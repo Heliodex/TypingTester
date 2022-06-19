@@ -494,8 +494,9 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<Content name="LinkedSource"><null></null></Content>
 						<string name="Name">FusionLocal</string>
 						<string name="ScriptGuid">{80848008-59DD-436F-BFB7-58AF8FE8C432}</string>
-						<ProtectedString name="Source"><![CDATA[-- Written 2021/10/04
+						<ProtectedString name="Source"><![CDATA[--!strict
 
+-- Written 2021/10/04
 -- Main UI-buliding script
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -506,7 +507,6 @@ local New = Fusion.New
 local Children = Fusion.Children
 local OnEvent = Fusion.OnEvent
 local Spring = Fusion.Spring
-
 local State = Fusion.State
 
 local White = Color3.fromRGB(255, 255, 255)
@@ -520,9 +520,9 @@ local DarkBlack = Color3.new() -- hehehuehehuehe
 
 local Green = Color3.fromRGB(0, 255, 0)
 
-local playerFontBold = Enum.Font.GothamBold
-local playerFont = Enum.Font.GothamMedium -- "iT'S dePreCaTEd!!!!1!!!!11"
 local playerFontThin = Enum.Font.Gotham
+local playerFont = Enum.Font.GothamMedium -- "iT'S dePreCaTEd!!!!1!!!!11"
+local playerFontBold = Enum.Font.GothamBold
 
 local codeFont = Enum.Font.RobotoMono
 
@@ -535,7 +535,7 @@ local MainFrameSize = State(UDim2.fromScale(0.8, 0.8))
 local DarkTintTransparency = State(1)
 local DarkTintTransparencyGoal = 0.5
 
-function RandomString(length) -- thanks, mysterious4579    https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
+function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
 	for _ = 1, length do
 		res = res .. string.char(math.random(97, 122)) -- needs more random
@@ -651,13 +651,11 @@ local function Button(props)
 				AnchorPoint = Vector2.new(0, 0.5),
 
 				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = {
-					New("UIAspectRatioConstraint")({
-						AspectRatio = 1,
-						AspectType = Enum.AspectType.ScaleWithParentSize,
-						DominantAxis = Enum.DominantAxis.Width,
-					}),
-				},
+				[Children] = New("UIAspectRatioConstraint")({
+					AspectRatio = 1,
+					AspectType = Enum.AspectType.ScaleWithParentSize,
+					DominantAxis = Enum.DominantAxis.Width,
+				}),
 			}),
 		},
 	})
@@ -700,13 +698,11 @@ local function Label(props)
 				AnchorPoint = Vector2.new(0, 0.5),
 
 				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = {
-					New("UIAspectRatioConstraint")({
-						AspectRatio = 1,
-						AspectType = Enum.AspectType.ScaleWithParentSize,
-						DominantAxis = Enum.DominantAxis.Width,
-					}),
-				},
+				[Children] = New("UIAspectRatioConstraint")({
+					AspectRatio = 1,
+					AspectType = Enum.AspectType.ScaleWithParentSize,
+					DominantAxis = Enum.DominantAxis.Width,
+				}),
 			}),
 		},
 	})
@@ -735,9 +731,7 @@ local function Popup(props)
 
 				ScrollingDirection = Enum.ScrollingDirection.Y,
 
-				[Children] = {
-					props.Children,
-				},
+				[Children] = props.Children,
 			}),
 
 			New("TextLabel")({
@@ -750,26 +744,24 @@ local function Popup(props)
 				Font = playerFontBold,
 				Text = props.Title,
 
-				[Children] = {
-					New("TextButton")({
-						Name = "CloseButton",
-						AnchorPoint = Vector2.new(1, 0),
-						BackgroundColor3 = Black,
+				[Children] = New("TextButton")({
+					Name = "CloseButton",
+					AnchorPoint = Vector2.new(1, 0),
+					BackgroundColor3 = Black,
 
-						Position = UDim2.fromScale(1, 0),
-						Size = UDim2.fromScale(1, 1),
-						SizeConstraint = Enum.SizeConstraint.RelativeYY,
-						Font = Enum.Font.SourceSans,
+					Position = UDim2.fromScale(1, 0),
+					Size = UDim2.fromScale(1, 1),
+					SizeConstraint = Enum.SizeConstraint.RelativeYY,
+					Font = Enum.Font.SourceSans,
 
-						Text = "X",
-						AutoButtonColor = true,
+					Text = "X",
+					AutoButtonColor = true,
 
-						[OnEvent("Activated")] = function()
-							popup.Visible = false
-							DarkTintTransparency:set(1)
-						end,
-					}),
-				},
+					[OnEvent("Activated")] = function()
+						popup.Visible = false
+						DarkTintTransparency:set(1)
+					end,
+				}),
 			}),
 		},
 	})
@@ -821,7 +813,6 @@ local function ShopOption(props)
 		Size = UDim2.fromScale(0.45, 0.05),
 
 		[Children] = {
-
 			New("TextLabel")({
 				AnchorPoint = Vector2.new(0, 0.5),
 				BackgroundTransparency = 1,
@@ -858,119 +849,106 @@ PlayScreen = New("ScreenGui")({
 	DisplayOrder = 10,
 	IgnoreGuiInset = true,
 
-	[Children] = {
-		New("Frame")({
-			Active = true,
-			BackgroundColor3 = Black,
-			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UDim2.fromScale(1, 1),
+	[Children] = New("Frame")({
+		BackgroundColor3 = Black,
+		Position = UDim2.fromScale(0.5, 0.5),
+		Size = UDim2.fromScale(1, 1),
 
-			[Children] = {
-				New("Frame")({ -- Credits
-					Name = "Credits",
-					BackgroundTransparency = 1,
-					Position = UDim2.fromScale(0.9, 0.65),
-					Size = UDim2.fromScale(0.1, 0.1),
-					SizeConstraint = Enum.SizeConstraint.RelativeXX,
+		[Children] = {
+			New("Frame")({ -- Credits
+				Name = "Credits",
+				BackgroundTransparency = 1,
+				Position = UDim2.fromScale(0.9, 0.65),
+				Size = UDim2.fromScale(0.1, 0.1),
+				SizeConstraint = Enum.SizeConstraint.RelativeXX,
 
-					[Children] = {
-						New("ImageLabel")({
-							Name = "HeliodexLogo",
-							AnchorPoint = Vector2.new(0.5, 0.5),
-							Position = UDim2.fromScale(0.5, 0.5),
-							Size = UDim2.fromScale(1, 1),
-							SizeConstraint = Enum.SizeConstraint.RelativeYY,
-							ZIndex = 6,
-							Image = "rbxassetid://7501730261",
-
-							[Children] = {
-								New("TextLabel")({
-									Name = "a Heliodex game",
-									BackgroundTransparency = 1,
-									Position = UDim2.fromScale(0.5, 1.1),
-									Size = UDim2.fromScale(1.8, 0.2),
-									Font = playerFontThin,
-									RichText = true,
-									Text = "a <i>HELIODEX</i> game",
-								}),
-								New("TextLabel")({
-									Name = "pjstarr12",
-									BackgroundTransparency = 1,
-									Position = UDim2.fromScale(0.5, 1.4),
-									Size = UDim2.fromScale(1.5, 0.175),
-									Font = playerFontThin,
-									Text = "pjstarr12",
-
-									[Children] = {
-										UIPadding(),
-									},
-								}),
-								New("TextLabel")({
-									Name = "TheWhaleCloud",
-									BackgroundTransparency = 1,
-									Position = UDim2.fromScale(0.5, 1.6),
-									Size = UDim2.fromScale(1.5, 0.175),
-									Font = playerFontThin,
-									Text = "TheWhaleCloud",
-
-									[Children] = {
-										UIPadding(),
-									},
-								}),
-								New("TextLabel")({
-									Name = "Lewin4",
-									AnchorPoint = Vector2.new(0.5, 0.5),
-									BackgroundColor3 = White,
-									BackgroundTransparency = 1,
-									Position = UDim2.fromScale(0.5, 1.8),
-									Size = UDim2.fromScale(1.5, 0.175),
-									Font = playerFontThin,
-									Text = "Lewin4",
-
-									[Children] = {
-										UIPadding(),
-									},
-								}),
-							},
-						}),
-					},
-				}),
-
-				Button({
-					Name = "Play",
-					Size = UDim2.fromScale(0.17, 0.075),
+				[Children] = New("ImageLabel")({
+					Name = "HeliodexLogo",
+					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
-					Text = "Play",
-					Image = 8156398078,
-
-					Activated = function() -- o this is how you do functions
-						PlayScreen.Frame.Visible = false
-						Sounds.music:Play()
-						MainFrameSize:set(UDim2.fromScale(1, 1))
-					end,
-				}),
-
-				New("TextLabel")({ -- Title
-					Name = "Title",
-					BackgroundTransparency = 1,
-					Position = UDim2.fromScale(0.5, 0.35),
-					Size = UDim2.fromScale(0.3, 0.175),
-					Font = playerFontBold,
-					RichText = true,
-					Text = "typing simulator but better",
+					Size = UDim2.fromScale(1, 1),
+					SizeConstraint = Enum.SizeConstraint.RelativeYY,
+					ZIndex = 6,
+					Image = "rbxassetid://7501730261",
 
 					[Children] = {
-						New("UIPadding")({
-							PaddingBottom = UDim.new(0.1, 0),
-							PaddingLeft = UDim.new(0.1, 0),
-							PaddingRight = UDim.new(0.1, 0),
-							PaddingTop = UDim.new(0.1, 0),
+						New("TextLabel")({
+							Name = "a Heliodex game",
+							BackgroundTransparency = 1,
+							Position = UDim2.fromScale(0.5, 1.1),
+							Size = UDim2.fromScale(1.8, 0.2),
+							Font = playerFontThin,
+							RichText = true,
+							Text = "a <i>HELIODEX</i> game",
+						}),
+						New("TextLabel")({
+							Name = "pjstarr12",
+							BackgroundTransparency = 1,
+							Position = UDim2.fromScale(0.5, 1.4),
+							Size = UDim2.fromScale(1.5, 0.175),
+							Font = playerFontThin,
+							Text = "pjstarr12",
+
+							[Children] = UIPadding(),
+						}),
+						New("TextLabel")({
+							Name = "TheWhaleCloud",
+							BackgroundTransparency = 1,
+							Position = UDim2.fromScale(0.5, 1.6),
+							Size = UDim2.fromScale(1.5, 0.175),
+							Font = playerFontThin,
+							Text = "TheWhaleCloud",
+
+							[Children] = UIPadding(),
+						}),
+						New("TextLabel")({
+							Name = "Lewin4",
+							AnchorPoint = Vector2.new(0.5, 0.5),
+							BackgroundColor3 = White,
+							BackgroundTransparency = 1,
+							Position = UDim2.fromScale(0.5, 1.8),
+							Size = UDim2.fromScale(1.5, 0.175),
+							Font = playerFontThin,
+							Text = "Lewin4",
+
+							[Children] = UIPadding(),
 						}),
 					},
 				}),
-			},
-		}),
-	},
+			}),
+
+			Button({
+				Name = "Play",
+				Size = UDim2.fromScale(0.17, 0.075),
+				Position = UDim2.fromScale(0.5, 0.5),
+				Text = "Play",
+				Image = 8156398078,
+
+				Activated = function() -- o this is how you do functions
+					PlayScreen.Frame.Visible = false
+					Sounds.music:Play()
+					MainFrameSize:set(UDim2.fromScale(1, 1))
+				end,
+			}),
+
+			New("TextLabel")({ -- Title
+				Name = "Title",
+				BackgroundTransparency = 1,
+				Position = UDim2.fromScale(0.5, 0.35),
+				Size = UDim2.fromScale(0.3, 0.175),
+				Font = playerFontBold,
+				RichText = true,
+				Text = "typing simulator but better",
+
+				[Children] = New("UIPadding")({
+					PaddingBottom = UDim.new(0.1, 0),
+					PaddingLeft = UDim.new(0.1, 0),
+					PaddingRight = UDim.new(0.1, 0),
+					PaddingTop = UDim.new(0.1, 0),
+				}),
+			}),
+		},
+	}),
 })
 
 -- Main ui time,,.,,.oaoeueuoueooaaeiiaaa
@@ -992,6 +970,7 @@ MainUI = New("ScreenGui")({
 
 			BackgroundTransparency = 1,
 			TextTransparency = 1,
+			Font = playerFont,
 
 			ZIndex = 88,
 		}),
@@ -1003,7 +982,6 @@ MainUI = New("ScreenGui")({
 			ZIndex = 5,
 
 			[Children] = {
-
 				New("Frame")({ -- UIFrame
 					Size = Spring(MainFrameSize, 12, 1),
 					BackgroundTransparency = 1,
@@ -1011,7 +989,6 @@ MainUI = New("ScreenGui")({
 					ZIndex = 5,
 
 					[Children] = {
-
 						Button({
 							Name = "OpenHelp",
 							Size = UDim2.fromScale(0.17, 0.075),
@@ -1155,13 +1132,11 @@ MainUI = New("ScreenGui")({
 									AnchorPoint = Vector2.new(0, 0.5),
 
 									Image = "rbxassetid://7363005276",
-									[Children] = {
-										New("UIAspectRatioConstraint")({
-											AspectRatio = 1,
-											AspectType = Enum.AspectType.ScaleWithParentSize,
-											DominantAxis = Enum.DominantAxis.Width,
-										}),
-									},
+									[Children] = New("UIAspectRatioConstraint")({
+										AspectRatio = 1,
+										AspectType = Enum.AspectType.ScaleWithParentSize,
+										DominantAxis = Enum.DominantAxis.Width,
+									}),
 								}),
 							},
 						}),
@@ -1202,7 +1177,7 @@ MainUI = New("ScreenGui")({
 									Position = UDim2.fromScale(0.5, 0),
 									Text = "Amount until level up",
 
-									Image = 261481376, -- DELETE THIS. AWFUL    -- ok, it did end up getting content deleted
+									Image = 261481376, -- DELETE THIS. AWFUL	-- ok, it did end up getting content deleted
 
 									LabelWidth = 1,
 									LabelPosition = 1,
@@ -1256,7 +1231,6 @@ MainUI = New("ScreenGui")({
 							Name = "NextWordLabels",
 
 							[Children] = {
-
 								New("TextLabel")({
 									Name = "CurrentWordLabel",
 
@@ -1297,7 +1271,7 @@ MainUI = New("ScreenGui")({
 					Rotation = 110,
 				}),
 
-				New("Frame")({ -- BackgroundDesign
+				New("Frame")({
 					Name = "BackgroundDesign",
 
 					Size = UDim2.fromScale(1.5, 0.75),
@@ -1313,9 +1287,7 @@ MainUI = New("ScreenGui")({
 							Size = UDim2.fromScale(1, 1),
 							BackgroundTransparency = 1,
 
-							[Children] = {
-								BackgroundDesign(),
-							},
+							[Children] = BackgroundDesign(),
 						}),
 
 						New("Frame")({
@@ -1325,17 +1297,10 @@ MainUI = New("ScreenGui")({
 							Position = UDim2.fromScale(0.5, 0.6),
 							BackgroundTransparency = 1,
 
-							[Children] = {
-								BackgroundDesign(),
-							},
+							[Children] = BackgroundDesign(),
 						}),
 					},
 				}),
-
-				--#####################################################################################################################
-				--#####################################################################################################################
-				--#####################################################################################################################
-				--#####################################################################################################################
 
 				-- MENU TIME
 				-- OH MY GOD STOP PROCRASTINATING
@@ -1347,23 +1312,23 @@ MainUI = New("ScreenGui")({
 					Corner = 0.04,
 					ZIndex = 120,
 
-					Children = {
-						New("TextLabel")({
-							Name = "Text",
-							AnchorPoint = Vector2.new(0.5, 0.9),
-							BackgroundTransparency = 1,
-							Position = UDim2.fromScale(0.5, 1),
-							Size = UDim2.fromScale(0.97, 1.1),
-							Font = playerFont,
-							RichText = true,
-							Text = "Welcome to game name goes here!<br />This is a game you can use to improve your speed, accuracy, and stamina while typing.<br /><br />In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.<br />The upcoming words are displayed below the current word.<br /><br />The button in the top-right corner allows you to change the difficulty of your words.<br /><br />Easy words can be between 2 and 4 letters long. They are the easiest to type.<br />They give 1 typing token and 12-15 exp per word.<br /><br />Medium words can be between 4 and 7 letters long. Harder, but more rewarding.<br />They give 2 typing tokens and 20-26 exp per word.<br /><br />Hard words can be between 7 and 10 letters long.<br />They give 3 typing tokens and 35-42 exp per word.<br /><br />Insane words were added as a joke, they are some of the longest words in English.<br />They give 5 typing tokens and 57-65 exp per word.<br /><br />Experience is used to level up. Each level requires 100 more experience to level up than the one before it.<br />Ranks are gained every 10 levels.<br /><br />Developers:<br />pjstarr12<br />TheWhaleCloud<br />Lewin4<br /><br />The soundtrack for the game is Click by C418.<br />Thanks to icons8 for providing the icons.<br /><br />Inspired by:<br />Monkeytype by Miodec<br />Typing Simulator by S-GAMES",
-							TextSize = 28,
-							TextTruncate = Enum.TextTruncate.AtEnd,
-							TextWrapped = true,
-							TextXAlignment = Enum.TextXAlignment.Left,
-							TextYAlignment = Enum.TextYAlignment.Top,
-						}),
-					},
+					-- Children does not require brackets here
+					-- remember, this is a variable, children are applied in the Popup() function
+					Children = New("TextLabel")({
+						Name = "Text",
+						AnchorPoint = Vector2.new(0.5, 0.9),
+						BackgroundTransparency = 1,
+						Position = UDim2.fromScale(0.5, 1),
+						Size = UDim2.fromScale(0.97, 1.1),
+						Font = playerFont,
+						RichText = true,
+						Text = "Welcome to game name goes here!<br />This is a game you can use to improve your speed, accuracy, and stamina while typing.<br /><br />In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.<br />The upcoming words are displayed below the current word.<br /><br />The button in the top-right corner allows you to change the difficulty of your words.<br /><br />Easy words can be between 2 and 4 letters long. They are the easiest to type.<br />They give 1 typing token and 12-15 exp per word.<br /><br />Medium words can be between 4 and 7 letters long. Harder, but more rewarding.<br />They give 2 typing tokens and 20-26 exp per word.<br /><br />Hard words can be between 7 and 10 letters long.<br />They give 3 typing tokens and 35-42 exp per word.<br /><br />Insane words were added as a joke, they are some of the longest words in English.<br />They give 5 typing tokens and 57-65 exp per word.<br /><br />Experience is used to level up. Each level requires 100 more experience to level up than the one before it.<br />Ranks are gained every 10 levels.<br /><br />Developers:<br />pjstarr12<br />TheWhaleCloud<br />Lewin4<br /><br />The soundtrack for the game is Click by C418.<br />Thanks to icons8 for providing the icons.<br /><br />Inspired by:<br />Monkeytype by Miodec<br />Typing Simulator by S-GAMES",
+						TextSize = 28,
+						TextTruncate = Enum.TextTruncate.AtEnd,
+						TextWrapped = true,
+						TextXAlignment = Enum.TextXAlignment.Left,
+						TextYAlignment = Enum.TextYAlignment.Top,
+					}),
 				}),
 
 				Popup({
@@ -1384,7 +1349,6 @@ MainUI = New("ScreenGui")({
 							Text = "Blind Mode",
 							Right = true,
 						}),
-
 						SettingsOption({
 							Name = "Memory",
 							Text = "Memory Mode",
@@ -1419,7 +1383,6 @@ MainUI = New("ScreenGui")({
 							Right = true,
 							Price = 100, -- the price is right
 						}),
-
 						ShopOption({
 							Name = "InsaneDifficulty",
 							Text = "Insane Difficulty",
@@ -5856,10 +5819,8 @@ if ENABLE_SENSIBLE_DEFAULTS then
 		TextLabel = {
 			BorderSizePixel = 0,
 
-			Font = "SourceSans",
 			Text = "",
 			TextColor3 = Color3.new(1, 1, 1),
-			TextSize = 14,
 			TextScaled = true,
 
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -5870,25 +5831,22 @@ if ENABLE_SENSIBLE_DEFAULTS then
 
 			AutoButtonColor = true,
 
-			Font = "SourceSans",
 			Text = "",
 			TextColor3 = Color3.new(1, 1, 1),
-			TextSize = 14,
 
 			TextScaled = true,
 		},
-
+		
 		TextBox = {
 			BorderSizePixel = 0,
-
+			
 			ClearTextOnFocus = false,
-
-			Font = "SourceSans",
+			
 			Text = "",
 			TextColor3 = Color3.new(1, 1, 1),
-			TextSize = 14,
-
+			
 			AnchorPoint = Vector2.new(0.5, 0.5),
+			TextScaled = true,
 		},
 
 		ImageLabel = {

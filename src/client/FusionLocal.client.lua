@@ -1,14 +1,15 @@
--- Written 2021/10/04
-
 -- Main UI-buliding script
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
+local Words = require(script.Parent.Words)
 
 local New = Fusion.New
 local Children = Fusion.Children
 local OnEvent = Fusion.OnEvent
+local OnChange = Fusion.OnChange
 local Spring = Fusion.Spring
 local State = Fusion.State
 
@@ -22,9 +23,10 @@ local Black = Color3.fromRGB(16, 14, 12)
 local DarkBlack = Color3.new() -- hehehuehehuehe
 
 local Green = Color3.fromRGB(0, 255, 0)
+local Red = Color3.fromRGB(255, 0, 0)
 
 local playerFontThin = Enum.Font.Gotham
-local playerFont = Enum.Font.GothamMedium -- "iT'S dePreCaTEd!!!!1!!!!11"
+local playerFont = Enum.Font.GothamMedium -- selene: "iT'S dePreCaTEd!!!!1!!!!11"
 local playerFontBold = Enum.Font.GothamBold
 
 local codeFont = Enum.Font.RobotoMono
@@ -33,18 +35,35 @@ local Sounds = ReplicatedStorage.Sounds
 
 local PlayScreen
 local MainUI
+local TypingBox
 
 local MainFrameSize = State(UDim2.fromScale(0.8, 0.8))
 local DarkTintTransparency = State(1)
 local DarkTintTransparencyGoal = 0.5
 
-function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
+local displayedWords = State({})
+local wordCorrect = State(true)
+
+local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
 	for _ = 1, length do
 		res = res .. string.char(math.random(97, 122)) -- needs more random
 	end
 	return res
 end
+
+local function changeDifficulty()
+	if TypingBox then
+		TypingBox.Text = ""
+	end
+
+	local tempWords = {}
+	for i = 1, 5 do
+		tempWords[i] = Words.mediumList[math.random(1, #Words.mediumList)]
+	end
+	displayedWords:set(tempWords)
+end
+changeDifficulty()
 
 local function UICorner(corner)
 	return New("UICorner")({
@@ -75,7 +94,7 @@ end
 
 local function NextWords(props)
 	return New("TextLabel")({
-		Name = props.Name,
+		Name = "Label" .. props.id,
 
 		Size = UDim2.fromScale(0.4, 0.06),
 		Position = UDim2.fromScale(0.5, props.Pos),
@@ -83,7 +102,7 @@ local function NextWords(props)
 
 		Font = playerFont,
 		TextColor3 = Grey5,
-		Text = "next word",
+		Text = displayedWords:get()[props.id],
 	})
 end
 
@@ -345,6 +364,27 @@ local function ShopOption(props)
 		},
 	})
 end
+
+TypingBox = New("TextBox")({
+	Name = "TypingBox",
+	Position = UDim2.fromScale(0.5, 0.7),
+	Size = UDim2.fromScale(0.5, 0.05),
+	BackgroundColor3 = Grey0,
+	TextColor3 = if wordCorrect then Green else Red,
+
+	Font = playerFont,
+	PlaceholderText = "Type here (spacebar to complete word)",
+
+	[OnChange("CursorPosition")] = function()
+		RunService.RenderStepped:Wait()
+		print(TypingBox.Text)
+	end,
+
+	[Children] = {
+		UICorner(),
+		UIPadding(),
+	},
+})
 
 PlayScreen = New("ScreenGui")({
 	Name = "PlayScreen",
@@ -715,20 +755,7 @@ MainUI = New("ScreenGui")({
 							},
 						}),
 
-						New("TextBox")({
-							Name = "TypingBox",
-							Position = UDim2.fromScale(0.5, 0.7),
-							Size = UDim2.fromScale(0.5, 0.05),
-							BackgroundColor3 = Grey0,
-
-							Font = playerFont,
-							PlaceholderText = "Type here (spacebar to complete word)",
-
-							[Children] = {
-								UICorner(),
-								UIPadding(),
-							},
-						}),
+						TypingBox,
 
 						New("Folder")({
 							Name = "NextWordLabels",
@@ -742,24 +769,24 @@ MainUI = New("ScreenGui")({
 									BackgroundTransparency = 1,
 
 									Font = playerFont,
-									Text = "word here",
+									Text = displayedWords:get()[1],
 								}),
 
 								NextWords({
 									Pos = 0.36,
-									Name = "Label2",
+									id = 2,
 								}),
 								NextWords({
 									Pos = 0.42,
-									Name = "Label3",
+									id = 3,
 								}),
 								NextWords({
 									Pos = 0.48,
-									Name = "Label4",
+									id = 4,
 								}),
 								NextWords({
 									Pos = 0.54,
-									Name = "Label5",
+									id = 5,
 								}),
 							},
 						}),
