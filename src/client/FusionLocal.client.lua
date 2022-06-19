@@ -3,6 +3,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
+local Sounds = ReplicatedStorage.Sounds
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Words = require(script.Parent.Words)
 
@@ -12,6 +13,7 @@ local OnEvent = Fusion.OnEvent
 local OnChange = Fusion.OnChange
 local Spring = Fusion.Spring
 local State = Fusion.State
+local Computed = Fusion.Computed
 
 local White = Color3.fromRGB(255, 255, 255)
 local Grey5 = Color3.fromRGB(178, 178, 178)
@@ -41,8 +43,9 @@ local MainFrameSize = State(UDim2.fromScale(0.8, 0.8))
 local DarkTintTransparency = State(1)
 local DarkTintTransparencyGoal = 0.5
 
-local displayedWords = State({})
-local wordCorrect = State(true)
+local previouslyTyped
+local displayedWords = {}
+local wordCorrect = State(Green)
 
 local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
@@ -57,11 +60,10 @@ local function changeDifficulty()
 		TypingBox.Text = ""
 	end
 
-	local tempWords = {}
 	for i = 1, 5 do
-		tempWords[i] = Words.mediumList[math.random(1, #Words.mediumList)]
+		displayedWords[i] = State()
+		displayedWords[i]:set(Words.mediumList[math.random(1, #Words.mediumList)])
 	end
-	displayedWords:set(tempWords)
 end
 changeDifficulty()
 
@@ -102,7 +104,7 @@ local function NextWords(props)
 
 		Font = playerFont,
 		TextColor3 = Grey5,
-		Text = displayedWords:get()[props.id],
+		Text = displayedWords[props.id],
 	})
 end
 
@@ -370,14 +372,47 @@ TypingBox = New("TextBox")({
 	Position = UDim2.fromScale(0.5, 0.7),
 	Size = UDim2.fromScale(0.5, 0.05),
 	BackgroundColor3 = Grey0,
-	TextColor3 = if wordCorrect then Green else Red,
+	TextColor3 = wordCorrect,
 
 	Font = playerFont,
 	PlaceholderText = "Type here (spacebar to complete word)",
+	PlaceholderColor3 = Grey3,
 
 	[OnChange("CursorPosition")] = function()
 		RunService.RenderStepped:Wait()
-		print(TypingBox.Text)
+		local text = TypingBox.Text
+
+		if text ~= previouslyTyped then
+			previouslyTyped = text
+
+			if string.match("!" .. displayedWords[1]:get() .. " ", ("!" .. text)) then
+				wordCorrect:set(Green)
+				if text == displayedWords[1]:get() .. " " then
+					TypingBox.Text = ""
+
+					local tempWords = displayedWords
+
+					for i = 1, 4 do
+						tempWords[i]:set(tempWords[i + 1]:get()) -- Move each word up by one place
+					end
+					tempWords[5]:set(Words.mediumList[math.random(1, #Words.mediumList)])
+
+					displayedWords = tempWords
+				end
+			else
+				wordCorrect:set(Red)
+			end
+		end
+	end,
+
+	[OnChange("Text")] = function()
+		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
+
+		local rand = math.random(1, 3)
+		local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
+
+		Sounds["click" .. rand].PlaybackSpeed = rand2
+		Sounds["click" .. rand]:Play()
 	end,
 
 	[Children] = {
@@ -769,7 +804,7 @@ MainUI = New("ScreenGui")({
 									BackgroundTransparency = 1,
 
 									Font = playerFont,
-									Text = displayedWords:get()[1],
+									Text = displayedWords[1],
 								}),
 
 								NextWords({
