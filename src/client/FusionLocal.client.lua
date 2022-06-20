@@ -7,6 +7,8 @@ local Sounds = ReplicatedStorage.Sounds
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
 
+local Words = require(script.Parent.Words)
+
 Knit.Start()
 	:andThen(function()
 		print("Knit client started")
@@ -48,7 +50,6 @@ local MainFrameSize = State(UDim2.fromScale(0.8, 0.8))
 local DarkTintTransparency = State(1)
 local DarkTintTransparencyGoal = 0.5
 
-local previouslyTyped
 local displayedWords = {}
 local wordCorrect = State(Green)
 
@@ -60,22 +61,19 @@ local function RandomString(length) -- thanks, mysterious4579		https://gist.gith
 	return res
 end
 
+local function getWord()
+	return Words.easyList[math.random(1, #Words.easyList)]
+end
+
 local function changeDifficulty()
 	if TypingBox then
 		TypingBox.Text = ""
 	end
 
-	for i = 1, 6 do
+	for i = 1, 5 do
 		displayedWords[i] = State("")
+		displayedWords[i]:set(getWord())
 	end
-
-	WordService
-		:GetWordlist(6)
-		:andThen(function(list)
-			for i = 1, 6 do
-				displayedWords[i]:set(list[i])
-			end
-		end)
 end
 changeDifficulty()
 
@@ -389,40 +387,34 @@ TypingBox = New("TextBox")({
 	Font = playerFont,
 	PlaceholderText = "Type here (spacebar to complete word)",
 	PlaceholderColor3 = Grey3,
-	
+
 	[OnChange("Text")] = function()
 		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
-		
+
 		local rand = math.random(1, 3)
 		local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
-		
+
 		Sounds["click" .. rand].PlaybackSpeed = rand2
 		Sounds["click" .. rand]:Play()
 
 		local text = TypingBox.Text
-	
-		if text ~= previouslyTyped then
-			previouslyTyped = text
-	
-			if string.match("!" .. displayedWords[1]:get() .. " ", ("!" .. text)) then
-				wordCorrect:set(Green)
-				if text == displayedWords[1]:get() .. " " then
-					TypingBox.Text = ""
-	
-					local tempWords = displayedWords
-	
-					for i = 1, 5 do
-						tempWords[i]:set(tempWords[i + 1]:get()) -- Move each word up by one place
-					end
-					WordService:GetWord():andThen(function(word)
-						tempWords[6]:set(word)
-					end)
-	
-					displayedWords = tempWords
+
+		if string.match("!" .. displayedWords[1]:get() .. " ", ("!" .. text)) then
+			wordCorrect:set(Green)
+			if text == displayedWords[1]:get() .. " " then
+				TypingBox.Text = ""
+
+				local tempWords = displayedWords
+
+				for i = 1, 4 do
+					tempWords[i]:set(tempWords[i + 1]:get()) -- Move each word up by one place
 				end
-			else
-				wordCorrect:set(Red)
+				tempWords[5]:set(getWord()) -- Add a new word to the bottom
+
+				displayedWords = tempWords
 			end
+		else
+			wordCorrect:set(Red)
 		end
 	end,
 

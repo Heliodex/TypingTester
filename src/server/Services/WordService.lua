@@ -1,13 +1,11 @@
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 
-local Words = require(script.Parent.Parent.Words)
-
 local WordService = Knit.CreateService({
 	Name = "WordService",
 })
 
 function WordService.Client:GetWord()
-	return Words.mediumList[math.random(1, #Words.mediumList)]
+	return ""--Words.easyList[math.random(1, #Words.easyList)]
 end
 
 function WordService.Client:GetWordlist(_, howMany) 
@@ -17,7 +15,7 @@ function WordService.Client:GetWordlist(_, howMany)
 	howMany = howMany or 6
 	local list = {}
 	for i = 1, howMany do
-		list[i] = Words.mediumList[math.random(1, #Words.mediumList)]
+		list[i] = ""--Words.easyList[math.random(1, #Words.easyList)]
 	end
 	return list
 end
