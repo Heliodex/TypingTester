@@ -1,21 +1,14 @@
 -- Main UI-buliding script
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Sounds = ReplicatedStorage.Sounds
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
 
+Knit.Start():catch(warn)
+
 local Words = require(script.Parent.Words)
-
-Knit.Start()
-	:andThen(function()
-		print("Knit client started")
-	end)
-	:catch(warn)
-
-local WordService = Knit.GetService("WordService")
 
 local New = Fusion.New
 local Children = Fusion.Children
@@ -23,6 +16,7 @@ local OnEvent = Fusion.OnEvent
 local OnChange = Fusion.OnChange
 local Spring = Fusion.Spring
 local State = Fusion.State
+local Computed = Fusion.Computed
 
 local White = Color3.fromRGB(255, 255, 255)
 local Grey5 = Color3.fromRGB(178, 178, 178)
@@ -52,6 +46,8 @@ local DarkTintTransparencyGoal = 0.5
 
 local displayedWords = {}
 local wordCorrect = State(Green)
+
+local currency = State(0)
 
 local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
@@ -404,6 +400,8 @@ TypingBox = New("TextBox")({
 			if text == displayedWords[1]:get() .. " " then
 				TypingBox.Text = ""
 
+				currency:set(currency:get() + 1)
+
 				local tempWords = displayedWords
 
 				for i = 1, 4 do
@@ -649,7 +647,9 @@ MainUI = New("ScreenGui")({
 							Size = UDim2.fromScale(0.22, 0.075),
 							AnchorPoint = Vector2.new(0, 0),
 							Position = UDim2.fromScale(0.01, 0.02),
-							Text = "0 Typing Tokens",
+							Text = Computed(function()
+								return currency:get() .. " typing tokens"
+							end),
 							Image = 7367251392,
 
 							LabelWidth = 0.7,
