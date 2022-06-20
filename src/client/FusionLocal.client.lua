@@ -5,7 +5,15 @@ local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Sounds = ReplicatedStorage.Sounds
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
-local Words = require(script.Parent.Words)
+local Knit = require(ReplicatedStorage.Packages.Knit)
+
+Knit.Start()
+	:andThen(function()
+		print("Knit client started")
+	end)
+	:catch(warn)
+
+local WordService = Knit.GetService("WordService")
 
 local New = Fusion.New
 local Children = Fusion.Children
@@ -13,7 +21,6 @@ local OnEvent = Fusion.OnEvent
 local OnChange = Fusion.OnChange
 local Spring = Fusion.Spring
 local State = Fusion.State
-local Computed = Fusion.Computed
 
 local White = Color3.fromRGB(255, 255, 255)
 local Grey5 = Color3.fromRGB(178, 178, 178)
@@ -32,8 +39,6 @@ local playerFont = Enum.Font.GothamMedium -- selene: "iT'S dePreCaTEd!!!!1!!!!11
 local playerFontBold = Enum.Font.GothamBold
 
 local codeFont = Enum.Font.RobotoMono
-
-local Sounds = ReplicatedStorage.Sounds
 
 local PlayScreen
 local MainUI
@@ -60,10 +65,17 @@ local function changeDifficulty()
 		TypingBox.Text = ""
 	end
 
-	for i = 1, 5 do
-		displayedWords[i] = State()
-		displayedWords[i]:set(Words.mediumList[math.random(1, #Words.mediumList)])
+	for i = 1, 6 do
+		displayedWords[i] = State("")
 	end
+
+	WordService
+		:GetWordlist(6)
+		:andThen(function(list)
+			for i = 1, 6 do
+				displayedWords[i]:set(list[i])
+			end
+		end)
 end
 changeDifficulty()
 
@@ -392,10 +404,12 @@ TypingBox = New("TextBox")({
 
 					local tempWords = displayedWords
 
-					for i = 1, 4 do
+					for i = 1, 5 do
 						tempWords[i]:set(tempWords[i + 1]:get()) -- Move each word up by one place
 					end
-					tempWords[5]:set(Words.mediumList[math.random(1, #Words.mediumList)])
+					WordService:GetWord():andThen(function(word)
+						tempWords[6]:set(word)
+					end)
 
 					displayedWords = tempWords
 				end
