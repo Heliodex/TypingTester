@@ -389,44 +389,41 @@ TypingBox = New("TextBox")({
 	Font = playerFont,
 	PlaceholderText = "Type here (spacebar to complete word)",
 	PlaceholderColor3 = Grey3,
+	
+	[OnChange("Text")] = function()
+		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
+		
+		local rand = math.random(1, 3)
+		local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
+		
+		Sounds["click" .. rand].PlaybackSpeed = rand2
+		Sounds["click" .. rand]:Play()
 
-	[OnChange("CursorPosition")] = function()
-		RunService.RenderStepped:Wait()
 		local text = TypingBox.Text
-
+	
 		if text ~= previouslyTyped then
 			previouslyTyped = text
-
+	
 			if string.match("!" .. displayedWords[1]:get() .. " ", ("!" .. text)) then
 				wordCorrect:set(Green)
 				if text == displayedWords[1]:get() .. " " then
 					TypingBox.Text = ""
-
+	
 					local tempWords = displayedWords
-
+	
 					for i = 1, 5 do
 						tempWords[i]:set(tempWords[i + 1]:get()) -- Move each word up by one place
 					end
 					WordService:GetWord():andThen(function(word)
 						tempWords[6]:set(word)
 					end)
-
+	
 					displayedWords = tempWords
 				end
 			else
 				wordCorrect:set(Red)
 			end
 		end
-	end,
-
-	[OnChange("Text")] = function()
-		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
-
-		local rand = math.random(1, 3)
-		local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
-
-		Sounds["click" .. rand].PlaybackSpeed = rand2
-		Sounds["click" .. rand]:Play()
 	end,
 
 	[Children] = {
