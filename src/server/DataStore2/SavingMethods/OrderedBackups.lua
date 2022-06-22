@@ -48,15 +48,13 @@ function OrderedBackups:Set(value)
 	return Promise.async(function(resolve)
 		self.dataStore:SetAsync(key, value)
 		resolve()
+	end):andThen(function()
+		return Promise.promisify(function()
+			self.orderedDataStore:SetAsync(key, key)
+		end)()
+	end):andThen(function()
+		self.mostRecentKey = key
 	end)
-		:andThen(function()
-			return Promise.promisify(function()
-				self.orderedDataStore:SetAsync(key, key)
-			end)()
-		end)
-		:andThen(function()
-			self.mostRecentKey = key
-		end)
 end
 
 function OrderedBackups.new(dataStore2)

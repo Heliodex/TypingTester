@@ -8,9 +8,9 @@ end
 
 function Verifier.scanValidity(tbl, passed, path)
 	if type(tbl) ~= "table" then
-		return Verifier.scanValidity({ input = tbl }, {}, {})
+		return Verifier.scanValidity({input = tbl}, {}, {})
 	end
-	passed, path = passed or {}, path or { "input" }
+	passed, path = passed or {}, path or {"input"}
 	passed[tbl] = true
 	local tblType
 	do
@@ -27,7 +27,7 @@ function Verifier.scanValidity(tbl, passed, path)
 		if type(key) == "number" then
 			if tblType == "Dictionary" then
 				return false, path, "Mixed Array/Dictionary"
-			elseif key % 1 ~= 0 then -- if not an integer
+			elseif key%1 ~= 0 then  -- if not an integer
 				return false, path, "Non-integer index"
 			elseif key == math.huge or key == -math.huge then
 				return false, path, "(-)Infinity index"
@@ -70,15 +70,9 @@ function Verifier.testValidity(input)
 	local isValid, keyPath, reason, extra = Verifier.scanValidity(input)
 	if not isValid then
 		if extra then
-			return "Invalid at "
-				.. Verifier.getStringPath(keyPath)
-				.. " because: "
-				.. reason
-				.. " ("
-				.. tostring(extra)
-				.. ")"
+			return "Invalid at "..Verifier.getStringPath(keyPath).." because: "..reason.." ("..tostring(extra)..")"
 		else
-			return "Invalid at " .. Verifier.getStringPath(keyPath) .. " because: " .. reason
+			return "Invalid at "..Verifier.getStringPath(keyPath).." because: "..reason
 		end
 	end
 end
