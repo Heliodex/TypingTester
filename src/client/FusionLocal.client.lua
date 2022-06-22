@@ -48,6 +48,7 @@ local displayedWords = {}
 local wordCorrect = State(Green)
 
 local currency = State(0)
+local experience = State(0)
 
 local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
@@ -401,6 +402,7 @@ TypingBox = New("TextBox")({
 				TypingBox.Text = ""
 
 				currency:set(currency:get() + 1)
+				experience:set(experience:get() + 5)
 
 				local tempWords = displayedWords
 
@@ -539,7 +541,7 @@ MainUI = New("ScreenGui")({
 	IgnoreGuiInset = true,
 
 	[Children] = {
-		New("TextLabel")({ -- should this go inside the frame??
+		New("TextLabel")({ -- could go inside MainFrame or frame
 			Name = "Warning",
 
 			Position = UDim2.fromScale(0.5, 0.15),
@@ -561,7 +563,7 @@ MainUI = New("ScreenGui")({
 			ZIndex = 5,
 
 			[Children] = {
-				New("Frame")({ -- UIFrame
+				New("Frame")({
 					Size = Spring(MainFrameSize, 12, 1),
 					BackgroundTransparency = 1,
 
@@ -579,20 +581,10 @@ MainUI = New("ScreenGui")({
 							Activated = function()
 								MainUI.MainFrame.Help.Visible = not MainUI.MainFrame.Help.Visible
 
-								if MainUI.MainFrame.Help.Visible then
-									DarkTintTransparency:set(DarkTintTransparencyGoal)
-								else
-									DarkTintTransparency:set(1)
-								end
+								DarkTintTransparency:set(
+									if MainUI.MainFrame.Help.Visible then DarkTintTransparencyGoal else 1
+								)
 							end,
-						}),
-						Button({
-							Name = "SaveData",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(0, 1),
-							Position = UDim2.fromScale(0.01, 0.88),
-							Text = "Save",
-							Image = 7415450693,
 						}),
 						Button({
 							Name = "OpenShop",
@@ -605,11 +597,9 @@ MainUI = New("ScreenGui")({
 							Activated = function()
 								MainUI.MainFrame.Shop.Visible = not MainUI.MainFrame.Shop.Visible
 
-								if MainUI.MainFrame.Shop.Visible then
-									DarkTintTransparency:set(DarkTintTransparencyGoal)
-								else
-									DarkTintTransparency:set(1)
-								end
+								DarkTintTransparency:set(
+									if MainUI.MainFrame.Shop.Visible then DarkTintTransparencyGoal else 1
+								)
 							end,
 						}),
 						Button({
@@ -623,11 +613,9 @@ MainUI = New("ScreenGui")({
 							Activated = function()
 								MainUI.MainFrame.Settings.Visible = not MainUI.MainFrame.Settings.Visible
 
-								if MainUI.MainFrame.Settings.Visible then
-									DarkTintTransparency:set(DarkTintTransparencyGoal)
-								else
-									DarkTintTransparency:set(1)
-								end
+								DarkTintTransparency:set(
+									if MainUI.MainFrame.Settings.Visible then DarkTintTransparencyGoal else 1
+								)
 							end,
 						}),
 						Button({
@@ -774,20 +762,18 @@ MainUI = New("ScreenGui")({
 									[Children] = {
 										UICorner(0.5),
 
-										[Children] = {
-											New("Frame")({
-												Name = "Bar",
-												Size = UDim2.fromScale(0.5, 1),
-												AnchorPoint = Vector2.new(0, 0),
-												Position = UDim2.fromScale(0, 0),
+										[Children] = New("Frame")({
+											Name = "Bar",
+											Size = Computed(function()
+												return UDim2.fromScale(experience:get() / 100 % 1, 1)
+											end),
+											AnchorPoint = Vector2.new(0, 0),
+											Position = UDim2.fromScale(0, 0),
 
-												BackgroundColor3 = Green,
+											BackgroundColor3 = Green,
 
-												[Children] = {
-													UICorner(0.5),
-												},
-											}),
-										},
+											[Children] = UICorner(0.5),
+										}),
 									},
 								}),
 							},
