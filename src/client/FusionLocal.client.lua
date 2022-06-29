@@ -8,6 +8,8 @@ local Knit = require(ReplicatedStorage.Packages.Knit)
 
 Knit.Start():catch(warn)
 
+local SyncService = Knit.GetService("SyncService")
+
 local Words = require(script.Parent.Words)
 
 local New = Fusion.New
@@ -49,6 +51,7 @@ local wordCorrect = State(Green)
 
 local currency = State(0)
 local experience = State(0)
+local wordsTyped = State(0)
 
 local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
@@ -401,8 +404,11 @@ TypingBox = New("TextBox")({
 			if text == displayedWords[1]:get() .. " " then
 				TypingBox.Text = ""
 
+				SyncService:WordTyped()
+				wordsTyped:set(wordsTyped:get() + 1)
 				currency:set(currency:get() + 1)
 				experience:set(experience:get() + 5)
+				print("word been typed")
 
 				local tempWords = displayedWords
 
@@ -648,7 +654,9 @@ MainUI = New("ScreenGui")({
 							Size = UDim2.fromScale(0.17, 0.075),
 							AnchorPoint = Vector2.new(0.5, 0),
 							Position = UDim2.fromScale(0.5, 0.02),
-							Text = "0 Words",
+							Text = Computed(function()
+								return wordsTyped:get() .. " Words"
+							end),
 							Image = 7367083297,
 						}),
 
