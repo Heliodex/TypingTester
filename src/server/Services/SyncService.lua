@@ -7,13 +7,29 @@ How syncing works
 ]]
 
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
+local seed = math.random()
+local rand = Random.new(seed)
+
+local currency = 0
+local experience = 0
+local wordsTyped = 0
 
 local SyncService = Knit.CreateService({
 	Name = "SyncService",
 })
 
+function SyncService.Client:GetSeed()
+	return self.Server:GetSeed()
+end
+function SyncService:GetSeed()
+	return seed
+end
+
 function SyncService.Client:WordTyped()
-	
+	wordsTyped += 1
+	currency += 1
+	experience += 5
+	print(wordsTyped .. " words, " .. currency .. " currency, " .. experience .. " experience")
 end
 
 return SyncService
