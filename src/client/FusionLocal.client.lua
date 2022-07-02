@@ -9,10 +9,15 @@ local Knit = require(ReplicatedStorage.Packages.Knit)
 Knit.Start():catch(warn)
 
 local SyncService = Knit.GetService("SyncService")
+local DataService = Knit.GetService("DataService")
 local randomGenerator
 
 SyncService:GetSeed():andThen(function(seed)
 	randomGenerator = Random.new(seed)
+end)
+
+DataService:LoadData():andThen(function(data)
+	print(data.Currency)
 end)
 
 local Words = require(script.Parent.Words)
