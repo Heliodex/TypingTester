@@ -9,6 +9,11 @@ local Knit = require(ReplicatedStorage.Packages.Knit)
 Knit.Start():catch(warn)
 
 local SyncService = Knit.GetService("SyncService")
+local randomGenerator
+
+SyncService:GetSeed():andThen(function(seed)
+	randomGenerator = Random.new(seed)
+end)
 
 local Words = require(script.Parent.Words)
 
@@ -407,7 +412,7 @@ TypingBox = New("TextBox")({
 				SyncService:WordTyped()
 				wordsTyped:set(wordsTyped:get() + 1)
 				currency:set(currency:get() + 1)
-				experience:set(experience:get() + 5)
+				experience:set(experience:get() + randomGenerator:NextInteger(3, 10))
 				print("word been typed")
 
 				local tempWords = displayedWords

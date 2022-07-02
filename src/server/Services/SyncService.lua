@@ -28,8 +28,7 @@ end
 function SyncService.Client:WordTyped()
 	wordsTyped += 1
 	currency += 1
-	experience += 5
-	print(wordsTyped .. " words, " .. currency .. " currency, " .. experience .. " experience")
+	experience += rand:NextInteger(3, 10)
 end
 
 return SyncService
