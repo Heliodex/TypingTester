@@ -32,7 +32,6 @@ function SyncService:GetSeed()
 end
 
 function SyncService.Client:WordTyped(player)
-	print(player)
 	local experienceToAdd = rand:NextInteger(3, 10)
 	wordsTyped += 1
 	experience += experienceToAdd

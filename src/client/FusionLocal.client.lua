@@ -16,10 +16,6 @@ SyncService:GetSeed():andThen(function(seed)
 	randomGenerator = Random.new(seed)
 end)
 
-DataService:LoadData():andThen(function(data)
-	print(data.Currency)
-end)
-
 local Words = require(script.Parent.Words)
 
 local New = Fusion.New
@@ -36,8 +32,9 @@ local Grey3 = Color3.fromRGB(102, 102, 102)
 local Grey2 = Color3.fromRGB(84, 84, 84)
 local Grey1 = Color3.fromRGB(60, 60, 60)
 local Grey0 = Color3.fromRGB(42, 42, 42)
-local Black = Color3.fromRGB(16, 14, 12)
-local DarkBlack = Color3.new() -- hehehuehehuehe
+local Black2 = Color3.fromRGB(16, 14, 12)
+local Black1 = Color3.fromRGB(10, 9, 8)
+local Black0 = Color3.new() -- hehehuehehuehe
 
 local Green = Color3.fromRGB(0, 255, 0)
 local Red = Color3.fromRGB(255, 0, 0)
@@ -120,7 +117,6 @@ local function NextWords(props)
 
 		Size = UDim2.fromScale(0.4, 0.06),
 		Position = UDim2.fromScale(0.5, props.Pos),
-		BackgroundTransparency = 1,
 
 		Font = playerFont,
 		TextColor3 = Grey5,
@@ -137,7 +133,6 @@ local function BackgroundDesign()
 		local box = New("TextLabel")({
 			Name = "BackgroundDesign" .. tostring(i),
 
-			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(2.41, 0.1),
 			Position = UDim2.fromScale(0.5, temp),
 
@@ -174,9 +169,7 @@ local function Button(props)
 
 		[Children] = {
 			UICorner(props.Corner),
-			UIPadding({
-				PaddingH = 0.075 / ratio, -- at least it works well
-			}),
+			UIPadding({ PaddingH = 0.075 / ratio }), -- at least it works well
 
 			New("TextLabel")({
 				Text = props.Text,
@@ -185,7 +178,6 @@ local function Button(props)
 				Position = UDim2.fromScale(0.9, 0.5),
 				AnchorPoint = Vector2.new(1, 0.5),
 
-				BackgroundTransparency = 1,
 				Font = playerFont,
 			}),
 
@@ -205,6 +197,49 @@ local function Button(props)
 	})
 end
 
+local function Profile(props)
+	local text = State("Profile " .. props.Number)
+	return New("TextButton")({
+		Name = "Profile",
+
+		Size = UDim2.fromScale(1, 0.15),
+
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = props.Position,
+		BackgroundColor3 = Grey3,
+		AutoButtonColor = true,
+
+		[OnEvent("Activated")] = function()
+			text:set("Loading...")
+			
+			DataService:LoadData(props.Number):andThen(function(data)
+				currency:set(data.Currency)
+				experience:set(data.Experience)
+				wordsTyped:set(data.WordsTyped)
+
+				PlayScreen.Frame.Visible = false
+				Sounds.music:Play()
+				MainFrameSize:set(UDim2.fromScale(1, 1))
+			end)
+		end,
+
+		[Children] = {
+			UICorner(),
+
+			New("TextLabel")({
+				Text = text,
+
+				Size = UDim2.fromScale(0.3, 0.8),
+				Position = UDim2.fromScale(0.02, 0.5),
+				AnchorPoint = Vector2.new(0, 0.5),
+				TextXAlignment = Enum.TextXAlignment.Left,
+
+				Font = playerFont,
+			}),
+		},
+	})
+end
+
 local function Label(props)
 	props.LabelWidth = props.LabelWidth or 0.6
 	props.LabelPosition = props.LabelPosition or 0.9
@@ -218,12 +253,11 @@ local function Label(props)
 		AnchorPoint = props.AnchorPoint,
 		Position = props.Position,
 		BackgroundColor3 = Grey0,
+		BackgroundTransparency = 0,
 
 		[Children] = {
 			UICorner(),
-			UIPadding({
-				PaddingH = 0.075 / ratio, -- ratio
-			}),
+			UIPadding({ PaddingH = 0.075 / ratio }), -- ratio
 
 			New("TextLabel")({
 				Text = props.Text,
@@ -232,7 +266,6 @@ local function Label(props)
 				Position = UDim2.fromScale(props.LabelPosition, 0.5),
 				AnchorPoint = Vector2.new(1, 0.5),
 
-				BackgroundTransparency = 1,
 				Font = playerFont,
 			}),
 
@@ -282,6 +315,7 @@ local function Popup(props)
 				Name = "Label",
 				AnchorPoint = Vector2.new(0.5, 0),
 				BackgroundColor3 = Grey1,
+				BackgroundTransparency = 0,
 
 				Position = UDim2.new(0.5, 0, 0, 16),
 				Size = UDim2.fromScale(1, 0.08), -- I don't like it. 0.08 barely works okay enough.
@@ -291,7 +325,7 @@ local function Popup(props)
 				[Children] = New("TextButton")({
 					Name = "CloseButton",
 					AnchorPoint = Vector2.new(1, 0),
-					BackgroundColor3 = Black,
+					BackgroundColor3 = Black2,
 
 					Position = UDim2.fromScale(1, 0),
 					Size = UDim2.fromScale(1, 1),
@@ -333,7 +367,6 @@ local function SettingsOption(props)
 			}),
 			New("TextLabel")({
 				AnchorPoint = Vector2.new(0, 0.5),
-				BackgroundTransparency = 1,
 				Position = UDim2.fromScale(0.15, 0.5),
 				Size = UDim2.fromScale(0.8, 1),
 				Font = playerFont,
@@ -359,7 +392,6 @@ local function ShopOption(props)
 		[Children] = {
 			New("TextLabel")({
 				AnchorPoint = Vector2.new(0, 0.5),
-				BackgroundTransparency = 1,
 				Position = UDim2.fromScale(0, 0.5),
 				Size = UDim2.fromScale(0.8, 0.8),
 				Font = playerFont,
@@ -418,7 +450,6 @@ TypingBox = New("TextBox")({
 				wordsTyped:set(wordsTyped:get() + 1)
 				experience:set(experience:get() + randomGenerator:NextInteger(3, 10))
 				currency:set(currency:get() + 1)
-				print("word been typed")
 
 				local tempWords = displayedWords
 
@@ -447,102 +478,132 @@ PlayScreen = New("ScreenGui")({
 	IgnoreGuiInset = true,
 
 	[Children] = New("Frame")({
-		BackgroundColor3 = Black,
+		BackgroundColor3 = Black2,
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = UDim2.fromScale(1, 1),
 
 		[Children] = {
-			New("Frame")({ -- Credits
-				Name = "Credits",
-				BackgroundTransparency = 1,
-				Position = UDim2.fromScale(0.9, 0.65),
-				Size = UDim2.fromScale(0.1, 0.1),
-				SizeConstraint = Enum.SizeConstraint.RelativeXX,
-
-				[Children] = New("ImageLabel")({
-					Name = "HeliodexLogo",
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = UDim2.fromScale(0.5, 0.5),
-					Size = UDim2.fromScale(1, 1),
-					SizeConstraint = Enum.SizeConstraint.RelativeYY,
-					ZIndex = 6,
-					Image = "rbxassetid://7501730261",
-
-					[Children] = {
-						New("TextLabel")({
-							Name = "a Heliodex game",
-							BackgroundTransparency = 1,
-							Position = UDim2.fromScale(0.5, 1.1),
-							Size = UDim2.fromScale(1.8, 0.2),
-							Font = playerFontThin,
-							RichText = true,
-							Text = "a <i>HELIODEX</i> game",
-						}),
-						New("TextLabel")({
-							Name = "pjstarr12",
-							BackgroundTransparency = 1,
-							Position = UDim2.fromScale(0.5, 1.4),
-							Size = UDim2.fromScale(1.5, 0.175),
-							Font = playerFontThin,
-							Text = "pjstarr12",
-
-							[Children] = UIPadding(),
-						}),
-						New("TextLabel")({
-							Name = "TheWhaleCloud",
-							BackgroundTransparency = 1,
-							Position = UDim2.fromScale(0.5, 1.6),
-							Size = UDim2.fromScale(1.5, 0.175),
-							Font = playerFontThin,
-							Text = "TheWhaleCloud",
-
-							[Children] = UIPadding(),
-						}),
-						New("TextLabel")({
-							Name = "Lewin4",
-							AnchorPoint = Vector2.new(0.5, 0.5),
-							BackgroundColor3 = White,
-							BackgroundTransparency = 1,
-							Position = UDim2.fromScale(0.5, 1.8),
-							Size = UDim2.fromScale(1.5, 0.175),
-							Font = playerFontThin,
-							Text = "Lewin4",
-
-							[Children] = UIPadding(),
-						}),
-					},
-				}),
-			}),
-
-			Button({
-				Name = "Play",
-				Size = UDim2.fromScale(0.17, 0.075),
+			New("Frame")({
+				Name = "Profiles",
+				BackgroundColor3 = Black1,
 				Position = UDim2.fromScale(0.5, 0.5),
-				Text = "Play",
-				Image = 8156398078,
+				Size = UDim2.fromScale(0.5, 0.5),
+				Visible = false,
 
-				Activated = function() -- o this is how you do functions
-					PlayScreen.Frame.Visible = false
-					Sounds.music:Play()
-					MainFrameSize:set(UDim2.fromScale(1, 1))
-				end,
+				[Children] = {
+					UICorner(0.05),
+					UIPadding({ Padding = 0.025 }),
+
+					New("TextLabel")({
+						Size = UDim2.fromScale(1, 0.1),
+						Position = UDim2.fromScale(0.5, -0.1),
+						Text = "Select a profile to load",
+						Font = playerFontBold,
+					}),
+
+					Profile({
+						Number = 1,
+						Position = UDim2.fromScale(0.5, 0.3),
+					}),
+					Profile({
+						Number = 2,
+						Position = UDim2.fromScale(0.5, 0.5),
+					}),
+					Profile({
+						Number = 3,
+						Position = UDim2.fromScale(0.5, 0.7),
+					}),
+				},
 			}),
 
-			New("TextLabel")({ -- Title
-				Name = "Title",
+			New("Frame")({
+				Name = "Play",
 				BackgroundTransparency = 1,
-				Position = UDim2.fromScale(0.5, 0.35),
-				Size = UDim2.fromScale(0.3, 0.175),
-				Font = playerFontBold,
-				RichText = true,
-				Text = "typing simulator but better",
+				Position = UDim2.fromScale(0.5, 0.5),
+				Size = UDim2.fromScale(1, 1),
 
-				[Children] = New("UIPadding")({
-					PaddingBottom = UDim.new(0.1, 0),
-					PaddingLeft = UDim.new(0.1, 0),
-					PaddingRight = UDim.new(0.1, 0),
-					PaddingTop = UDim.new(0.1, 0),
-				}),
+				[Children] = {
+					Button({
+						Name = "Play",
+						Size = UDim2.fromScale(0.17, 0.075),
+						Position = UDim2.fromScale(0.5, 0.5),
+						Text = "Play",
+						Image = 8156398059,
+
+						Activated = function() -- o this is how you do functions
+							PlayScreen.Frame.Play.Visible = false
+							PlayScreen.Frame.Profiles.Visible = true
+						end,
+					}),
+
+					New("TextLabel")({ -- Title
+						Name = "Title",
+						Position = UDim2.fromScale(0.5, 0.35),
+						Size = UDim2.fromScale(0.3, 0.175),
+						Font = playerFontBold,
+						RichText = true,
+						Text = "typing simulator but better",
+
+						[Children] = UIPadding({ Padding = 0.1 }),
+					}),
+
+					New("Frame")({ -- Credits
+						Name = "Credits",
+						BackgroundTransparency = 1,
+						Position = UDim2.fromScale(0.9, 0.65),
+						Size = UDim2.fromScale(0.1, 0.1),
+						SizeConstraint = Enum.SizeConstraint.RelativeXX,
+
+						[Children] = New("ImageLabel")({
+							Name = "HeliodexLogo",
+							AnchorPoint = Vector2.new(0.5, 0.5),
+							Position = UDim2.fromScale(0.5, 0.5),
+							Size = UDim2.fromScale(1, 1),
+							SizeConstraint = Enum.SizeConstraint.RelativeYY,
+							ZIndex = 6,
+							Image = "rbxassetid://7501730261",
+
+							[Children] = {
+								New("TextLabel")({
+									Name = "a Heliodex game",
+									Position = UDim2.fromScale(0.5, 1.1),
+									Size = UDim2.fromScale(1.8, 0.2),
+									Font = playerFontThin,
+									RichText = true,
+									Text = "a <i>HELIODEX</i> game",
+								}),
+								New("TextLabel")({
+									Name = "pjstarr12",
+									Position = UDim2.fromScale(0.5, 1.4),
+									Size = UDim2.fromScale(1.5, 0.175),
+									Font = playerFontThin,
+									Text = "pjstarr12",
+
+									[Children] = UIPadding(),
+								}),
+								New("TextLabel")({
+									Name = "TheWhaleCloud",
+									Position = UDim2.fromScale(0.5, 1.6),
+									Size = UDim2.fromScale(1.5, 0.175),
+									Font = playerFontThin,
+									Text = "TheWhaleCloud",
+
+									[Children] = UIPadding(),
+								}),
+								New("TextLabel")({
+									Name = "Lewin4",
+									AnchorPoint = Vector2.new(0.5, 0.5),
+									Position = UDim2.fromScale(0.5, 1.8),
+									Size = UDim2.fromScale(1.5, 0.175),
+									Font = playerFontThin,
+									Text = "Lewin4",
+
+									[Children] = UIPadding(),
+								}),
+							},
+						}),
+					}),
+				},
 			}),
 		},
 	}),
@@ -565,7 +626,6 @@ MainUI = New("ScreenGui")({
 
 			Visible = false,
 
-			BackgroundTransparency = 1,
 			TextTransparency = 1,
 			Font = playerFont,
 
@@ -681,9 +741,7 @@ MainUI = New("ScreenGui")({
 
 							[Children] = {
 								UICorner(),
-								UIPadding({
-									PaddingH = 0.033,
-								}),
+								UIPadding({ PaddingH = 0.033 }),
 
 								New("IntValue")({
 									Name = "DifficultyLevel",
@@ -697,7 +755,6 @@ MainUI = New("ScreenGui")({
 									Position = UDim2.fromScale(0.9, 0.25),
 									AnchorPoint = Vector2.new(1, 0.5),
 
-									BackgroundTransparency = 1,
 									Font = playerFont,
 								}),
 
@@ -709,7 +766,6 @@ MainUI = New("ScreenGui")({
 									Position = UDim2.fromScale(0.9, 0.75),
 									AnchorPoint = Vector2.new(1, 0.5),
 
-									BackgroundTransparency = 1,
 									Font = playerFont,
 								}),
 
@@ -737,9 +793,7 @@ MainUI = New("ScreenGui")({
 
 							[Children] = {
 								UICorner(0.05),
-								UIPadding({
-									Padding = 0.04,
-								}),
+								UIPadding({ Padding = 0.04 }),
 
 								Label({
 									Name = "Rank",
@@ -808,7 +862,6 @@ MainUI = New("ScreenGui")({
 
 									Size = UDim2.fromScale(0.4, 0.06),
 									Position = UDim2.fromScale(0.5, 0.3),
-									BackgroundTransparency = 1,
 
 									Font = playerFont,
 									Text = displayedWords[1],
@@ -889,7 +942,6 @@ MainUI = New("ScreenGui")({
 					Children = New("TextLabel")({
 						Name = "Text",
 						AnchorPoint = Vector2.new(0.5, 0.9),
-						BackgroundTransparency = 1,
 						Position = UDim2.fromScale(0.5, 1),
 						Size = UDim2.fromScale(0.97, 1.1),
 						Font = playerFont,
@@ -966,7 +1018,7 @@ MainUI = New("ScreenGui")({
 
 				New("Frame")({
 					Name = "DarkTint",
-					BackgroundColor3 = DarkBlack,
+					BackgroundColor3 = Black0,
 					BackgroundTransparency = Spring(DarkTintTransparency, 25),
 					Size = UDim2.fromScale(2, 2),
 					ZIndex = 100,

@@ -42,8 +42,8 @@ Players.PlayerRemoving:Connect(function(player)
 	end
 end)
 
-function DataService.Client:LoadData(player)
-	local profile = ProfileStore:LoadProfileAsync("Player_" .. player.UserId)
+function DataService.Client:LoadData(player, profile)
+	local profile = ProfileStore:LoadProfileAsync("Player_" .. player.UserId .. "_" .. profile)
 	if profile ~= nil then
 		profile:AddUserId(player.UserId) -- GDPR compliance
 		profile:Reconcile() -- Fill in missing variables from ProfileTemplate (optional)
