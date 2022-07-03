@@ -53,7 +53,7 @@ function DataService.Client:LoadData(player, profile)
 			player:Kick()
 		end)
 		if player:IsDescendantOf(Players) == true then
-			Profiles[player].Stats.Logins += 1
+			Profiles[player].Data.Stats.Logins += 1
 			Profiles[player] = profile
 			-- A profile has been successfully loaded:
 			return profile.Data
