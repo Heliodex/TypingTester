@@ -197,10 +197,18 @@ local function Button(props)
 	})
 end
 
-local function Profile(props)
-	local text = State("Profile " .. props.Number)
+local function SaveSlot(props)
+	local text = State("Save slot " .. props.Number)
+	local previewText = State("Loading info...")
+
+	DataService:PreviewData(props.Number):andThen(function(data)
+		previewText:set(
+			"Level: " .. data.Experience % 100 .. "\nWords: " .. data.WordsTyped .. "\nTyping Tokens: " .. data.Currency
+		)
+	end)
+
 	return New("TextButton")({
-		Name = "Profile",
+		Name = "SaveSlot",
 
 		Size = UDim2.fromScale(1, 0.15),
 
@@ -211,7 +219,7 @@ local function Profile(props)
 
 		[OnEvent("Activated")] = function()
 			text:set("Loading...")
-			
+
 			DataService:LoadData(props.Number):andThen(function(data)
 				currency:set(data.Currency)
 				experience:set(data.Experience)
@@ -227,12 +235,25 @@ local function Profile(props)
 			UICorner(),
 
 			New("TextLabel")({
+				Name = "SaveSlotName",
 				Text = text,
 
 				Size = UDim2.fromScale(0.3, 0.8),
 				Position = UDim2.fromScale(0.02, 0.5),
 				AnchorPoint = Vector2.new(0, 0.5),
 				TextXAlignment = Enum.TextXAlignment.Left,
+
+				Font = playerFont,
+			}),
+
+			New("TextLabel")({
+				Name = "SaveSlotPreview",
+				Text = previewText,
+
+				Size = UDim2.fromScale(0.3, 0.8),
+				Position = UDim2.fromScale(0.98, 0.5),
+				AnchorPoint = Vector2.new(1, 0.5),
+				TextXAlignment = Enum.TextXAlignment.Right,
 
 				Font = playerFont,
 			}),
@@ -484,7 +505,7 @@ PlayScreen = New("ScreenGui")({
 
 		[Children] = {
 			New("Frame")({
-				Name = "Profiles",
+				Name = "SaveSlots",
 				BackgroundColor3 = Black1,
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromScale(0.5, 0.5),
@@ -497,21 +518,29 @@ PlayScreen = New("ScreenGui")({
 					New("TextLabel")({
 						Size = UDim2.fromScale(1, 0.1),
 						Position = UDim2.fromScale(0.5, -0.1),
-						Text = "Select a profile to load",
+						Text = "Select a save slot to load",
 						Font = playerFontBold,
 					}),
 
-					Profile({
+					SaveSlot({
 						Number = 1,
+						Position = UDim2.fromScale(0.5, 0.1),
+					}),
+					SaveSlot({
+						Number = 2,
 						Position = UDim2.fromScale(0.5, 0.3),
 					}),
-					Profile({
-						Number = 2,
+					SaveSlot({
+						Number = 3,
 						Position = UDim2.fromScale(0.5, 0.5),
 					}),
-					Profile({
-						Number = 3,
+					SaveSlot({
+						Number = 4,
 						Position = UDim2.fromScale(0.5, 0.7),
+					}),
+					SaveSlot({
+						Number = 5,
+						Position = UDim2.fromScale(0.5, 0.9),
 					}),
 				},
 			}),
@@ -532,7 +561,7 @@ PlayScreen = New("ScreenGui")({
 
 						Activated = function() -- o this is how you do functions
 							PlayScreen.Frame.Play.Visible = false
-							PlayScreen.Frame.Profiles.Visible = true
+							PlayScreen.Frame.SaveSlots.Visible = true
 						end,
 					}),
 

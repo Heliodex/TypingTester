@@ -53,9 +53,10 @@ function DataService.Client:LoadData(player, profile)
 			player:Kick()
 		end)
 		if player:IsDescendantOf(Players) == true then
+			Profiles[player].Stats.Logins += 1
 			Profiles[player] = profile
 			-- A profile has been successfully loaded:
-			return Profiles[player].Data
+			return profile.Data
 		else
 			-- Player left before the profile loaded:
 			profile:Release()
@@ -64,6 +65,19 @@ function DataService.Client:LoadData(player, profile)
 		-- The profile couldn't be loaded possibly due to other
 		-- Roblox servers trying to load this profile at the same time:
 		player:Kick("\n\nYour data could not be loaded. Please rejoin and try again.\n")
+	end
+end
+
+function DataService.Client:PreviewData(player, profile)
+	local profile = ProfileStore:ViewProfileAsync("Player_" .. player.UserId .. "_" .. profile)
+	if profile ~= nil then
+		if player:IsDescendantOf(Players) == true then
+			Profiles[player] = profile
+			-- A profile has been successfully loaded:
+			return Profiles[player].Data
+		end
+	else
+		return DefaultProfileTemplate
 	end
 end
 
