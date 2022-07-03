@@ -59,6 +59,9 @@ local wordCorrect = State(Green)
 local currency = State(0)
 local experience = State(0)
 local wordsTyped = State(0)
+local level = Computed(function()
+	return math.floor(experience:get() / 100)
+end)
 
 local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
@@ -837,7 +840,9 @@ MainUI = New("ScreenGui")({
 									Size = UDim2.fromScale(1, 0.25),
 									AnchorPoint = Vector2.new(0.5, 0.5),
 									Position = UDim2.fromScale(0.5, 0.5),
-									Text = "Level 1",
+									Text = Computed(function()
+										return "Level " .. level:get()
+									end),
 									Image = 7367078076,
 								}),
 								Label({
