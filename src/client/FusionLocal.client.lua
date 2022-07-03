@@ -206,7 +206,7 @@ local function SaveSlot(props)
 
 	DataService:PreviewData(props.Number):andThen(function(data)
 		previewText:set(
-			"Level: " .. data.Experience % 100 .. "\nWords: " .. data.WordsTyped .. "\nTyping Tokens: " .. data.Currency
+			"Level: " .. math.floor(data.Experience / 100) .. "\nWords: " .. data.WordsTyped .. "\nTyping Tokens: " .. data.Currency
 		)
 	end)
 
@@ -728,7 +728,7 @@ MainUI = New("ScreenGui")({
 						}),
 						Button({
 							Name = "AudioToggle",
-							Size = UDim2.fromScale(0.15, 0.15),
+							Size = UDim2.fromScale(0.1, 0.1),
 							AnchorPoint = Vector2.new(1, 1),
 							Position = UDim2.fromScale(0.99, 0.98),
 							Text = "",
