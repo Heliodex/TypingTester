@@ -14,9 +14,15 @@ local currency = 0
 local experience = 0
 local wordsTyped = 0
 
+local DataService
 local SyncService = Knit.CreateService({
 	Name = "SyncService",
 })
+
+function SyncService:KnitStart()
+	DataService = Knit.GetService("DataService")
+end
+
 
 function SyncService.Client:GetSeed()
 	return self.Server:GetSeed()
@@ -25,10 +31,16 @@ function SyncService:GetSeed()
 	return seed
 end
 
-function SyncService.Client:WordTyped()
+function SyncService.Client:WordTyped(player)
+	print(player)
+	local experienceToAdd = rand:NextInteger(3, 10)
 	wordsTyped += 1
+	experience += experienceToAdd
 	currency += 1
-	experience += rand:NextInteger(3, 10)
+
+	DataService:IncrementData(player, "WordsTyped", 1)
+	DataService:IncrementData(player, "Experience", experienceToAdd)
+	DataService:IncrementData(player, "Currency", 1)
 end
 
 return SyncService

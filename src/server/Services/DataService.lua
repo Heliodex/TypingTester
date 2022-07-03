@@ -2,6 +2,10 @@ local Players = game:GetService("Players")
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 local ProfileService = require(game:GetService("ServerScriptService").Server.ProfileService)
 
+-- *daft punk - get lucky plays*
+-- This game has ProfileService.
+-- Brought to you by Mad Studio.
+
 local DefaultProfileTemplate = {
 	WordsTyped = 0,
 	Experience = 0,
@@ -63,6 +67,8 @@ function DataService.Client:LoadData(player)
 	end
 end
 
-function DataService:UpdateData(variable) end
+function DataService:IncrementData(player, variable, value)
+	Profiles[player].Data[variable] += value
+end
 
 return DataService

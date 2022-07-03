@@ -416,8 +416,8 @@ TypingBox = New("TextBox")({
 
 				SyncService:WordTyped()
 				wordsTyped:set(wordsTyped:get() + 1)
-				currency:set(currency:get() + 1)
 				experience:set(experience:get() + randomGenerator:NextInteger(3, 10))
+				currency:set(currency:get() + 1)
 				print("word been typed")
 
 				local tempWords = displayedWords
