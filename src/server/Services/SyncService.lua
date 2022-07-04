@@ -10,35 +10,39 @@ local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 local seed = math.random()
 local rand = Random.new(seed)
 
-local currency = 0
-local experience = 0
-local wordsTyped = 0
-
 local DataService
 local SyncService = Knit.CreateService({
 	Name = "SyncService",
 })
 
+local experience
+local level
+
 function SyncService:KnitStart()
 	DataService = Knit.GetService("DataService")
 end
 
-
 function SyncService.Client:GetSeed()
-	return self.Server:GetSeed()
-end
-function SyncService:GetSeed()
 	return seed
 end
 
 function SyncService.Client:WordTyped(player)
-	local experienceToAdd = rand:NextInteger(3, 10)
-	wordsTyped += 1
-	experience += experienceToAdd
-	currency += 1
+	experience = DataService:GetData(player, "Experience")
+	level = DataService:GetData(player, "Level")
 
 	DataService:IncrementData(player, "WordsTyped", 1)
-	DataService:IncrementData(player, "Experience", experienceToAdd)
+
+	local expToAdd = rand:NextInteger(3, 10)
+	if experience + expToAdd > level * 100 then
+		experience += expToAdd - level * 100
+		DataService:IncrementData(player, "Experience", expToAdd - level * 100)
+		level += 1
+		DataService:IncrementData(player, "Level", 1)
+	else
+		experience += expToAdd
+		DataService:IncrementData(player, "Experience", expToAdd)
+	end
+
 	DataService:IncrementData(player, "Currency", 1)
 end
 

@@ -9,10 +9,17 @@ local ProfileService = require(game:GetService("ServerScriptService").Server.Pro
 local DefaultProfileTemplate = {
 	WordsTyped = 0,
 	Experience = 0,
+	Level = 0,
 	Currency = 0,
 	Stats = {
 		PlayTime = 0,
 		Logins = 0,
+		Words = {
+			Easy = 0,
+			Normal = 0,
+			Hard = 0,
+			Insane = 0,
+		},
 	},
 
 	ShopPurchases = {
@@ -79,6 +86,18 @@ function DataService.Client:PreviewData(player, profile)
 	else
 		return DefaultProfileTemplate
 	end
+end
+
+function DataService:GetData(player, variable)
+	-- if typeof(variable) == "table" then -- hey, why not
+	-- 	local returns = {}
+	-- 	for i in variable do
+	-- 		table.insert(returns, Profiles[player].Data[i])
+	-- 	end
+	-- 	return returns
+	-- end
+
+	return Profiles[player].Data[variable]
 end
 
 function DataService:IncrementData(player, variable, value)

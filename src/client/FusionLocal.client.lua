@@ -17,6 +17,7 @@ SyncService:GetSeed():andThen(function(seed)
 end)
 
 local Words = require(script.Parent.Words)
+local Ranks = require(script.Parent.Ranks)
 
 local New = Fusion.New
 local Children = Fusion.Children
@@ -26,7 +27,7 @@ local Spring = Fusion.Spring
 local State = Fusion.State
 local Computed = Fusion.Computed
 
-local White = Color3.fromRGB(255, 255, 255)
+local White = Color3.new(1, 1, 1)
 local Grey5 = Color3.fromRGB(178, 178, 178)
 local Grey3 = Color3.fromRGB(102, 102, 102)
 local Grey2 = Color3.fromRGB(84, 84, 84)
@@ -53,15 +54,15 @@ local MainFrameSize = State(UDim2.fromScale(0.8, 0.8))
 local DarkTintTransparency = State(1)
 local DarkTintTransparencyGoal = 0.5
 
+local loadingData = false
+
 local displayedWords = {}
 local wordCorrect = State(Green)
 
 local currency = State(0)
 local experience = State(0)
+local level = State(0)
 local wordsTyped = State(0)
-local level = Computed(function()
-	return math.floor(experience:get() / 100)
-end)
 
 local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
@@ -206,7 +207,12 @@ local function SaveSlot(props)
 
 	DataService:PreviewData(props.Number):andThen(function(data)
 		previewText:set(
-			"Level: " .. math.floor(data.Experience / 100) .. "\nWords: " .. data.WordsTyped .. "\nTyping Tokens: " .. data.Currency
+			"Level: "
+				.. math.floor(data.Experience / ((level:get() + 1) * 100))
+				.. "\nWords: "
+				.. data.WordsTyped
+				.. "\nTyping Tokens: "
+				.. data.Currency
 		)
 	end)
 
@@ -221,17 +227,21 @@ local function SaveSlot(props)
 		AutoButtonColor = true,
 
 		[OnEvent("Activated")] = function()
-			text:set("Loading...")
+			if not loadingData then
+				loadingData = true
+				text:set("Loading...")
 
-			DataService:LoadData(props.Number):andThen(function(data)
-				currency:set(data.Currency)
-				experience:set(data.Experience)
-				wordsTyped:set(data.WordsTyped)
+				DataService:LoadData(props.Number):andThen(function(data)
+					currency:set(data.Currency)
+					experience:set(data.Experience)
+					level:set(data.Level)
+					wordsTyped:set(data.WordsTyped)
 
-				PlayScreen.Frame.Visible = false
-				Sounds.music:Play()
-				MainFrameSize:set(UDim2.fromScale(1, 1))
-			end)
+					PlayScreen.Frame.Visible = false
+					Sounds.music:Play()
+					MainFrameSize:set(UDim2.fromScale(1, 1))
+				end)
+			end
 		end,
 
 		[Children] = {
@@ -276,12 +286,13 @@ local function Label(props)
 		Size = props.Size,
 		AnchorPoint = props.AnchorPoint,
 		Position = props.Position,
-		BackgroundColor3 = Grey0,
+		BackgroundColor3 = props.BackgroundColor3 or Grey0,
 		BackgroundTransparency = 0,
 
 		[Children] = {
 			UICorner(),
 			UIPadding({ PaddingH = 0.075 / ratio }), -- ratio
+			props.Children,
 
 			New("TextLabel")({
 				Text = props.Text,
@@ -375,7 +386,6 @@ local function SettingsOption(props)
 
 	return New("Frame")({
 		Name = props.Name,
-		BackgroundColor3 = White,
 
 		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
 		BackgroundTransparency = 1,
@@ -406,7 +416,6 @@ local function ShopOption(props)
 
 	return New("Frame")({
 		Name = props.Name,
-		BackgroundColor3 = White,
 
 		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
 		BackgroundTransparency = 1,
@@ -472,7 +481,17 @@ TypingBox = New("TextBox")({
 
 				SyncService:WordTyped()
 				wordsTyped:set(wordsTyped:get() + 1)
-				experience:set(experience:get() + randomGenerator:NextInteger(3, 10))
+
+				local exp = experience:get()
+				local expToAdd = randomGenerator:NextInteger(3, 10)
+				if exp + expToAdd > level:get() * 100 then
+					exp += expToAdd - level:get() * 100
+					level:set(level:get() + 1)
+				else
+					exp += expToAdd
+				end
+				experience:set(exp)
+
 				currency:set(currency:get() + 1)
 
 				local tempWords = displayedWords
@@ -747,6 +766,7 @@ MainUI = New("ScreenGui")({
 								return currency:get() .. " typing tokens"
 							end),
 							Image = 7367251392,
+							TextWrapped = false,
 
 							LabelWidth = 0.7,
 							LabelPosition = 0.95,
@@ -832,8 +852,21 @@ MainUI = New("ScreenGui")({
 									Size = UDim2.fromScale(1, 0.32),
 									AnchorPoint = Vector2.new(0.5, 1),
 									Position = UDim2.fromScale(0.5, 1),
-									Text = "Rank",
+									Text = Computed(function()
+										return Ranks(level:get()).Text
+									end),
 									Image = 7456285956,
+									BackgroundColor3 = White,
+
+									Children = {
+										New("UIGradient")({
+											Color = Computed(function()
+												return Ranks(level:get()).Colour
+											end),
+
+											Rotation = 90,
+										}),
+									},
 								}),
 								Label({
 									Name = "Level",
@@ -871,7 +904,7 @@ MainUI = New("ScreenGui")({
 										[Children] = New("Frame")({
 											Name = "Bar",
 											Size = Computed(function()
-												return UDim2.fromScale(experience:get() / 100 % 1, 1)
+												return UDim2.fromScale(experience:get() / (level:get() * 100) % 1, 1)
 											end),
 											AnchorPoint = Vector2.new(0, 0),
 											Position = UDim2.fromScale(0, 0),
