@@ -908,9 +908,10 @@ MainUI = New("ScreenGui")({
 
 										[Children] = New("Frame")({
 											Name = "Bar",
-											Size = Computed(function()
-												return UDim2.fromScale(experience:get() / (level:get() * 100) % 1, 1)
-											end),
+											Size = Spring(Computed(function()
+												local size = experience:get() / (level:get() * 100) % 1
+												return UDim2.fromScale(if size == size then size else 0, 1) -- prevent NaNs from silently breaking everything
+											end), 50),
 											AnchorPoint = Vector2.new(0, 0),
 											Position = UDim2.fromScale(0, 0),
 
