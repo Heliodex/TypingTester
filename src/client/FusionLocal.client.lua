@@ -388,8 +388,9 @@ end
 
 local function SettingsOption(props)
 	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse
+	local checked = State(false)
 
-	return New("Frame")({
+	return New("TextButton")({
 		Name = props.Name,
 
 		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
@@ -397,17 +398,23 @@ local function SettingsOption(props)
 		Position = if props.Right then UDim2.fromScale(0.97, VerticalPos) else UDim2.fromScale(0.03, VerticalPos),
 		Size = UDim2.fromScale(0.45, 0.05),
 
+		[OnEvent("Activated")] = function()
+			checked:set(not checked:get())
+		end,
+
 		[Children] = {
-			New("ImageButton")({
+			New("ImageLabel")({
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeYY,
-				Image = "rbxassetid://7523096047",
+				Image = Computed(function()
+					return if checked:get() then "rbxassetid://7523095951" else "rbxassetid://7523096047"
+				end),
 			}),
 			New("TextLabel")({
 				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.fromScale(0.15, 0.5),
-				Size = UDim2.fromScale(0.8, 1),
+				Position = UDim2.fromScale(0.18, 0.5),
+				Size = UDim2.fromScale(0.8, 0.8),
 				Font = playerFont,
 				Text = props.Text,
 				TextXAlignment = Enum.TextXAlignment.Left,
