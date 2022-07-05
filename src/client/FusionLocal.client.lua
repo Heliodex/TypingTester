@@ -26,6 +26,7 @@ local OnChange = Fusion.OnChange
 local Spring = Fusion.Spring
 local State = Fusion.State
 local Computed = Fusion.Computed
+local Compat = Fusion.Compat
 
 local White = Color3.new(1, 1, 1)
 local Grey5 = Color3.fromRGB(178, 178, 178)
@@ -55,6 +56,12 @@ local DarkTintTransparency = State(1)
 local DarkTintTransparencyGoal = 0.5
 
 local loadingData = false
+local dataPrepared = State()
+local dataPreparedChanged = Compat(dataPrepared)
+
+DataService:PrepareData():andThen(function()
+	dataPrepared:set(true)
+end)
 
 local displayedWords = {}
 local wordCorrect = State(Green)
@@ -117,14 +124,14 @@ end
 
 local function NextWords(props)
 	return New("TextLabel")({
-		Name = "Label" .. props.id,
+		Name = "Label" .. props.Number,
 
 		Size = UDim2.fromScale(0.4, 0.06),
-		Position = UDim2.fromScale(0.5, props.Pos),
+		Position = UDim2.fromScale(0.5, props.Position),
 
 		Font = playerFont,
 		TextColor3 = Grey5,
-		Text = displayedWords[props.id],
+		Text = displayedWords[props.Number],
 	})
 end
 
@@ -202,18 +209,15 @@ local function Button(props)
 end
 
 local function SaveSlot(props)
-	local text = State("Save slot " .. props.Number)
+	local text = State("Save slot " .. props.SaveSlot)
 	local previewText = State("Loading info...")
 
-	DataService:PreviewData(props.Number):andThen(function(data)
-		previewText:set(
-			"Level: "
-				.. math.floor(data.Experience / ((level:get() + 1) * 100))
-				.. "\nWords: "
-				.. data.WordsTyped
-				.. "\nTyping Tokens: "
-				.. data.Currency
-		)
+	local disconnect = dataPreparedChanged:onChange(function()
+		DataService:PreviewData(props.SaveSlot):andThen(function(data)
+			previewText:set(
+				"Level: " .. data.Level .. "\nWords: " .. data.WordsTyped .. "\nTyping Tokens: " .. data.Currency
+			)
+		end)
 	end)
 
 	return New("TextButton")({
@@ -230,8 +234,9 @@ local function SaveSlot(props)
 			if not loadingData then
 				loadingData = true
 				text:set("Loading...")
+				disconnect()
 
-				DataService:LoadData(props.Number):andThen(function(data)
+				DataService:LoadData(props.SaveSlot):andThen(function(data)
 					currency:set(data.Currency)
 					experience:set(data.Experience)
 					level:set(data.Level)
@@ -545,23 +550,23 @@ PlayScreen = New("ScreenGui")({
 					}),
 
 					SaveSlot({
-						Number = 1,
+						SaveSlot = 1,
 						Position = UDim2.fromScale(0.5, 0.1),
 					}),
 					SaveSlot({
-						Number = 2,
+						SaveSlot = 2,
 						Position = UDim2.fromScale(0.5, 0.3),
 					}),
 					SaveSlot({
-						Number = 3,
+						SaveSlot = 3,
 						Position = UDim2.fromScale(0.5, 0.5),
 					}),
 					SaveSlot({
-						Number = 4,
+						SaveSlot = 4,
 						Position = UDim2.fromScale(0.5, 0.7),
 					}),
 					SaveSlot({
-						Number = 5,
+						SaveSlot = 5,
 						Position = UDim2.fromScale(0.5, 0.9),
 					}),
 				},
@@ -935,20 +940,20 @@ MainUI = New("ScreenGui")({
 								}),
 
 								NextWords({
-									Pos = 0.36,
-									id = 2,
+									Position = 0.36,
+									Number = 2,
 								}),
 								NextWords({
-									Pos = 0.42,
-									id = 3,
+									Position = 0.42,
+									Number = 3,
 								}),
 								NextWords({
-									Pos = 0.48,
-									id = 4,
+									Position = 0.48,
+									Number = 4,
 								}),
 								NextWords({
-									Pos = 0.54,
-									id = 5,
+									Position = 0.54,
+									Number = 5,
 								}),
 							},
 						}),

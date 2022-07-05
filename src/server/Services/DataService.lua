@@ -35,35 +35,44 @@ local DefaultProfileTemplate = {
 	},
 }
 
-local ProfileStore = ProfileService.GetProfileStore("PlayerData", DefaultProfileTemplate)
+local DefaultUserTemplate = {
+	DefaultProfileTemplate,
+	DefaultProfileTemplate,
+	DefaultProfileTemplate,
+	DefaultProfileTemplate,
+	DefaultProfileTemplate,
+}
+
+local ProfileStore = ProfileService.GetProfileStore("PlayerData_testing123", DefaultUserTemplate)
 local Profiles = {}
+local CurrentSaveSlot = {}
+local ProfileViews = {}
 
 local DataService = Knit.CreateService({
 	Name = "DataService",
 })
 
-Players.PlayerRemoving:Connect(function(player)
-	local profile = Profiles[player]
-	if profile ~= nil then
-		profile:Release()
-	end
-end)
+function DataService.Client:LoadData(player, SaveSlot)
+	CurrentSaveSlot[player] = SaveSlot
+	return Profiles[player].Data[SaveSlot]
+end
 
-function DataService.Client:LoadData(player, profile)
-	local profile = ProfileStore:LoadProfileAsync("Player_" .. player.UserId .. "_" .. profile)
+function DataService.Client:PrepareData(player)
+	local profile = ProfileStore:LoadProfileAsync("Player_" .. player.UserId)
+
 	if profile ~= nil then
 		profile:AddUserId(player.UserId) -- GDPR compliance
 		profile:Reconcile() -- Fill in missing variables from ProfileTemplate (optional)
 		profile:ListenToRelease(function()
 			Profiles[player] = nil
+			ProfileViews[player] = nil
 			-- The profile could've been loaded on another Roblox server:
 			player:Kick()
 		end)
-		if player:IsDescendantOf(Players) == true then
-			Profiles[player].Data.Stats.Logins += 1
-			Profiles[player] = profile
+		if player:IsDescendantOf(Players) then
 			-- A profile has been successfully loaded:
-			return profile.Data
+			Profiles[player] = profile
+			ProfileViews[player] = profile.Data
 		else
 			-- Player left before the profile loaded:
 			profile:Release()
@@ -75,13 +84,11 @@ function DataService.Client:LoadData(player, profile)
 	end
 end
 
-function DataService.Client:PreviewData(player, profile)
-	local profile = ProfileStore:ViewProfileAsync("Player_" .. player.UserId .. "_" .. profile)
-	if profile ~= nil then
+function DataService.Client:PreviewData(player, SaveSlot)
+	local view = ProfileViews[player]
+	if view ~= nil and view[SaveSlot] ~= nil then
 		if player:IsDescendantOf(Players) == true then
-			Profiles[player] = profile
-			-- A profile has been successfully loaded:
-			return Profiles[player].Data
+			return view[SaveSlot]
 		end
 	else
 		return DefaultProfileTemplate
@@ -89,19 +96,18 @@ function DataService.Client:PreviewData(player, profile)
 end
 
 function DataService:GetData(player, variable)
-	-- if typeof(variable) == "table" then -- hey, why not
-	-- 	local returns = {}
-	-- 	for i in variable do
-	-- 		table.insert(returns, Profiles[player].Data[i])
-	-- 	end
-	-- 	return returns
-	-- end
-
-	return Profiles[player].Data[variable]
+	return Profiles[player].Data[CurrentSaveSlot[player]][variable]
 end
 
 function DataService:IncrementData(player, variable, value)
-	Profiles[player].Data[variable] += value
+	Profiles[player].Data[CurrentSaveSlot[player]][variable] += value
 end
+
+Players.PlayerRemoving:Connect(function(player)
+	local profile = Profiles[player]
+	if profile ~= nil then
+		profile:Release()
+	end
+end)
 
 return DataService
