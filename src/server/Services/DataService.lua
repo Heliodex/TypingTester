@@ -11,6 +11,7 @@ local DefaultProfileTemplate = {
 	Experience = 0,
 	Level = 0,
 	Currency = 0,
+
 	Stats = {
 		PlayTime = 0,
 		Logins = 0,
@@ -23,9 +24,9 @@ local DefaultProfileTemplate = {
 	},
 
 	ShopPurchases = {
-		NormalMode = false,
-		HardMode = false,
-		InsaneMode = false,
+		MediumDifficulty = false,
+		HardDifficulty = false,
+		InsaneDifficulty = false,
 	},
 	Settings = {
 		KeySounds = false,
@@ -95,10 +96,31 @@ function DataService.Client:PreviewData(player, SaveSlot)
 	end
 end
 
+function DataService.Client:ItemOwned(player, item)
+	return DataService:GetData(player, "ShopPurchases")[item]
+end
+
+function DataService.Client:GetSetting(player, setting)
+	return DataService:GetData(player, "Settings")[setting]
+end
+
 function DataService:GetData(player, variable)
 	return Profiles[player].Data[CurrentSaveSlot[player]][variable]
 end
 
+function DataService:SetData(player, variable, value)
+	local slot = Profiles[player].Data[CurrentSaveSlot[player]]
+
+	-- Variable could be a list of values denoting a path to access:
+	if typeof(variable) == "table" then
+		for i = 1, #variable - 1 do
+			slot = slot[variable[i]]
+		end
+		slot[variable[#variable]] = value
+	else
+		slot[variable] = value
+	end
+end
 function DataService:IncrementData(player, variable, value)
 	Profiles[player].Data[CurrentSaveSlot[player]][variable] += value
 end

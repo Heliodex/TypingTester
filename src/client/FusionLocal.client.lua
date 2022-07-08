@@ -2,13 +2,17 @@
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local LocalPlayer = game:GetService("Players").LocalPlayer
-local Sounds = ReplicatedStorage.Sounds
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
 
-Knit.Start():catch(warn)
+Knit.Start()
+	:andThen(function()
+		print("Knit client started")
+	end)
+	:catch(warn)
 
 local SyncService = Knit.GetService("SyncService")
+local TextService = game:GetService("TextService")
 local DataService = Knit.GetService("DataService")
 local randomGenerator
 
@@ -18,6 +22,8 @@ end)
 
 local Words = require(script.Parent.Words)
 local Ranks = require(script.Parent.Ranks)
+local Sounds = ReplicatedStorage.Sounds
+local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
 
 local New = Fusion.New
 local Children = Fusion.Children
@@ -58,6 +64,8 @@ local DarkTintTransparencyGoal = 0.5
 local loadingData = false
 local dataPrepared = State()
 local dataPreparedChanged = Compat(dataPrepared)
+local dataLoaded = State()
+local dataLoadedChanged = Compat(dataLoaded)
 
 DataService:PrepareData():andThen(function()
 	dataPrepared:set(true)
@@ -242,6 +250,8 @@ local function SaveSlot(props)
 					level:set(data.Level)
 					wordsTyped:set(data.WordsTyped)
 
+					dataLoaded:set(true)
+
 					PlayScreen.Frame.Visible = false
 					Sounds.music:Play()
 					MainFrameSize:set(UDim2.fromScale(1, 1))
@@ -389,6 +399,7 @@ end
 local function SettingsOption(props)
 	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse
 	local checked = State(false)
+	local canClick = true
 
 	return New("TextButton")({
 		Name = props.Name,
@@ -399,7 +410,15 @@ local function SettingsOption(props)
 		Size = UDim2.fromScale(0.45, 0.05),
 
 		[OnEvent("Activated")] = function()
+			if not canClick then
+				return
+			end
+
+			canClick = false
 			checked:set(not checked:get())
+			SyncService:ChangeSetting(props.Name)
+			task.wait(0.1) -- don't click so fast
+			canClick = true
 		end,
 
 		[Children] = {
@@ -425,6 +444,19 @@ end
 
 local function ShopOption(props)
 	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse, css grid much
+	local buttonText = State(ShopItems[props.Name].Price)
+	local canClick
+
+	dataLoadedChanged:onChange(function()
+		DataService:ItemOwned(props.Name):andThen(function(owned)
+			if owned then
+				buttonText:set("Owned")
+				canClick = false
+			else
+				canClick = true
+			end
+		end)
+	end)
 
 	return New("Frame")({
 		Name = props.Name,
@@ -438,7 +470,7 @@ local function ShopOption(props)
 			New("TextLabel")({
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.fromScale(0, 0.5),
-				Size = UDim2.fromScale(0.8, 0.8),
+				Size = UDim2.fromScale(0.7, 0.8),
 				Font = playerFont,
 				Text = props.Text,
 				TextXAlignment = Enum.TextXAlignment.Left,
@@ -452,8 +484,31 @@ local function ShopOption(props)
 				Position = UDim2.fromScale(1, 0.5),
 				Size = UDim2.fromScale(0.25, 1),
 				Font = playerFont,
-				Text = props.Price or "Price",
+				Text = buttonText,
 				AutoButtonColor = true,
+
+				[OnEvent("Activated")] = function()
+					local price = buttonText:get()
+
+					if not canClick then
+						return
+					end
+
+					canClick = false
+					SyncService:PurchaseItem(props.Name):andThen(function(success)
+						if success then
+							currency:set(currency:get() - price)
+							buttonText:set("Purchase successful!")
+							task.wait(1)
+							buttonText:set("Owned")
+						else
+							buttonText:set("Purchase failed!")
+							task.wait(1)
+							buttonText:set(price)
+							canClick = true
+						end
+					end)
+				end,
 
 				[Children] = {
 					UIPadding(),
@@ -494,11 +549,13 @@ TypingBox = New("TextBox")({
 				SyncService:WordTyped()
 				wordsTyped:set(wordsTyped:get() + 1)
 
-				local exp = experience:get()
 				local expToAdd = randomGenerator:NextInteger(3, 10)
+				local exp = experience:get()
 				if exp + expToAdd > level:get() * 100 then
-					exp += expToAdd - level:get() * 100
-					level:set(level:get() + 1)
+					while exp + expToAdd > level:get() * 100 do -- why no while else (also probably redundant until soemone actually gets this much exp)
+						exp += expToAdd - level:get() * 100
+						level:set(level:get() + 1)
+					end
 				else
 					exp += expToAdd
 				end
@@ -682,7 +739,7 @@ MainUI = New("ScreenGui")({
 
 	[Children] = {
 		New("TextLabel")({ -- could go inside MainFrame or frame
-			Name = "Warning",
+			Name = "Notification",
 
 			Position = UDim2.fromScale(0.5, 0.15),
 			Size = UDim2.fromScale(1, 1),
@@ -915,10 +972,13 @@ MainUI = New("ScreenGui")({
 
 										[Children] = New("Frame")({
 											Name = "Bar",
-											Size = Spring(Computed(function()
-												local size = experience:get() / (level:get() * 100) % 1
-												return UDim2.fromScale(if size == size then size else 0, 1) -- prevent NaNs from silently breaking everything
-											end), 50),
+											Size = Spring(
+												Computed(function()
+													local size = experience:get() / (level:get() * 100) % 1
+													return UDim2.fromScale(if size == size then size else 0, 1) -- prevent NaNs from silently breaking everything
+												end),
+												50
+											),
 											AnchorPoint = Vector2.new(0, 0),
 											Position = UDim2.fromScale(0, 0),
 
@@ -1045,16 +1105,16 @@ MainUI = New("ScreenGui")({
 
 					Children = {
 						SettingsOption({
-							Name = "Keysounds",
+							Name = "KeySounds",
 							Text = "Keypress Sounds",
 						}),
 						SettingsOption({
-							Name = "Blind",
+							Name = "BlindMode",
 							Text = "Blind Mode",
 							Right = true,
 						}),
 						SettingsOption({
-							Name = "Memory",
+							Name = "MemoryMode",
 							Text = "Memory Mode",
 							Row = 1,
 						}),
@@ -1079,19 +1139,16 @@ MainUI = New("ScreenGui")({
 						ShopOption({
 							Name = "MediumDifficulty",
 							Text = "Medium Difficulty",
-							Price = 40,
 						}),
 						ShopOption({
 							Name = "HardDifficulty",
 							Text = "Hard Difficulty",
 							Right = true,
-							Price = 100, -- the price is right
 						}),
 						ShopOption({
 							Name = "InsaneDifficulty",
 							Text = "Insane Difficulty",
 							Row = 1,
-							Price = 600,
 						}),
 					},
 				}),

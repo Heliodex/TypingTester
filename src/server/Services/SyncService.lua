@@ -2,11 +2,13 @@
 How syncing works
 	When any data is updated, the client will also send a call to this module to update the data stored on the server.
 	There will be latency, this does not really matter.
-	All functions here are ratelimited so even if the client is exploited, not much damage can be done.
+	All functions here will be ratelimited so even if the client is exploited, not much damage can be done.
 	This means that the true data should be stored on the server for data saving.
 ]]
 
-local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Knit = require(ReplicatedStorage.Packages.Knit)
+local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
 local seed = math.random()
 local rand = Random.new(seed)
 
@@ -44,6 +46,24 @@ function SyncService.Client:WordTyped(player)
 	end
 
 	DataService:IncrementData(player, "Currency", 1)
+end
+
+function SyncService.Client:ChangeSetting(player, setting)
+	DataService:SetData(player, setting, not DataService:GetData(player, setting))
+	-- currently settings are all checkboxes stored as booleans, fine for now
+end
+
+function SyncService.Client:PurchaseItem(player, item)
+	-- if DataService:GetData(player, "ShopPurchases")[item] then
+	-- 	return
+	-- end
+	local itemPrice = ShopItems[item].Price
+	if DataService:GetData(player, "Currency") < itemPrice then
+		return
+	end
+	DataService:IncrementData(player, "Currency", -itemPrice)
+	DataService:SetData(player, {"ShopPurchases", item}, true)
+	return true
 end
 
 return SyncService
