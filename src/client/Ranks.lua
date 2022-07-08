@@ -138,7 +138,7 @@ return function(level)
 			Text = "Word Wizard",
 			Colour = gradients[13],
 		}
-	elseif level < 140 then
+	else
 		return {
 			Text = "Document Deity",
 			Colour = gradients[14],
