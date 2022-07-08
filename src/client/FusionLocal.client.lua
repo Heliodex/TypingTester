@@ -414,6 +414,13 @@ local function SettingsOption(props)
 	local checked = State(false)
 	local canClick = true
 
+	dataLoadedChanged:onChange(function()
+		DataService:GetSetting(props.Name):andThen(function(value)
+			print(value)
+			checked:set(value)
+		end)
+	end)
+
 	return New("TextButton")({
 		Name = props.Name,
 

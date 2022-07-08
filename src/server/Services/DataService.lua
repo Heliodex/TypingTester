@@ -101,6 +101,9 @@ function DataService.Client:ItemOwned(player, item)
 end
 
 function DataService.Client:GetSetting(player, setting)
+	return DataService:GetSetting(player, setting)
+end
+function DataService:GetSetting(player, setting)
 	return DataService:GetData(player, "Settings")[setting]
 end
 

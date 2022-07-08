@@ -34,7 +34,7 @@ function SyncService.Client:WordTyped(player)
 
 	DataService:IncrementData(player, "WordsTyped", 1)
 
-	local expToAdd = rand:NextInteger(3, 10)
+	local expToAdd = rand:NextInteger(12, 15)
 	if experience + expToAdd > level * 100 then
 		experience += expToAdd - level * 100
 		DataService:IncrementData(player, "Experience", expToAdd - level * 100)
@@ -49,7 +49,7 @@ function SyncService.Client:WordTyped(player)
 end
 
 function SyncService.Client:ChangeSetting(player, setting)
-	DataService:SetData(player, setting, not DataService:GetData(player, setting))
+	DataService:SetData(player, {"Settings", setting}, not DataService:GetSetting(player, setting))
 	-- currently settings are all checkboxes stored as booleans, fine for now
 end
 
