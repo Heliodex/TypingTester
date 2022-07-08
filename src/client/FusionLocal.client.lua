@@ -336,6 +336,14 @@ local function Label(props)
 end
 
 local function Popup(props)
+	if typeof(props.Children) == "table" then
+		for i = 1, #props.Children do
+			if props.Children[i]:IsA("GuiObject") then
+				props.Children[i].LayoutOrder = i
+			end
+		end
+	end
+
 	local popup
 	popup = New("Frame")({
 		Name = props.Name,
@@ -351,14 +359,20 @@ local function Popup(props)
 
 			New("ScrollingFrame")({
 				Active = true,
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.fromScale(0.5, 0.55),
-				Size = UDim2.fromScale(1, 0.85),
+				Position = UDim2.fromScale(0.5, 0.556), -- perfect values
+				Size = UDim2.fromScale(1, 0.888),
 				CanvasSize = UDim2.fromScale(1, 2.5),
 
-				ScrollingDirection = Enum.ScrollingDirection.Y,
+				[Children] = New("Frame")({
+					Size = UDim2.fromScale(0.96, 1),
+					Position = UDim2.fromScale(0.5, 0.5),
+					BackgroundTransparency = 1,
 
-				[Children] = props.Children,
+					[Children] = {
+						UIPadding({ PaddingV = 0.01, PaddingH = 0 }),
+						props.Children,
+					},
+				}),
 			}),
 
 			New("TextLabel")({
@@ -367,10 +381,10 @@ local function Popup(props)
 				BackgroundColor3 = Grey1,
 				BackgroundTransparency = 0,
 
-				Position = UDim2.new(0.5, 0, 0, 16),
+				Position = UDim2.fromScale(0.5, 0.03),
 				Size = UDim2.fromScale(1, 0.08), -- I don't like it. 0.08 barely works okay enough.
 				Font = playerFontBold,
-				Text = props.Title,
+				Text = string.upper(props.Name),
 
 				[Children] = New("TextButton")({
 					Name = "CloseButton",
@@ -397,7 +411,6 @@ local function Popup(props)
 end
 
 local function SettingsOption(props)
-	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse
 	local checked = State(false)
 	local canClick = true
 
@@ -406,8 +419,6 @@ local function SettingsOption(props)
 
 		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
 		BackgroundTransparency = 1,
-		Position = if props.Right then UDim2.fromScale(0.97, VerticalPos) else UDim2.fromScale(0.03, VerticalPos),
-		Size = UDim2.fromScale(0.45, 0.05),
 
 		[OnEvent("Activated")] = function()
 			if not canClick then
@@ -443,7 +454,6 @@ local function SettingsOption(props)
 end
 
 local function ShopOption(props)
-	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse, css grid much
 	local buttonText = State(ShopItems[props.Name].Price)
 	local canClick
 
@@ -463,8 +473,6 @@ local function ShopOption(props)
 
 		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
 		BackgroundTransparency = 1,
-		Position = if props.Right then UDim2.fromScale(0.97, VerticalPos) else UDim2.fromScale(0.03, VerticalPos),
-		Size = UDim2.fromScale(0.45, 0.05),
 
 		[Children] = {
 			New("TextLabel")({
@@ -549,7 +557,7 @@ TypingBox = New("TextBox")({
 				SyncService:WordTyped()
 				wordsTyped:set(wordsTyped:get() + 1)
 
-				local expToAdd = randomGenerator:NextInteger(3, 10)
+				local expToAdd = randomGenerator:NextInteger(12, 15)
 				local exp = experience:get()
 				if exp + expToAdd > level:get() * 100 then
 					while exp + expToAdd > level:get() * 100 do -- why no while else (also probably redundant until soemone actually gets this much exp)
@@ -1072,7 +1080,7 @@ MainUI = New("ScreenGui")({
 
 				Popup({
 					Name = "Help",
-					Title = "HELP",
+
 					Size = UDim2.fromScale(0.8, 0.8),
 					Corner = 0.04,
 					ZIndex = 120,
@@ -1085,9 +1093,43 @@ MainUI = New("ScreenGui")({
 						Position = UDim2.fromScale(0.5, 1),
 						Size = UDim2.fromScale(0.97, 1.1),
 						Font = playerFont,
-						RichText = true,
-						Text = "Welcome to game name goes here!<br />This is a game you can use to improve your speed, accuracy, and stamina while typing.<br /><br />In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.<br />The upcoming words are displayed below the current word.<br /><br />The button in the top-right corner allows you to change the difficulty of your words.<br /><br />Easy words can be between 2 and 4 letters long. They are the easiest to type.<br />They give 1 typing token and 12-15 exp per word.<br /><br />Medium words can be between 4 and 7 letters long. Harder, but more rewarding.<br />They give 2 typing tokens and 20-26 exp per word.<br /><br />Hard words can be between 7 and 10 letters long.<br />They give 3 typing tokens and 35-42 exp per word.<br /><br />Insane words were added as a joke, they are some of the longest words in English.<br />They give 5 typing tokens and 57-65 exp per word.<br /><br />Experience is used to level up. Each level requires 100 more experience to level up than the one before it.<br />Ranks are gained every 10 levels.<br /><br />Developers:<br />pjstarr12<br />TheWhaleCloud<br />Lewin4<br /><br />The soundtrack for the game is Click by C418.<br />Thanks to icons8 for providing the icons.<br /><br />Inspired by:<br />Monkeytype by Miodec<br />Typing Simulator by S-GAMES",
+						-- RichText = true,
+						Text = [[Welcome to game name goes here!
+This is a game you can use to improve your speed, accuracy, and stamina while typing.
+
+In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.
+The upcoming words are displayed below the current word.
+
+The button in the top-right corner allows you to change the difficulty of your words.
+
+Easy words can be between 2 and 4 letters long. They are the easiest to type.
+They give 1 typing token and 12-15 exp per word.
+
+Medium words can be between 4 and 7 letters long. Harder, but more rewarding.
+They give 2 typing tokens and 20-26 exp per word.
+
+Hard words can be between 7 and 10 letters long.
+They give 3 typing tokens and 35-42 exp per word.
+
+Insane words were added as a joke, they are some of the longest words in English.
+They give 5 typing tokens and 57-65 exp per word.
+
+Experience is used to level up. Each level requires 100 more experience to level up than the one before it.
+Ranks are gained every 10 levels.
+
+Developers:
+pjstarr12
+TheWhaleCloud
+Lewin4
+
+The soundtrack for the game is Click by C418.
+Thanks to icons8 for providing the icons.
+
+Inspired by:
+Monkeytype by Miodec
+Typing Simulator by S-GAMES]],
 						TextSize = 28,
+						TextScaled = false,
 						TextTruncate = Enum.TextTruncate.AtEnd,
 						TextWrapped = true,
 						TextXAlignment = Enum.TextXAlignment.Left,
@@ -1097,13 +1139,18 @@ MainUI = New("ScreenGui")({
 
 				Popup({
 					Name = "Settings",
-					Title = "SETTINGS",
 
 					Size = UDim2.fromScale(0.5, 0.5),
 					Corner = 0.04,
 					ZIndex = 130,
 
 					Children = {
+						New("UIGridLayout")({
+							FillDirectionMaxCells = 2,
+							CellSize = UDim2.fromScale(0.465, 0.05),
+							CellPadding = UDim2.fromScale(0.05, 0.02),
+						}),
+
 						SettingsOption({
 							Name = "KeySounds",
 							Text = "Keypress Sounds",
@@ -1111,44 +1158,46 @@ MainUI = New("ScreenGui")({
 						SettingsOption({
 							Name = "BlindMode",
 							Text = "Blind Mode",
-							Right = true,
 						}),
 						SettingsOption({
 							Name = "MemoryMode",
 							Text = "Memory Mode",
-							Row = 1,
 						}),
 						SettingsOption({
 							Name = "PlainBG",
 							Text = "Plain Background",
-							Row = 1,
-							Right = true,
 						}),
 					},
 				}),
 
 				Popup({
 					Name = "Shop",
-					Title = "SHOP",
 
 					Size = UDim2.fromScale(0.5, 0.5),
 					Corner = 0.04,
 					ZIndex = 120,
 
 					Children = {
+						New("UIGridLayout")({
+							FillDirectionMaxCells = 2,
+							CellSize = UDim2.fromScale(0.465, 0.05),
+							CellPadding = UDim2.fromScale(0.05, 0.02),
+						}),
+
 						ShopOption({
 							Name = "MediumDifficulty",
 							Text = "Medium Difficulty",
+							LayoutOrder = 1,
 						}),
 						ShopOption({
 							Name = "HardDifficulty",
 							Text = "Hard Difficulty",
-							Right = true,
+							LayoutOrder = 2,
 						}),
 						ShopOption({
 							Name = "InsaneDifficulty",
 							Text = "Insane Difficulty",
-							Row = 1,
+							LayoutOrder = 3,
 						}),
 					},
 				}),
