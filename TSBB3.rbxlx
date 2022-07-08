@@ -1,14 +1,14 @@
 <roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
 	<External>null</External>
 	<External>nil</External>
-	<Item class="Workspace" referent="RBXF8BD9C2375B94A208CDB97753A37D46D">
+	<Item class="Workspace" referent="RBX14C509B45F1F4F92BC470D089A473E70">
 		<Properties>
 			<bool name="AllowThirdPartySales">false</bool>
 			<token name="AnimationWeightedBlendFix">0</token>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<token name="ClientAnimatorThrottling">0</token>
 			<string name="CollisionGroups">Default^0^-1</string>
-			<Ref name="CurrentCamera">RBX41D34CF247A5417A95FA7C2959663504</Ref>
+			<Ref name="CurrentCamera">RBXE1EF1B184FCA417988C59B20864F54AE</Ref>
 			<double name="DistributedGameTime">0</double>
 			<bool name="ExplicitAutoJoints">true</bool>
 			<float name="FallenPartsDestroyHeight">0</float>
@@ -77,7 +77,7 @@
 				</CFrame>
 			</OptionalCoordinateFrame>
 		</Properties>
-		<Item class="Camera" referent="RBX41D34CF247A5417A95FA7C2959663504">
+		<Item class="Camera" referent="RBXE1EF1B184FCA417988C59B20864F54AE">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
@@ -85,14 +85,14 @@
 					<Y>7.85488224</Y>
 					<Z>-134.946777</Z>
 					<R00>0.998972416</R00>
-					<R01>0.0136670684</R01>
-					<R02>0.0432129726</R02>
-					<R10>-0</R10>
-					<R11>0.953450441</R11>
-					<R12>-0.301550001</R12>
+					<R01>0.0136672258</R01>
+					<R02>0.0432129204</R02>
+					<R10>-9.31322575e-10</R10>
+					<R11>0.953449309</R11>
+					<R12>-0.301553458</R12>
 					<R20>-0.0453227274</R20>
-					<R21>0.301240146</R21>
-					<R22>0.95247066</R22>
+					<R21>0.301243573</R21>
+					<R22>0.952469528</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -100,7 +100,7 @@
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
 					<X>-1290.08435</X>
-					<Y>8.45798111</Y>
+					<Y>8.45798874</Y>
 					<Z>-136.851715</Z>
 					<R00>1</R00>
 					<R01>0</R01>
@@ -120,7 +120,7 @@
 				<UniqueId name="UniqueId">71724e2837248f2a018373cd00019245</UniqueId>
 			</Properties>
 		</Item>
-		<Item class="Terrain" referent="RBXF8C599B57CCA4EF3A49FE580E3F2EAEF">
+		<Item class="Terrain" referent="RBX0E13EEB149DA4F4CA89DAFCE9C45D2BF">
 			<Properties>
 				<token name="AcquisitionMethod">0</token>
 				<bool name="Anchored">true</bool>
@@ -229,7 +229,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			</Properties>
 		</Item>
 	</Item>
-	<Item class="SoundService" referent="RBX6CE8DADE6F144E10806B94C6001FF54D">
+	<Item class="SoundService" referent="RBXE19D39E8DBA848EDB824108DBBE04747">
 		<Properties>
 			<token name="AmbientReverb">0</token>
 			<BinaryString name="AttributesSerialize"></BinaryString>
@@ -243,7 +243,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd00019194</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="NonReplicatedCSGDictionaryService" referent="RBXCC59453DE11D42C897FAB51C55CC75A5">
+	<Item class="NonReplicatedCSGDictionaryService" referent="RBX92F1ACA084974D16A2B066CC4F028EFE">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">NonReplicatedCSGDictionaryService</string>
@@ -252,7 +252,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191a0</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="CSGDictionaryService" referent="RBX01BB175874AB4C8F8D44585E29EE3190">
+	<Item class="CSGDictionaryService" referent="RBXCBB19F46505A4F11B801409E160CAD98">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">CSGDictionaryService</string>
@@ -261,7 +261,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191a1</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="Chat" referent="RBXE0A73238BDF9490EB8B86DABB088B334">
+	<Item class="Chat" referent="RBXCCA593746B32469F972E134DE160CF08">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<bool name="BubbleChatEnabled">false</bool>
@@ -272,7 +272,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191a5</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="TimerService" referent="RBX2FA1AD5E6A8144218304271F87CEB91B">
+	<Item class="TimerService" referent="RBXF442A217A22E4DA7A81B515F10B1293B">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">Instance</string>
@@ -281,7 +281,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191a6</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="Players" referent="RBXC559DFDE8CAF451FA92301F1BCE9E932">
+	<Item class="Players" referent="RBX9633E66D70794BC3824E779C50602CAE">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<bool name="CharacterAutoLoads">false</bool>
@@ -294,7 +294,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191a8</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="ReplicatedFirst" referent="RBXFF4C3270A5EE440EBB2E42C792915D40">
+	<Item class="ReplicatedFirst" referent="RBXF9B06175B2E643E492E8B1393523ADD8">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">ReplicatedFirst</string>
@@ -303,7 +303,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191ac</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="TweenService" referent="RBX4EA1E168BBB3432EB9DA9780ED7B00E2">
+	<Item class="TweenService" referent="RBX84BC76DF8AF64C6AAC4A6A0CAF475A7D">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">TweenService</string>
@@ -312,7 +312,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191ae</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="MaterialService" referent="RBX0C987367F843483EBA94F8B5967F04C2">
+	<Item class="MaterialService" referent="RBX5792971D5E954B31BFA93811535E15E5">
 		<Properties>
 			<string name="AsphaltName">Asphalt</string>
 			<BinaryString name="AttributesSerialize"></BinaryString>
@@ -354,7 +354,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<string name="WoodPlanksName">WoodPlanks</string>
 		</Properties>
 	</Item>
-	<Item class="TextChatService" referent="RBX791D2E4CE28540F0ABEF1D01E413FDEB">
+	<Item class="TextChatService" referent="RBX94F6540216C04605A584DDE0C35BADCA">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<token name="ChatVersion">0</token>
@@ -365,7 +365,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<BinaryString name="Tags"></BinaryString>
 			<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140001fa7c</UniqueId>
 		</Properties>
-		<Item class="ChatWindowConfiguration" referent="RBXCB4023CEE58D45E7AF2EB38341C6DB53">
+		<Item class="ChatWindowConfiguration" referent="RBX5394315C06844600BC967B29F82AE4A6">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<bool name="Enabled">true</bool>
@@ -375,7 +375,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140001fb8e</UniqueId>
 			</Properties>
 		</Item>
-		<Item class="ChatInputBarConfiguration" referent="RBX75A81CBBC8534AE79C96B865F0E3BDD4">
+		<Item class="ChatInputBarConfiguration" referent="RBXE8EE9DF60ADF4F068238420D2AA12C73">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<bool name="Enabled">true</bool>
@@ -387,7 +387,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			</Properties>
 		</Item>
 	</Item>
-	<Item class="PermissionsService" referent="RBX66AEBF7F3F8448D8A6F89779C2DFB7DE">
+	<Item class="PermissionsService" referent="RBX2C439C481D4A408297EF8A1C1CACD3A9">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">PermissionsService</string>
@@ -396,7 +396,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191b2</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="PlayerEmulatorService" referent="RBX414FA3A0460840938602694D9411BEAC">
+	<Item class="PlayerEmulatorService" referent="RBX875B4AA68AD1422D9B9B4699237105AE">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<bool name="CustomPoliciesEnabled">false</bool>
@@ -410,7 +410,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191b4</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="StudioData" referent="RBX295E99B97F6E4148B889AF0CB18AD552">
+	<Item class="StudioData" referent="RBXC54FF20F84A2472387F5A34D9EBF7A2C">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<int64 name="CommitInflightAuthorId">0</int64>
@@ -425,7 +425,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191b6</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="StarterPlayer" referent="RBXAD3DCA1CE13C46C2B9A4C48DA898B2FF">
+	<Item class="StarterPlayer" referent="RBXA87BAB75F4304E5088EA8585C34F5FF5">
 		<Properties>
 			<bool name="AllowCustomAnimations">true</bool>
 			<BinaryString name="AttributesSerialize"></BinaryString>
@@ -471,7 +471,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191b7</UniqueId>
 			<bool name="UserEmotesEnabled">true</bool>
 		</Properties>
-		<Item class="StarterPlayerScripts" referent="RBX3F5A49582C9B42E18877B042CB91A288">
+		<Item class="StarterPlayerScripts" referent="RBXEF65EF4BAC8C45B5BC933ECCEB47DE3D">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<string name="Name">StarterPlayerScripts</string>
@@ -479,7 +479,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">71724e2837248f2a018373cd00019247</UniqueId>
 			</Properties>
-			<Item class="Folder" referent="RBXD81C698B59204C90BB607751A7EB4EF2">
+			<Item class="Folder" referent="RBXE249017C02AD4B9EA124BB5A56614D6A">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<string name="Name">Client</string>
@@ -487,1117 +487,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">0410319cc29183e6018c3036002a50d1</UniqueId>
 				</Properties>
-				<Item class="LocalScript" referent="RBXB7DB03D43D9D4422B1FC996B4F0F9C90">
-					<Properties>
-						<BinaryString name="AttributesSerialize"></BinaryString>
-						<bool name="Disabled">false</bool>
-						<Content name="LinkedSource"><null></null></Content>
-						<string name="Name">FusionLocal</string>
-						<token name="RunContext">0</token>
-						<string name="ScriptGuid">{80848008-59DD-436F-BFB7-58AF8FE8C432}</string>
-						<ProtectedString name="Source"><![CDATA[-- Main UI-buliding script
-
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local LocalPlayer = game:GetService("Players").LocalPlayer
-local Sounds = ReplicatedStorage.Sounds
-local Fusion = require(ReplicatedStorage.Shared.Fusion)
-local Knit = require(ReplicatedStorage.Packages.Knit)
-
-Knit.Start():catch(warn)
-
-local SyncService = Knit.GetService("SyncService")
-local DataService = Knit.GetService("DataService")
-local randomGenerator
-
-SyncService:GetSeed():andThen(function(seed)
-	randomGenerator = Random.new(seed)
-end)
-
-local Words = require(script.Parent.Words)
-local Ranks = require(script.Parent.Ranks)
-
-local New = Fusion.New
-local Children = Fusion.Children
-local OnEvent = Fusion.OnEvent
-local OnChange = Fusion.OnChange
-local Spring = Fusion.Spring
-local State = Fusion.State
-local Computed = Fusion.Computed
-
-local White = Color3.new(1, 1, 1)
-local Grey5 = Color3.fromRGB(178, 178, 178)
-local Grey3 = Color3.fromRGB(102, 102, 102)
-local Grey2 = Color3.fromRGB(84, 84, 84)
-local Grey1 = Color3.fromRGB(60, 60, 60)
-local Grey0 = Color3.fromRGB(42, 42, 42)
-local Black2 = Color3.fromRGB(16, 14, 12)
-local Black1 = Color3.fromRGB(10, 9, 8)
-local Black0 = Color3.new() -- hehehuehehuehe
-
-local Green = Color3.fromRGB(0, 255, 0)
-local Red = Color3.fromRGB(255, 0, 0)
-
-local playerFontThin = Enum.Font.Gotham
-local playerFont = Enum.Font.GothamMedium -- selene: "iT'S dePreCaTEd!!!!1!!!!11"
-local playerFontBold = Enum.Font.GothamBold
-
-local codeFont = Enum.Font.RobotoMono
-
-local PlayScreen
-local MainUI
-local TypingBox
-
-local MainFrameSize = State(UDim2.fromScale(0.8, 0.8))
-local DarkTintTransparency = State(1)
-local DarkTintTransparencyGoal = 0.5
-
-local loadingData = false
-
-local displayedWords = {}
-local wordCorrect = State(Green)
-
-local currency = State(0)
-local experience = State(0)
-local level = State(0)
-local wordsTyped = State(0)
-
-local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
-	local res = ""
-	for _ = 1, length do
-		res = res .. string.char(math.random(97, 122)) -- needs more random
-	end
-	return res
-end
-
-local function getWord()
-	return Words.easyList[math.random(1, #Words.easyList)]
-end
-
-local function changeDifficulty()
-	if TypingBox then
-		TypingBox.Text = ""
-	end
-
-	for i = 1, 5 do
-		displayedWords[i] = State("")
-		displayedWords[i]:set(getWord())
-	end
-end
-changeDifficulty()
-
-local function UICorner(corner)
-	return New("UICorner")({
-		CornerRadius = UDim.new(corner or 0.2, 0),
-	})
-end
-
-local function UIPadding(props)
-	if props then
-		props.Padding = props.Padding or 0.075
-		props.PaddingV = props.PaddingV or props.Padding
-		props.PaddingH = props.PaddingH or props.Padding
-	else
-		props = {
-			Padding = 0.075,
-			PaddingV = 0.075,
-			PaddingH = 0.075,
-		}
-	end
-
-	return New("UIPadding")({
-		PaddingBottom = UDim.new(props.PaddingV, 0),
-		PaddingTop = UDim.new(props.PaddingV, 0),
-		PaddingLeft = UDim.new(props.PaddingH, 0),
-		PaddingRight = UDim.new(props.PaddingH, 0),
-	})
-end
-
-local function NextWords(props)
-	return New("TextLabel")({
-		Name = "Label" .. props.id,
-
-		Size = UDim2.fromScale(0.4, 0.06),
-		Position = UDim2.fromScale(0.5, props.Pos),
-
-		Font = playerFont,
-		TextColor3 = Grey5,
-		Text = displayedWords[props.id],
-	})
-end
-
-local function BackgroundDesign()
-	local returns = {}
-
-	for i = 1, 11 do
-		local temp = (i - 3.5) / 5
-
-		local box = New("TextLabel")({
-			Name = "BackgroundDesign" .. tostring(i),
-
-			Size = UDim2.fromScale(2.41, 0.1),
-			Position = UDim2.fromScale(0.5, temp),
-
-			Font = codeFont,
-			TextColor3 = Grey0,
-			TextTransparency = 0.65,
-			Text = RandomString(215),
-		})
-		table.insert(returns, box)
-	end
-	return returns
-end
-
-local function Button(props)
-	props.LabelWidth = props.LabelWidth or 0.6
-	props.ImageSize = props.ImageSize or 0.3
-	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
-
-	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
-
-	return New("TextButton")({
-		Name = props.Name,
-
-		Size = props.Size,
-
-		AnchorPoint = props.AnchorPoint or Vector2.new(0.5, 0.5),
-		Position = props.Position,
-		BackgroundColor3 = Grey3,
-		AutoButtonColor = true,
-
-		SizeConstraint = props.SizeConstraint,
-
-		[OnEvent("Activated")] = props.Activated,
-
-		[Children] = {
-			UICorner(props.Corner),
-			UIPadding({ PaddingH = 0.075 / ratio }), -- at least it works well
-
-			New("TextLabel")({
-				Text = props.Text,
-
-				Size = UDim2.fromScale(props.LabelWidth, 1),
-				Position = UDim2.fromScale(0.9, 0.5),
-				AnchorPoint = Vector2.new(1, 0.5),
-
-				Font = playerFont,
-			}),
-
-			New("ImageLabel")({
-				Size = UDim2.fromScale(props.ImageSize, props.ImageSize),
-				Position = UDim2.fromScale(0, 0.5),
-				AnchorPoint = Vector2.new(0, 0.5),
-
-				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = New("UIAspectRatioConstraint")({
-					AspectRatio = 1,
-					AspectType = Enum.AspectType.ScaleWithParentSize,
-					DominantAxis = Enum.DominantAxis.Width,
-				}),
-			}),
-		},
-	})
-end
-
-local function SaveSlot(props)
-	local text = State("Save slot " .. props.Number)
-	local previewText = State("Loading info...")
-
-	DataService:PreviewData(props.Number):andThen(function(data)
-		previewText:set(
-			"Level: "
-				.. math.floor(data.Experience / ((level:get() + 1) * 100))
-				.. "\nWords: "
-				.. data.WordsTyped
-				.. "\nTyping Tokens: "
-				.. data.Currency
-		)
-	end)
-
-	return New("TextButton")({
-		Name = "SaveSlot",
-
-		Size = UDim2.fromScale(1, 0.15),
-
-		AnchorPoint = Vector2.new(0.5, 0.5),
-		Position = props.Position,
-		BackgroundColor3 = Grey3,
-		AutoButtonColor = true,
-
-		[OnEvent("Activated")] = function()
-			if not loadingData then
-				loadingData = true
-				text:set("Loading...")
-
-				DataService:LoadData(props.Number):andThen(function(data)
-					currency:set(data.Currency)
-					experience:set(data.Experience)
-					level:set(data.Level)
-					wordsTyped:set(data.WordsTyped)
-
-					PlayScreen.Frame.Visible = false
-					Sounds.music:Play()
-					MainFrameSize:set(UDim2.fromScale(1, 1))
-				end)
-			end
-		end,
-
-		[Children] = {
-			UICorner(),
-
-			New("TextLabel")({
-				Name = "SaveSlotName",
-				Text = text,
-
-				Size = UDim2.fromScale(0.3, 0.8),
-				Position = UDim2.fromScale(0.02, 0.5),
-				AnchorPoint = Vector2.new(0, 0.5),
-				TextXAlignment = Enum.TextXAlignment.Left,
-
-				Font = playerFont,
-			}),
-
-			New("TextLabel")({
-				Name = "SaveSlotPreview",
-				Text = previewText,
-
-				Size = UDim2.fromScale(0.3, 0.8),
-				Position = UDim2.fromScale(0.98, 0.5),
-				AnchorPoint = Vector2.new(1, 0.5),
-				TextXAlignment = Enum.TextXAlignment.Right,
-
-				Font = playerFont,
-			}),
-		},
-	})
-end
-
-local function Label(props)
-	props.LabelWidth = props.LabelWidth or 0.6
-	props.LabelPosition = props.LabelPosition or 0.9
-
-	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale)
-
-	return New("TextLabel")({
-		Name = props.Name,
-
-		Size = props.Size,
-		AnchorPoint = props.AnchorPoint,
-		Position = props.Position,
-		BackgroundColor3 = props.BackgroundColor3 or Grey0,
-		BackgroundTransparency = 0,
-
-		[Children] = {
-			UICorner(),
-			UIPadding({ PaddingH = 0.075 / ratio }), -- ratio
-			props.Children,
-
-			New("TextLabel")({
-				Text = props.Text,
-
-				Size = UDim2.fromScale(props.LabelWidth, 1),
-				Position = UDim2.fromScale(props.LabelPosition, 0.5),
-				AnchorPoint = Vector2.new(1, 0.5),
-
-				Font = playerFont,
-			}),
-
-			New("ImageLabel")({
-				Size = UDim2.fromScale(0.3, 0.3),
-				Position = UDim2.fromScale(0, 0.5),
-				AnchorPoint = Vector2.new(0, 0.5),
-
-				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = New("UIAspectRatioConstraint")({
-					AspectRatio = 1,
-					AspectType = Enum.AspectType.ScaleWithParentSize,
-					DominantAxis = Enum.DominantAxis.Width,
-				}),
-			}),
-		},
-	})
-end
-
-local function Popup(props)
-	local popup
-	popup = New("Frame")({
-		Name = props.Name,
-
-		Size = props.Size or UDim2.fromScale(0.8, 0.8),
-		Position = props.Position or UDim2.fromScale(0.5, 0.5),
-		BackgroundColor3 = Grey2,
-		Visible = false,
-		ZIndex = props.ZIndex or 120, -- bruh darktint moment
-
-		[Children] = {
-			UICorner(props.Corner),
-
-			New("ScrollingFrame")({
-				Active = true,
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.fromScale(0.5, 0.55),
-				Size = UDim2.fromScale(1, 0.85),
-				CanvasSize = UDim2.fromScale(1, 2.5),
-
-				ScrollingDirection = Enum.ScrollingDirection.Y,
-
-				[Children] = props.Children,
-			}),
-
-			New("TextLabel")({
-				Name = "Label",
-				AnchorPoint = Vector2.new(0.5, 0),
-				BackgroundColor3 = Grey1,
-				BackgroundTransparency = 0,
-
-				Position = UDim2.new(0.5, 0, 0, 16),
-				Size = UDim2.fromScale(1, 0.08), -- I don't like it. 0.08 barely works okay enough.
-				Font = playerFontBold,
-				Text = props.Title,
-
-				[Children] = New("TextButton")({
-					Name = "CloseButton",
-					AnchorPoint = Vector2.new(1, 0),
-					BackgroundColor3 = Black2,
-
-					Position = UDim2.fromScale(1, 0),
-					Size = UDim2.fromScale(1, 1),
-					SizeConstraint = Enum.SizeConstraint.RelativeYY,
-					Font = Enum.Font.SourceSans,
-
-					Text = "X",
-					AutoButtonColor = true,
-
-					[OnEvent("Activated")] = function()
-						popup.Visible = false
-						DarkTintTransparency:set(1)
-					end,
-				}),
-			}),
-		},
-	})
-	return popup
-end
-
-local function SettingsOption(props)
-	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse
-
-	return New("Frame")({
-		Name = props.Name,
-
-		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
-		BackgroundTransparency = 1,
-		Position = if props.Right then UDim2.fromScale(0.97, VerticalPos) else UDim2.fromScale(0.03, VerticalPos),
-		Size = UDim2.fromScale(0.45, 0.05),
-
-		[Children] = {
-			New("ImageButton")({
-				BackgroundTransparency = 1,
-				Size = UDim2.fromScale(1, 1),
-				SizeConstraint = Enum.SizeConstraint.RelativeYY,
-				Image = "rbxassetid://7523096047",
-			}),
-			New("TextLabel")({
-				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.fromScale(0.15, 0.5),
-				Size = UDim2.fromScale(0.8, 1),
-				Font = playerFont,
-				Text = props.Text,
-				TextXAlignment = Enum.TextXAlignment.Left,
-			}),
-		},
-	})
-end
-
-local function ShopOption(props)
-	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse, css grid much
-
-	return New("Frame")({
-		Name = props.Name,
-
-		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
-		BackgroundTransparency = 1,
-		Position = if props.Right then UDim2.fromScale(0.97, VerticalPos) else UDim2.fromScale(0.03, VerticalPos),
-		Size = UDim2.fromScale(0.45, 0.05),
-
-		[Children] = {
-			New("TextLabel")({
-				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.fromScale(0, 0.5),
-				Size = UDim2.fromScale(0.8, 0.8),
-				Font = playerFont,
-				Text = props.Text,
-				TextXAlignment = Enum.TextXAlignment.Left,
-			}),
-
-			New("TextButton")({
-				Name = "Price",
-
-				BackgroundColor3 = Grey3,
-				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.fromScale(1, 0.5),
-				Size = UDim2.fromScale(0.25, 1),
-				Font = playerFont,
-				Text = props.Price or "Price",
-				AutoButtonColor = true,
-
-				[Children] = {
-					UIPadding(),
-					UICorner(),
-				},
-			}),
-		},
-	})
-end
-
-TypingBox = New("TextBox")({
-	Name = "TypingBox",
-	Position = UDim2.fromScale(0.5, 0.7),
-	Size = UDim2.fromScale(0.5, 0.05),
-	BackgroundColor3 = Grey0,
-	TextColor3 = wordCorrect,
-
-	Font = playerFont,
-	PlaceholderText = "Type here (spacebar to complete word)",
-	PlaceholderColor3 = Grey3,
-
-	[OnChange("Text")] = function()
-		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
-
-		local rand = math.random(1, 3)
-		local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
-
-		Sounds["click" .. rand].PlaybackSpeed = rand2
-		Sounds["click" .. rand]:Play()
-
-		local text = TypingBox.Text
-
-		if string.match("!" .. displayedWords[1]:get() .. " ", ("!" .. text)) then
-			wordCorrect:set(Green)
-			if text == displayedWords[1]:get() .. " " then
-				TypingBox.Text = ""
-
-				SyncService:WordTyped()
-				wordsTyped:set(wordsTyped:get() + 1)
-
-				local exp = experience:get()
-				local expToAdd = randomGenerator:NextInteger(3, 10)
-				if exp + expToAdd > level:get() * 100 then
-					exp += expToAdd - level:get() * 100
-					level:set(level:get() + 1)
-				else
-					exp += expToAdd
-				end
-				experience:set(exp)
-
-				currency:set(currency:get() + 1)
-
-				local tempWords = displayedWords
-
-				for i = 1, 4 do
-					tempWords[i]:set(tempWords[i + 1]:get()) -- Move each word up by one place
-				end
-				tempWords[5]:set(getWord()) -- Add a new word to the bottom
-
-				displayedWords = tempWords
-			end
-		else
-			wordCorrect:set(Red)
-		end
-	end,
-
-	[Children] = {
-		UICorner(),
-		UIPadding(),
-	},
-})
-
-PlayScreen = New("ScreenGui")({
-	Name = "PlayScreen",
-	Parent = LocalPlayer.PlayerGui,
-	DisplayOrder = 10,
-	IgnoreGuiInset = true,
-
-	[Children] = New("Frame")({
-		BackgroundColor3 = Black2,
-		Position = UDim2.fromScale(0.5, 0.5),
-		Size = UDim2.fromScale(1, 1),
-
-		[Children] = {
-			New("Frame")({
-				Name = "SaveSlots",
-				BackgroundColor3 = Black1,
-				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.fromScale(0.5, 0.5),
-				Visible = false,
-
-				[Children] = {
-					UICorner(0.05),
-					UIPadding({ Padding = 0.025 }),
-
-					New("TextLabel")({
-						Size = UDim2.fromScale(1, 0.1),
-						Position = UDim2.fromScale(0.5, -0.1),
-						Text = "Select a save slot to load",
-						Font = playerFontBold,
-					}),
-
-					SaveSlot({
-						Number = 1,
-						Position = UDim2.fromScale(0.5, 0.1),
-					}),
-					SaveSlot({
-						Number = 2,
-						Position = UDim2.fromScale(0.5, 0.3),
-					}),
-					SaveSlot({
-						Number = 3,
-						Position = UDim2.fromScale(0.5, 0.5),
-					}),
-					SaveSlot({
-						Number = 4,
-						Position = UDim2.fromScale(0.5, 0.7),
-					}),
-					SaveSlot({
-						Number = 5,
-						Position = UDim2.fromScale(0.5, 0.9),
-					}),
-				},
-			}),
-
-			New("Frame")({
-				Name = "Play",
-				BackgroundTransparency = 1,
-				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.fromScale(1, 1),
-
-				[Children] = {
-					Button({
-						Name = "Play",
-						Size = UDim2.fromScale(0.17, 0.075),
-						Position = UDim2.fromScale(0.5, 0.5),
-						Text = "Play",
-						Image = 8156398059,
-
-						Activated = function() -- o this is how you do functions
-							PlayScreen.Frame.Play.Visible = false
-							PlayScreen.Frame.SaveSlots.Visible = true
-						end,
-					}),
-
-					New("TextLabel")({ -- Title
-						Name = "Title",
-						Position = UDim2.fromScale(0.5, 0.35),
-						Size = UDim2.fromScale(0.3, 0.175),
-						Font = playerFontBold,
-						RichText = true,
-						Text = "typing simulator but better",
-
-						[Children] = UIPadding({ Padding = 0.1 }),
-					}),
-
-					New("Frame")({ -- Credits
-						Name = "Credits",
-						BackgroundTransparency = 1,
-						Position = UDim2.fromScale(0.9, 0.65),
-						Size = UDim2.fromScale(0.1, 0.1),
-						SizeConstraint = Enum.SizeConstraint.RelativeXX,
-
-						[Children] = New("ImageLabel")({
-							Name = "HeliodexLogo",
-							AnchorPoint = Vector2.new(0.5, 0.5),
-							Position = UDim2.fromScale(0.5, 0.5),
-							Size = UDim2.fromScale(1, 1),
-							SizeConstraint = Enum.SizeConstraint.RelativeYY,
-							ZIndex = 6,
-							Image = "rbxassetid://7501730261",
-
-							[Children] = {
-								New("TextLabel")({
-									Name = "a Heliodex game",
-									Position = UDim2.fromScale(0.5, 1.1),
-									Size = UDim2.fromScale(1.8, 0.2),
-									Font = playerFontThin,
-									RichText = true,
-									Text = "a <i>HELIODEX</i> game",
-								}),
-								New("TextLabel")({
-									Name = "pjstarr12",
-									Position = UDim2.fromScale(0.5, 1.4),
-									Size = UDim2.fromScale(1.5, 0.175),
-									Font = playerFontThin,
-									Text = "pjstarr12",
-
-									[Children] = UIPadding(),
-								}),
-								New("TextLabel")({
-									Name = "TheWhaleCloud",
-									Position = UDim2.fromScale(0.5, 1.6),
-									Size = UDim2.fromScale(1.5, 0.175),
-									Font = playerFontThin,
-									Text = "TheWhaleCloud",
-
-									[Children] = UIPadding(),
-								}),
-								New("TextLabel")({
-									Name = "Lewin4",
-									AnchorPoint = Vector2.new(0.5, 0.5),
-									Position = UDim2.fromScale(0.5, 1.8),
-									Size = UDim2.fromScale(1.5, 0.175),
-									Font = playerFontThin,
-									Text = "Lewin4",
-
-									[Children] = UIPadding(),
-								}),
-							},
-						}),
-					}),
-				},
-			}),
-		},
-	}),
-})
-
--- Main ui time,,.,,.oaoeueuoueooaaeiiaaa
-
-MainUI = New("ScreenGui")({
-	Name = "Main",
-	Parent = LocalPlayer.PlayerGui,
-	DisplayOrder = 0,
-	IgnoreGuiInset = true,
-
-	[Children] = {
-		New("TextLabel")({ -- could go inside MainFrame or frame
-			Name = "Warning",
-
-			Position = UDim2.fromScale(0.5, 0.15),
-			Size = UDim2.fromScale(1, 1),
-
-			Visible = false,
-
-			TextTransparency = 1,
-			Font = playerFont,
-
-			ZIndex = 88,
-		}),
-
-		New("Frame")({
-			Name = "MainFrame",
-			Size = UDim2.fromScale(1, 1),
-
-			ZIndex = 5,
-
-			[Children] = {
-				New("Frame")({
-					Size = Spring(MainFrameSize, 12, 1),
-					BackgroundTransparency = 1,
-
-					ZIndex = 5,
-
-					[Children] = {
-						Button({
-							Name = "OpenHelp",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(0, 1),
-							Position = UDim2.fromScale(0.01, 0.98),
-							Text = "Help",
-							Image = 7362810660,
-
-							Activated = function()
-								MainUI.MainFrame.Help.Visible = not MainUI.MainFrame.Help.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Help.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
-						}),
-						Button({
-							Name = "OpenShop",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(0, 0),
-							Position = UDim2.fromScale(0.01, 0.12),
-							Text = "Shop",
-							Image = 7362870044,
-
-							Activated = function()
-								MainUI.MainFrame.Shop.Visible = not MainUI.MainFrame.Shop.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Shop.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
-						}),
-						Button({
-							Name = "OpenSettings",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.39),
-							Text = "Settings",
-							Image = 7362801114,
-
-							Activated = function()
-								MainUI.MainFrame.Settings.Visible = not MainUI.MainFrame.Settings.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Settings.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
-						}),
-						Button({
-							Name = "AudioToggle",
-							Size = UDim2.fromScale(0.1, 0.1),
-							AnchorPoint = Vector2.new(1, 1),
-							Position = UDim2.fromScale(0.99, 0.98),
-							Text = "",
-							Image = 7517177224,
-
-							Corner = 0.1,
-							ImageSize = 0.9,
-							SizeConstraint = Enum.SizeConstraint.RelativeYY,
-						}),
-						Label({
-							Name = "Currency",
-							Size = UDim2.fromScale(0.22, 0.075),
-							AnchorPoint = Vector2.new(0, 0),
-							Position = UDim2.fromScale(0.01, 0.02),
-							Text = Computed(function()
-								return currency:get() .. " typing tokens"
-							end),
-							Image = 7367251392,
-							TextWrapped = false,
-
-							LabelWidth = 0.7,
-							LabelPosition = 0.95,
-						}),
-						Label({
-							Name = "Words",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(0.5, 0),
-							Position = UDim2.fromScale(0.5, 0.02),
-							Text = Computed(function()
-								return wordsTyped:get() .. " Words"
-							end),
-							Image = 7367083297,
-						}),
-
-						New("TextButton")({ -- why from scratch
-							Name = "DifficultyButton",
-
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.02),
-							BackgroundColor3 = Grey3,
-							AutoButtonColor = true,
-
-							[Children] = {
-								UICorner(),
-								UIPadding({ PaddingH = 0.033 }),
-
-								New("IntValue")({
-									Name = "DifficultyLevel",
-									Value = 1,
-								}),
-
-								New("TextLabel")({
-									Text = "Change Difficulty:",
-
-									Size = UDim2.fromScale(0.6, 0.5),
-									Position = UDim2.fromScale(0.9, 0.25),
-									AnchorPoint = Vector2.new(1, 0.5),
-
-									Font = playerFont,
-								}),
-
-								New("TextLabel")({
-									Name = "DifficultyLevelText",
-									Text = "Easy",
-
-									Size = UDim2.fromScale(0.6, 0.5),
-									Position = UDim2.fromScale(0.9, 0.75),
-									AnchorPoint = Vector2.new(1, 0.5),
-
-									Font = playerFont,
-								}),
-
-								New("ImageLabel")({
-									Size = UDim2.fromScale(0.3, 0.3),
-									Position = UDim2.fromScale(0, 0.5),
-									AnchorPoint = Vector2.new(0, 0.5),
-
-									Image = "rbxassetid://7363005276",
-									[Children] = New("UIAspectRatioConstraint")({
-										AspectRatio = 1,
-										AspectType = Enum.AspectType.ScaleWithParentSize,
-										DominantAxis = Enum.DominantAxis.Width,
-									}),
-								}),
-							},
-						}),
-
-						New("Frame")({
-							Name = "LevelMenu",
-							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.115),
-							Size = UDim2.fromScale(0.17, 0.255),
-							BackgroundColor3 = Grey3,
-
-							[Children] = {
-								UICorner(0.05),
-								UIPadding({ Padding = 0.04 }),
-
-								Label({
-									Name = "Rank",
-									Size = UDim2.fromScale(1, 0.32),
-									AnchorPoint = Vector2.new(0.5, 1),
-									Position = UDim2.fromScale(0.5, 1),
-									Text = Computed(function()
-										return Ranks(level:get()).Text
-									end),
-									Image = 7456285956,
-									BackgroundColor3 = White,
-
-									Children = {
-										New("UIGradient")({
-											Color = Computed(function()
-												return Ranks(level:get()).Colour
-											end),
-
-											Rotation = 90,
-										}),
-									},
-								}),
-								Label({
-									Name = "Level",
-									Size = UDim2.fromScale(1, 0.25),
-									AnchorPoint = Vector2.new(0.5, 0.5),
-									Position = UDim2.fromScale(0.5, 0.5),
-									Text = Computed(function()
-										return "Level " .. level:get()
-									end),
-									Image = 7367078076,
-								}),
-								Label({
-									Name = "Experience",
-									Size = UDim2.fromScale(1, 0.2),
-									AnchorPoint = Vector2.new(0.5, 0),
-									Position = UDim2.fromScale(0.5, 0),
-									Text = "Amount until level up",
-
-									Image = 261481376, -- DELETE THIS. AWFUL	-- ok, it did end up getting content deleted
-
-									LabelWidth = 1,
-									LabelPosition = 1,
-								}),
-
-								New("Frame")({
-									Name = "BarHolder",
-									Size = UDim2.fromScale(1, 0.08),
-									Position = UDim2.fromScale(0.5, 0.28),
-
-									BackgroundColor3 = Grey0,
-
-									[Children] = {
-										UICorner(0.5),
-
-										[Children] = New("Frame")({
-											Name = "Bar",
-											Size = Computed(function()
-												return UDim2.fromScale(experience:get() / (level:get() * 100) % 1, 1)
-											end),
-											AnchorPoint = Vector2.new(0, 0),
-											Position = UDim2.fromScale(0, 0),
-
-											BackgroundColor3 = Green,
-
-											[Children] = UICorner(0.5),
-										}),
-									},
-								}),
-							},
-						}),
-
-						TypingBox,
-
-						New("Folder")({
-							Name = "NextWordLabels",
-
-							[Children] = {
-								New("TextLabel")({
-									Name = "CurrentWordLabel",
-
-									Size = UDim2.fromScale(0.4, 0.06),
-									Position = UDim2.fromScale(0.5, 0.3),
-
-									Font = playerFont,
-									Text = displayedWords[1],
-								}),
-
-								NextWords({
-									Pos = 0.36,
-									id = 2,
-								}),
-								NextWords({
-									Pos = 0.42,
-									id = 3,
-								}),
-								NextWords({
-									Pos = 0.48,
-									id = 4,
-								}),
-								NextWords({
-									Pos = 0.54,
-									id = 5,
-								}),
-							},
-						}),
-					},
-				}),
-
-				New("UIGradient")({
-					Color = ColorSequence.new({
-						ColorSequenceKeypoint.new(0, Color3.fromRGB(32, 30, 28)),
-						ColorSequenceKeypoint.new(1, Color3.fromRGB(12, 10, 8)),
-					}),
-					Rotation = 110,
-				}),
-
-				New("Frame")({
-					Name = "BackgroundDesign",
-
-					Size = UDim2.fromScale(1.5, 0.75),
-					BackgroundTransparency = 1,
-
-					Rotation = -20,
-					ZIndex = -50,
-
-					[Children] = {
-						New("Frame")({
-							Name = "Frame1",
-
-							Size = UDim2.fromScale(1, 1),
-							BackgroundTransparency = 1,
-
-							[Children] = BackgroundDesign(),
-						}),
-
-						New("Frame")({
-							Name = "Frame2",
-
-							Size = UDim2.fromScale(1, 1),
-							Position = UDim2.fromScale(0.5, 0.6),
-							BackgroundTransparency = 1,
-
-							[Children] = BackgroundDesign(),
-						}),
-					},
-				}),
-
-				-- MENU TIME
-				-- OH MY GOD STOP PROCRASTINATING
-
-				Popup({
-					Name = "Help",
-					Title = "HELP",
-					Size = UDim2.fromScale(0.8, 0.8),
-					Corner = 0.04,
-					ZIndex = 120,
-
-					-- Children does not require brackets here
-					-- remember, this is a variable, children are applied in the Popup() function
-					Children = New("TextLabel")({
-						Name = "Text",
-						AnchorPoint = Vector2.new(0.5, 0.9),
-						Position = UDim2.fromScale(0.5, 1),
-						Size = UDim2.fromScale(0.97, 1.1),
-						Font = playerFont,
-						RichText = true,
-						Text = "Welcome to game name goes here!<br />This is a game you can use to improve your speed, accuracy, and stamina while typing.<br /><br />In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.<br />The upcoming words are displayed below the current word.<br /><br />The button in the top-right corner allows you to change the difficulty of your words.<br /><br />Easy words can be between 2 and 4 letters long. They are the easiest to type.<br />They give 1 typing token and 12-15 exp per word.<br /><br />Medium words can be between 4 and 7 letters long. Harder, but more rewarding.<br />They give 2 typing tokens and 20-26 exp per word.<br /><br />Hard words can be between 7 and 10 letters long.<br />They give 3 typing tokens and 35-42 exp per word.<br /><br />Insane words were added as a joke, they are some of the longest words in English.<br />They give 5 typing tokens and 57-65 exp per word.<br /><br />Experience is used to level up. Each level requires 100 more experience to level up than the one before it.<br />Ranks are gained every 10 levels.<br /><br />Developers:<br />pjstarr12<br />TheWhaleCloud<br />Lewin4<br /><br />The soundtrack for the game is Click by C418.<br />Thanks to icons8 for providing the icons.<br /><br />Inspired by:<br />Monkeytype by Miodec<br />Typing Simulator by S-GAMES",
-						TextSize = 28,
-						TextTruncate = Enum.TextTruncate.AtEnd,
-						TextWrapped = true,
-						TextXAlignment = Enum.TextXAlignment.Left,
-						TextYAlignment = Enum.TextYAlignment.Top,
-					}),
-				}),
-
-				Popup({
-					Name = "Settings",
-					Title = "SETTINGS",
-
-					Size = UDim2.fromScale(0.5, 0.5),
-					Corner = 0.04,
-					ZIndex = 130,
-
-					Children = {
-						SettingsOption({
-							Name = "Keysounds",
-							Text = "Keypress Sounds",
-						}),
-						SettingsOption({
-							Name = "Blind",
-							Text = "Blind Mode",
-							Right = true,
-						}),
-						SettingsOption({
-							Name = "Memory",
-							Text = "Memory Mode",
-							Row = 1,
-						}),
-						SettingsOption({
-							Name = "PlainBG",
-							Text = "Plain Background",
-							Row = 1,
-							Right = true,
-						}),
-					},
-				}),
-
-				Popup({
-					Name = "Shop",
-					Title = "SHOP",
-
-					Size = UDim2.fromScale(0.5, 0.5),
-					Corner = 0.04,
-					ZIndex = 120,
-
-					Children = {
-						ShopOption({
-							Name = "MediumDifficulty",
-							Text = "Medium Difficulty",
-							Price = 40,
-						}),
-						ShopOption({
-							Name = "HardDifficulty",
-							Text = "Hard Difficulty",
-							Right = true,
-							Price = 100, -- the price is right
-						}),
-						ShopOption({
-							Name = "InsaneDifficulty",
-							Text = "Insane Difficulty",
-							Row = 1,
-							Price = 600,
-						}),
-					},
-				}),
-
-				New("Frame")({
-					Name = "DarkTint",
-					BackgroundColor3 = Black0,
-					BackgroundTransparency = Spring(DarkTintTransparency, 25),
-					Size = UDim2.fromScale(2, 2),
-					ZIndex = 100,
-				}),
-			},
-		}),
-	},
-})
-]]></ProtectedString>
-						<int64 name="SourceAssetId">-1</int64>
-						<BinaryString name="Tags"></BinaryString>
-						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee24</UniqueId>
-					</Properties>
-				</Item>
-				<Item class="LocalScript" referent="RBXEE95E47CAC504F5EBFB8258DF732BC95">
+				<Item class="LocalScript" referent="RBX7F985954427B4C24991B3D11B585A18C">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<bool name="Disabled">false</bool>
@@ -1612,7 +502,7 @@ MainUI = New("ScreenGui")({
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee26</UniqueId>
 					</Properties>
 				</Item>
-				<Item class="ModuleScript" referent="RBX68D6E06EB1314B398012A810F49EC499">
+				<Item class="ModuleScript" referent="RBX07B148CB818546E682BF9E198E9322E6">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<Content name="LinkedSource"><null></null></Content>
@@ -4629,7 +3519,7 @@ return Words
 						<UniqueId name="UniqueId">71f79c4423fca8b802c1c26b00125cab</UniqueId>
 					</Properties>
 				</Item>
-				<Item class="ModuleScript" referent="RBX3A9362D4E84A4E25963778561F786CB6">
+				<Item class="ModuleScript" referent="RBXE567600D7C5249A3886E0FB4B19A250C">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<Content name="LinkedSource"><null></null></Content>
@@ -4775,7 +3665,7 @@ return function(level)
 			Text = "Word Wizard",
 			Colour = gradients[13],
 		}
-	elseif level < 140 then
+	else
 		return {
 			Text = "Document Deity",
 			Colour = gradients[14],
@@ -4788,9 +3678,1189 @@ end
 						<UniqueId name="UniqueId">508812495c0e28fa02d361bf004ef71d</UniqueId>
 					</Properties>
 				</Item>
+				<Item class="LocalScript" referent="RBXB127A384A3724ED0B6D897EC8AEEE3AC">
+					<Properties>
+						<BinaryString name="AttributesSerialize"></BinaryString>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">FusionLocal</string>
+						<token name="RunContext">0</token>
+						<string name="ScriptGuid">{80848008-59DD-436F-BFB7-58AF8FE8C432}</string>
+						<ProtectedString name="Source"><![CDATA[-- Main UI-buliding script
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Fusion = require(ReplicatedStorage.Shared.Fusion)
+local Knit = require(ReplicatedStorage.Packages.Knit)
+
+Knit.Start()
+	:andThen(function()
+		print("Knit client started")
+	end)
+	:catch(warn)
+
+local SyncService = Knit.GetService("SyncService")
+local TextService = game:GetService("TextService")
+local DataService = Knit.GetService("DataService")
+local randomGenerator
+
+SyncService:GetSeed():andThen(function(seed)
+	randomGenerator = Random.new(seed)
+end)
+
+local Words = require(script.Parent.Words)
+local Ranks = require(script.Parent.Ranks)
+local Sounds = ReplicatedStorage.Sounds
+local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
+
+local New = Fusion.New
+local Children = Fusion.Children
+local OnEvent = Fusion.OnEvent
+local OnChange = Fusion.OnChange
+local Spring = Fusion.Spring
+local State = Fusion.State
+local Computed = Fusion.Computed
+local Compat = Fusion.Compat
+
+local White = Color3.new(1, 1, 1)
+local Grey5 = Color3.fromRGB(178, 178, 178)
+local Grey3 = Color3.fromRGB(102, 102, 102)
+local Grey2 = Color3.fromRGB(84, 84, 84)
+local Grey1 = Color3.fromRGB(60, 60, 60)
+local Grey0 = Color3.fromRGB(42, 42, 42)
+local Black2 = Color3.fromRGB(16, 14, 12)
+local Black1 = Color3.fromRGB(10, 9, 8)
+local Black0 = Color3.new() -- hehehuehehuehe
+
+local Green = Color3.fromRGB(0, 255, 0)
+local Red = Color3.fromRGB(255, 0, 0)
+
+local playerFontThin = Enum.Font.Gotham
+local playerFont = Enum.Font.GothamMedium -- selene: "iT'S dePreCaTEd!!!!1!!!!11"
+local playerFontBold = Enum.Font.GothamBold
+
+local codeFont = Enum.Font.RobotoMono
+
+local PlayScreen
+local MainUI
+local TypingBox
+
+local MainFrameSize = State(UDim2.fromScale(0.8, 0.8))
+local DarkTintTransparency = State(1)
+local DarkTintTransparencyGoal = 0.5
+
+local loadingData = false
+local dataPrepared = State()
+local dataPreparedChanged = Compat(dataPrepared)
+local dataLoaded = State()
+local dataLoadedChanged = Compat(dataLoaded)
+
+DataService:PrepareData():andThen(function()
+	dataPrepared:set(true)
+end)
+
+local displayedWords = {}
+local wordCorrect = State(Green)
+
+local currency = State(0)
+local experience = State(0)
+local level = State(0)
+local wordsTyped = State(0)
+
+local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
+	local res = ""
+	for _ = 1, length do
+		res = res .. string.char(math.random(97, 122)) -- needs more random
+	end
+	return res
+end
+
+local function getWord()
+	return Words.easyList[math.random(1, #Words.easyList)]
+end
+
+local function changeDifficulty()
+	if TypingBox then
+		TypingBox.Text = ""
+	end
+
+	for i = 1, 5 do
+		displayedWords[i] = State("")
+		displayedWords[i]:set(getWord())
+	end
+end
+changeDifficulty()
+
+local function UICorner(corner)
+	return New("UICorner")({
+		CornerRadius = UDim.new(corner or 0.2, 0),
+	})
+end
+
+local function UIPadding(props)
+	if props then
+		props.Padding = props.Padding or 0.075
+		props.PaddingV = props.PaddingV or props.Padding
+		props.PaddingH = props.PaddingH or props.Padding
+	else
+		props = {
+			Padding = 0.075,
+			PaddingV = 0.075,
+			PaddingH = 0.075,
+		}
+	end
+
+	return New("UIPadding")({
+		PaddingBottom = UDim.new(props.PaddingV, 0),
+		PaddingTop = UDim.new(props.PaddingV, 0),
+		PaddingLeft = UDim.new(props.PaddingH, 0),
+		PaddingRight = UDim.new(props.PaddingH, 0),
+	})
+end
+
+local function NextWords(props)
+	return New("TextLabel")({
+		Name = "Label" .. props.Number,
+
+		Size = UDim2.fromScale(0.4, 0.06),
+		Position = UDim2.fromScale(0.5, props.Position),
+
+		Font = playerFont,
+		TextColor3 = Grey5,
+		Text = displayedWords[props.Number],
+	})
+end
+
+local function BackgroundDesign()
+	local returns = {}
+
+	for i = 1, 11 do
+		local temp = (i - 3.5) / 5
+
+		local box = New("TextLabel")({
+			Name = "BackgroundDesign" .. tostring(i),
+
+			Size = UDim2.fromScale(2.41, 0.1),
+			Position = UDim2.fromScale(0.5, temp),
+
+			Font = codeFont,
+			TextColor3 = Grey0,
+			TextTransparency = 0.65,
+			Text = RandomString(215),
+		})
+		table.insert(returns, box)
+	end
+	return returns
+end
+
+local function Button(props)
+	props.LabelWidth = props.LabelWidth or 0.6
+	props.ImageSize = props.ImageSize or 0.3
+	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
+
+	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
+
+	return New("TextButton")({
+		Name = props.Name,
+
+		Size = props.Size,
+
+		AnchorPoint = props.AnchorPoint or Vector2.new(0.5, 0.5),
+		Position = props.Position,
+		BackgroundColor3 = Grey3,
+		AutoButtonColor = true,
+
+		SizeConstraint = props.SizeConstraint,
+
+		[OnEvent("Activated")] = props.Activated,
+
+		[Children] = {
+			UICorner(props.Corner),
+			UIPadding({ PaddingH = 0.075 / ratio }), -- at least it works well
+
+			New("TextLabel")({
+				Text = props.Text,
+
+				Size = UDim2.fromScale(props.LabelWidth, 1),
+				Position = UDim2.fromScale(0.9, 0.5),
+				AnchorPoint = Vector2.new(1, 0.5),
+
+				Font = playerFont,
+			}),
+
+			New("ImageLabel")({
+				Size = UDim2.fromScale(props.ImageSize, props.ImageSize),
+				Position = UDim2.fromScale(0, 0.5),
+				AnchorPoint = Vector2.new(0, 0.5),
+
+				Image = "rbxassetid://" .. tostring(props.Image),
+				[Children] = New("UIAspectRatioConstraint")({
+					AspectRatio = 1,
+					AspectType = Enum.AspectType.ScaleWithParentSize,
+					DominantAxis = Enum.DominantAxis.Width,
+				}),
+			}),
+		},
+	})
+end
+
+local function SaveSlot(props)
+	local text = State("Save slot " .. props.SaveSlot)
+	local previewText = State("Loading info...")
+
+	local disconnect = dataPreparedChanged:onChange(function()
+		DataService:PreviewData(props.SaveSlot):andThen(function(data)
+			previewText:set(
+				"Level: " .. data.Level .. "\nWords: " .. data.WordsTyped .. "\nTyping Tokens: " .. data.Currency
+			)
+		end)
+	end)
+
+	return New("TextButton")({
+		Name = "SaveSlot",
+
+		Size = UDim2.fromScale(1, 0.15),
+
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = props.Position,
+		BackgroundColor3 = Grey3,
+		AutoButtonColor = true,
+
+		[OnEvent("Activated")] = function()
+			if not loadingData then
+				loadingData = true
+				text:set("Loading...")
+				disconnect()
+
+				DataService:LoadData(props.SaveSlot):andThen(function(data)
+					currency:set(data.Currency)
+					experience:set(data.Experience)
+					level:set(data.Level)
+					wordsTyped:set(data.WordsTyped)
+
+					dataLoaded:set(true)
+
+					PlayScreen.Frame.Visible = false
+					Sounds.music:Play()
+					MainFrameSize:set(UDim2.fromScale(1, 1))
+				end)
+			end
+		end,
+
+		[Children] = {
+			UICorner(),
+
+			New("TextLabel")({
+				Name = "SaveSlotName",
+				Text = text,
+
+				Size = UDim2.fromScale(0.3, 0.8),
+				Position = UDim2.fromScale(0.02, 0.5),
+				AnchorPoint = Vector2.new(0, 0.5),
+				TextXAlignment = Enum.TextXAlignment.Left,
+
+				Font = playerFont,
+			}),
+
+			New("TextLabel")({
+				Name = "SaveSlotPreview",
+				Text = previewText,
+
+				Size = UDim2.fromScale(0.3, 0.8),
+				Position = UDim2.fromScale(0.98, 0.5),
+				AnchorPoint = Vector2.new(1, 0.5),
+				TextXAlignment = Enum.TextXAlignment.Right,
+
+				Font = playerFont,
+			}),
+		},
+	})
+end
+
+local function Label(props)
+	props.LabelWidth = props.LabelWidth or 0.6
+	props.LabelPosition = props.LabelPosition or 0.9
+
+	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale)
+
+	return New("TextLabel")({
+		Name = props.Name,
+
+		Size = props.Size,
+		AnchorPoint = props.AnchorPoint,
+		Position = props.Position,
+		BackgroundColor3 = props.BackgroundColor3 or Grey0,
+		BackgroundTransparency = 0,
+
+		[Children] = {
+			UICorner(),
+			UIPadding({ PaddingH = 0.075 / ratio }), -- ratio
+			props.Children,
+
+			New("TextLabel")({
+				Text = props.Text,
+
+				Size = UDim2.fromScale(props.LabelWidth, 1),
+				Position = UDim2.fromScale(props.LabelPosition, 0.5),
+				AnchorPoint = Vector2.new(1, 0.5),
+
+				Font = playerFont,
+			}),
+
+			New("ImageLabel")({
+				Size = UDim2.fromScale(0.3, 0.3),
+				Position = UDim2.fromScale(0, 0.5),
+				AnchorPoint = Vector2.new(0, 0.5),
+
+				Image = "rbxassetid://" .. tostring(props.Image),
+				[Children] = New("UIAspectRatioConstraint")({
+					AspectRatio = 1,
+					AspectType = Enum.AspectType.ScaleWithParentSize,
+					DominantAxis = Enum.DominantAxis.Width,
+				}),
+			}),
+		},
+	})
+end
+
+local function Popup(props)
+	local popup
+	popup = New("Frame")({
+		Name = props.Name,
+
+		Size = props.Size or UDim2.fromScale(0.8, 0.8),
+		Position = props.Position or UDim2.fromScale(0.5, 0.5),
+		BackgroundColor3 = Grey2,
+		Visible = false,
+		ZIndex = props.ZIndex or 120, -- bruh darktint moment
+
+		[Children] = {
+			UICorner(props.Corner),
+
+			New("ScrollingFrame")({
+				Active = true,
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				Position = UDim2.fromScale(0.5, 0.55),
+				Size = UDim2.fromScale(1, 0.85),
+				CanvasSize = UDim2.fromScale(1, 2.5),
+
+				ScrollingDirection = Enum.ScrollingDirection.Y,
+
+				[Children] = props.Children,
+			}),
+
+			New("TextLabel")({
+				Name = "Label",
+				AnchorPoint = Vector2.new(0.5, 0),
+				BackgroundColor3 = Grey1,
+				BackgroundTransparency = 0,
+
+				Position = UDim2.new(0.5, 0, 0, 16),
+				Size = UDim2.fromScale(1, 0.08), -- I don't like it. 0.08 barely works okay enough.
+				Font = playerFontBold,
+				Text = props.Title,
+
+				[Children] = New("TextButton")({
+					Name = "CloseButton",
+					AnchorPoint = Vector2.new(1, 0),
+					BackgroundColor3 = Black2,
+
+					Position = UDim2.fromScale(1, 0),
+					Size = UDim2.fromScale(1, 1),
+					SizeConstraint = Enum.SizeConstraint.RelativeYY,
+					Font = Enum.Font.SourceSans,
+
+					Text = "X",
+					AutoButtonColor = true,
+
+					[OnEvent("Activated")] = function()
+						popup.Visible = false
+						DarkTintTransparency:set(1)
+					end,
+				}),
+			}),
+		},
+	})
+	return popup
+end
+
+local function SettingsOption(props)
+	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse
+	local checked = State(false)
+	local canClick = true
+
+	return New("TextButton")({
+		Name = props.Name,
+
+		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
+		BackgroundTransparency = 1,
+		Position = if props.Right then UDim2.fromScale(0.97, VerticalPos) else UDim2.fromScale(0.03, VerticalPos),
+		Size = UDim2.fromScale(0.45, 0.05),
+
+		[OnEvent("Activated")] = function()
+			if not canClick then
+				return
+			end
+
+			canClick = false
+			checked:set(not checked:get())
+			SyncService:ChangeSetting(props.Name)
+			task.wait(0.1) -- don't click so fast
+			canClick = true
+		end,
+
+		[Children] = {
+			New("ImageLabel")({
+				BackgroundTransparency = 1,
+				Size = UDim2.fromScale(1, 1),
+				SizeConstraint = Enum.SizeConstraint.RelativeYY,
+				Image = Computed(function()
+					return if checked:get() then "rbxassetid://7523095951" else "rbxassetid://7523096047"
+				end),
+			}),
+			New("TextLabel")({
+				AnchorPoint = Vector2.new(0, 0.5),
+				Position = UDim2.fromScale(0.18, 0.5),
+				Size = UDim2.fromScale(0.8, 0.8),
+				Font = playerFont,
+				Text = props.Text,
+				TextXAlignment = Enum.TextXAlignment.Left,
+			}),
+		},
+	})
+end
+
+local function ShopOption(props)
+	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse, css grid much
+	local buttonText = State(ShopItems[props.Name].Price)
+	local canClick
+
+	dataLoadedChanged:onChange(function()
+		DataService:ItemOwned(props.Name):andThen(function(owned)
+			if owned then
+				buttonText:set("Owned")
+				canClick = false
+			else
+				canClick = true
+			end
+		end)
+	end)
+
+	return New("Frame")({
+		Name = props.Name,
+
+		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
+		BackgroundTransparency = 1,
+		Position = if props.Right then UDim2.fromScale(0.97, VerticalPos) else UDim2.fromScale(0.03, VerticalPos),
+		Size = UDim2.fromScale(0.45, 0.05),
+
+		[Children] = {
+			New("TextLabel")({
+				AnchorPoint = Vector2.new(0, 0.5),
+				Position = UDim2.fromScale(0, 0.5),
+				Size = UDim2.fromScale(0.7, 0.8),
+				Font = playerFont,
+				Text = props.Text,
+				TextXAlignment = Enum.TextXAlignment.Left,
+			}),
+
+			New("TextButton")({
+				Name = "Price",
+
+				BackgroundColor3 = Grey3,
+				AnchorPoint = Vector2.new(1, 0.5),
+				Position = UDim2.fromScale(1, 0.5),
+				Size = UDim2.fromScale(0.25, 1),
+				Font = playerFont,
+				Text = buttonText,
+				AutoButtonColor = true,
+
+				[OnEvent("Activated")] = function()
+					local price = buttonText:get()
+
+					if not canClick then
+						return
+					end
+
+					canClick = false
+					SyncService:PurchaseItem(props.Name):andThen(function(success)
+						if success then
+							currency:set(currency:get() - price)
+							buttonText:set("Purchase successful!")
+							task.wait(1)
+							buttonText:set("Owned")
+						else
+							buttonText:set("Purchase failed!")
+							task.wait(1)
+							buttonText:set(price)
+							canClick = true
+						end
+					end)
+				end,
+
+				[Children] = {
+					UIPadding(),
+					UICorner(),
+				},
+			}),
+		},
+	})
+end
+
+TypingBox = New("TextBox")({
+	Name = "TypingBox",
+	Position = UDim2.fromScale(0.5, 0.7),
+	Size = UDim2.fromScale(0.5, 0.05),
+	BackgroundColor3 = Grey0,
+	TextColor3 = wordCorrect,
+
+	Font = playerFont,
+	PlaceholderText = "Type here (spacebar to complete word)",
+	PlaceholderColor3 = Grey3,
+
+	[OnChange("Text")] = function()
+		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
+
+		local rand = math.random(1, 3)
+		local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
+
+		Sounds["click" .. rand].PlaybackSpeed = rand2
+		Sounds["click" .. rand]:Play()
+
+		local text = TypingBox.Text
+
+		if string.match("!" .. displayedWords[1]:get() .. " ", ("!" .. text)) then
+			wordCorrect:set(Green)
+			if text == displayedWords[1]:get() .. " " then
+				TypingBox.Text = ""
+
+				SyncService:WordTyped()
+				wordsTyped:set(wordsTyped:get() + 1)
+
+				local expToAdd = randomGenerator:NextInteger(3, 10)
+				local exp = experience:get()
+				if exp + expToAdd > level:get() * 100 then
+					while exp + expToAdd > level:get() * 100 do -- why no while else (also probably redundant until soemone actually gets this much exp)
+						exp += expToAdd - level:get() * 100
+						level:set(level:get() + 1)
+					end
+				else
+					exp += expToAdd
+				end
+				experience:set(exp)
+
+				currency:set(currency:get() + 1)
+
+				local tempWords = displayedWords
+
+				for i = 1, 4 do
+					tempWords[i]:set(tempWords[i + 1]:get()) -- Move each word up by one place
+				end
+				tempWords[5]:set(getWord()) -- Add a new word to the bottom
+
+				displayedWords = tempWords
+			end
+		else
+			wordCorrect:set(Red)
+		end
+	end,
+
+	[Children] = {
+		UICorner(),
+		UIPadding(),
+	},
+})
+
+PlayScreen = New("ScreenGui")({
+	Name = "PlayScreen",
+	Parent = LocalPlayer.PlayerGui,
+	DisplayOrder = 10,
+	IgnoreGuiInset = true,
+
+	[Children] = New("Frame")({
+		BackgroundColor3 = Black2,
+		Position = UDim2.fromScale(0.5, 0.5),
+		Size = UDim2.fromScale(1, 1),
+
+		[Children] = {
+			New("Frame")({
+				Name = "SaveSlots",
+				BackgroundColor3 = Black1,
+				Position = UDim2.fromScale(0.5, 0.5),
+				Size = UDim2.fromScale(0.5, 0.5),
+				Visible = false,
+
+				[Children] = {
+					UICorner(0.05),
+					UIPadding({ Padding = 0.025 }),
+
+					New("TextLabel")({
+						Size = UDim2.fromScale(1, 0.1),
+						Position = UDim2.fromScale(0.5, -0.1),
+						Text = "Select a save slot to load",
+						Font = playerFontBold,
+					}),
+
+					SaveSlot({
+						SaveSlot = 1,
+						Position = UDim2.fromScale(0.5, 0.1),
+					}),
+					SaveSlot({
+						SaveSlot = 2,
+						Position = UDim2.fromScale(0.5, 0.3),
+					}),
+					SaveSlot({
+						SaveSlot = 3,
+						Position = UDim2.fromScale(0.5, 0.5),
+					}),
+					SaveSlot({
+						SaveSlot = 4,
+						Position = UDim2.fromScale(0.5, 0.7),
+					}),
+					SaveSlot({
+						SaveSlot = 5,
+						Position = UDim2.fromScale(0.5, 0.9),
+					}),
+				},
+			}),
+
+			New("Frame")({
+				Name = "Play",
+				BackgroundTransparency = 1,
+				Position = UDim2.fromScale(0.5, 0.5),
+				Size = UDim2.fromScale(1, 1),
+
+				[Children] = {
+					Button({
+						Name = "Play",
+						Size = UDim2.fromScale(0.17, 0.075),
+						Position = UDim2.fromScale(0.5, 0.5),
+						Text = "Play",
+						Image = 8156398059,
+
+						Activated = function() -- o this is how you do functions
+							PlayScreen.Frame.Play.Visible = false
+							PlayScreen.Frame.SaveSlots.Visible = true
+						end,
+					}),
+
+					New("TextLabel")({ -- Title
+						Name = "Title",
+						Position = UDim2.fromScale(0.5, 0.35),
+						Size = UDim2.fromScale(0.3, 0.175),
+						Font = playerFontBold,
+						RichText = true,
+						Text = "typing simulator but better",
+
+						[Children] = UIPadding({ Padding = 0.1 }),
+					}),
+
+					New("Frame")({ -- Credits
+						Name = "Credits",
+						BackgroundTransparency = 1,
+						Position = UDim2.fromScale(0.9, 0.65),
+						Size = UDim2.fromScale(0.1, 0.1),
+						SizeConstraint = Enum.SizeConstraint.RelativeXX,
+
+						[Children] = New("ImageLabel")({
+							Name = "HeliodexLogo",
+							AnchorPoint = Vector2.new(0.5, 0.5),
+							Position = UDim2.fromScale(0.5, 0.5),
+							Size = UDim2.fromScale(1, 1),
+							SizeConstraint = Enum.SizeConstraint.RelativeYY,
+							ZIndex = 6,
+							Image = "rbxassetid://7501730261",
+
+							[Children] = {
+								New("TextLabel")({
+									Name = "a Heliodex game",
+									Position = UDim2.fromScale(0.5, 1.1),
+									Size = UDim2.fromScale(1.8, 0.2),
+									Font = playerFontThin,
+									RichText = true,
+									Text = "a <i>HELIODEX</i> game",
+								}),
+								New("TextLabel")({
+									Name = "pjstarr12",
+									Position = UDim2.fromScale(0.5, 1.4),
+									Size = UDim2.fromScale(1.5, 0.175),
+									Font = playerFontThin,
+									Text = "pjstarr12",
+
+									[Children] = UIPadding(),
+								}),
+								New("TextLabel")({
+									Name = "TheWhaleCloud",
+									Position = UDim2.fromScale(0.5, 1.6),
+									Size = UDim2.fromScale(1.5, 0.175),
+									Font = playerFontThin,
+									Text = "TheWhaleCloud",
+
+									[Children] = UIPadding(),
+								}),
+								New("TextLabel")({
+									Name = "Lewin4",
+									AnchorPoint = Vector2.new(0.5, 0.5),
+									Position = UDim2.fromScale(0.5, 1.8),
+									Size = UDim2.fromScale(1.5, 0.175),
+									Font = playerFontThin,
+									Text = "Lewin4",
+
+									[Children] = UIPadding(),
+								}),
+							},
+						}),
+					}),
+				},
+			}),
+		},
+	}),
+})
+
+-- Main ui time,,.,,.oaoeueuoueooaaeiiaaa
+
+MainUI = New("ScreenGui")({
+	Name = "Main",
+	Parent = LocalPlayer.PlayerGui,
+	DisplayOrder = 0,
+	IgnoreGuiInset = true,
+
+	[Children] = {
+		New("TextLabel")({ -- could go inside MainFrame or frame
+			Name = "Notification",
+
+			Position = UDim2.fromScale(0.5, 0.15),
+			Size = UDim2.fromScale(1, 1),
+
+			Visible = false,
+
+			TextTransparency = 1,
+			Font = playerFont,
+
+			ZIndex = 88,
+		}),
+
+		New("Frame")({
+			Name = "MainFrame",
+			Size = UDim2.fromScale(1, 1),
+
+			ZIndex = 5,
+
+			[Children] = {
+				New("Frame")({
+					Size = Spring(MainFrameSize, 12, 1),
+					BackgroundTransparency = 1,
+
+					ZIndex = 5,
+
+					[Children] = {
+						Button({
+							Name = "OpenHelp",
+							Size = UDim2.fromScale(0.17, 0.075),
+							AnchorPoint = Vector2.new(0, 1),
+							Position = UDim2.fromScale(0.01, 0.98),
+							Text = "Help",
+							Image = 7362810660,
+
+							Activated = function()
+								MainUI.MainFrame.Help.Visible = not MainUI.MainFrame.Help.Visible
+
+								DarkTintTransparency:set(
+									if MainUI.MainFrame.Help.Visible then DarkTintTransparencyGoal else 1
+								)
+							end,
+						}),
+						Button({
+							Name = "OpenShop",
+							Size = UDim2.fromScale(0.17, 0.075),
+							AnchorPoint = Vector2.new(0, 0),
+							Position = UDim2.fromScale(0.01, 0.12),
+							Text = "Shop",
+							Image = 7362870044,
+
+							Activated = function()
+								MainUI.MainFrame.Shop.Visible = not MainUI.MainFrame.Shop.Visible
+
+								DarkTintTransparency:set(
+									if MainUI.MainFrame.Shop.Visible then DarkTintTransparencyGoal else 1
+								)
+							end,
+						}),
+						Button({
+							Name = "OpenSettings",
+							Size = UDim2.fromScale(0.17, 0.075),
+							AnchorPoint = Vector2.new(1, 0),
+							Position = UDim2.fromScale(0.99, 0.39),
+							Text = "Settings",
+							Image = 7362801114,
+
+							Activated = function()
+								MainUI.MainFrame.Settings.Visible = not MainUI.MainFrame.Settings.Visible
+
+								DarkTintTransparency:set(
+									if MainUI.MainFrame.Settings.Visible then DarkTintTransparencyGoal else 1
+								)
+							end,
+						}),
+						Button({
+							Name = "AudioToggle",
+							Size = UDim2.fromScale(0.1, 0.1),
+							AnchorPoint = Vector2.new(1, 1),
+							Position = UDim2.fromScale(0.99, 0.98),
+							Text = "",
+							Image = 7517177224,
+
+							Corner = 0.1,
+							ImageSize = 0.9,
+							SizeConstraint = Enum.SizeConstraint.RelativeYY,
+						}),
+						Label({
+							Name = "Currency",
+							Size = UDim2.fromScale(0.22, 0.075),
+							AnchorPoint = Vector2.new(0, 0),
+							Position = UDim2.fromScale(0.01, 0.02),
+							Text = Computed(function()
+								return currency:get() .. " typing tokens"
+							end),
+							Image = 7367251392,
+							TextWrapped = false,
+
+							LabelWidth = 0.7,
+							LabelPosition = 0.95,
+						}),
+						Label({
+							Name = "Words",
+							Size = UDim2.fromScale(0.17, 0.075),
+							AnchorPoint = Vector2.new(0.5, 0),
+							Position = UDim2.fromScale(0.5, 0.02),
+							Text = Computed(function()
+								return wordsTyped:get() .. " Words"
+							end),
+							Image = 7367083297,
+						}),
+
+						New("TextButton")({ -- why from scratch
+							Name = "DifficultyButton",
+
+							Size = UDim2.fromScale(0.17, 0.075),
+							AnchorPoint = Vector2.new(1, 0),
+							Position = UDim2.fromScale(0.99, 0.02),
+							BackgroundColor3 = Grey3,
+							AutoButtonColor = true,
+
+							[Children] = {
+								UICorner(),
+								UIPadding({ PaddingH = 0.033 }),
+
+								New("IntValue")({
+									Name = "DifficultyLevel",
+									Value = 1,
+								}),
+
+								New("TextLabel")({
+									Text = "Change Difficulty:",
+
+									Size = UDim2.fromScale(0.6, 0.5),
+									Position = UDim2.fromScale(0.9, 0.25),
+									AnchorPoint = Vector2.new(1, 0.5),
+
+									Font = playerFont,
+								}),
+
+								New("TextLabel")({
+									Name = "DifficultyLevelText",
+									Text = "Easy",
+
+									Size = UDim2.fromScale(0.6, 0.5),
+									Position = UDim2.fromScale(0.9, 0.75),
+									AnchorPoint = Vector2.new(1, 0.5),
+
+									Font = playerFont,
+								}),
+
+								New("ImageLabel")({
+									Size = UDim2.fromScale(0.3, 0.3),
+									Position = UDim2.fromScale(0, 0.5),
+									AnchorPoint = Vector2.new(0, 0.5),
+
+									Image = "rbxassetid://7363005276",
+									[Children] = New("UIAspectRatioConstraint")({
+										AspectRatio = 1,
+										AspectType = Enum.AspectType.ScaleWithParentSize,
+										DominantAxis = Enum.DominantAxis.Width,
+									}),
+								}),
+							},
+						}),
+
+						New("Frame")({
+							Name = "LevelMenu",
+							AnchorPoint = Vector2.new(1, 0),
+							Position = UDim2.fromScale(0.99, 0.115),
+							Size = UDim2.fromScale(0.17, 0.255),
+							BackgroundColor3 = Grey3,
+
+							[Children] = {
+								UICorner(0.05),
+								UIPadding({ Padding = 0.04 }),
+
+								Label({
+									Name = "Rank",
+									Size = UDim2.fromScale(1, 0.32),
+									AnchorPoint = Vector2.new(0.5, 1),
+									Position = UDim2.fromScale(0.5, 1),
+									Text = Computed(function()
+										return Ranks(level:get()).Text
+									end),
+									Image = 7456285956,
+									BackgroundColor3 = White,
+
+									Children = {
+										New("UIGradient")({
+											Color = Computed(function()
+												return Ranks(level:get()).Colour
+											end),
+
+											Rotation = 90,
+										}),
+									},
+								}),
+								Label({
+									Name = "Level",
+									Size = UDim2.fromScale(1, 0.25),
+									AnchorPoint = Vector2.new(0.5, 0.5),
+									Position = UDim2.fromScale(0.5, 0.5),
+									Text = Computed(function()
+										return "Level " .. level:get()
+									end),
+									Image = 7367078076,
+								}),
+								Label({
+									Name = "Experience",
+									Size = UDim2.fromScale(1, 0.2),
+									AnchorPoint = Vector2.new(0.5, 0),
+									Position = UDim2.fromScale(0.5, 0),
+									Text = "Amount until level up",
+
+									Image = 261481376, -- DELETE THIS. AWFUL	-- ok, it did end up getting content deleted
+
+									LabelWidth = 1,
+									LabelPosition = 1,
+								}),
+
+								New("Frame")({
+									Name = "BarHolder",
+									Size = UDim2.fromScale(1, 0.08),
+									Position = UDim2.fromScale(0.5, 0.28),
+
+									BackgroundColor3 = Grey0,
+
+									[Children] = {
+										UICorner(0.5),
+
+										[Children] = New("Frame")({
+											Name = "Bar",
+											Size = Spring(
+												Computed(function()
+													local size = experience:get() / (level:get() * 100) % 1
+													return UDim2.fromScale(if size == size then size else 0, 1) -- prevent NaNs from silently breaking everything
+												end),
+												50
+											),
+											AnchorPoint = Vector2.new(0, 0),
+											Position = UDim2.fromScale(0, 0),
+
+											BackgroundColor3 = Green,
+
+											[Children] = UICorner(0.5),
+										}),
+									},
+								}),
+							},
+						}),
+
+						TypingBox,
+
+						New("Folder")({
+							Name = "NextWordLabels",
+
+							[Children] = {
+								New("TextLabel")({
+									Name = "CurrentWordLabel",
+
+									Size = UDim2.fromScale(0.4, 0.06),
+									Position = UDim2.fromScale(0.5, 0.3),
+
+									Font = playerFont,
+									Text = displayedWords[1],
+								}),
+
+								NextWords({
+									Position = 0.36,
+									Number = 2,
+								}),
+								NextWords({
+									Position = 0.42,
+									Number = 3,
+								}),
+								NextWords({
+									Position = 0.48,
+									Number = 4,
+								}),
+								NextWords({
+									Position = 0.54,
+									Number = 5,
+								}),
+							},
+						}),
+					},
+				}),
+
+				New("UIGradient")({
+					Color = ColorSequence.new({
+						ColorSequenceKeypoint.new(0, Color3.fromRGB(32, 30, 28)),
+						ColorSequenceKeypoint.new(1, Color3.fromRGB(12, 10, 8)),
+					}),
+					Rotation = 110,
+				}),
+
+				New("Frame")({
+					Name = "BackgroundDesign",
+
+					Size = UDim2.fromScale(1.5, 0.75),
+					BackgroundTransparency = 1,
+
+					Rotation = -20,
+					ZIndex = -50,
+
+					[Children] = {
+						New("Frame")({
+							Name = "Frame1",
+
+							Size = UDim2.fromScale(1, 1),
+							BackgroundTransparency = 1,
+
+							[Children] = BackgroundDesign(),
+						}),
+
+						New("Frame")({
+							Name = "Frame2",
+
+							Size = UDim2.fromScale(1, 1),
+							Position = UDim2.fromScale(0.5, 0.6),
+							BackgroundTransparency = 1,
+
+							[Children] = BackgroundDesign(),
+						}),
+					},
+				}),
+
+				-- MENU TIME
+				-- OH MY GOD STOP PROCRASTINATING
+
+				Popup({
+					Name = "Help",
+					Title = "HELP",
+					Size = UDim2.fromScale(0.8, 0.8),
+					Corner = 0.04,
+					ZIndex = 120,
+
+					-- Children does not require brackets here
+					-- remember, this is a variable, children are applied in the Popup() function
+					Children = New("TextLabel")({
+						Name = "Text",
+						AnchorPoint = Vector2.new(0.5, 0.9),
+						Position = UDim2.fromScale(0.5, 1),
+						Size = UDim2.fromScale(0.97, 1.1),
+						Font = playerFont,
+						RichText = true,
+						Text = "Welcome to game name goes here!<br />This is a game you can use to improve your speed, accuracy, and stamina while typing.<br /><br />In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.<br />The upcoming words are displayed below the current word.<br /><br />The button in the top-right corner allows you to change the difficulty of your words.<br /><br />Easy words can be between 2 and 4 letters long. They are the easiest to type.<br />They give 1 typing token and 12-15 exp per word.<br /><br />Medium words can be between 4 and 7 letters long. Harder, but more rewarding.<br />They give 2 typing tokens and 20-26 exp per word.<br /><br />Hard words can be between 7 and 10 letters long.<br />They give 3 typing tokens and 35-42 exp per word.<br /><br />Insane words were added as a joke, they are some of the longest words in English.<br />They give 5 typing tokens and 57-65 exp per word.<br /><br />Experience is used to level up. Each level requires 100 more experience to level up than the one before it.<br />Ranks are gained every 10 levels.<br /><br />Developers:<br />pjstarr12<br />TheWhaleCloud<br />Lewin4<br /><br />The soundtrack for the game is Click by C418.<br />Thanks to icons8 for providing the icons.<br /><br />Inspired by:<br />Monkeytype by Miodec<br />Typing Simulator by S-GAMES",
+						TextSize = 28,
+						TextTruncate = Enum.TextTruncate.AtEnd,
+						TextWrapped = true,
+						TextXAlignment = Enum.TextXAlignment.Left,
+						TextYAlignment = Enum.TextYAlignment.Top,
+					}),
+				}),
+
+				Popup({
+					Name = "Settings",
+					Title = "SETTINGS",
+
+					Size = UDim2.fromScale(0.5, 0.5),
+					Corner = 0.04,
+					ZIndex = 130,
+
+					Children = {
+						SettingsOption({
+							Name = "KeySounds",
+							Text = "Keypress Sounds",
+						}),
+						SettingsOption({
+							Name = "BlindMode",
+							Text = "Blind Mode",
+							Right = true,
+						}),
+						SettingsOption({
+							Name = "MemoryMode",
+							Text = "Memory Mode",
+							Row = 1,
+						}),
+						SettingsOption({
+							Name = "PlainBG",
+							Text = "Plain Background",
+							Row = 1,
+							Right = true,
+						}),
+					},
+				}),
+
+				Popup({
+					Name = "Shop",
+					Title = "SHOP",
+
+					Size = UDim2.fromScale(0.5, 0.5),
+					Corner = 0.04,
+					ZIndex = 120,
+
+					Children = {
+						ShopOption({
+							Name = "MediumDifficulty",
+							Text = "Medium Difficulty",
+						}),
+						ShopOption({
+							Name = "HardDifficulty",
+							Text = "Hard Difficulty",
+							Right = true,
+						}),
+						ShopOption({
+							Name = "InsaneDifficulty",
+							Text = "Insane Difficulty",
+							Row = 1,
+						}),
+					},
+				}),
+
+				New("Frame")({
+					Name = "DarkTint",
+					BackgroundColor3 = Black0,
+					BackgroundTransparency = Spring(DarkTintTransparency, 25),
+					Size = UDim2.fromScale(2, 2),
+					ZIndex = 100,
+				}),
+			},
+		}),
+	},
+})
+]]></ProtectedString>
+						<int64 name="SourceAssetId">-1</int64>
+						<BinaryString name="Tags"></BinaryString>
+						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee24</UniqueId>
+					</Properties>
+				</Item>
 			</Item>
 		</Item>
-		<Item class="StarterCharacterScripts" referent="RBXAAAD0EFDAC604317BB24C4208832CA0E">
+		<Item class="StarterCharacterScripts" referent="RBXE1F3D71B1F1A4569973507A2547F8C73">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<string name="Name">StarterCharacterScripts</string>
@@ -4800,7 +4870,7 @@ end
 			</Properties>
 		</Item>
 	</Item>
-	<Item class="StarterPack" referent="RBX00B56E82717E48609EFE745107F156DF">
+	<Item class="StarterPack" referent="RBX1C47842B299146F0855951F8EFD84419">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">StarterPack</string>
@@ -4809,7 +4879,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191b8</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="StarterGui" referent="RBX07D9AA6C89E24EAFBF09D53116BB6C44">
+	<Item class="StarterGui" referent="RBX05F3F1E1BFB548869DB65C2DE07C1EA0">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">StarterGui</string>
@@ -4822,7 +4892,7 @@ end
 			<token name="VirtualCursorMode">0</token>
 		</Properties>
 	</Item>
-	<Item class="LocalizationService" referent="RBX4C132F5CE45E4CA7A7719045CF13DC5D">
+	<Item class="LocalizationService" referent="RBX2652E7D4DC6540B09E7FF4C24C3CE79F">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">LocalizationService</string>
@@ -4831,7 +4901,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191bb</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="TeleportService" referent="RBX4A803D65564B4FF09558A794A26550CB">
+	<Item class="TeleportService" referent="RBX429FFD3A22DA4686954EFCFE3279D1AA">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">Teleport Service</string>
@@ -4840,7 +4910,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191bf</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="CollectionService" referent="RBX01B67272678945D9877AB3347F2CD90A">
+	<Item class="CollectionService" referent="RBXDC3040DB41634AF8B87EC9D28CBA895E">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">CollectionService</string>
@@ -4849,7 +4919,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191c1</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="PhysicsService" referent="RBX7818E6A36DCF4FF1BEE05C5A674897EA">
+	<Item class="PhysicsService" referent="RBXA90B9CEE185843FFBE30F45FD0A87AFB">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">PhysicsService</string>
@@ -4858,7 +4928,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191c2</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="Geometry" referent="RBX006328BD9152478BA7B6D5EC87D9C9BB">
+	<Item class="Geometry" referent="RBX67F2035349BF4555AF2676895CD9CD38">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">Geometry</string>
@@ -4867,7 +4937,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191c4</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="InsertService" referent="RBXA7B917D26D5145868FB87F8A10755C81">
+	<Item class="InsertService" referent="RBX51EB9705793E4B598914AC398219F2C0">
 		<Properties>
 			<bool name="AllowClientInsertModels">false</bool>
 			<bool name="AllowInsertFreeModels">false</bool>
@@ -4877,7 +4947,7 @@ end
 			<BinaryString name="Tags"></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191c6</UniqueId>
 		</Properties>
-		<Item class="StringValue" referent="RBX0ABBB8C953134BC0A88B64D1147D797A">
+		<Item class="StringValue" referent="RBXB29CBFAB33C44422BB0C6FAA14EB58A7">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<string name="Name">InsertionHash</string>
@@ -4888,7 +4958,7 @@ end
 			</Properties>
 		</Item>
 	</Item>
-	<Item class="GamePassService" referent="RBX0C619075A8D4427EBAA6235977D53B02">
+	<Item class="GamePassService" referent="RBX2F3652A23B694CD9821C929F3D46D958">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">GamePassService</string>
@@ -4897,7 +4967,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191c7</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="Debris" referent="RBXE2DE3C39F93C472C9FB5461A67F05F2F">
+	<Item class="Debris" referent="RBX480AEA0AA32F44C190DBF1D888A8C978">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<int name="MaxItems">1000</int>
@@ -4907,7 +4977,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191c8</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="CookiesService" referent="RBX42269D568A2749919A3F656EF81EC26C">
+	<Item class="CookiesService" referent="RBX1BD9531380F941BEBE23F2BF7C254B5D">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">CookiesService</string>
@@ -4916,7 +4986,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191c9</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="VRService" referent="RBX65C5B62AAA154C759C2BCADB1193EA9E">
+	<Item class="VRService" referent="RBXE7FD074E434C48F7967CCEF2F8EFD244">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">VRService</string>
@@ -4925,7 +4995,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191d3</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="ContextActionService" referent="RBX03B6D0E33B3246D8B38AECFD7A7B5EA2">
+	<Item class="ContextActionService" referent="RBX3086EA2421A442869BF9A893B91CB54E">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">ContextActionService</string>
@@ -4934,7 +5004,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191d4</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="ScriptService" referent="RBX12FDAF52B3874965A1C262C9044282B5">
+	<Item class="ScriptService" referent="RBX289A5EB95AAD40129769B685CBFA79BC">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">Instance</string>
@@ -4943,7 +5013,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191d6</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="AssetService" referent="RBXC080CF59774548D99B6951FD12B5D3F8">
+	<Item class="AssetService" referent="RBX9319408DE3E94E47A47CF65474FFEAAC">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">AssetService</string>
@@ -4952,7 +5022,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191d7</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="TouchInputService" referent="RBX0DE80B800A034A94AF6780460415A522">
+	<Item class="TouchInputService" referent="RBXD9F9D7CCE6A2453FB82AD599935D332F">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">TouchInputService</string>
@@ -4961,7 +5031,7 @@ end
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191d8</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="AnalyticsService" referent="RBXBAE50AB00CD244A69EA2794D6FA2FB2A">
+	<Item class="AnalyticsService" referent="RBX2EC6415B0F5F4E2286A10F84E0CACC08">
 		<Properties>
 			<string name="ApiKey"></string>
 			<BinaryString name="AttributesSerialize"></BinaryString>
@@ -4970,7 +5040,7 @@ end
 			<BinaryString name="Tags"></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191db</UniqueId>
 		</Properties>
-		<Item class="ModuleScript" referent="RBXFC264B448A72440A87B691642FB76B12">
+		<Item class="ModuleScript" referent="RBX8B502611C76F41EB97716247EDA65014">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<Content name="LinkedSource"><null></null></Content>
@@ -4999,7 +5069,7 @@ return {
 			</Properties>
 		</Item>
 	</Item>
-	<Item class="Selection" referent="RBX7B742059B94E44799F9F6007D1202B59">
+	<Item class="Selection" referent="RBX3FD1CF5D6AFE442D869B5AB1D1E9F687">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">Selection</string>
@@ -5008,7 +5078,7 @@ return {
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191de</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="ServerScriptService" referent="RBX24546DD714DC4BBA8F539C7F6AC37787">
+	<Item class="ServerScriptService" referent="RBX23F3C49F7C7041468401EC144D1EBFE8">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<bool name="LoadStringEnabled">false</bool>
@@ -5017,7 +5087,7 @@ return {
 			<BinaryString name="Tags"></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191e7</UniqueId>
 		</Properties>
-		<Item class="Folder" referent="RBX68451F69FF224F90972685654952194C">
+		<Item class="Folder" referent="RBX975C6B9B22DB450493FBBF2363075AAC">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<string name="Name">Server</string>
@@ -5025,7 +5095,7 @@ return {
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">0410319cc29183e6018c3036003101fe</UniqueId>
 			</Properties>
-			<Item class="Folder" referent="RBXFE1466C5E78E439498DD3DC4BB643921">
+			<Item class="Folder" referent="RBX5CBE566173EA4D08909AAE8B630CB351">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<string name="Name">Services</string>
@@ -5033,7 +5103,7 @@ return {
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">22c1b8756d88bb8602c0e9200007ec51</UniqueId>
 				</Properties>
-				<Item class="ModuleScript" referent="RBX5226581B8B734E0DA4AF328485267A4F">
+				<Item class="ModuleScript" referent="RBX9A00141F77FF4F3586C43087D8358C25">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<Content name="LinkedSource"><null></null></Content>
@@ -5052,6 +5122,7 @@ local DefaultProfileTemplate = {
 	Experience = 0,
 	Level = 0,
 	Currency = 0,
+
 	Stats = {
 		PlayTime = 0,
 		Logins = 0,
@@ -5064,9 +5135,9 @@ local DefaultProfileTemplate = {
 	},
 
 	ShopPurchases = {
-		NormalMode = false,
-		HardMode = false,
-		InsaneMode = false,
+		MediumDifficulty = false,
+		HardDifficulty = false,
+		InsaneDifficulty = false,
 	},
 	Settings = {
 		KeySounds = false,
@@ -5076,35 +5147,44 @@ local DefaultProfileTemplate = {
 	},
 }
 
-local ProfileStore = ProfileService.GetProfileStore("PlayerData", DefaultProfileTemplate)
+local DefaultUserTemplate = {
+	DefaultProfileTemplate,
+	DefaultProfileTemplate,
+	DefaultProfileTemplate,
+	DefaultProfileTemplate,
+	DefaultProfileTemplate,
+}
+
+local ProfileStore = ProfileService.GetProfileStore("PlayerData_testing123", DefaultUserTemplate)
 local Profiles = {}
+local CurrentSaveSlot = {}
+local ProfileViews = {}
 
 local DataService = Knit.CreateService({
 	Name = "DataService",
 })
 
-Players.PlayerRemoving:Connect(function(player)
-	local profile = Profiles[player]
-	if profile ~= nil then
-		profile:Release()
-	end
-end)
+function DataService.Client:LoadData(player, SaveSlot)
+	CurrentSaveSlot[player] = SaveSlot
+	return Profiles[player].Data[SaveSlot]
+end
 
-function DataService.Client:LoadData(player, profile)
-	local profile = ProfileStore:LoadProfileAsync("Player_" .. player.UserId .. "_" .. profile)
+function DataService.Client:PrepareData(player)
+	local profile = ProfileStore:LoadProfileAsync("Player_" .. player.UserId)
+
 	if profile ~= nil then
 		profile:AddUserId(player.UserId) -- GDPR compliance
 		profile:Reconcile() -- Fill in missing variables from ProfileTemplate (optional)
 		profile:ListenToRelease(function()
 			Profiles[player] = nil
+			ProfileViews[player] = nil
 			-- The profile could've been loaded on another Roblox server:
 			player:Kick()
 		end)
-		if player:IsDescendantOf(Players) == true then
-			Profiles[player].Data.Stats.Logins += 1
-			Profiles[player] = profile
+		if player:IsDescendantOf(Players) then
 			-- A profile has been successfully loaded:
-			return profile.Data
+			Profiles[player] = profile
+			ProfileViews[player] = profile.Data
 		else
 			-- Player left before the profile loaded:
 			profile:Release()
@@ -5116,34 +5196,52 @@ function DataService.Client:LoadData(player, profile)
 	end
 end
 
-function DataService.Client:PreviewData(player, profile)
-	local profile = ProfileStore:ViewProfileAsync("Player_" .. player.UserId .. "_" .. profile)
-	if profile ~= nil then
+function DataService.Client:PreviewData(player, SaveSlot)
+	local view = ProfileViews[player]
+	if view ~= nil and view[SaveSlot] ~= nil then
 		if player:IsDescendantOf(Players) == true then
-			Profiles[player] = profile
-			-- A profile has been successfully loaded:
-			return Profiles[player].Data
+			return view[SaveSlot]
 		end
 	else
 		return DefaultProfileTemplate
 	end
 end
 
+function DataService.Client:ItemOwned(player, item)
+	return DataService:GetData(player, "ShopPurchases")[item]
+end
+
+function DataService.Client:GetSetting(player, setting)
+	return DataService:GetData(player, "Settings")[setting]
+end
+
 function DataService:GetData(player, variable)
-	-- if typeof(variable) == "table" then -- hey, why not
-	-- 	local returns = {}
-	-- 	for i in variable do
-	-- 		table.insert(returns, Profiles[player].Data[i])
-	-- 	end
-	-- 	return returns
-	-- end
-
-	return Profiles[player].Data[variable]
+	return Profiles[player].Data[CurrentSaveSlot[player]][variable]
 end
 
+function DataService:SetData(player, variable, value)
+	local slot = Profiles[player].Data[CurrentSaveSlot[player]]
+
+	-- Variable could be a list of values denoting a path to access:
+	if typeof(variable) == "table" then
+		for i = 1, #variable - 1 do
+			slot = slot[variable[i]]
+		end
+		slot[variable[#variable]] = value
+	else
+		slot[variable] = value
+	end
+end
 function DataService:IncrementData(player, variable, value)
-	Profiles[player].Data[variable] += value
+	Profiles[player].Data[CurrentSaveSlot[player]][variable] += value
 end
+
+Players.PlayerRemoving:Connect(function(player)
+	local profile = Profiles[player]
+	if profile ~= nil then
+		profile:Release()
+	end
+end)
 
 return DataService
 ]]></ProtectedString>
@@ -5152,7 +5250,7 @@ return DataService
 						<UniqueId name="UniqueId">624039066896104d02c1fe080007f277</UniqueId>
 					</Properties>
 				</Item>
-				<Item class="ModuleScript" referent="RBX92C5AE58CFA94FAB80FB39394A5E63EB">
+				<Item class="ModuleScript" referent="RBX11E6D47E14614492914D1B1FA2CC2168">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<Content name="LinkedSource"><null></null></Content>
@@ -5162,11 +5260,13 @@ return DataService
 How syncing works
 	When any data is updated, the client will also send a call to this module to update the data stored on the server.
 	There will be latency, this does not really matter.
-	All functions here are ratelimited so even if the client is exploited, not much damage can be done.
+	All functions here will be ratelimited so even if the client is exploited, not much damage can be done.
 	This means that the true data should be stored on the server for data saving.
 ]]
 
-local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Knit = require(ReplicatedStorage.Packages.Knit)
+local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
 local seed = math.random()
 local rand = Random.new(seed)
 
@@ -5206,6 +5306,24 @@ function SyncService.Client:WordTyped(player)
 	DataService:IncrementData(player, "Currency", 1)
 end
 
+function SyncService.Client:ChangeSetting(player, setting)
+	DataService:SetData(player, setting, not DataService:GetData(player, setting))
+	-- currently settings are all checkboxes stored as booleans, fine for now
+end
+
+function SyncService.Client:PurchaseItem(player, item)
+	-- if DataService:GetData(player, "ShopPurchases")[item] then
+	-- 	return
+	-- end
+	local itemPrice = ShopItems[item].Price
+	if DataService:GetData(player, "Currency") < itemPrice then
+		return
+	end
+	DataService:IncrementData(player, "Currency", -itemPrice)
+	DataService:SetData(player, {"ShopPurchases", item}, true)
+	return true
+end
+
 return SyncService
 ]]></ProtectedString>
 						<int64 name="SourceAssetId">-1</int64>
@@ -5214,7 +5332,7 @@ return SyncService
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="ModuleScript" referent="RBX82A429FF344A4BE481ED7BC7B2F8415F">
+			<Item class="ModuleScript" referent="RBXE81BDE5ACADE439AA9957DDB1030707C">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<Content name="LinkedSource"><null></null></Content>
@@ -7689,7 +7807,7 @@ return ProfileService
 					<UniqueId name="UniqueId">651801770383872802c46fb4000ee2fe</UniqueId>
 				</Properties>
 			</Item>
-			<Item class="Script" referent="RBX6A265E1323234D2D8010BC7267281C2F">
+			<Item class="Script" referent="RBX777D693A5FEC455C90F61877F9EEEEE3">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<bool name="Disabled">false</bool>
@@ -7714,7 +7832,7 @@ Knit.Start()
 			</Item>
 		</Item>
 	</Item>
-	<Item class="ServerStorage" referent="RBX11AF98E4E21542EFBD7CAEA1850505B5">
+	<Item class="ServerStorage" referent="RBX9F30EA06B5B04DD4B3ABB985405660C0">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">ServerStorage</string>
@@ -7723,7 +7841,7 @@ Knit.Start()
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191e8</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="ReplicatedStorage" referent="RBX0A07A86CF6D347CF9112A5EEDFC5A5B4">
+	<Item class="ReplicatedStorage" referent="RBX8DBF1D65462E48CBA8B1A46A63836264">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">ReplicatedStorage</string>
@@ -7731,7 +7849,7 @@ Knit.Start()
 			<BinaryString name="Tags"></BinaryString>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191e9</UniqueId>
 		</Properties>
-		<Item class="RemoteEvent" referent="RBX25CF7906366A4274839E1925B74CEAFF">
+		<Item class="RemoteEvent" referent="RBX43825618F85B49A58D9D01DE783D98AE">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<string name="Name">SaveData</string>
@@ -7740,7 +7858,7 @@ Knit.Start()
 				<UniqueId name="UniqueId">237c009ba5e6308e01b128f800024555</UniqueId>
 			</Properties>
 		</Item>
-		<Item class="RemoteEvent" referent="RBXC8258C06FEA04D419F0C4CE2ECCBA11D">
+		<Item class="RemoteEvent" referent="RBX07C1E49DC7CD45829EEE412F2B2DCAD5">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<string name="Name">LoadData</string>
@@ -7749,7 +7867,7 @@ Knit.Start()
 				<UniqueId name="UniqueId">237c009ba5e6308e01b128f800024586</UniqueId>
 			</Properties>
 		</Item>
-		<Item class="Folder" referent="RBX589AE67F83A54C5398A07C3A5C65A1E0">
+		<Item class="Folder" referent="RBX85E140D1891F4E6B82C7DE05A2585086">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<string name="Name">Shared</string>
@@ -7757,7 +7875,7 @@ Knit.Start()
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c243</UniqueId>
 			</Properties>
-			<Item class="ModuleScript" referent="RBXE3F5599216794829BB2ED01098D81AF5">
+			<Item class="ModuleScript" referent="RBXA5CEB6DA49A04C82BDD7D9B121212CFD">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<Content name="LinkedSource"><null></null></Content>
@@ -7792,7 +7910,7 @@ return restrictRead("Fusion", {
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee06</UniqueId>
 				</Properties>
-				<Item class="Folder" referent="RBX36B7EA9B5FE4407197DC33AEEFD2EF63">
+				<Item class="Folder" referent="RBX9C6766486027400A8E338AF779A2BFDD">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">Animation</string>
@@ -7800,7 +7918,7 @@ return restrictRead("Fusion", {
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c245</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBX1E08D28695304518B08F1397051A8814">
+					<Item class="ModuleScript" referent="RBX04E2D270AEA64A5ABAD49BB626CF1ED7">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -7851,7 +7969,7 @@ return getTweenRatio]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edd4</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXB156F7DE83A6435AB4D4DF3569BF929D">
+					<Item class="ModuleScript" referent="RBX4237DB38133146C5B7BF262FA30D3BA4">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -8001,7 +8119,7 @@ return lerpType]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edd6</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX6F8B1C2AF21A449EA80C26F795B8D870">
+					<Item class="ModuleScript" referent="RBX005D144D5BC2414EA406141ACDBE8FFF">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -8102,7 +8220,7 @@ return packType]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edd8</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX9CC54ACDFB9148D88296FDC38F32633C">
+					<Item class="ModuleScript" referent="RBXF4BDC96982F841E9AB5D3D30E999BE55">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -8229,7 +8347,431 @@ return springCoefficients]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edda</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXA2CBF4CB4E5B4D7D85F0E25CCA61BB32">
+					<Item class="ModuleScript" referent="RBXC92AE7EE5C054891AA2680B180D7113F">
+						<Properties>
+							<BinaryString name="AttributesSerialize"></BinaryString>
+							<Content name="LinkedSource"><null></null></Content>
+							<string name="Name">SpringScheduler</string>
+							<string name="ScriptGuid">{B5C2AF04-4277-48E2-9838-8EDFEFDAB594}</string>
+							<ProtectedString name="Source"><![CDATA[--[[
+	Manages batch updating of spring objects.
+]]
+
+local RunService = game:GetService("RunService")
+
+local Package = script.Parent.Parent
+local packType = require(Package.Animation.packType)
+local springCoefficients = require(Package.Animation.springCoefficients)
+local updateAll = require(Package.Dependencies.updateAll)
+
+local SpringScheduler = {}
+
+type Spring = {
+	_speed: number,
+	_damping: number,
+
+	_springPositions: {number},
+	_springGoals: {number},
+	_springVelocities: {number}
+}
+
+local WEAK_KEYS_METATABLE = {__mode = "k"}
+
+-- when a spring has displacement and velocity below +/- epsilon, the spring
+-- won't send updates
+local MOVEMENT_EPSILON = 0.0001
+
+-- organises springs by speed and damping, for batch processing
+local springBuckets: {[number]: {[number]: Types.Set<Spring>}} = {}
+
+--[[
+	Adds a Spring to be updated every render step.
+]]
+function SpringScheduler.add(spring: Spring)
+	local damping = spring._damping
+	local speed = spring._speed
+
+	local dampingBucket = springBuckets[damping]
+
+	if dampingBucket == nil then
+		springBuckets[damping] = {
+			[speed] = setmetatable({[spring] = true}, WEAK_KEYS_METATABLE)
+		}
+		return
+	end
+
+	local speedBucket = dampingBucket[speed]
+
+	if speedBucket == nil then
+		dampingBucket[speed] = setmetatable({[spring] = true}, WEAK_KEYS_METATABLE)
+		return
+	end
+
+	speedBucket[spring] = true
+end
+
+--[[
+	Removes a Spring from the scheduler.
+]]
+function SpringScheduler.remove(spring: Spring)
+	local damping = spring._damping
+	local speed = spring._speed
+
+	local dampingBucket = springBuckets[damping]
+
+	if dampingBucket == nil then
+		return
+	end
+
+	local speedBucket = dampingBucket[speed]
+
+	if speedBucket == nil then
+		return
+	end
+
+	speedBucket[spring] = nil
+end
+
+--[[
+	Updates all Spring objects.
+]]
+local function updateAllSprings(timeStep: number)
+	for damping, dampingBucket in pairs(springBuckets) do
+		for speed, speedBucket in pairs(dampingBucket) do
+			local posPosCoef, posVelCoef, velPosCoef, velVelCoef = springCoefficients(timeStep, damping, speed)
+
+			for spring in pairs(speedBucket) do
+				local goals = spring._springGoals
+				local positions = spring._springPositions
+				local velocities = spring._springVelocities
+
+				local isMoving = false
+
+				for index, goal in ipairs(goals) do
+					local oldPosition = positions[index]
+					local oldVelocity = velocities[index]
+
+					local oldDisplacement = oldPosition - goal
+
+					local newDisplacement = oldDisplacement * posPosCoef + oldVelocity * posVelCoef
+					local newVelocity = oldDisplacement * velPosCoef + oldVelocity * velVelCoef
+
+					if
+						math.abs(newDisplacement) > MOVEMENT_EPSILON or
+						math.abs(newVelocity) > MOVEMENT_EPSILON
+					then
+						isMoving = true
+					end
+
+					positions[index] = newDisplacement + goal
+					velocities[index] = newVelocity
+				end
+
+				-- if the spring moved a significant distance, update its
+				-- current value, otherwise stop animating
+				if isMoving then
+					spring._currentValue = packType(positions, spring._currentType)
+					updateAll(spring)
+				else
+					SpringScheduler.remove(spring)
+				end
+			end
+		end
+	end
+end
+
+RunService:BindToRenderStep(
+	"__FusionSpringScheduler",
+	Enum.RenderPriority.First.Value,
+	updateAllSprings
+)
+
+return SpringScheduler]]></ProtectedString>
+							<int64 name="SourceAssetId">-1</int64>
+							<BinaryString name="Tags"></BinaryString>
+							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edde</UniqueId>
+						</Properties>
+					</Item>
+					<Item class="ModuleScript" referent="RBX556ED8362C9B4F7F9891FD41B6B0E6DD">
+						<Properties>
+							<BinaryString name="AttributesSerialize"></BinaryString>
+							<Content name="LinkedSource"><null></null></Content>
+							<string name="Name">Tween</string>
+							<string name="ScriptGuid">{922D8DF6-066C-41F7-9695-DE77A398E2B3}</string>
+							<ProtectedString name="Source"><![CDATA[--[[
+	Constructs a new computed state object, which follows the value of another
+	state object using a tween.
+]]
+
+local Package = script.Parent.Parent
+local TweenScheduler = require(Package.Animation.TweenScheduler)
+local useDependency = require(Package.Dependencies.useDependency)
+local initDependency = require(Package.Dependencies.initDependency)
+
+local class = {}
+
+local CLASS_METATABLE = {__index = class}
+local WEAK_KEYS_METATABLE = {__mode = "k"}
+
+local ENABLE_PARAM_SETTERS = false
+
+--[[
+	Returns the current value of this Tween object.
+	The object will be registered as a dependency unless `asDependency` is false.
+]]
+function class:get(asDependency: boolean?)
+	if asDependency ~= false then
+		useDependency(self)
+	end
+	return self._currentValue
+end
+
+--[[
+	Called when the goal state changes value; this will initiate a new tween.
+	Returns false as the current value doesn't change right away.
+]]
+function class:update()
+	self._prevValue = self._currentValue
+	self._nextValue = self._goalState:get(false)
+
+	self._currentTweenStartTime = os.clock()
+	self._currentTweenInfo = self._tweenInfo
+
+	local tweenDuration = self._tweenInfo.DelayTime + self._tweenInfo.Time
+	if self._tweenInfo.Reverses then
+		tweenDuration += self._tweenInfo.Time
+	end
+	tweenDuration *= self._tweenInfo.RepeatCount
+	self._currentTweenDuration = tweenDuration
+
+	-- start animating this tween
+	TweenScheduler.add(self)
+	return false
+end
+
+if ENABLE_PARAM_SETTERS then
+
+	--[[
+		Specifies a new TweenInfo to use when the goal state changes in the future.
+	]]
+	function class:setTweenInfo(newTweenInfo: TweenInfo)
+		self._tweenInfo = newTweenInfo
+	end
+
+end
+
+local function Tween(goalState: Types.State<Types.Animatable>, tweenInfo: TweenInfo?)
+	local currentValue = goalState:get(false)
+
+	local self = setmetatable({
+		type = "State",
+		kind = "Tween",
+		dependencySet = {[goalState] = true},
+		-- if we held strong references to the dependents, then they wouldn't be
+		-- able to get garbage collected when they fall out of scope
+		dependentSet = setmetatable({}, WEAK_KEYS_METATABLE),
+		_goalState = goalState,
+		_tweenInfo = tweenInfo or TweenInfo.new(),
+
+		_prevValue = currentValue,
+		_nextValue = currentValue,
+		_currentValue = currentValue,
+
+		-- store current tween into separately from 'real' tween into, so it
+		-- isn't affected by :setTweenInfo() until next change
+		_currentTweenInfo = tweenInfo,
+		_currentTweenDuration = 0,
+		_currentTweenStartTime = 0
+	}, CLASS_METATABLE)
+
+	initDependency(self)
+	-- add this object to the goal state's dependent set
+	goalState.dependentSet[self] = true
+
+	return self
+end
+
+return Tween]]></ProtectedString>
+							<int64 name="SourceAssetId">-1</int64>
+							<BinaryString name="Tags"></BinaryString>
+							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ede0</UniqueId>
+						</Properties>
+					</Item>
+					<Item class="ModuleScript" referent="RBX71B4B200DBA04DE1B692E1D08CBD9127">
+						<Properties>
+							<BinaryString name="AttributesSerialize"></BinaryString>
+							<Content name="LinkedSource"><null></null></Content>
+							<string name="Name">TweenScheduler</string>
+							<string name="ScriptGuid">{DE9F604F-A7D7-4A25-8139-9EC3C725F088}</string>
+							<ProtectedString name="Source"><![CDATA[--[[
+	Manages batch updating of tween objects.
+]]
+
+local RunService = game:GetService("RunService")
+
+local Package = script.Parent.Parent
+local lerpType = require(Package.Animation.lerpType)
+local getTweenRatio = require(Package.Animation.getTweenRatio)
+local updateAll = require(Package.Dependencies.updateAll)
+
+local TweenScheduler = {}
+
+type Tween = {
+	_prevValue: Types.Animatable,
+	_nextValue: Types.Animatable,
+	_currentValue: Types.Animatable,
+
+	_tweenStartTime: number,
+	_tweenDuration: number,
+	_tweenInfo: TweenInfo
+}
+
+local WEAK_KEYS_METATABLE = {__mode = "k"}
+
+-- all the tweens currently being updated
+local allTweens: Types.Set<Tween> = setmetatable({}, WEAK_KEYS_METATABLE)
+
+--[[
+	Adds a Tween to be updated every render step.
+]]
+function TweenScheduler.add(tween: Tween)
+	allTweens[tween] = true
+end
+
+--[[
+	Removes a Tween from the scheduler.
+]]
+function TweenScheduler.remove(tween: Tween)
+	allTweens[tween] = nil
+end
+
+--[[
+	Updates all Tween objects.
+]]
+local function updateAllTweens()
+	local now = os.clock()
+	for tween in pairs(allTweens) do
+		local currentTime = now - tween._currentTweenStartTime
+
+		if currentTime > tween._currentTweenDuration then
+			if tween._currentTweenInfo.Reverses then
+				tween._currentValue = tween._prevValue
+			else
+				tween._currentValue = tween._nextValue
+			end
+			updateAll(tween)
+			TweenScheduler.remove(tween)
+		else
+			local ratio = getTweenRatio(tween._currentTweenInfo, currentTime)
+			local currentValue = lerpType(tween._prevValue, tween._nextValue, ratio)
+			tween._currentValue = currentValue
+			updateAll(tween)
+		end
+	end
+end
+
+RunService:BindToRenderStep(
+	"__FusionTweenScheduler",
+	Enum.RenderPriority.First.Value,
+	updateAllTweens
+)
+
+return TweenScheduler]]></ProtectedString>
+							<int64 name="SourceAssetId">-1</int64>
+							<BinaryString name="Tags"></BinaryString>
+							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ede2</UniqueId>
+						</Properties>
+					</Item>
+					<Item class="ModuleScript" referent="RBXBBB956A4CA6D490C95FDC67DE25304DD">
+						<Properties>
+							<BinaryString name="AttributesSerialize"></BinaryString>
+							<Content name="LinkedSource"><null></null></Content>
+							<string name="Name">unpackType</string>
+							<string name="ScriptGuid">{FE6D8BA5-A340-4C02-8BD1-810B6F1E86BC}</string>
+							<ProtectedString name="Source"><![CDATA[--[[
+	Unpacks an animatable type into an array of numbers.
+	If the type is not animatable, an empty array will be returned.
+]]
+
+local Package = script.Parent.Parent
+local Types = require(Package.Types)
+local Oklab = require(Package.Colour.Oklab)
+
+local function unpackType(value: Types.Animatable, typeString: string): {number}
+	if typeString == "number" then
+		return {value}
+
+	elseif typeString == "CFrame" then
+		-- FUTURE: is there a better way of doing this? doing distance
+		-- calculations on `angle` may be incorrect
+		local axis, angle = value:ToAxisAngle()
+		return {value.X, value.Y, value.Z, axis.X, axis.Y, axis.Z, angle}
+
+	elseif typeString == "Color3" then
+		local lab = Oklab.to(value)
+		return {lab.X, lab.Y, lab.Z}
+
+	elseif typeString == "ColorSequenceKeypoint" then
+		local lab = Oklab.to(value.Value)
+		return {lab.X, lab.Y, lab.Z, value.Time}
+
+	elseif typeString == "DateTime" then
+		return {value.UnixTimestampMillis}
+
+	elseif typeString == "NumberRange" then
+		return {value.Min, value.Max}
+
+	elseif typeString == "NumberSequenceKeypoint" then
+		return {value.Value, value.Time, value.Envelope}
+
+	elseif typeString == "PhysicalProperties" then
+		return {value.Density, value.Friction, value.Elasticity, value.FrictionWeight, value.ElasticityWeight}
+
+	elseif typeString == "Ray" then
+		return {value.Origin.X, value.Origin.Y, value.Origin.Z, value.Direction.X, value.Direction.Y, value.Direction.Z}
+
+	elseif typeString == "Rect" then
+		return {value.Min.X, value.Min.Y, value.Max.X, value.Max.Y}
+
+	elseif typeString == "Region3" then
+		-- FUTURE: support rotated Region3s if/when they become constructable
+		return {
+			value.CFrame.X, value.CFrame.Y, value.CFrame.Z,
+			value.Size.X, value.Size.Y, value.Size.Z
+		}
+
+	elseif typeString == "Region3int16" then
+		return {value.Min.X, value.Min.Y, value.Min.Z, value.Max.X, value.Max.Y, value.Max.Z}
+
+	elseif typeString == "UDim" then
+		return {value.Scale, value.Offset}
+
+	elseif typeString == "UDim2" then
+		return {value.X.Scale, value.X.Offset, value.Y.Scale, value.Y.Offset}
+
+	elseif typeString == "Vector2" then
+		return {value.X, value.Y}
+
+	elseif typeString == "Vector2int16" then
+		return {value.X, value.Y}
+
+	elseif typeString == "Vector3" then
+		return {value.X, value.Y, value.Z}
+
+	elseif typeString == "Vector3int16" then
+		return {value.X, value.Y, value.Z}
+	else
+		return {}
+	end
+end
+
+return unpackType]]></ProtectedString>
+							<int64 name="SourceAssetId">-1</int64>
+							<BinaryString name="Tags"></BinaryString>
+							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ede4</UniqueId>
+						</Properties>
+					</Item>
+					<Item class="ModuleScript" referent="RBX212B40E0F381467DA32AF2CC87BF1910">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -8459,432 +9001,8 @@ return Spring]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017eddc</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX48C29F8A48D84AFF95A4D04A0D925468">
-						<Properties>
-							<BinaryString name="AttributesSerialize"></BinaryString>
-							<Content name="LinkedSource"><null></null></Content>
-							<string name="Name">SpringScheduler</string>
-							<string name="ScriptGuid">{B5C2AF04-4277-48E2-9838-8EDFEFDAB594}</string>
-							<ProtectedString name="Source"><![CDATA[--[[
-	Manages batch updating of spring objects.
-]]
-
-local RunService = game:GetService("RunService")
-
-local Package = script.Parent.Parent
-local packType = require(Package.Animation.packType)
-local springCoefficients = require(Package.Animation.springCoefficients)
-local updateAll = require(Package.Dependencies.updateAll)
-
-local SpringScheduler = {}
-
-type Spring = {
-	_speed: number,
-	_damping: number,
-
-	_springPositions: {number},
-	_springGoals: {number},
-	_springVelocities: {number}
-}
-
-local WEAK_KEYS_METATABLE = {__mode = "k"}
-
--- when a spring has displacement and velocity below +/- epsilon, the spring
--- won't send updates
-local MOVEMENT_EPSILON = 0.0001
-
--- organises springs by speed and damping, for batch processing
-local springBuckets: {[number]: {[number]: Types.Set<Spring>}} = {}
-
---[[
-	Adds a Spring to be updated every render step.
-]]
-function SpringScheduler.add(spring: Spring)
-	local damping = spring._damping
-	local speed = spring._speed
-
-	local dampingBucket = springBuckets[damping]
-
-	if dampingBucket == nil then
-		springBuckets[damping] = {
-			[speed] = setmetatable({[spring] = true}, WEAK_KEYS_METATABLE)
-		}
-		return
-	end
-
-	local speedBucket = dampingBucket[speed]
-
-	if speedBucket == nil then
-		dampingBucket[speed] = setmetatable({[spring] = true}, WEAK_KEYS_METATABLE)
-		return
-	end
-
-	speedBucket[spring] = true
-end
-
---[[
-	Removes a Spring from the scheduler.
-]]
-function SpringScheduler.remove(spring: Spring)
-	local damping = spring._damping
-	local speed = spring._speed
-
-	local dampingBucket = springBuckets[damping]
-
-	if dampingBucket == nil then
-		return
-	end
-
-	local speedBucket = dampingBucket[speed]
-
-	if speedBucket == nil then
-		return
-	end
-
-	speedBucket[spring] = nil
-end
-
---[[
-	Updates all Spring objects.
-]]
-local function updateAllSprings(timeStep: number)
-	for damping, dampingBucket in pairs(springBuckets) do
-		for speed, speedBucket in pairs(dampingBucket) do
-			local posPosCoef, posVelCoef, velPosCoef, velVelCoef = springCoefficients(timeStep, damping, speed)
-
-			for spring in pairs(speedBucket) do
-				local goals = spring._springGoals
-				local positions = spring._springPositions
-				local velocities = spring._springVelocities
-
-				local isMoving = false
-
-				for index, goal in ipairs(goals) do
-					local oldPosition = positions[index]
-					local oldVelocity = velocities[index]
-
-					local oldDisplacement = oldPosition - goal
-
-					local newDisplacement = oldDisplacement * posPosCoef + oldVelocity * posVelCoef
-					local newVelocity = oldDisplacement * velPosCoef + oldVelocity * velVelCoef
-
-					if
-						math.abs(newDisplacement) > MOVEMENT_EPSILON or
-						math.abs(newVelocity) > MOVEMENT_EPSILON
-					then
-						isMoving = true
-					end
-
-					positions[index] = newDisplacement + goal
-					velocities[index] = newVelocity
-				end
-
-				-- if the spring moved a significant distance, update its
-				-- current value, otherwise stop animating
-				if isMoving then
-					spring._currentValue = packType(positions, spring._currentType)
-					updateAll(spring)
-				else
-					SpringScheduler.remove(spring)
-				end
-			end
-		end
-	end
-end
-
-RunService:BindToRenderStep(
-	"__FusionSpringScheduler",
-	Enum.RenderPriority.First.Value,
-	updateAllSprings
-)
-
-return SpringScheduler]]></ProtectedString>
-							<int64 name="SourceAssetId">-1</int64>
-							<BinaryString name="Tags"></BinaryString>
-							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edde</UniqueId>
-						</Properties>
-					</Item>
-					<Item class="ModuleScript" referent="RBXAA45E8D51B09457F9B811EF761FAE64F">
-						<Properties>
-							<BinaryString name="AttributesSerialize"></BinaryString>
-							<Content name="LinkedSource"><null></null></Content>
-							<string name="Name">Tween</string>
-							<string name="ScriptGuid">{922D8DF6-066C-41F7-9695-DE77A398E2B3}</string>
-							<ProtectedString name="Source"><![CDATA[--[[
-	Constructs a new computed state object, which follows the value of another
-	state object using a tween.
-]]
-
-local Package = script.Parent.Parent
-local TweenScheduler = require(Package.Animation.TweenScheduler)
-local useDependency = require(Package.Dependencies.useDependency)
-local initDependency = require(Package.Dependencies.initDependency)
-
-local class = {}
-
-local CLASS_METATABLE = {__index = class}
-local WEAK_KEYS_METATABLE = {__mode = "k"}
-
-local ENABLE_PARAM_SETTERS = false
-
---[[
-	Returns the current value of this Tween object.
-	The object will be registered as a dependency unless `asDependency` is false.
-]]
-function class:get(asDependency: boolean?)
-	if asDependency ~= false then
-		useDependency(self)
-	end
-	return self._currentValue
-end
-
---[[
-	Called when the goal state changes value; this will initiate a new tween.
-	Returns false as the current value doesn't change right away.
-]]
-function class:update()
-	self._prevValue = self._currentValue
-	self._nextValue = self._goalState:get(false)
-
-	self._currentTweenStartTime = os.clock()
-	self._currentTweenInfo = self._tweenInfo
-
-	local tweenDuration = self._tweenInfo.DelayTime + self._tweenInfo.Time
-	if self._tweenInfo.Reverses then
-		tweenDuration += self._tweenInfo.Time
-	end
-	tweenDuration *= self._tweenInfo.RepeatCount
-	self._currentTweenDuration = tweenDuration
-
-	-- start animating this tween
-	TweenScheduler.add(self)
-	return false
-end
-
-if ENABLE_PARAM_SETTERS then
-
-	--[[
-		Specifies a new TweenInfo to use when the goal state changes in the future.
-	]]
-	function class:setTweenInfo(newTweenInfo: TweenInfo)
-		self._tweenInfo = newTweenInfo
-	end
-
-end
-
-local function Tween(goalState: Types.State<Types.Animatable>, tweenInfo: TweenInfo?)
-	local currentValue = goalState:get(false)
-
-	local self = setmetatable({
-		type = "State",
-		kind = "Tween",
-		dependencySet = {[goalState] = true},
-		-- if we held strong references to the dependents, then they wouldn't be
-		-- able to get garbage collected when they fall out of scope
-		dependentSet = setmetatable({}, WEAK_KEYS_METATABLE),
-		_goalState = goalState,
-		_tweenInfo = tweenInfo or TweenInfo.new(),
-
-		_prevValue = currentValue,
-		_nextValue = currentValue,
-		_currentValue = currentValue,
-
-		-- store current tween into separately from 'real' tween into, so it
-		-- isn't affected by :setTweenInfo() until next change
-		_currentTweenInfo = tweenInfo,
-		_currentTweenDuration = 0,
-		_currentTweenStartTime = 0
-	}, CLASS_METATABLE)
-
-	initDependency(self)
-	-- add this object to the goal state's dependent set
-	goalState.dependentSet[self] = true
-
-	return self
-end
-
-return Tween]]></ProtectedString>
-							<int64 name="SourceAssetId">-1</int64>
-							<BinaryString name="Tags"></BinaryString>
-							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ede0</UniqueId>
-						</Properties>
-					</Item>
-					<Item class="ModuleScript" referent="RBX3BA0E341287642A7B40D110A50A0959A">
-						<Properties>
-							<BinaryString name="AttributesSerialize"></BinaryString>
-							<Content name="LinkedSource"><null></null></Content>
-							<string name="Name">TweenScheduler</string>
-							<string name="ScriptGuid">{DE9F604F-A7D7-4A25-8139-9EC3C725F088}</string>
-							<ProtectedString name="Source"><![CDATA[--[[
-	Manages batch updating of tween objects.
-]]
-
-local RunService = game:GetService("RunService")
-
-local Package = script.Parent.Parent
-local lerpType = require(Package.Animation.lerpType)
-local getTweenRatio = require(Package.Animation.getTweenRatio)
-local updateAll = require(Package.Dependencies.updateAll)
-
-local TweenScheduler = {}
-
-type Tween = {
-	_prevValue: Types.Animatable,
-	_nextValue: Types.Animatable,
-	_currentValue: Types.Animatable,
-
-	_tweenStartTime: number,
-	_tweenDuration: number,
-	_tweenInfo: TweenInfo
-}
-
-local WEAK_KEYS_METATABLE = {__mode = "k"}
-
--- all the tweens currently being updated
-local allTweens: Types.Set<Tween> = setmetatable({}, WEAK_KEYS_METATABLE)
-
---[[
-	Adds a Tween to be updated every render step.
-]]
-function TweenScheduler.add(tween: Tween)
-	allTweens[tween] = true
-end
-
---[[
-	Removes a Tween from the scheduler.
-]]
-function TweenScheduler.remove(tween: Tween)
-	allTweens[tween] = nil
-end
-
---[[
-	Updates all Tween objects.
-]]
-local function updateAllTweens()
-	local now = os.clock()
-	for tween in pairs(allTweens) do
-		local currentTime = now - tween._currentTweenStartTime
-
-		if currentTime > tween._currentTweenDuration then
-			if tween._currentTweenInfo.Reverses then
-				tween._currentValue = tween._prevValue
-			else
-				tween._currentValue = tween._nextValue
-			end
-			updateAll(tween)
-			TweenScheduler.remove(tween)
-		else
-			local ratio = getTweenRatio(tween._currentTweenInfo, currentTime)
-			local currentValue = lerpType(tween._prevValue, tween._nextValue, ratio)
-			tween._currentValue = currentValue
-			updateAll(tween)
-		end
-	end
-end
-
-RunService:BindToRenderStep(
-	"__FusionTweenScheduler",
-	Enum.RenderPriority.First.Value,
-	updateAllTweens
-)
-
-return TweenScheduler]]></ProtectedString>
-							<int64 name="SourceAssetId">-1</int64>
-							<BinaryString name="Tags"></BinaryString>
-							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ede2</UniqueId>
-						</Properties>
-					</Item>
-					<Item class="ModuleScript" referent="RBX3DCFEA1F57BF4B40BCDE102C280E43E9">
-						<Properties>
-							<BinaryString name="AttributesSerialize"></BinaryString>
-							<Content name="LinkedSource"><null></null></Content>
-							<string name="Name">unpackType</string>
-							<string name="ScriptGuid">{FE6D8BA5-A340-4C02-8BD1-810B6F1E86BC}</string>
-							<ProtectedString name="Source"><![CDATA[--[[
-	Unpacks an animatable type into an array of numbers.
-	If the type is not animatable, an empty array will be returned.
-]]
-
-local Package = script.Parent.Parent
-local Types = require(Package.Types)
-local Oklab = require(Package.Colour.Oklab)
-
-local function unpackType(value: Types.Animatable, typeString: string): {number}
-	if typeString == "number" then
-		return {value}
-
-	elseif typeString == "CFrame" then
-		-- FUTURE: is there a better way of doing this? doing distance
-		-- calculations on `angle` may be incorrect
-		local axis, angle = value:ToAxisAngle()
-		return {value.X, value.Y, value.Z, axis.X, axis.Y, axis.Z, angle}
-
-	elseif typeString == "Color3" then
-		local lab = Oklab.to(value)
-		return {lab.X, lab.Y, lab.Z}
-
-	elseif typeString == "ColorSequenceKeypoint" then
-		local lab = Oklab.to(value.Value)
-		return {lab.X, lab.Y, lab.Z, value.Time}
-
-	elseif typeString == "DateTime" then
-		return {value.UnixTimestampMillis}
-
-	elseif typeString == "NumberRange" then
-		return {value.Min, value.Max}
-
-	elseif typeString == "NumberSequenceKeypoint" then
-		return {value.Value, value.Time, value.Envelope}
-
-	elseif typeString == "PhysicalProperties" then
-		return {value.Density, value.Friction, value.Elasticity, value.FrictionWeight, value.ElasticityWeight}
-
-	elseif typeString == "Ray" then
-		return {value.Origin.X, value.Origin.Y, value.Origin.Z, value.Direction.X, value.Direction.Y, value.Direction.Z}
-
-	elseif typeString == "Rect" then
-		return {value.Min.X, value.Min.Y, value.Max.X, value.Max.Y}
-
-	elseif typeString == "Region3" then
-		-- FUTURE: support rotated Region3s if/when they become constructable
-		return {
-			value.CFrame.X, value.CFrame.Y, value.CFrame.Z,
-			value.Size.X, value.Size.Y, value.Size.Z
-		}
-
-	elseif typeString == "Region3int16" then
-		return {value.Min.X, value.Min.Y, value.Min.Z, value.Max.X, value.Max.Y, value.Max.Z}
-
-	elseif typeString == "UDim" then
-		return {value.Scale, value.Offset}
-
-	elseif typeString == "UDim2" then
-		return {value.X.Scale, value.X.Offset, value.Y.Scale, value.Y.Offset}
-
-	elseif typeString == "Vector2" then
-		return {value.X, value.Y}
-
-	elseif typeString == "Vector2int16" then
-		return {value.X, value.Y}
-
-	elseif typeString == "Vector3" then
-		return {value.X, value.Y, value.Z}
-
-	elseif typeString == "Vector3int16" then
-		return {value.X, value.Y, value.Z}
-	else
-		return {}
-	end
-end
-
-return unpackType]]></ProtectedString>
-							<int64 name="SourceAssetId">-1</int64>
-							<BinaryString name="Tags"></BinaryString>
-							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ede4</UniqueId>
-						</Properties>
-					</Item>
 				</Item>
-				<Item class="Folder" referent="RBX6DCDD80AC430489F8AD21CBDF82E6295">
+				<Item class="Folder" referent="RBX389D45E282564508A90FA9696521BC0B">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">Colour</string>
@@ -8892,7 +9010,7 @@ return unpackType]]></ProtectedString>
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c24f</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBXDE41AA9106794579BA764A9643C882CB">
+					<Item class="ModuleScript" referent="RBXCFBF098C46E5430DA14E01B0B838FCDE">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -8955,7 +9073,7 @@ return Oklab]]></ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Folder" referent="RBX1C3206BF85F849CC832D43EC72A8453B">
+				<Item class="Folder" referent="RBX033A185D40F248DBA21D498A594C2A33">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">Dependencies</string>
@@ -8963,7 +9081,7 @@ return Oklab]]></ProtectedString>
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c251</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBXB471CF7304F04CB79F2E9BA0DA099241">
+					<Item class="ModuleScript" referent="RBX7EDF36FECEE242CEBAA6EAEAEFE5EB7F">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9001,7 +9119,7 @@ return useDependency]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ede6</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXF7CD77B630A14D27B2174F1E649C1816">
+					<Item class="ModuleScript" referent="RBXA3535B0EEEC24AEEB6EF7BB0265AF43A">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9132,7 +9250,7 @@ return updateAll]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ede8</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX84CE42569E5A482DBA38CF98D47D2E49">
+					<Item class="ModuleScript" referent="RBX5E85E291DBBA49EC872DCB4F15C95E7C">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9167,7 +9285,7 @@ return sharedState]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edea</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX807E894DE5D14D7FB2F41A5EF2588F06">
+					<Item class="ModuleScript" referent="RBXAC3BB2BBEBA043529FCD5CC1A2C67EC7">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9243,7 +9361,7 @@ return captureDependencies]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edec</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXC56AC9A7257B45F298F79D75530EECE4">
+					<Item class="ModuleScript" referent="RBXFEC0167FB3E442069CAD4802E637A1A8">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9281,7 +9399,7 @@ return initDependency]]></ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Folder" referent="RBX8EEDB8C6E6CA4E8E87B5C39FA32D0BDA">
+				<Item class="Folder" referent="RBX0740A368E1574AE3BBC0D52A89A6E8E8">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">Instances</string>
@@ -9289,7 +9407,7 @@ return initDependency]]></ProtectedString>
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c257</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBX50178F28701B41AAB48C72E45ED6F122">
+					<Item class="ModuleScript" referent="RBX550793D678FE406A92CA5F1F7DB655AB">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9310,7 +9428,7 @@ return {
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee08</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX1161439CFBBF4C7CAC91A2295D8AE727">
+					<Item class="ModuleScript" referent="RBX3320072F955A430DB4B2DEA04A185773">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9426,7 +9544,7 @@ end
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee0c</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX14A1091D71F44307A58B2011C3A76E10">
+					<Item class="ModuleScript" referent="RBXD4F98D531C1543C299653062010080C2">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9451,7 +9569,7 @@ return OnEvent]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee0e</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX9A21D11118134873A0A3CE1596F9CF46">
+					<Item class="ModuleScript" referent="RBX4C1B5221CB284F5B878E3032A0AA8028">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9476,7 +9594,7 @@ return OnChange]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee10</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX50EAF184A1244093818097BE21D097FF">
+					<Item class="ModuleScript" referent="RBX6032D7685D424056A46A0DB7CB5E4237">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9832,7 +9950,7 @@ return New]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee12</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX9F5B58EF62244AA681700C2EF17EA68E">
+					<Item class="ModuleScript" referent="RBXDA93707173114364ADF9A0A0E0424E0E">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9926,7 +10044,7 @@ return Scheduler]]></ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Folder" referent="RBX9F2F0CE2B1F543DC8A5F4477D8A8748C">
+				<Item class="Folder" referent="RBX1B5E7BC557B843D3A8C57A5E0498914A">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">Logging</string>
@@ -9934,7 +10052,7 @@ return Scheduler]]></ProtectedString>
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c25e</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBX599D4127CEC44404B241EFA3578E2A59">
+					<Item class="ModuleScript" referent="RBX399D1C9D2A014D6796D3B8D7E194AA00">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -9972,7 +10090,7 @@ return logError]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee16</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX533CEB27C2564270ABC41286921E665F">
+					<Item class="ModuleScript" referent="RBXB66A2E7B5E6148F5A8E2201CAD655123">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10012,7 +10130,7 @@ return logErrorNonFatal]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee18</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXC20C798C397548BC90467E36B19D9004">
+					<Item class="ModuleScript" referent="RBX6FCD63B08F324023888D81A91BC9ACBE">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10043,7 +10161,7 @@ return logWarn
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee1a</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX291894D87F5F44AA90A39C2D1F36BEEA">
+					<Item class="ModuleScript" referent="RBX3DF15D00B3774180892C9477A5368A02">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10075,7 +10193,7 @@ return {
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee1c</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX0267280DBC374349A02CBD14A81B7391">
+					<Item class="ModuleScript" referent="RBXCFACF87A80C04211996CA50A3E22C979">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10104,7 +10222,7 @@ return parseError]]></ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Folder" referent="RBX7481D381B5644B9FBCCE2BF8DEB18179">
+				<Item class="Folder" referent="RBX63490D4B67B747C9BAFF76282E8B49A6">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">State</string>
@@ -10112,7 +10230,7 @@ return parseError]]></ProtectedString>
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c264</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBX91B5FAF0275941C58F72691F0967E8BB">
+					<Item class="ModuleScript" referent="RBXAFFFF5E9E3B940CFB448BB64B1B226AF">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10196,7 +10314,7 @@ return Compat]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edfc</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX9ECDEF2385B34D5081A21DFA2A7BE55B">
+					<Item class="ModuleScript" referent="RBX11081878DB804E879D52AA407A8699D2">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10426,7 +10544,7 @@ return ComputedPairs]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edfe</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX94E00DDF1C8B40DDBFD337DE2500490B">
+					<Item class="ModuleScript" referent="RBXC3F06F9C93C842EE852F50543762B528">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10531,7 +10649,7 @@ return Computed]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee00</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXFDA1B1C9000D4F69A174872E38507E44">
+					<Item class="ModuleScript" referent="RBXC76CEACC5D834850A82E601E1761F566">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10605,7 +10723,7 @@ return State]]></ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Folder" referent="RBXD57A560556B84A1E9405103079E87837">
+				<Item class="Folder" referent="RBX399C88378B8E4C7FBADDC96BBD74C844">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">Utility</string>
@@ -10613,7 +10731,7 @@ return State]]></ProtectedString>
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c26a</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBXFAB8269DEAB24152ABD98FCDEAFD22CA">
+					<Item class="ModuleScript" referent="RBXD6AA00296E574C9E9E321F1AE3171ADD">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10633,7 +10751,7 @@ return {
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edf2</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXCF65C7C0F2D744CD9EE12D4322C6DD67">
+					<Item class="ModuleScript" referent="RBX24D4190C4B794B76816A6DEA923FCBBE">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10762,7 +10880,7 @@ return cleanupOnDestroy]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edf4</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXC126DE829A084FB7B35205F10D7CF724">
+					<Item class="ModuleScript" referent="RBXE1A3E7030CF54B719E1759CED8922604">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10796,7 +10914,7 @@ return restrictRead]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edf6</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXBF091CBC2713441BB5FF00F6EFFD1593">
+					<Item class="ModuleScript" referent="RBXEB8E4C05C6F24D37953429EFB31E7CFF">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10860,7 +10978,7 @@ return cleanup]]></ProtectedString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017edf8</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBXBB21D0A2ED1D453C92E49C945A551718">
+					<Item class="ModuleScript" referent="RBXCDF6375E80CF4735BD8C4E17F7E4E5FD">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -10987,7 +11105,7 @@ return cleanupOnDestroy]]></ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="ModuleScript" referent="RBX3D7329D3BA97460FA7898D283D90E0EF">
+				<Item class="ModuleScript" referent="RBX6B23BD5B588F4617B9B7C044873FDFFA">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<Content name="LinkedSource"><null></null></Content>
@@ -11050,7 +11168,7 @@ return nil]]></ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="ModuleScript" referent="RBXAC476A46109744F08D22001E6226E095">
+			<Item class="ModuleScript" referent="RBX3F2301AA9A9A47989544F8E5C03D7A0C">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<Content name="LinkedSource"><null></null></Content>
@@ -11063,7 +11181,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local SoundService = game:GetService("SoundService")
 local RunService = game:GetService("RunService")
-
 local PlaySound = ReplicatedStorage.PlaySound
 local Sounds = ReplicatedStorage.Sounds
 
@@ -11099,8 +11216,30 @@ end
 					<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140017ee0a</UniqueId>
 				</Properties>
 			</Item>
+			<Item class="ModuleScript" referent="RBXF2248ED7A57E4D829DDCBE6D20638BCD">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">ShopItems</string>
+					<string name="ScriptGuid">{4FADE8ED-D94C-470A-8D9B-F102DDDBA11F}</string>
+					<ProtectedString name="Source"><![CDATA[return {
+	MediumDifficulty = {
+		Price = 40,
+	},
+	HardDifficulty = {
+		Price = 100,
+	},
+	InsaneDifficulty = {
+		Price = 600,
+	},
+}]]></ProtectedString>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">7645b39253ab8aa402d63202000d6c53</UniqueId>
+				</Properties>
+			</Item>
 		</Item>
-		<Item class="Folder" referent="RBX5DD20051C37248E1AD4FABF8EB9525F0">
+		<Item class="Folder" referent="RBX9337341D34664D09BCC79FC373B45943">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<string name="Name">Packages</string>
@@ -11108,7 +11247,7 @@ end
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c297</UniqueId>
 			</Properties>
-			<Item class="ModuleScript" referent="RBXA9C397F424D449AEB15D60770E2BF02A">
+			<Item class="ModuleScript" referent="RBX9AF535F9C2A44F2BBC2FB9BCA6C7D8D1">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<Content name="LinkedSource"><null></null></Content>
@@ -11121,7 +11260,7 @@ end
 					<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c298</UniqueId>
 				</Properties>
 			</Item>
-			<Item class="Folder" referent="RBXE78A4A7156264DC1B9F01B34947B5AF2">
+			<Item class="Folder" referent="RBXA39A1617E37245269061318EFB101EA2">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<string name="Name">_Index</string>
@@ -11129,7 +11268,7 @@ end
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c299</UniqueId>
 				</Properties>
-				<Item class="Folder" referent="RBX9981B0C528974867AB4956E4CBE0EC7D">
+				<Item class="Folder" referent="RBXB9D1CF202B904E6F8FB2D1A63C6455ED">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">evaera_promise@4.0.0</string>
@@ -11137,7 +11276,7 @@ end
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c29a</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBX71E90FCBF1CF4E239636C116F4C5ED37">
+					<Item class="ModuleScript" referent="RBX537804D73D25401D8D152854BB261377">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -13216,7 +13355,7 @@ return Promise
 							<BinaryString name="Tags"></BinaryString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c29b</UniqueId>
 						</Properties>
-						<Item class="ModuleScript" referent="RBX28972997F543458490410127300ED8C5">
+						<Item class="ModuleScript" referent="RBXE184EF3C077B47D0B0B68BE4175B40C4">
 							<Properties>
 								<BinaryString name="AttributesSerialize"></BinaryString>
 								<Content name="LinkedSource"><null></null></Content>
@@ -15074,7 +15213,7 @@ end
 						</Item>
 					</Item>
 				</Item>
-				<Item class="Folder" referent="RBXD4A34EF17A3E4CEEA1928166E98027DA">
+				<Item class="Folder" referent="RBX1559C633C99D4DEA879385C5B4320EF1">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">sleitnick_comm@0.3.0</string>
@@ -15082,7 +15221,7 @@ end
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c29d</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBX524EB049CD1F40A3A4560F3D3B15E8D3">
+					<Item class="ModuleScript" referent="RBX0EA130307BF0401C8F6C802859532BD7">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -15095,7 +15234,7 @@ end
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c29e</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX6B8D3E8120A743C48DA91F49DA08941C">
+					<Item class="ModuleScript" referent="RBX6BC5E5BE2CB84E349D2789C74BF44D31">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -15108,7 +15247,7 @@ end
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c29f</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX514B818C64D34BB09000D6BBD848D87A">
+					<Item class="ModuleScript" referent="RBX044BB90E887E47128A792485DB12FA06">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -15121,7 +15260,7 @@ end
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2a0</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX571D9AC861124137BD82BB2C44029CBD">
+					<Item class="ModuleScript" referent="RBX1CEED91786084B449C9728EC518D18FA">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -15168,7 +15307,7 @@ return Comm
 							<BinaryString name="Tags"></BinaryString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2a1</UniqueId>
 						</Properties>
-						<Item class="ModuleScript" referent="RBX102C50682E2D4008BA8099787BF9B101">
+						<Item class="ModuleScript" referent="RBX081D8283539140A6B327AFACB90D1EC9">
 							<Properties>
 								<BinaryString name="AttributesSerialize"></BinaryString>
 								<Content name="LinkedSource"><null></null></Content>
@@ -15300,7 +15439,7 @@ return Client
 								<BinaryString name="Tags"></BinaryString>
 								<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2a2</UniqueId>
 							</Properties>
-							<Item class="ModuleScript" referent="RBX365B0012C5FD4C73AA04DAC48E77FB6A">
+							<Item class="ModuleScript" referent="RBXB20FBA6F80BF42EEAD54B8B30611B55A">
 								<Properties>
 									<BinaryString name="AttributesSerialize"></BinaryString>
 									<Content name="LinkedSource"><null></null></Content>
@@ -15527,7 +15666,7 @@ return ClientComm
 									<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2a3</UniqueId>
 								</Properties>
 							</Item>
-							<Item class="ModuleScript" referent="RBXA11A858A74B8416AB3657D8423032530">
+							<Item class="ModuleScript" referent="RBX977E4DC2C2974C8B9F12CD88301A1DA9">
 								<Properties>
 									<BinaryString name="AttributesSerialize"></BinaryString>
 									<Content name="LinkedSource"><null></null></Content>
@@ -15693,7 +15832,7 @@ return ClientRemoteProperty
 									<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2a4</UniqueId>
 								</Properties>
 							</Item>
-							<Item class="ModuleScript" referent="RBXDDA5FC98BE7C453F97AD58DE15510B32">
+							<Item class="ModuleScript" referent="RBXD23B29E60A5A4306BC0E9BC06D7C4576">
 								<Properties>
 									<BinaryString name="AttributesSerialize"></BinaryString>
 									<Content name="LinkedSource"><null></null></Content>
@@ -15810,7 +15949,7 @@ return ClientRemoteSignal
 								</Properties>
 							</Item>
 						</Item>
-						<Item class="ModuleScript" referent="RBXD5F8842705464B139E5C222EBA40FA00">
+						<Item class="ModuleScript" referent="RBX6ED10ACFD08F4762923237137386F853">
 							<Properties>
 								<BinaryString name="AttributesSerialize"></BinaryString>
 								<Content name="LinkedSource"><null></null></Content>
@@ -15939,7 +16078,7 @@ return Server
 								<BinaryString name="Tags"></BinaryString>
 								<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2a6</UniqueId>
 							</Properties>
-							<Item class="ModuleScript" referent="RBXD2462CB410EC4D18B296C87744FE865C">
+							<Item class="ModuleScript" referent="RBX0669B07B937445C48B5D77A09A5FC0A8">
 								<Properties>
 									<BinaryString name="AttributesSerialize"></BinaryString>
 									<Content name="LinkedSource"><null></null></Content>
@@ -16239,7 +16378,7 @@ return RemoteProperty
 									<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2a7</UniqueId>
 								</Properties>
 							</Item>
-							<Item class="ModuleScript" referent="RBXA90514DBD63740FE8A233C9F8F6A992F">
+							<Item class="ModuleScript" referent="RBXB9AB89F42C964717B251B3F911808484">
 								<Properties>
 									<BinaryString name="AttributesSerialize"></BinaryString>
 									<Content name="LinkedSource"><null></null></Content>
@@ -16447,7 +16586,7 @@ return RemoteSignal
 									<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2a8</UniqueId>
 								</Properties>
 							</Item>
-							<Item class="ModuleScript" referent="RBX84AA54B4AC684909A615DDAB6B5D7351">
+							<Item class="ModuleScript" referent="RBXF0F3AD4AEA504074ACB41F5477022392">
 								<Properties>
 									<BinaryString name="AttributesSerialize"></BinaryString>
 									<Content name="LinkedSource"><null></null></Content>
@@ -16647,7 +16786,7 @@ return ServerComm
 								</Properties>
 							</Item>
 						</Item>
-						<Item class="ModuleScript" referent="RBX238E1A2D796E4A4D9FE91BBE46F56308">
+						<Item class="ModuleScript" referent="RBXBEDBC01FF9C94BD6944009CE347C55E0">
 							<Properties>
 								<BinaryString name="AttributesSerialize"></BinaryString>
 								<Content name="LinkedSource"><null></null></Content>
@@ -16678,7 +16817,7 @@ return nil
 								<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2aa</UniqueId>
 							</Properties>
 						</Item>
-						<Item class="ModuleScript" referent="RBX03F147E88460400FB6A0A8416F79CBD7">
+						<Item class="ModuleScript" referent="RBXD06A0ADD7892467988D8595987A4FB91">
 							<Properties>
 								<BinaryString name="AttributesSerialize"></BinaryString>
 								<Content name="LinkedSource"><null></null></Content>
@@ -16719,7 +16858,7 @@ return Util
 						</Item>
 					</Item>
 				</Item>
-				<Item class="Folder" referent="RBXBE5B0FE42D4349A2AE24714CF17FE87D">
+				<Item class="Folder" referent="RBX0E96F99440534109B7DA28AE2FB9E5D0">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">sleitnick_knit@1.4.7</string>
@@ -16727,7 +16866,7 @@ return Util
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2ac</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBXBF4C6894E5374D95BA54D3BAAC0A1DA5">
+					<Item class="ModuleScript" referent="RBX4A86603EC2E04AA3ADE1BC757531A77B">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -16740,7 +16879,7 @@ return Util
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2ad</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX0B78CD5C003B4EA2979C40CA4B5D5330">
+					<Item class="ModuleScript" referent="RBX8683500979414073BE852AEF64E31EBB">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -16753,7 +16892,7 @@ return Util
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2ae</UniqueId>
 						</Properties>
 					</Item>
-					<Item class="ModuleScript" referent="RBX3224646E2ED54C01AF4D53D3DF918E6D">
+					<Item class="ModuleScript" referent="RBXDB68F2E529ED40A080C7A2285508FAD5">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -16773,7 +16912,7 @@ end
 							<BinaryString name="Tags"></BinaryString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2af</UniqueId>
 						</Properties>
-						<Item class="ModuleScript" referent="RBX7FA5926A8F1E44E1B307AA2AB0E96999">
+						<Item class="ModuleScript" referent="RBX50715C0475EC40618C525131914DE1A4">
 							<Properties>
 								<BinaryString name="AttributesSerialize"></BinaryString>
 								<Content name="LinkedSource"><null></null></Content>
@@ -17187,7 +17326,7 @@ return KnitClient
 								<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2b0</UniqueId>
 							</Properties>
 						</Item>
-						<Item class="ModuleScript" referent="RBX7DDAE5CD80DD48ED909515435106EB9A">
+						<Item class="ModuleScript" referent="RBX169A79D2253A491A8CE3BFE351264135">
 							<Properties>
 								<BinaryString name="AttributesSerialize"></BinaryString>
 								<Content name="LinkedSource"><null></null></Content>
@@ -17640,7 +17779,7 @@ return KnitServer
 						</Item>
 					</Item>
 				</Item>
-				<Item class="Folder" referent="RBX00F0F8DCD4B64FC59CD67DA59340C6BB">
+				<Item class="Folder" referent="RBX5699F27B78DA44F7BB8DF474FDBF6E22">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">sleitnick_option@1.0.3</string>
@@ -17648,7 +17787,7 @@ return KnitServer
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2b2</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBXE67EB962FB134C0B991CDD35157C690D">
+					<Item class="ModuleScript" referent="RBXF603A41FA18D48D29FE80B5A29027EED">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -18133,7 +18272,7 @@ return Option
 							<BinaryString name="Tags"></BinaryString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2b3</UniqueId>
 						</Properties>
-						<Item class="ModuleScript" referent="RBXA45D0EF62AD9475B85AC637BCFAA48BA">
+						<Item class="ModuleScript" referent="RBXB36872003F834BCE9DB6089DAEF89A15">
 							<Properties>
 								<BinaryString name="AttributesSerialize"></BinaryString>
 								<Content name="LinkedSource"><null></null></Content>
@@ -18500,7 +18639,7 @@ end
 						</Item>
 					</Item>
 				</Item>
-				<Item class="Folder" referent="RBXD04088D33E8547D38E8A53FA733E8D6C">
+				<Item class="Folder" referent="RBX05B1E1CBB3774109BB8D3B177B3B0BAE">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<string name="Name">sleitnick_signal@1.2.0</string>
@@ -18508,7 +18647,7 @@ end
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2b5</UniqueId>
 					</Properties>
-					<Item class="ModuleScript" referent="RBX2FA3F19920FF40EF8872DC6A3EB445C0">
+					<Item class="ModuleScript" referent="RBX2F2DFF0955134F60AE8BCBCB795948F4">
 						<Properties>
 							<BinaryString name="AttributesSerialize"></BinaryString>
 							<Content name="LinkedSource"><null></null></Content>
@@ -18899,7 +19038,7 @@ return Signal
 							<BinaryString name="Tags"></BinaryString>
 							<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002c2b6</UniqueId>
 						</Properties>
-						<Item class="ModuleScript" referent="RBXDEE2628FF5B744F5BB84E9DED8154B8E">
+						<Item class="ModuleScript" referent="RBXEC8B6D1E824F4A568489334C90543AF1">
 							<Properties>
 								<BinaryString name="AttributesSerialize"></BinaryString>
 								<Content name="LinkedSource"><null></null></Content>
@@ -19090,1069 +19229,8 @@ end
 					</Item>
 				</Item>
 			</Item>
-			<Item class="LocalScript" referent="RBXF9C7E0E2EFCA44B9B6ED85A3FAD2200E">
-				<Properties>
-					<BinaryString name="AttributesSerialize"></BinaryString>
-					<bool name="Disabled">false</bool>
-					<Content name="LinkedSource"><null></null></Content>
-					<string name="Name">FusionLocal</string>
-					<token name="RunContext">0</token>
-					<string name="ScriptGuid">{1583F755-CFB0-4482-95C0-925316BE1B51}</string>
-					<ProtectedString name="Source"><![CDATA[-- Main UI-buliding script
-
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local LocalPlayer = game:GetService("Players").LocalPlayer
-local Sounds = ReplicatedStorage.Sounds
-local Fusion = require(ReplicatedStorage.Shared.Fusion)
-local Knit = require(ReplicatedStorage.Packages.Knit)
-
-Knit.Start():catch(warn)
-
-local Words = require(script.Parent.Words)
-
-local New = Fusion.New
-local Children = Fusion.Children
-local OnEvent = Fusion.OnEvent
-local OnChange = Fusion.OnChange
-local Spring = Fusion.Spring
-local State = Fusion.State
-local Computed = Fusion.Computed
-
-local White = Color3.fromRGB(255, 255, 255)
-local Grey5 = Color3.fromRGB(178, 178, 178)
-local Grey3 = Color3.fromRGB(102, 102, 102)
-local Grey2 = Color3.fromRGB(84, 84, 84)
-local Grey1 = Color3.fromRGB(60, 60, 60)
-local Grey0 = Color3.fromRGB(42, 42, 42)
-local Black = Color3.fromRGB(16, 14, 12)
-local DarkBlack = Color3.new() -- hehehuehehuehe
-
-local Green = Color3.fromRGB(0, 255, 0)
-local Red = Color3.fromRGB(255, 0, 0)
-
-local playerFontThin = Enum.Font.Gotham
-local playerFont = Enum.Font.GothamMedium -- selene: "iT'S dePreCaTEd!!!!1!!!!11"
-local playerFontBold = Enum.Font.GothamBold
-
-local codeFont = Enum.Font.RobotoMono
-
-local PlayScreen
-local MainUI
-local TypingBox
-
-local MainFrameSize = State(UDim2.fromScale(0.8, 0.8))
-local DarkTintTransparency = State(1)
-local DarkTintTransparencyGoal = 0.5
-
-local displayedWords = {}
-local wordCorrect = State(Green)
-
-local currency = State(0)
-local experience = State(0)
-local wordsTyped = State(0)
-
-local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
-	local res = ""
-	for _ = 1, length do
-		res = res .. string.char(math.random(97, 122)) -- needs more random
-	end
-	return res
-end
-
-local function getWord()
-	return Words.easyList[math.random(1, #Words.easyList)]
-end
-
-local function changeDifficulty()
-	if TypingBox then
-		TypingBox.Text = ""
-	end
-
-	for i = 1, 5 do
-		displayedWords[i] = State("")
-		displayedWords[i]:set(getWord())
-	end
-end
-changeDifficulty()
-
-local function UICorner(corner)
-	return New("UICorner")({
-		CornerRadius = UDim.new(corner or 0.2, 0),
-	})
-end
-
-local function UIPadding(props)
-	if props then
-		props.Padding = props.Padding or 0.075
-		props.PaddingV = props.PaddingV or props.Padding
-		props.PaddingH = props.PaddingH or props.Padding
-	else
-		props = {
-			Padding = 0.075,
-			PaddingV = 0.075,
-			PaddingH = 0.075,
-		}
-	end
-
-	return New("UIPadding")({
-		PaddingBottom = UDim.new(props.PaddingV, 0),
-		PaddingTop = UDim.new(props.PaddingV, 0),
-		PaddingLeft = UDim.new(props.PaddingH, 0),
-		PaddingRight = UDim.new(props.PaddingH, 0),
-	})
-end
-
-local function NextWords(props)
-	return New("TextLabel")({
-		Name = "Label" .. props.id,
-
-		Size = UDim2.fromScale(0.4, 0.06),
-		Position = UDim2.fromScale(0.5, props.Pos),
-		BackgroundTransparency = 1,
-
-		Font = playerFont,
-		TextColor3 = Grey5,
-		Text = displayedWords[props.id],
-	})
-end
-
-local function BackgroundDesign()
-	local returns = {}
-
-	for i = 1, 11 do
-		local temp = (i - 3.5) / 5
-
-		local box = New("TextLabel")({
-			Name = "BackgroundDesign" .. tostring(i),
-
-			BackgroundTransparency = 1,
-			Size = UDim2.fromScale(2.41, 0.1),
-			Position = UDim2.fromScale(0.5, temp),
-
-			Font = codeFont,
-			TextColor3 = Grey0,
-			TextTransparency = 0.65,
-			Text = RandomString(215),
-		})
-		table.insert(returns, box)
-	end
-	return returns
-end
-
-local function Button(props)
-	props.LabelWidth = props.LabelWidth or 0.6
-	props.ImageSize = props.ImageSize or 0.3
-	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
-
-	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
-
-	return New("TextButton")({
-		Name = props.Name,
-
-		Size = props.Size,
-
-		AnchorPoint = props.AnchorPoint or Vector2.new(0.5, 0.5),
-		Position = props.Position,
-		BackgroundColor3 = Grey3,
-		AutoButtonColor = true,
-
-		SizeConstraint = props.SizeConstraint,
-
-		[OnEvent("Activated")] = props.Activated,
-
-		[Children] = {
-			UICorner(props.Corner),
-			UIPadding({
-				PaddingH = 0.075 / ratio, -- at least it works well
-			}),
-
-			New("TextLabel")({
-				Text = props.Text,
-
-				Size = UDim2.fromScale(props.LabelWidth, 1),
-				Position = UDim2.fromScale(0.9, 0.5),
-				AnchorPoint = Vector2.new(1, 0.5),
-
-				BackgroundTransparency = 1,
-				Font = playerFont,
-			}),
-
-			New("ImageLabel")({
-				Size = UDim2.fromScale(props.ImageSize, props.ImageSize),
-				Position = UDim2.fromScale(0, 0.5),
-				AnchorPoint = Vector2.new(0, 0.5),
-
-				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = New("UIAspectRatioConstraint")({
-					AspectRatio = 1,
-					AspectType = Enum.AspectType.ScaleWithParentSize,
-					DominantAxis = Enum.DominantAxis.Width,
-				}),
-			}),
-		},
-	})
-end
-
-local function Label(props)
-	props.LabelWidth = props.LabelWidth or 0.6
-	props.LabelPosition = props.LabelPosition or 0.9
-
-	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale)
-
-	return New("TextLabel")({
-		Name = props.Name,
-
-		Size = props.Size,
-		AnchorPoint = props.AnchorPoint,
-		Position = props.Position,
-		BackgroundColor3 = Grey0,
-
-		[Children] = {
-			UICorner(),
-			UIPadding({
-				PaddingH = 0.075 / ratio, -- ratio
-			}),
-
-			New("TextLabel")({
-				Text = props.Text,
-
-				Size = UDim2.fromScale(props.LabelWidth, 1),
-				Position = UDim2.fromScale(props.LabelPosition, 0.5),
-				AnchorPoint = Vector2.new(1, 0.5),
-
-				BackgroundTransparency = 1,
-				Font = playerFont,
-			}),
-
-			New("ImageLabel")({
-				Size = UDim2.fromScale(0.3, 0.3),
-				Position = UDim2.fromScale(0, 0.5),
-				AnchorPoint = Vector2.new(0, 0.5),
-
-				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = New("UIAspectRatioConstraint")({
-					AspectRatio = 1,
-					AspectType = Enum.AspectType.ScaleWithParentSize,
-					DominantAxis = Enum.DominantAxis.Width,
-				}),
-			}),
-		},
-	})
-end
-
-local function Popup(props)
-	local popup
-	popup = New("Frame")({
-		Name = props.Name,
-
-		Size = props.Size or UDim2.fromScale(0.8, 0.8),
-		Position = props.Position or UDim2.fromScale(0.5, 0.5),
-		BackgroundColor3 = Grey2,
-		Visible = false,
-		ZIndex = props.ZIndex or 120, -- bruh darktint moment
-
-		[Children] = {
-			UICorner(props.Corner),
-
-			New("ScrollingFrame")({
-				Active = true,
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.fromScale(0.5, 0.55),
-				Size = UDim2.fromScale(1, 0.85),
-				CanvasSize = UDim2.fromScale(1, 2.5),
-
-				ScrollingDirection = Enum.ScrollingDirection.Y,
-
-				[Children] = props.Children,
-			}),
-
-			New("TextLabel")({
-				Name = "Label",
-				AnchorPoint = Vector2.new(0.5, 0),
-				BackgroundColor3 = Grey1,
-
-				Position = UDim2.new(0.5, 0, 0, 16),
-				Size = UDim2.fromScale(1, 0.08), -- I don't like it. 0.08 barely works okay enough.
-				Font = playerFontBold,
-				Text = props.Title,
-
-				[Children] = New("TextButton")({
-					Name = "CloseButton",
-					AnchorPoint = Vector2.new(1, 0),
-					BackgroundColor3 = Black,
-
-					Position = UDim2.fromScale(1, 0),
-					Size = UDim2.fromScale(1, 1),
-					SizeConstraint = Enum.SizeConstraint.RelativeYY,
-					Font = Enum.Font.SourceSans,
-
-					Text = "X",
-					AutoButtonColor = true,
-
-					[OnEvent("Activated")] = function()
-						popup.Visible = false
-						DarkTintTransparency:set(1)
-					end,
-				}),
-			}),
-		},
-	})
-	return popup
-end
-
-local function SettingsOption(props)
-	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse
-
-	return New("Frame")({
-		Name = props.Name,
-		BackgroundColor3 = White,
-
-		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
-		BackgroundTransparency = 1,
-		Position = if props.Right then UDim2.fromScale(0.97, VerticalPos) else UDim2.fromScale(0.03, VerticalPos),
-		Size = UDim2.fromScale(0.45, 0.05),
-
-		[Children] = {
-			New("ImageButton")({
-				BackgroundTransparency = 1,
-				Size = UDim2.fromScale(1, 1),
-				SizeConstraint = Enum.SizeConstraint.RelativeYY,
-				Image = "rbxassetid://7523096047",
-			}),
-			New("TextLabel")({
-				AnchorPoint = Vector2.new(0, 0.5),
-				BackgroundTransparency = 1,
-				Position = UDim2.fromScale(0.15, 0.5),
-				Size = UDim2.fromScale(0.8, 1),
-				Font = playerFont,
-				Text = props.Text,
-				TextXAlignment = Enum.TextXAlignment.Left,
-			}),
-		},
-	})
-end
-
-local function ShopOption(props)
-	local VerticalPos = 0.03 + ((props.Row or 0) * 0.07) -- even worse, css grid much
-
-	return New("Frame")({
-		Name = props.Name,
-		BackgroundColor3 = White,
-
-		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
-		BackgroundTransparency = 1,
-		Position = if props.Right then UDim2.fromScale(0.97, VerticalPos) else UDim2.fromScale(0.03, VerticalPos),
-		Size = UDim2.fromScale(0.45, 0.05),
-
-		[Children] = {
-			New("TextLabel")({
-				AnchorPoint = Vector2.new(0, 0.5),
-				BackgroundTransparency = 1,
-				Position = UDim2.fromScale(0, 0.5),
-				Size = UDim2.fromScale(0.8, 0.8),
-				Font = playerFont,
-				Text = props.Text,
-				TextXAlignment = Enum.TextXAlignment.Left,
-			}),
-
-			New("TextButton")({
-				Name = "Price",
-
-				BackgroundColor3 = Grey3,
-				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.fromScale(1, 0.5),
-				Size = UDim2.fromScale(0.25, 1),
-				Font = playerFont,
-				Text = props.Price or "Price",
-				AutoButtonColor = true,
-
-				[Children] = {
-					UIPadding(),
-					UICorner(),
-				},
-			}),
-		},
-	})
-end
-
-TypingBox = New("TextBox")({
-	Name = "TypingBox",
-	Position = UDim2.fromScale(0.5, 0.7),
-	Size = UDim2.fromScale(0.5, 0.05),
-	BackgroundColor3 = Grey0,
-	TextColor3 = wordCorrect,
-
-	Font = playerFont,
-	PlaceholderText = "Type here (spacebar to complete word)",
-	PlaceholderColor3 = Grey3,
-
-	[OnChange("Text")] = function()
-		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
-
-		local rand = math.random(1, 3)
-		local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
-
-		Sounds["click" .. rand].PlaybackSpeed = rand2
-		Sounds["click" .. rand]:Play()
-
-		local text = TypingBox.Text
-
-		if string.match("!" .. displayedWords[1]:get() .. " ", ("!" .. text)) then
-			wordCorrect:set(Green)
-			if text == displayedWords[1]:get() .. " " then
-				TypingBox.Text = ""
-
-				currency:set(currency:get() + 1)
-				wordsTyped:set(wordsTyped:get() + 1)
-				experience:set(experience:get() + 5)
-
-				local tempWords = displayedWords
-
-				for i = 1, 4 do
-					tempWords[i]:set(tempWords[i + 1]:get()) -- Move each word up by one place
-				end
-				tempWords[5]:set(getWord()) -- Add a new word to the bottom
-
-				displayedWords = tempWords
-			end
-		else
-			wordCorrect:set(Red)
-		end
-	end,
-
-	[Children] = {
-		UICorner(),
-		UIPadding(),
-	},
-})
-
-PlayScreen = New("ScreenGui")({
-	Name = "PlayScreen",
-	Parent = LocalPlayer.PlayerGui,
-	DisplayOrder = 10,
-	IgnoreGuiInset = true,
-
-	[Children] = New("Frame")({
-		BackgroundColor3 = Black,
-		Position = UDim2.fromScale(0.5, 0.5),
-		Size = UDim2.fromScale(1, 1),
-
-		[Children] = {
-			New("Frame")({ -- Credits
-				Name = "Credits",
-				BackgroundTransparency = 1,
-				Position = UDim2.fromScale(0.9, 0.65),
-				Size = UDim2.fromScale(0.1, 0.1),
-				SizeConstraint = Enum.SizeConstraint.RelativeXX,
-
-				[Children] = New("ImageLabel")({
-					Name = "HeliodexLogo",
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = UDim2.fromScale(0.5, 0.5),
-					Size = UDim2.fromScale(1, 1),
-					SizeConstraint = Enum.SizeConstraint.RelativeYY,
-					ZIndex = 6,
-					Image = "rbxassetid://7501730261",
-
-					[Children] = {
-						New("TextLabel")({
-							Name = "a Heliodex game",
-							BackgroundTransparency = 1,
-							Position = UDim2.fromScale(0.5, 1.1),
-							Size = UDim2.fromScale(1.8, 0.2),
-							Font = playerFontThin,
-							RichText = true,
-							Text = "a <i>HELIODEX</i> game",
-						}),
-						New("TextLabel")({
-							Name = "pjstarr12",
-							BackgroundTransparency = 1,
-							Position = UDim2.fromScale(0.5, 1.4),
-							Size = UDim2.fromScale(1.5, 0.175),
-							Font = playerFontThin,
-							Text = "pjstarr12",
-
-							[Children] = UIPadding(),
-						}),
-						New("TextLabel")({
-							Name = "TheWhaleCloud",
-							BackgroundTransparency = 1,
-							Position = UDim2.fromScale(0.5, 1.6),
-							Size = UDim2.fromScale(1.5, 0.175),
-							Font = playerFontThin,
-							Text = "TheWhaleCloud",
-
-							[Children] = UIPadding(),
-						}),
-						New("TextLabel")({
-							Name = "Lewin4",
-							AnchorPoint = Vector2.new(0.5, 0.5),
-							BackgroundColor3 = White,
-							BackgroundTransparency = 1,
-							Position = UDim2.fromScale(0.5, 1.8),
-							Size = UDim2.fromScale(1.5, 0.175),
-							Font = playerFontThin,
-							Text = "Lewin4",
-
-							[Children] = UIPadding(),
-						}),
-					},
-				}),
-			}),
-
-			Button({
-				Name = "Play",
-				Size = UDim2.fromScale(0.17, 0.075),
-				Position = UDim2.fromScale(0.5, 0.5),
-				Text = "Play",
-				Image = 8156398078,
-
-				Activated = function() -- o this is how you do functions
-					PlayScreen.Frame.Visible = false
-					Sounds.music:Play()
-					MainFrameSize:set(UDim2.fromScale(1, 1))
-				end,
-			}),
-
-			New("TextLabel")({ -- Title
-				Name = "Title",
-				BackgroundTransparency = 1,
-				Position = UDim2.fromScale(0.5, 0.35),
-				Size = UDim2.fromScale(0.3, 0.175),
-				Font = playerFontBold,
-				RichText = true,
-				Text = "typing simulator but better",
-
-				[Children] = New("UIPadding")({
-					PaddingBottom = UDim.new(0.1, 0),
-					PaddingLeft = UDim.new(0.1, 0),
-					PaddingRight = UDim.new(0.1, 0),
-					PaddingTop = UDim.new(0.1, 0),
-				}),
-			}),
-		},
-	}),
-})
-
--- Main ui time,,.,,.oaoeueuoueooaaeiiaaa
-
-MainUI = New("ScreenGui")({
-	Name = "Main",
-	Parent = LocalPlayer.PlayerGui,
-	DisplayOrder = 0,
-	IgnoreGuiInset = true,
-
-	[Children] = {
-		New("TextLabel")({ -- could go inside MainFrame or frame
-			Name = "Warning",
-
-			Position = UDim2.fromScale(0.5, 0.15),
-			Size = UDim2.fromScale(1, 1),
-
-			Visible = false,
-
-			BackgroundTransparency = 1,
-			TextTransparency = 1,
-			Font = playerFont,
-
-			ZIndex = 88,
-		}),
-
-		New("Frame")({
-			Name = "MainFrame",
-			Size = UDim2.fromScale(1, 1),
-
-			ZIndex = 5,
-
-			[Children] = {
-				New("Frame")({
-					Size = Spring(MainFrameSize, 12, 1),
-					BackgroundTransparency = 1,
-
-					ZIndex = 5,
-
-					[Children] = {
-						Button({
-							Name = "OpenHelp",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(0, 1),
-							Position = UDim2.fromScale(0.01, 0.98),
-							Text = "Help",
-							Image = 7362810660,
-
-							Activated = function()
-								MainUI.MainFrame.Help.Visible = not MainUI.MainFrame.Help.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Help.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
-						}),
-						Button({
-							Name = "OpenShop",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(0, 0),
-							Position = UDim2.fromScale(0.01, 0.12),
-							Text = "Shop",
-							Image = 7362870044,
-
-							Activated = function()
-								MainUI.MainFrame.Shop.Visible = not MainUI.MainFrame.Shop.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Shop.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
-						}),
-						Button({
-							Name = "OpenSettings",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.39),
-							Text = "Settings",
-							Image = 7362801114,
-
-							Activated = function()
-								MainUI.MainFrame.Settings.Visible = not MainUI.MainFrame.Settings.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Settings.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
-						}),
-						Button({
-							Name = "AudioToggle",
-							Size = UDim2.fromScale(0.15, 0.15),
-							AnchorPoint = Vector2.new(1, 1),
-							Position = UDim2.fromScale(0.99, 0.98),
-							Text = "",
-							Image = 7517177224,
-
-							Corner = 0.1,
-							ImageSize = 0.9,
-							SizeConstraint = Enum.SizeConstraint.RelativeYY,
-						}),
-						Label({
-							Name = "Currency",
-							Size = UDim2.fromScale(0.22, 0.075),
-							AnchorPoint = Vector2.new(0, 0),
-							Position = UDim2.fromScale(0.01, 0.02),
-							Text = Computed(function()
-								return currency:get() .. " typing tokens"
-							end),
-							Image = 7367251392,
-
-							LabelWidth = 0.7,
-							LabelPosition = 0.95,
-						}),
-						Label({
-							Name = "Words",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(0.5, 0),
-							Position = UDim2.fromScale(0.5, 0.02),
-							Text = Computed(function()
-								return wordsTyped:get() .. " Words"
-							end),
-							Image = 7367083297,
-						}),
-
-						New("TextButton")({ -- why from scratch
-							Name = "DifficultyButton",
-
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.02),
-							BackgroundColor3 = Grey3,
-							AutoButtonColor = true,
-
-							[Children] = {
-								UICorner(),
-								UIPadding({
-									PaddingH = 0.033,
-								}),
-
-								New("IntValue")({
-									Name = "DifficultyLevel",
-									Value = 1,
-								}),
-
-								New("TextLabel")({
-									Text = "Change Difficulty:",
-
-									Size = UDim2.fromScale(0.6, 0.5),
-									Position = UDim2.fromScale(0.9, 0.25),
-									AnchorPoint = Vector2.new(1, 0.5),
-
-									BackgroundTransparency = 1,
-									Font = playerFont,
-								}),
-
-								New("TextLabel")({
-									Name = "DifficultyLevelText",
-									Text = "Easy",
-
-									Size = UDim2.fromScale(0.6, 0.5),
-									Position = UDim2.fromScale(0.9, 0.75),
-									AnchorPoint = Vector2.new(1, 0.5),
-
-									BackgroundTransparency = 1,
-									Font = playerFont,
-								}),
-
-								New("ImageLabel")({
-									Size = UDim2.fromScale(0.3, 0.3),
-									Position = UDim2.fromScale(0, 0.5),
-									AnchorPoint = Vector2.new(0, 0.5),
-
-									Image = "rbxassetid://7363005276",
-									[Children] = New("UIAspectRatioConstraint")({
-										AspectRatio = 1,
-										AspectType = Enum.AspectType.ScaleWithParentSize,
-										DominantAxis = Enum.DominantAxis.Width,
-									}),
-								}),
-							},
-						}),
-
-						New("Frame")({
-							Name = "LevelMenu",
-							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.115),
-							Size = UDim2.fromScale(0.17, 0.255),
-							BackgroundColor3 = Grey3,
-
-							[Children] = {
-								UICorner(0.05),
-								UIPadding({
-									Padding = 0.04,
-								}),
-
-								Label({
-									Name = "Rank",
-									Size = UDim2.fromScale(1, 0.32),
-									AnchorPoint = Vector2.new(0.5, 1),
-									Position = UDim2.fromScale(0.5, 1),
-									Text = "Rank",
-									Image = 7456285956,
-								}),
-								Label({
-									Name = "Level",
-									Size = UDim2.fromScale(1, 0.25),
-									AnchorPoint = Vector2.new(0.5, 0.5),
-									Position = UDim2.fromScale(0.5, 0.5),
-									Text = "Level 1",
-									Image = 7367078076,
-								}),
-								Label({
-									Name = "Experience",
-									Size = UDim2.fromScale(1, 0.2),
-									AnchorPoint = Vector2.new(0.5, 0),
-									Position = UDim2.fromScale(0.5, 0),
-									Text = "Amount until level up",
-
-									Image = 261481376, -- DELETE THIS. AWFUL	-- ok, it did end up getting content deleted
-
-									LabelWidth = 1,
-									LabelPosition = 1,
-								}),
-
-								New("Frame")({
-									Name = "BarHolder",
-									Size = UDim2.fromScale(1, 0.08),
-									Position = UDim2.fromScale(0.5, 0.28),
-
-									BackgroundColor3 = Grey0,
-
-									[Children] = {
-										UICorner(0.5),
-
-										[Children] = New("Frame")({
-											Name = "Bar",
-											Size = Computed(function()
-												return UDim2.fromScale(experience:get() / 100 % 1, 1)
-											end),
-											AnchorPoint = Vector2.new(0, 0),
-											Position = UDim2.fromScale(0, 0),
-
-											BackgroundColor3 = Green,
-
-											[Children] = UICorner(0.5),
-										}),
-									},
-								}),
-							},
-						}),
-
-						TypingBox,
-
-						New("Folder")({
-							Name = "NextWordLabels",
-
-							[Children] = {
-								New("TextLabel")({
-									Name = "CurrentWordLabel",
-
-									Size = UDim2.fromScale(0.4, 0.06),
-									Position = UDim2.fromScale(0.5, 0.3),
-									BackgroundTransparency = 1,
-
-									Font = playerFont,
-									Text = displayedWords[1],
-								}),
-
-								NextWords({
-									Pos = 0.36,
-									id = 2,
-								}),
-								NextWords({
-									Pos = 0.42,
-									id = 3,
-								}),
-								NextWords({
-									Pos = 0.48,
-									id = 4,
-								}),
-								NextWords({
-									Pos = 0.54,
-									id = 5,
-								}),
-							},
-						}),
-					},
-				}),
-
-				New("UIGradient")({
-					Color = ColorSequence.new({
-						ColorSequenceKeypoint.new(0, Color3.fromRGB(32, 30, 28)),
-						ColorSequenceKeypoint.new(1, Color3.fromRGB(12, 10, 8)),
-					}),
-					Rotation = 110,
-				}),
-
-				New("Frame")({
-					Name = "BackgroundDesign",
-
-					Size = UDim2.fromScale(1.5, 0.75),
-					BackgroundTransparency = 1,
-
-					Rotation = -20,
-					ZIndex = -50,
-
-					[Children] = {
-						New("Frame")({
-							Name = "Frame1",
-
-							Size = UDim2.fromScale(1, 1),
-							BackgroundTransparency = 1,
-
-							[Children] = BackgroundDesign(),
-						}),
-
-						New("Frame")({
-							Name = "Frame2",
-
-							Size = UDim2.fromScale(1, 1),
-							Position = UDim2.fromScale(0.5, 0.6),
-							BackgroundTransparency = 1,
-
-							[Children] = BackgroundDesign(),
-						}),
-					},
-				}),
-
-				-- MENU TIME
-				-- OH MY GOD STOP PROCRASTINATING
-
-				Popup({
-					Name = "Help",
-					Title = "HELP",
-					Size = UDim2.fromScale(0.8, 0.8),
-					Corner = 0.04,
-					ZIndex = 120,
-
-					-- Children does not require brackets here
-					-- remember, this is a variable, children are applied in the Popup() function
-					Children = New("TextLabel")({
-						Name = "Text",
-						AnchorPoint = Vector2.new(0.5, 0.9),
-						BackgroundTransparency = 1,
-						Position = UDim2.fromScale(0.5, 1),
-						Size = UDim2.fromScale(0.97, 1.1),
-						Font = playerFont,
-						RichText = true,
-						Text = "Welcome to game name goes here!<br />This is a game you can use to improve your speed, accuracy, and stamina while typing.<br /><br />In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.<br />The upcoming words are displayed below the current word.<br /><br />The button in the top-right corner allows you to change the difficulty of your words.<br /><br />Easy words can be between 2 and 4 letters long. They are the easiest to type.<br />They give 1 typing token and 12-15 exp per word.<br /><br />Medium words can be between 4 and 7 letters long. Harder, but more rewarding.<br />They give 2 typing tokens and 20-26 exp per word.<br /><br />Hard words can be between 7 and 10 letters long.<br />They give 3 typing tokens and 35-42 exp per word.<br /><br />Insane words were added as a joke, they are some of the longest words in English.<br />They give 5 typing tokens and 57-65 exp per word.<br /><br />Experience is used to level up. Each level requires 100 more experience to level up than the one before it.<br />Ranks are gained every 10 levels.<br /><br />Developers:<br />pjstarr12<br />TheWhaleCloud<br />Lewin4<br /><br />The soundtrack for the game is Click by C418.<br />Thanks to icons8 for providing the icons.<br /><br />Inspired by:<br />Monkeytype by Miodec<br />Typing Simulator by S-GAMES",
-						TextSize = 28,
-						TextTruncate = Enum.TextTruncate.AtEnd,
-						TextWrapped = true,
-						TextXAlignment = Enum.TextXAlignment.Left,
-						TextYAlignment = Enum.TextYAlignment.Top,
-					}),
-				}),
-
-				Popup({
-					Name = "Settings",
-					Title = "SETTINGS",
-
-					Size = UDim2.fromScale(0.5, 0.5),
-					Corner = 0.04,
-					ZIndex = 130,
-
-					Children = {
-						SettingsOption({
-							Name = "Keysounds",
-							Text = "Keypress Sounds",
-						}),
-						SettingsOption({
-							Name = "Blind",
-							Text = "Blind Mode",
-							Right = true,
-						}),
-						SettingsOption({
-							Name = "Memory",
-							Text = "Memory Mode",
-							Row = 1,
-						}),
-						SettingsOption({
-							Name = "PlainBG",
-							Text = "Plain Background",
-							Row = 1,
-							Right = true,
-						}),
-					},
-				}),
-
-				Popup({
-					Name = "Shop",
-					Title = "SHOP",
-
-					Size = UDim2.fromScale(0.5, 0.5),
-					Corner = 0.04,
-					ZIndex = 120,
-
-					Children = {
-						ShopOption({
-							Name = "MediumDifficulty",
-							Text = "Medium Difficulty",
-							Price = 40,
-						}),
-						ShopOption({
-							Name = "HardDifficulty",
-							Text = "Hard Difficulty",
-							Right = true,
-							Price = 100, -- the price is right
-						}),
-						ShopOption({
-							Name = "InsaneDifficulty",
-							Text = "Insane Difficulty",
-							Row = 1,
-							Price = 600,
-						}),
-					},
-				}),
-
-				New("Frame")({
-					Name = "DarkTint",
-					BackgroundColor3 = DarkBlack,
-					BackgroundTransparency = Spring(DarkTintTransparency, 25),
-					Size = UDim2.fromScale(2, 2),
-					ZIndex = 100,
-				}),
-			},
-		}),
-	},
-})
-]]></ProtectedString>
-					<int64 name="SourceAssetId">-1</int64>
-					<BinaryString name="Tags"></BinaryString>
-					<UniqueId name="UniqueId">4f09d1a078a24ac002c7960d0002bc98</UniqueId>
-				</Properties>
-			</Item>
-			<Item class="ModuleScript" referent="RBX511ACDED1F9F4631BA19CF8504A77402">
-				<Properties>
-					<BinaryString name="AttributesSerialize"></BinaryString>
-					<Content name="LinkedSource"><null></null></Content>
-					<string name="Name">DataService</string>
-					<string name="ScriptGuid">{45AD5748-2C87-4F91-9621-63D8BF57B039}</string>
-					<ProtectedString name="Source"><![CDATA[local Players = game:GetService("Players")
-local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
-local ProfileService = require(game:GetService("ServerScriptService").Server.ProfileService)
-
-local DefaultProfileTemplate = {
-	WordsTyped = 0,
-	Experience = 0,
-	Currency = 0,
-
-	ShopPurchases = {
-		NormalMode = false,
-		HardMode = false,
-		InsaneMode = false,
-	},
-	Settings = {
-		KeySounds = false,
-		BlindMode = false,
-		MemoryMode = false,
-		PlainBG = false,
-	},
-}
-
-local ProfileStore = ProfileService.GetProfileStore(
-	"PlayerData",
-	DefaultProfileTemplate
-)
-
-local DataService = Knit.CreateService({
-	Name = "DataService",
-})
-
-function DataService.Client:LoadData()
-	return "bruh"
-end
-
-function DataService.Client:UpdateData(variable) end
-
-return DataService
-]]></ProtectedString>
-					<int64 name="SourceAssetId">-1</int64>
-					<BinaryString name="Tags"></BinaryString>
-					<UniqueId name="UniqueId">4f09d1a078a24ac002c7960d0002bc9a</UniqueId>
-				</Properties>
-			</Item>
-			<Item class="ModuleScript" referent="RBXD8D12C83C0CE4220AE80E4BFB1894B9E">
-				<Properties>
-					<BinaryString name="AttributesSerialize"></BinaryString>
-					<Content name="LinkedSource"><null></null></Content>
-					<string name="Name">SyncService</string>
-					<string name="ScriptGuid">{A1AF429C-589D-4F57-ACAE-13D066B0C7B3}</string>
-					<ProtectedString name="Source"><![CDATA[--[[
-How syncing works
-	When any data is updated, the client will also send a call to this module to update the data stored on the server.
-	The same random numbers will be generated on both the client and server, so no constant back-and-forth data transfer is required.
-	There will be latency, this does not really matter.
-	All functions here are ratelimited so even if the client is exploited, not much damage can be done.
-	This means that the true data should be stored on the server for data saving.
-]]
-
-local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
-
-local SyncService = Knit.CreateService({
-	Name = "SyncService",
-})
-
-function SyncService.Client:LoadSync()
-	return "bruh"
-end
-
-function SyncService.Client:UpdateSync() end
-
-return SyncService
-]]></ProtectedString>
-					<int64 name="SourceAssetId">-1</int64>
-					<BinaryString name="Tags"></BinaryString>
-					<UniqueId name="UniqueId">4f09d1a078a24ac002c7960d0002bc9c</UniqueId>
-				</Properties>
-			</Item>
 		</Item>
-		<Item class="Folder" referent="RBXBD5E905233294B82A4FE818481F127E3">
+		<Item class="Folder" referent="RBXB1D35CD8547448DA9E663417B629D1B3">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<string name="Name">Sounds</string>
@@ -20160,7 +19238,7 @@ return SyncService
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">0873ff8390129c8b02bd6e1400064691</UniqueId>
 			</Properties>
-			<Item class="Sound" referent="RBX413824F1EAF74836937C3C27E19ADA7C">
+			<Item class="Sound" referent="RBX4F5DD5DBF88746D88B7381DA6EF547DC">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<float name="EmitterSize">10</float>
@@ -20180,7 +19258,7 @@ return SyncService
 					<float name="xmlRead_MaxDistance_3">10000</float>
 				</Properties>
 			</Item>
-			<Item class="Sound" referent="RBXED71DC8827F0430381AAA7C77666FA84">
+			<Item class="Sound" referent="RBX3380F915D3224AEFBF42AC497A19D476">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<float name="EmitterSize">10</float>
@@ -20200,7 +19278,7 @@ return SyncService
 					<float name="xmlRead_MaxDistance_3">10000</float>
 				</Properties>
 			</Item>
-			<Item class="Sound" referent="RBXE48E3DA5609944E987946181AF7F407D">
+			<Item class="Sound" referent="RBX388888886AE14577911274A40F787629">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<float name="EmitterSize">10</float>
@@ -20220,7 +19298,7 @@ return SyncService
 					<float name="xmlRead_MaxDistance_3">10000</float>
 				</Properties>
 			</Item>
-			<Item class="Sound" referent="RBX82900166FC7F46E1846A3583B3E7CB58">
+			<Item class="Sound" referent="RBXC5E1855B366E46F7A962109A7F94A838">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<float name="EmitterSize">10</float>
@@ -20240,7 +19318,7 @@ return SyncService
 					<float name="xmlRead_MaxDistance_3">10000</float>
 				</Properties>
 			</Item>
-			<Item class="Sound" referent="RBXE8A60A5C4BF3483FBF929544377F0FB6">
+			<Item class="Sound" referent="RBXEFB39C912F164853A7ECDE1AB8C712B4">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<float name="EmitterSize">10</float>
@@ -20260,7 +19338,7 @@ return SyncService
 					<float name="xmlRead_MaxDistance_3">10000</float>
 				</Properties>
 			</Item>
-			<Item class="Sound" referent="RBXEC458980487E489A98FAFCE332AC01BC">
+			<Item class="Sound" referent="RBXE47BB819C5744318BD1D415AAEA27F56">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<float name="EmitterSize">10</float>
@@ -20282,7 +19360,7 @@ return SyncService
 			</Item>
 		</Item>
 	</Item>
-	<Item class="LuaWebService" referent="RBX2F0B857DA9054F06BD1AD25D04154E7C">
+	<Item class="LuaWebService" referent="RBX58F47ED62EF946488572B871B04CBE4A">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">Instance</string>
@@ -20291,7 +19369,7 @@ return SyncService
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191f2</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="ProcessInstancePhysicsService" referent="RBX2C6EDDDD6C7E4FA0BCEF4B27F65B7834">
+	<Item class="ProcessInstancePhysicsService" referent="RBX92579A39B2514FA699641E3684E1021F">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">ProcessInstancePhysicsService</string>
@@ -20300,7 +19378,7 @@ return SyncService
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191f6</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="Lighting" referent="RBXA7F3022DC7D34093AE274E898A80CCF3">
+	<Item class="Lighting" referent="RBX51B1C9E029764D0F9BCB814CE89DDB88">
 		<Properties>
 			<Color3 name="Ambient">
 				<R>0</R>
@@ -20345,7 +19423,7 @@ return SyncService
 			<string name="TimeOfDay">00:00:00</string>
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd00019216</UniqueId>
 		</Properties>
-		<Item class="Sky" referent="RBX56D5943277E04B319588E49522BFD1A1">
+		<Item class="Sky" referent="RBX4E6300C0DD184712BD39F83104E9807C">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<bool name="CelestialBodiesShown">false</bool>
@@ -20367,7 +19445,7 @@ return SyncService
 			</Properties>
 		</Item>
 	</Item>
-	<Item class="LodDataService" referent="RBXCE2E982430ED4C65849D1F3B908FBDB3">
+	<Item class="LodDataService" referent="RBXE27B53F8E9FD4EDCAD0EAD3A0CEC4685">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">Instance</string>
@@ -20376,7 +19454,7 @@ return SyncService
 			<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140001fb0e</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="LanguageService" referent="RBX199583334CFB46319ABF9BA4DD152FCE">
+	<Item class="LanguageService" referent="RBX47779C13A0B84DDC8BC8C9A5B682F646">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">LanguageService</string>
@@ -20385,7 +19463,18 @@ return SyncService
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd000191f7</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="HttpService" referent="RBX5B9687CBDD8846BC94B52CD014A16B75">
+	<Item class="DataStoreService" referent="RBXA0503A411697468291192FC66E921664">
+		<Properties>
+			<BinaryString name="AttributesSerialize"></BinaryString>
+			<bool name="AutomaticRetry">true</bool>
+			<bool name="LegacyNamingScheme">false</bool>
+			<string name="Name">DataStoreService</string>
+			<int64 name="SourceAssetId">-1</int64>
+			<BinaryString name="Tags"></BinaryString>
+			<UniqueId name="UniqueId">36ba5d4b511643cf02d4e1c6000496f0</UniqueId>
+		</Properties>
+	</Item>
+	<Item class="HttpService" referent="RBX412BCD45D8CA40E28C897D5E89780028">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<bool name="HttpEnabled">false</bool>
@@ -20395,7 +19484,7 @@ return SyncService
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd00019287</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="ProximityPromptService" referent="RBX4D43C6BE8A7540C1A0C9E1AE0454F281">
+	<Item class="ProximityPromptService" referent="RBXB0B222D33E79469C9BA08ADA0AC5CC21">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<bool name="Enabled">true</bool>
@@ -20406,7 +19495,7 @@ return SyncService
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd0001928a</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="Teams" referent="RBX037C0E1A61CA4A7BA331512E0C934228">
+	<Item class="Teams" referent="RBXB18F6D387F11402B801D7999A5BF2AF7">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">Teams</string>
@@ -20415,7 +19504,7 @@ return SyncService
 			<UniqueId name="UniqueId">0873ff8390129c8b02bd6e140002b348</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="TestService" referent="RBXE444879478A640BDAEFF5A82220907FF">
+	<Item class="TestService" referent="RBX217EE3D99C614E80B5DC39372CC76162">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<bool name="AutoRuns">true</bool>
@@ -20433,7 +19522,7 @@ return SyncService
 			<UniqueId name="UniqueId">71724e2837248f2a018373cd00019288</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="VirtualInputManager" referent="RBXD63DA2D0B8FB4855ABE734F8279A6223">
+	<Item class="VirtualInputManager" referent="RBX04D144F1AD5E4819AED71CC0463EBE1C">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<string name="Name">VirtualInputManager</string>
