@@ -72,6 +72,7 @@ function DataService.Client:PrepareData(player)
 		end)
 		if player:IsDescendantOf(Players) then
 			-- A profile has been successfully loaded:
+			print("Data prepared")
 			Profiles[player] = profile
 			ProfileViews[player] = profile.Data
 		else
