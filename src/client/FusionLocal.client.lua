@@ -7,12 +7,11 @@ local Knit = require(ReplicatedStorage.Packages.Knit)
 
 Knit.Start()
 	:andThen(function()
-		print("Knit client started")
+		print("[Knit] Client started")
 	end)
 	:catch(warn)
 
 local SyncService = Knit.GetService("SyncService")
-local TextService = game:GetService("TextService")
 local DataService = Knit.GetService("DataService")
 local randomGenerator
 
@@ -78,6 +77,9 @@ local currency = State(0)
 local experience = State(0)
 local level = State(0)
 local wordsTyped = State(0)
+local difficulty = State()
+local difficultyName = State("Easy")
+local difficultyChanged = Compat(difficulty)
 
 local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
@@ -88,20 +90,25 @@ local function RandomString(length) -- thanks, mysterious4579		https://gist.gith
 end
 
 local function getWord()
-	return Words.easyList[math.random(1, #Words.easyList)]
+	local list = Words[difficulty:get()]
+	difficultyName:set(list.Name)
+	return list[math.random(1, #list)]
 end
 
-local function changeDifficulty()
+difficultyChanged:onChange(function()
 	if TypingBox then
 		TypingBox.Text = ""
 	end
 
 	for i = 1, 5 do
-		displayedWords[i] = State("")
-		displayedWords[i]:set(getWord())
+		if not displayedWords[i] then
+			displayedWords[i] = State(getWord())
+		else
+			displayedWords[i]:set(getWord())
+		end
 	end
-end
-changeDifficulty()
+end)
+difficulty:set(1)
 
 local function UICorner(corner)
 	return New("UICorner")({
@@ -171,6 +178,7 @@ local function Button(props)
 	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
 
 	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
+	local clickable = true
 
 	return New("TextButton")({
 		Name = props.Name,
@@ -184,7 +192,14 @@ local function Button(props)
 
 		SizeConstraint = props.SizeConstraint,
 
-		[OnEvent("Activated")] = props.Activated,
+		[OnEvent("Activated")] = function()
+			if clickable or not props.Ratelimit then
+				clickable = false
+				props.Activated() -- shouldn't yield
+				task.wait(0.1)
+				clickable = true
+			end
+		end,
 
 		[Children] = {
 			UICorner(props.Corner),
@@ -241,6 +256,7 @@ local function SaveSlot(props)
 		[OnEvent("Activated")] = function()
 			if not loadingData then
 				loadingData = true
+				print("Loading data...")
 				text:set("Loading...")
 				disconnect()
 
@@ -251,6 +267,7 @@ local function SaveSlot(props)
 					wordsTyped:set(data.WordsTyped)
 
 					dataLoaded:set(true)
+					print("Data loaded!")
 
 					PlayScreen.Frame.Visible = false
 					Sounds.music:Play()
@@ -412,11 +429,10 @@ end
 
 local function SettingsOption(props)
 	local checked = State(false)
-	local canClick = true
+	local clickable = true
 
 	dataLoadedChanged:onChange(function()
 		DataService:GetSetting(props.Name):andThen(function(value)
-			print(value)
 			checked:set(value)
 		end)
 	end)
@@ -428,15 +444,13 @@ local function SettingsOption(props)
 		BackgroundTransparency = 1,
 
 		[OnEvent("Activated")] = function()
-			if not canClick then
-				return
+			if clickable then
+				clickable = false
+				checked:set(not checked:get())
+				SyncService:ChangeSetting(props.Name)
+				task.wait(0.1) -- ratelimiting, don't click so fast
+				clickable = true
 			end
-
-			canClick = false
-			checked:set(not checked:get())
-			SyncService:ChangeSetting(props.Name)
-			task.wait(0.1) -- don't click so fast
-			canClick = true
 		end,
 
 		[Children] = {
@@ -462,15 +476,15 @@ end
 
 local function ShopOption(props)
 	local buttonText = State(ShopItems[props.Name].Price)
-	local canClick
+	local clickable
 
 	dataLoadedChanged:onChange(function()
 		DataService:ItemOwned(props.Name):andThen(function(owned)
 			if owned then
 				buttonText:set("Owned")
-				canClick = false
+				clickable = false
 			else
-				canClick = true
+				clickable = true
 			end
 		end)
 	end)
@@ -503,26 +517,23 @@ local function ShopOption(props)
 				AutoButtonColor = true,
 
 				[OnEvent("Activated")] = function()
-					local price = buttonText:get()
-
-					if not canClick then
-						return
+					if clickable then
+						local price = buttonText:get()
+						clickable = false
+						SyncService:PurchaseItem(props.Name):andThen(function(success)
+							if success then
+								currency:set(currency:get() - price)
+								buttonText:set("Purchase successful!")
+								task.wait(1)
+								buttonText:set("Owned")
+							else
+								buttonText:set("Purchase failed!")
+								task.wait(1)
+								buttonText:set(price)
+								clickable = true
+							end
+						end)
 					end
-
-					canClick = false
-					SyncService:PurchaseItem(props.Name):andThen(function(success)
-						if success then
-							currency:set(currency:get() - price)
-							buttonText:set("Purchase successful!")
-							task.wait(1)
-							buttonText:set("Owned")
-						else
-							buttonText:set("Purchase failed!")
-							task.wait(1)
-							buttonText:set(price)
-							canClick = true
-						end
-					end)
 				end,
 
 				[Children] = {
@@ -564,7 +575,8 @@ TypingBox = New("TextBox")({
 				SyncService:WordTyped()
 				wordsTyped:set(wordsTyped:get() + 1)
 
-				local expToAdd = randomGenerator:NextInteger(12, 15)
+				local possibleExp = Words[difficulty:get()].Exp
+				local expToAdd = randomGenerator:NextInteger(possibleExp[1], possibleExp[2])
 				local exp = experience:get()
 				if exp + expToAdd > level:get() * 100 then
 					while exp + expToAdd > level:get() * 100 do -- why no while else (also probably redundant until soemone actually gets this much exp)
@@ -847,17 +859,16 @@ MainUI = New("ScreenGui")({
 							AnchorPoint = Vector2.new(0, 0),
 							Position = UDim2.fromScale(0.01, 0.02),
 							Text = Computed(function()
-								return currency:get() .. " typing tokens"
+								return currency:get() .. " typing\ntokens"
 							end),
 							Image = 7367251392,
-							TextWrapped = false,
 
 							LabelWidth = 0.7,
 							LabelPosition = 0.95,
 						}),
 						Label({
 							Name = "Words",
-							Size = UDim2.fromScale(0.17, 0.075),
+							Size = UDim2.fromScale(0.19, 0.075),
 							AnchorPoint = Vector2.new(0.5, 0),
 							Position = UDim2.fromScale(0.5, 0.02),
 							Text = Computed(function()
@@ -866,58 +877,23 @@ MainUI = New("ScreenGui")({
 							Image = 7367083297,
 						}),
 
-						New("TextButton")({ -- why from scratch
+						Button({
 							Name = "DifficultyButton",
-
-							Size = UDim2.fromScale(0.17, 0.075),
+							Size = UDim2.fromScale(0.22, 0.075),
 							AnchorPoint = Vector2.new(1, 0),
 							Position = UDim2.fromScale(0.99, 0.02),
-							BackgroundColor3 = Grey3,
-							AutoButtonColor = true,
+							Text = Computed(function()
+								return "Change difficulty:\n" .. difficultyName:get()
+							end),
+							Image = 7363005276,
+							Ratelimit = true,
 
-							[Children] = {
-								UICorner(),
-								UIPadding({ PaddingH = 0.033 }),
+							Activated = function()
+								difficulty:set((difficulty:get() % 4) + 1)
+							end,
 
-								New("IntValue")({
-									Name = "DifficultyLevel",
-									Value = 1,
-								}),
-
-								New("TextLabel")({
-									Text = "Change Difficulty:",
-
-									Size = UDim2.fromScale(0.6, 0.5),
-									Position = UDim2.fromScale(0.9, 0.25),
-									AnchorPoint = Vector2.new(1, 0.5),
-
-									Font = playerFont,
-								}),
-
-								New("TextLabel")({
-									Name = "DifficultyLevelText",
-									Text = "Easy",
-
-									Size = UDim2.fromScale(0.6, 0.5),
-									Position = UDim2.fromScale(0.9, 0.75),
-									AnchorPoint = Vector2.new(1, 0.5),
-
-									Font = playerFont,
-								}),
-
-								New("ImageLabel")({
-									Size = UDim2.fromScale(0.3, 0.3),
-									Position = UDim2.fromScale(0, 0.5),
-									AnchorPoint = Vector2.new(0, 0.5),
-
-									Image = "rbxassetid://7363005276",
-									[Children] = New("UIAspectRatioConstraint")({
-										AspectRatio = 1,
-										AspectType = Enum.AspectType.ScaleWithParentSize,
-										DominantAxis = Enum.DominantAxis.Width,
-									}),
-								}),
-							},
+							LabelWidth = 0.65,
+							LabelPosition = 0.95,
 						}),
 
 						New("Frame")({
@@ -969,7 +945,7 @@ MainUI = New("ScreenGui")({
 									Position = UDim2.fromScale(0.5, 0),
 									Text = "Amount until level up",
 
-									Image = 261481376, -- DELETE THIS. AWFUL	-- ok, it did end up getting content deleted
+									Image = 0, -- No image
 
 									LabelWidth = 1,
 									LabelPosition = 1,
@@ -1138,7 +1114,6 @@ Typing Simulator by S-GAMES]],
 						TextSize = 28,
 						TextScaled = false,
 						TextTruncate = Enum.TextTruncate.AtEnd,
-						TextWrapped = true,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Top,
 					}),
