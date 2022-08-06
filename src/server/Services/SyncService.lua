@@ -53,16 +53,25 @@ function SyncService.Client:WordTyped(player)
 end
 
 function SyncService.Client:ChangeSetting(player, setting)
-	DataService:SetData(player, {"Settings", setting}, not DataService:GetSetting(player, setting))
+	DataService:SetData(player, { "Settings", setting }, not DataService:GetSetting(player, setting))
 	-- currently settings are all checkboxes stored as booleans, fine for now
 end
 
-function SyncService.Client:ChangeWordlist()
-	wordlist = wordlist % 4 + 1
+function SyncService.Client:ChangeWordlist(player)
+	SyncService:ChangeWordlist(player)
+end
+function SyncService:ChangeWordlist(player)
+	repeat
+		wordlist = wordlist % 4 + 1
+		if wordlist == 1 then
+			break
+		end
+	until DataService:ItemOwned(player, "Wordlists", Words[wordlist].Name)
+	print(wordlist)
 end
 
 function SyncService.Client:PurchaseItem(player, category, item)
-	-- if DataService:GetData(player, "ShopPurchases")[item] then
+	-- if DataService:GetData(player, "ShopPurchases")[category][item] then
 	-- 	return
 	-- end
 	local itemPrice = ShopItems[category][item].Price
@@ -70,7 +79,7 @@ function SyncService.Client:PurchaseItem(player, category, item)
 		return
 	end
 	DataService:IncrementData(player, "Currency", -itemPrice)
-	DataService:SetData(player, {"ShopPurchases", category, item}, true)
+	DataService:SetData(player, { "ShopPurchases", category, item }, true)
 	return true
 end
 

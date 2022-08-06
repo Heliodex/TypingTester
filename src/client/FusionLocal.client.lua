@@ -77,7 +77,14 @@ local currency = State(0)
 local experience = State(0)
 local level = State(0)
 local wordsTyped = State(0)
+local ownedWordlists = {}
 local wordlist = State()
+
+for _, v in pairs(Words) do
+	ownedWordlists[v.Name] = false
+end
+ownedWordlists["Easy"] = true
+
 local wordlistName = State("Easy")
 local wordlistChanged = Compat(wordlist)
 
@@ -479,9 +486,10 @@ local function ShopOption(props)
 	local clickable
 
 	dataLoadedChanged:onChange(function()
-		DataService:ItemOwned(props.Name):andThen(function(owned)
+		DataService:ItemOwned(props.Category, props.Name):andThen(function(owned)
 			if owned then
 				buttonText:set("Owned")
+				ownedWordlists[props.Name] = true
 				clickable = false
 			else
 				clickable = true
@@ -520,7 +528,7 @@ local function ShopOption(props)
 					if clickable then
 						local price = buttonText:get()
 						clickable = false
-						SyncService:PurchaseItem(props.Name):andThen(function(success)
+						SyncService:PurchaseItem(props.Category, props.Name):andThen(function(success)
 							if success then
 								currency:set(currency:get() - price)
 								buttonText:set("Purchase successful!")
@@ -571,10 +579,10 @@ TypingBox = New("TextBox")({
 			wordCorrect:set(Green)
 			if text == displayedWords[1]:get() .. " " then
 				TypingBox.Text = ""
-				
+
 				SyncService:WordTyped()
 				wordsTyped:set(wordsTyped:get() + 1)
-				
+
 				local currentWordlist = Words[wordlist:get()]
 				local expToAdd = randomGenerator:NextInteger(currentWordlist.Exp[1], currentWordlist.Exp[2])
 
@@ -890,7 +898,17 @@ MainUI = New("ScreenGui")({
 							Ratelimit = true,
 
 							Activated = function()
-								wordlist:set(wordlist:get() % 4 + 1)
+								local currentWordlist = wordlist:get()
+
+								repeat
+									currentWordlist = currentWordlist % 4 + 1
+									if currentWordlist == 1 then
+										break
+									end
+								until ownedWordlists[Words[currentWordlist].Name]
+
+								wordlist:set(currentWordlist)
+
 								SyncService:ChangeWordlist()
 							end,
 

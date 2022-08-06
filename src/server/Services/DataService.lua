@@ -46,7 +46,7 @@ local DefaultUserTemplate = {
 	DefaultProfileTemplate,
 }
 
-local ProfileStore = ProfileService.GetProfileStore("PlayerData_testing123", DefaultUserTemplate)
+local ProfileStore = ProfileService.GetProfileStore("PlayerData_testing124", DefaultUserTemplate)
 local Profiles = {}
 local CurrentSaveSlot = {}
 local ProfileViews = {}
@@ -99,8 +99,11 @@ function DataService.Client:PreviewData(player, SaveSlot)
 	end
 end
 
-function DataService.Client:ItemOwned(player, item)
-	return DataService:GetData(player, "ShopPurchases")[item]
+function DataService.Client:ItemOwned(player, category, item)
+	return DataService:ItemOwned(player, category, item)
+end
+function DataService:ItemOwned(player, category, item)
+	return DataService:GetData(player, "ShopPurchases")[category][item]
 end
 
 function DataService.Client:GetSetting(player, setting)
