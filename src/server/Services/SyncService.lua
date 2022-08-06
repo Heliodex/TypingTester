@@ -9,6 +9,7 @@ How syncing works
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
+local Words = require(ReplicatedStorage.Shared.Words)
 local seed = math.random()
 local rand = Random.new(seed)
 
@@ -19,6 +20,7 @@ local SyncService = Knit.CreateService({
 
 local experience
 local level
+local wordlist = 1
 
 function SyncService:KnitStart()
 	DataService = Knit.GetService("DataService")
@@ -34,7 +36,9 @@ function SyncService.Client:WordTyped(player)
 
 	DataService:IncrementData(player, "WordsTyped", 1)
 
-	local expToAdd = rand:NextInteger(12, 15)
+	local currentWordlist = Words[wordlist]
+	local expToAdd = rand:NextInteger(currentWordlist.Exp[1], currentWordlist.Exp[2])
+
 	if experience + expToAdd > level * 100 then
 		experience += expToAdd - level * 100
 		DataService:IncrementData(player, "Experience", expToAdd - level * 100)
@@ -45,7 +49,7 @@ function SyncService.Client:WordTyped(player)
 		DataService:IncrementData(player, "Experience", expToAdd)
 	end
 
-	DataService:IncrementData(player, "Currency", 1)
+	DataService:IncrementData(player, "Currency", currentWordlist.Currency)
 end
 
 function SyncService.Client:ChangeSetting(player, setting)
@@ -53,16 +57,20 @@ function SyncService.Client:ChangeSetting(player, setting)
 	-- currently settings are all checkboxes stored as booleans, fine for now
 end
 
-function SyncService.Client:PurchaseItem(player, item)
+function SyncService.Client:ChangeWordlist()
+	wordlist = wordlist % 4 + 1
+end
+
+function SyncService.Client:PurchaseItem(player, category, item)
 	-- if DataService:GetData(player, "ShopPurchases")[item] then
 	-- 	return
 	-- end
-	local itemPrice = ShopItems[item].Price
+	local itemPrice = ShopItems[category][item].Price
 	if DataService:GetData(player, "Currency") < itemPrice then
 		return
 	end
 	DataService:IncrementData(player, "Currency", -itemPrice)
-	DataService:SetData(player, {"ShopPurchases", item}, true)
+	DataService:SetData(player, {"ShopPurchases", category, item}, true)
 	return true
 end
 

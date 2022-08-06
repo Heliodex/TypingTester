@@ -1,11 +1,10 @@
--- not how you are supposed to use modulescripts
-
 -- Word lists are taken from the top 200, 1000, 5000, and 451,790 words in English respectively, then heavily sanitized.
 
-local Words = {
+return {
 	{
 		Name = "Easy",
 		Exp = {12, 15},
+		Currency = 1,
 		"the",
 		"be",
 		"of",
@@ -139,6 +138,7 @@ local Words = {
 	{
 		Name = "Medium",
 		Exp = {20, 26},
+		Currency = 2,
 		"that",
 		"with",
 		"they",
@@ -855,6 +855,7 @@ local Words = {
 	{
 		Name = "Hard",
 		Exp = {35, 42},
+		Currency = 3,
 		"contact",
 		"business",
 		"services",
@@ -2816,6 +2817,7 @@ local Words = {
 	{
 		Name = "Insane",
 		Exp = {57, 65},
+		Currency = 5,
 		"alkylbenzenesulfonates",
 		"anatomicophysiologically",
 		"anthropomorphologically",
@@ -3009,5 +3011,3 @@ local Words = {
 	},
 	-- 190ish words between 21 and 31 characters
 }
-
-return Words

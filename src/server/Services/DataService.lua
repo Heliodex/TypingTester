@@ -24,9 +24,11 @@ local DefaultProfileTemplate = {
 	},
 
 	ShopPurchases = {
-		MediumDifficulty = false,
-		HardDifficulty = false,
-		InsaneDifficulty = false,
+		Wordlists = {
+			Medium = false,
+			Hard = false,
+			Insane = false,
+		},
 	},
 	Settings = {
 		KeySounds = false,

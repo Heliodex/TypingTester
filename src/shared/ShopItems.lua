@@ -1,11 +1,13 @@
 return {
-	MediumDifficulty = {
-		Price = 40,
-	},
-	HardDifficulty = {
-		Price = 100,
-	},
-	InsaneDifficulty = {
-		Price = 600,
+	Wordlists = {
+		Medium = {
+			Price = 40,
+		},
+		Hard = {
+			Price = 100,
+		},
+		Insane = {
+			Price = 600,
+		},
 	},
 }

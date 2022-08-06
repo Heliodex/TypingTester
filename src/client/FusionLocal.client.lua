@@ -4,6 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
+local Words = require(ReplicatedStorage.Shared.Words)
 
 Knit.Start()
 	:andThen(function()
@@ -19,7 +20,6 @@ SyncService:GetSeed():andThen(function(seed)
 	randomGenerator = Random.new(seed)
 end)
 
-local Words = require(script.Parent.Words)
 local Ranks = require(script.Parent.Ranks)
 local Sounds = ReplicatedStorage.Sounds
 local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
@@ -77,9 +77,9 @@ local currency = State(0)
 local experience = State(0)
 local level = State(0)
 local wordsTyped = State(0)
-local difficulty = State()
-local difficultyName = State("Easy")
-local difficultyChanged = Compat(difficulty)
+local wordlist = State()
+local wordlistName = State("Easy")
+local wordlistChanged = Compat(wordlist)
 
 local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
 	local res = ""
@@ -90,12 +90,12 @@ local function RandomString(length) -- thanks, mysterious4579		https://gist.gith
 end
 
 local function getWord()
-	local list = Words[difficulty:get()]
-	difficultyName:set(list.Name)
+	local list = Words[wordlist:get()]
+	wordlistName:set(list.Name)
 	return list[math.random(1, #list)]
 end
 
-difficultyChanged:onChange(function()
+wordlistChanged:onChange(function()
 	if TypingBox then
 		TypingBox.Text = ""
 	end
@@ -108,7 +108,7 @@ difficultyChanged:onChange(function()
 		end
 	end
 end)
-difficulty:set(1)
+wordlist:set(1)
 
 local function UICorner(corner)
 	return New("UICorner")({
@@ -475,7 +475,7 @@ local function SettingsOption(props)
 end
 
 local function ShopOption(props)
-	local buttonText = State(ShopItems[props.Name].Price)
+	local buttonText = State(ShopItems[props.Category][props.Name].Price)
 	local clickable
 
 	dataLoadedChanged:onChange(function()
@@ -571,12 +571,13 @@ TypingBox = New("TextBox")({
 			wordCorrect:set(Green)
 			if text == displayedWords[1]:get() .. " " then
 				TypingBox.Text = ""
-
+				
 				SyncService:WordTyped()
 				wordsTyped:set(wordsTyped:get() + 1)
+				
+				local currentWordlist = Words[wordlist:get()]
+				local expToAdd = randomGenerator:NextInteger(currentWordlist.Exp[1], currentWordlist.Exp[2])
 
-				local possibleExp = Words[difficulty:get()].Exp
-				local expToAdd = randomGenerator:NextInteger(possibleExp[1], possibleExp[2])
 				local exp = experience:get()
 				if exp + expToAdd > level:get() * 100 then
 					while exp + expToAdd > level:get() * 100 do -- why no while else (also probably redundant until soemone actually gets this much exp)
@@ -588,7 +589,7 @@ TypingBox = New("TextBox")({
 				end
 				experience:set(exp)
 
-				currency:set(currency:get() + 1)
+				currency:set(currency:get() + currentWordlist.Currency)
 
 				local tempWords = displayedWords
 
@@ -878,18 +879,19 @@ MainUI = New("ScreenGui")({
 						}),
 
 						Button({
-							Name = "DifficultyButton",
+							Name = "wordlistButton",
 							Size = UDim2.fromScale(0.22, 0.075),
 							AnchorPoint = Vector2.new(1, 0),
 							Position = UDim2.fromScale(0.99, 0.02),
 							Text = Computed(function()
-								return "Change difficulty:\n" .. difficultyName:get()
+								return "Change word list:\n" .. wordlistName:get()
 							end),
 							Image = 7363005276,
 							Ratelimit = true,
 
 							Activated = function()
-								difficulty:set((difficulty:get() % 4) + 1)
+								wordlist:set(wordlist:get() % 4 + 1)
+								SyncService:ChangeWordlist()
 							end,
 
 							LabelWidth = 0.65,
@@ -1083,7 +1085,7 @@ This is a game you can use to improve your speed, accuracy, and stamina while ty
 In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.
 The upcoming words are displayed below the current word.
 
-The button in the top-right corner allows you to change the difficulty of your words.
+The button in the top-right corner allows you to change the wordlist of your words.
 
 Easy words can be between 2 and 4 letters long. They are the easiest to type.
 They give 1 typing token and 12-15 exp per word.
@@ -1167,18 +1169,21 @@ Typing Simulator by S-GAMES]],
 						}),
 
 						ShopOption({
-							Name = "MediumDifficulty",
-							Text = "Medium Difficulty",
+							Name = "Medium",
+							Category = "Wordlists",
+							Text = "Medium words",
 							LayoutOrder = 1,
 						}),
 						ShopOption({
-							Name = "HardDifficulty",
-							Text = "Hard Difficulty",
+							Name = "Hard",
+							Category = "Wordlists",
+							Text = "Hard words",
 							LayoutOrder = 2,
 						}),
 						ShopOption({
-							Name = "InsaneDifficulty",
-							Text = "Insane Difficulty",
+							Name = "Insane",
+							Category = "Wordlists",
+							Text = "Insane words",
 							LayoutOrder = 3,
 						}),
 					},
