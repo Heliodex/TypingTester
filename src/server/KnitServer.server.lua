@@ -4,6 +4,6 @@ Knit.AddServices(game:GetService("ServerScriptService").Server.Services)
 
 Knit.Start()
 	:andThen(function()
-		print("[Knit] Server started")
+		print "[Knit] Server started"
 	end)
 	:catch(warn)

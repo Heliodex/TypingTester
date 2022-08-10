@@ -1,10 +1,10 @@
 -- Written 01/09/2021
 -- Last edited 11/26/2021
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ReplicatedStorage = game:GetService "ReplicatedStorage"
 
-local SoundService = game:GetService("SoundService")
-local RunService = game:GetService("RunService")
+local SoundService = game:GetService "SoundService"
+local RunService = game:GetService "RunService"
 local PlaySound = ReplicatedStorage.PlaySound
 local Sounds = ReplicatedStorage.Sounds
 

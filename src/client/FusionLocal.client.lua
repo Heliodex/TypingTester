@@ -1,6 +1,6 @@
 -- Main UI-buliding script
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ReplicatedStorage = game:GetService "ReplicatedStorage"
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
@@ -8,12 +8,12 @@ local Words = require(ReplicatedStorage.Shared.Words)
 
 Knit.Start()
 	:andThen(function()
-		print("[Knit] Client started")
+		print "[Knit] Client started"
 	end)
 	:catch(warn)
 
-local SyncService = Knit.GetService("SyncService")
-local DataService = Knit.GetService("DataService")
+local SyncService = Knit.GetService "SyncService"
+local DataService = Knit.GetService "DataService"
 local randomGenerator
 
 SyncService:GetSeed():andThen(function(seed)
@@ -85,7 +85,7 @@ for _, v in pairs(Words) do
 end
 ownedWordlists["Easy"] = true
 
-local wordlistName = State("Easy")
+local wordlistName = State "Easy"
 local wordlistChanged = Compat(wordlist)
 
 local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
@@ -118,9 +118,9 @@ end)
 wordlist:set(1)
 
 local function UICorner(corner)
-	return New("UICorner")({
+	return New "UICorner" {
 		CornerRadius = UDim.new(corner or 0.2, 0),
-	})
+	}
 end
 
 local function UIPadding(props)
@@ -136,16 +136,16 @@ local function UIPadding(props)
 		}
 	end
 
-	return New("UIPadding")({
+	return New "UIPadding" {
 		PaddingBottom = UDim.new(props.PaddingV, 0),
 		PaddingTop = UDim.new(props.PaddingV, 0),
 		PaddingLeft = UDim.new(props.PaddingH, 0),
 		PaddingRight = UDim.new(props.PaddingH, 0),
-	})
+	}
 end
 
 local function NextWords(props)
-	return New("TextLabel")({
+	return New "TextLabel" {
 		Name = "Label" .. props.Number,
 
 		Size = UDim2.fromScale(0.4, 0.06),
@@ -154,7 +154,7 @@ local function NextWords(props)
 		Font = playerFont,
 		TextColor3 = Grey5,
 		Text = displayedWords[props.Number],
-	})
+	}
 end
 
 local function BackgroundDesign()
@@ -163,7 +163,7 @@ local function BackgroundDesign()
 	for i = 1, 11 do
 		local temp = (i - 3.5) / 5
 
-		local box = New("TextLabel")({
+		local box = New "TextLabel" {
 			Name = "BackgroundDesign" .. tostring(i),
 
 			Size = UDim2.fromScale(2.41, 0.1),
@@ -173,7 +173,7 @@ local function BackgroundDesign()
 			TextColor3 = Grey0,
 			TextTransparency = 0.65,
 			Text = RandomString(215),
-		})
+		}
 		table.insert(returns, box)
 	end
 	return returns
@@ -187,7 +187,7 @@ local function Button(props)
 	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
 	local clickable = true
 
-	return New("TextButton")({
+	return New "TextButton" {
 		Name = props.Name,
 
 		Size = props.Size,
@@ -199,7 +199,7 @@ local function Button(props)
 
 		SizeConstraint = props.SizeConstraint,
 
-		[OnEvent("Activated")] = function()
+		[OnEvent "Activated"] = function()
 			if clickable or not props.Ratelimit then
 				clickable = false
 				props.Activated() -- shouldn't yield
@@ -210,9 +210,9 @@ local function Button(props)
 
 		[Children] = {
 			UICorner(props.Corner),
-			UIPadding({ PaddingH = 0.075 / ratio }), -- at least it works well
+			UIPadding { PaddingH = 0.075 / ratio }, -- at least it works well
 
-			New("TextLabel")({
+			New "TextLabel" {
 				Text = props.Text,
 
 				Size = UDim2.fromScale(props.LabelWidth, 1),
@@ -220,27 +220,27 @@ local function Button(props)
 				AnchorPoint = Vector2.new(1, 0.5),
 
 				Font = playerFont,
-			}),
+			},
 
-			New("ImageLabel")({
+			New "ImageLabel" {
 				Size = UDim2.fromScale(props.ImageSize, props.ImageSize),
 				Position = UDim2.fromScale(0, 0.5),
 				AnchorPoint = Vector2.new(0, 0.5),
 
 				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = New("UIAspectRatioConstraint")({
+				[Children] = New "UIAspectRatioConstraint" {
 					AspectRatio = 1,
 					AspectType = Enum.AspectType.ScaleWithParentSize,
 					DominantAxis = Enum.DominantAxis.Width,
-				}),
-			}),
+				},
+			},
 		},
-	})
+	}
 end
 
 local function SaveSlot(props)
 	local text = State("Save slot " .. props.SaveSlot)
-	local previewText = State("Loading info...")
+	local previewText = State "Loading info..."
 
 	local disconnect = dataPreparedChanged:onChange(function()
 		DataService:PreviewData(props.SaveSlot):andThen(function(data)
@@ -250,7 +250,7 @@ local function SaveSlot(props)
 		end)
 	end)
 
-	return New("TextButton")({
+	return New "TextButton" {
 		Name = "SaveSlot",
 
 		Size = UDim2.fromScale(1, 0.15),
@@ -260,11 +260,11 @@ local function SaveSlot(props)
 		BackgroundColor3 = Grey3,
 		AutoButtonColor = true,
 
-		[OnEvent("Activated")] = function()
+		[OnEvent "Activated"] = function()
 			if not loadingData then
 				loadingData = true
-				print("Loading data...")
-				text:set("Loading...")
+				print "Loading data..."
+				text:set "Loading..."
 				disconnect()
 
 				DataService:LoadData(props.SaveSlot):andThen(function(data)
@@ -274,7 +274,7 @@ local function SaveSlot(props)
 					wordsTyped:set(data.WordsTyped)
 
 					dataLoaded:set(true)
-					print("Data loaded!")
+					print "Data loaded!"
 
 					PlayScreen.Frame.Visible = false
 					Sounds.music:Play()
@@ -286,7 +286,7 @@ local function SaveSlot(props)
 		[Children] = {
 			UICorner(),
 
-			New("TextLabel")({
+			New "TextLabel" {
 				Name = "SaveSlotName",
 				Text = text,
 
@@ -296,9 +296,9 @@ local function SaveSlot(props)
 				TextXAlignment = Enum.TextXAlignment.Left,
 
 				Font = playerFont,
-			}),
+			},
 
-			New("TextLabel")({
+			New "TextLabel" {
 				Name = "SaveSlotPreview",
 				Text = previewText,
 
@@ -308,9 +308,9 @@ local function SaveSlot(props)
 				TextXAlignment = Enum.TextXAlignment.Right,
 
 				Font = playerFont,
-			}),
+			},
 		},
-	})
+	}
 end
 
 local function Label(props)
@@ -319,7 +319,7 @@ local function Label(props)
 
 	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale)
 
-	return New("TextLabel")({
+	return New "TextLabel" {
 		Name = props.Name,
 
 		Size = props.Size,
@@ -330,10 +330,10 @@ local function Label(props)
 
 		[Children] = {
 			UICorner(),
-			UIPadding({ PaddingH = 0.075 / ratio }), -- ratio
+			UIPadding { PaddingH = 0.075 / ratio }, -- ratio
 			props.Children,
 
-			New("TextLabel")({
+			New "TextLabel" {
 				Text = props.Text,
 
 				Size = UDim2.fromScale(props.LabelWidth, 1),
@@ -341,35 +341,35 @@ local function Label(props)
 				AnchorPoint = Vector2.new(1, 0.5),
 
 				Font = playerFont,
-			}),
+			},
 
-			New("ImageLabel")({
+			New "ImageLabel" {
 				Size = UDim2.fromScale(0.3, 0.3),
 				Position = UDim2.fromScale(0, 0.5),
 				AnchorPoint = Vector2.new(0, 0.5),
 
 				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = New("UIAspectRatioConstraint")({
+				[Children] = New "UIAspectRatioConstraint" {
 					AspectRatio = 1,
 					AspectType = Enum.AspectType.ScaleWithParentSize,
 					DominantAxis = Enum.DominantAxis.Width,
-				}),
-			}),
+				},
+			},
 		},
-	})
+	}
 end
 
 local function Popup(props)
 	if typeof(props.Children) == "table" then
 		for i = 1, #props.Children do
-			if props.Children[i]:IsA("GuiObject") then
+			if props.Children[i]:IsA "GuiObject" then
 				props.Children[i].LayoutOrder = i
 			end
 		end
 	end
 
 	local popup
-	popup = New("Frame")({
+	popup = New "Frame" {
 		Name = props.Name,
 
 		Size = props.Size or UDim2.fromScale(0.8, 0.8),
@@ -381,25 +381,25 @@ local function Popup(props)
 		[Children] = {
 			UICorner(props.Corner),
 
-			New("ScrollingFrame")({
+			New "ScrollingFrame" {
 				Active = true,
 				Position = UDim2.fromScale(0.5, 0.556), -- perfect values
 				Size = UDim2.fromScale(1, 0.888),
 				CanvasSize = UDim2.fromScale(1, 2.5),
 
-				[Children] = New("Frame")({
+				[Children] = New "Frame" {
 					Size = UDim2.fromScale(0.96, 1),
 					Position = UDim2.fromScale(0.5, 0.5),
 					BackgroundTransparency = 1,
 
 					[Children] = {
-						UIPadding({ PaddingV = 0.01, PaddingH = 0 }),
+						UIPadding { PaddingV = 0.01, PaddingH = 0 },
 						props.Children,
 					},
-				}),
-			}),
+				},
+			},
 
-			New("TextLabel")({
+			New "TextLabel" {
 				Name = "Label",
 				AnchorPoint = Vector2.new(0.5, 0),
 				BackgroundColor3 = Grey1,
@@ -410,7 +410,7 @@ local function Popup(props)
 				Font = playerFontBold,
 				Text = string.upper(props.Name),
 
-				[Children] = New("TextButton")({
+				[Children] = New "TextButton" {
 					Name = "CloseButton",
 					AnchorPoint = Vector2.new(1, 0),
 					BackgroundColor3 = Black2,
@@ -423,14 +423,14 @@ local function Popup(props)
 					Text = "X",
 					AutoButtonColor = true,
 
-					[OnEvent("Activated")] = function()
+					[OnEvent "Activated"] = function()
 						popup.Visible = false
 						DarkTintTransparency:set(1)
 					end,
-				}),
-			}),
+				},
+			},
 		},
-	})
+	}
 	return popup
 end
 
@@ -444,13 +444,13 @@ local function SettingsOption(props)
 		end)
 	end)
 
-	return New("TextButton")({
+	return New "TextButton" {
 		Name = props.Name,
 
 		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
 		BackgroundTransparency = 1,
 
-		[OnEvent("Activated")] = function()
+		[OnEvent "Activated"] = function()
 			if clickable then
 				clickable = false
 				checked:set(not checked:get())
@@ -461,24 +461,24 @@ local function SettingsOption(props)
 		end,
 
 		[Children] = {
-			New("ImageLabel")({
+			New "ImageLabel" {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeYY,
 				Image = Computed(function()
 					return if checked:get() then "rbxassetid://7523095951" else "rbxassetid://7523096047"
 				end),
-			}),
-			New("TextLabel")({
+			},
+			New "TextLabel" {
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.fromScale(0.18, 0.5),
 				Size = UDim2.fromScale(0.8, 0.8),
 				Font = playerFont,
 				Text = props.Text,
 				TextXAlignment = Enum.TextXAlignment.Left,
-			}),
+			},
 		},
-	})
+	}
 end
 
 local function ShopOption(props)
@@ -488,7 +488,7 @@ local function ShopOption(props)
 	dataLoadedChanged:onChange(function()
 		DataService:ItemOwned(props.Category, props.Name):andThen(function(owned)
 			if owned then
-				buttonText:set("Owned")
+				buttonText:set "Owned"
 				ownedWordlists[props.Name] = true
 				clickable = false
 			else
@@ -497,23 +497,23 @@ local function ShopOption(props)
 		end)
 	end)
 
-	return New("Frame")({
+	return New "Frame" {
 		Name = props.Name,
 
 		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
 		BackgroundTransparency = 1,
 
 		[Children] = {
-			New("TextLabel")({
+			New "TextLabel" {
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.fromScale(0, 0.5),
 				Size = UDim2.fromScale(0.7, 0.8),
 				Font = playerFont,
 				Text = props.Text,
 				TextXAlignment = Enum.TextXAlignment.Left,
-			}),
+			},
 
-			New("TextButton")({
+			New "TextButton" {
 				Name = "Price",
 
 				BackgroundColor3 = Grey3,
@@ -524,18 +524,18 @@ local function ShopOption(props)
 				Text = buttonText,
 				AutoButtonColor = true,
 
-				[OnEvent("Activated")] = function()
+				[OnEvent "Activated"] = function()
 					if clickable then
 						local price = buttonText:get()
 						clickable = false
 						SyncService:PurchaseItem(props.Category, props.Name):andThen(function(success)
 							if success then
 								currency:set(currency:get() - price)
-								buttonText:set("Purchase successful!")
+								buttonText:set "Purchase successful!"
 								task.wait(1)
-								buttonText:set("Owned")
+								buttonText:set "Owned"
 							else
-								buttonText:set("Purchase failed!")
+								buttonText:set "Purchase failed!"
 								task.wait(1)
 								buttonText:set(price)
 								clickable = true
@@ -548,12 +548,12 @@ local function ShopOption(props)
 					UIPadding(),
 					UICorner(),
 				},
-			}),
+			},
 		},
-	})
+	}
 end
 
-TypingBox = New("TextBox")({
+TypingBox = New "TextBox" {
 	Name = "TypingBox",
 	Position = UDim2.fromScale(0.5, 0.7),
 	Size = UDim2.fromScale(0.5, 0.05),
@@ -564,7 +564,7 @@ TypingBox = New("TextBox")({
 	PlaceholderText = "Type here (spacebar to complete word)",
 	PlaceholderColor3 = Grey3,
 
-	[OnChange("Text")] = function()
+	[OnChange "Text"] = function()
 		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
 
 		local rand = math.random(1, 3)
@@ -617,21 +617,22 @@ TypingBox = New("TextBox")({
 		UICorner(),
 		UIPadding(),
 	},
-})
+}
 
-PlayScreen = New("ScreenGui")({
+PlayScreen = New "ScreenGui" {
 	Name = "PlayScreen",
 	Parent = LocalPlayer.PlayerGui,
 	DisplayOrder = 10,
 	IgnoreGuiInset = true,
 
-	[Children] = New("Frame")({
+	[Children] = New "Frame" {
+
 		BackgroundColor3 = Black2,
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = UDim2.fromScale(1, 1),
 
 		[Children] = {
-			New("Frame")({
+			New "Frame" {
 				Name = "SaveSlots",
 				BackgroundColor3 = Black1,
 				Position = UDim2.fromScale(0.5, 0.5),
@@ -640,46 +641,46 @@ PlayScreen = New("ScreenGui")({
 
 				[Children] = {
 					UICorner(0.05),
-					UIPadding({ Padding = 0.025 }),
+					UIPadding { Padding = 0.025 },
 
-					New("TextLabel")({
+					New "TextLabel" {
 						Size = UDim2.fromScale(1, 0.1),
 						Position = UDim2.fromScale(0.5, -0.1),
 						Text = "Select a save slot to load",
 						Font = playerFontBold,
-					}),
+					},
 
-					SaveSlot({
+					SaveSlot {
 						SaveSlot = 1,
 						Position = UDim2.fromScale(0.5, 0.1),
-					}),
-					SaveSlot({
+					},
+					SaveSlot {
 						SaveSlot = 2,
 						Position = UDim2.fromScale(0.5, 0.3),
-					}),
-					SaveSlot({
+					},
+					SaveSlot {
 						SaveSlot = 3,
 						Position = UDim2.fromScale(0.5, 0.5),
-					}),
-					SaveSlot({
+					},
+					SaveSlot {
 						SaveSlot = 4,
 						Position = UDim2.fromScale(0.5, 0.7),
-					}),
-					SaveSlot({
+					},
+					SaveSlot {
 						SaveSlot = 5,
 						Position = UDim2.fromScale(0.5, 0.9),
-					}),
+					},
 				},
-			}),
+			},
 
-			New("Frame")({
+			New "Frame" {
 				Name = "Play",
 				BackgroundTransparency = 1,
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromScale(1, 1),
 
 				[Children] = {
-					Button({
+					Button {
 						Name = "Play",
 						Size = UDim2.fromScale(0.17, 0.075),
 						Position = UDim2.fromScale(0.5, 0.5),
@@ -690,9 +691,9 @@ PlayScreen = New("ScreenGui")({
 							PlayScreen.Frame.Play.Visible = false
 							PlayScreen.Frame.SaveSlots.Visible = true
 						end,
-					}),
+					},
 
-					New("TextLabel")({ -- Title
+					New "TextLabel" { -- Title
 						Name = "Title",
 						Position = UDim2.fromScale(0.5, 0.35),
 						Size = UDim2.fromScale(0.3, 0.175),
@@ -700,17 +701,17 @@ PlayScreen = New("ScreenGui")({
 						RichText = true,
 						Text = "typing simulator but better",
 
-						[Children] = UIPadding({ Padding = 0.1 }),
-					}),
+						[Children] = UIPadding { Padding = 0.1 },
+					},
 
-					New("Frame")({ -- Credits
+					New "Frame" { -- Credits
 						Name = "Credits",
 						BackgroundTransparency = 1,
 						Position = UDim2.fromScale(0.9, 0.65),
 						Size = UDim2.fromScale(0.1, 0.1),
 						SizeConstraint = Enum.SizeConstraint.RelativeXX,
 
-						[Children] = New("ImageLabel")({
+						[Children] = New "ImageLabel" {
 							Name = "HeliodexLogo",
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
@@ -720,15 +721,15 @@ PlayScreen = New("ScreenGui")({
 							Image = "rbxassetid://7501730261",
 
 							[Children] = {
-								New("TextLabel")({
+								New "TextLabel" {
 									Name = "a Heliodex game",
 									Position = UDim2.fromScale(0.5, 1.1),
 									Size = UDim2.fromScale(1.8, 0.2),
 									Font = playerFontThin,
 									RichText = true,
 									Text = "a <i>HELIODEX</i> game",
-								}),
-								New("TextLabel")({
+								},
+								New "TextLabel" {
 									Name = "pjstarr12",
 									Position = UDim2.fromScale(0.5, 1.4),
 									Size = UDim2.fromScale(1.5, 0.175),
@@ -736,8 +737,8 @@ PlayScreen = New("ScreenGui")({
 									Text = "pjstarr12",
 
 									[Children] = UIPadding(),
-								}),
-								New("TextLabel")({
+								},
+								New "TextLabel" {
 									Name = "TheWhaleCloud",
 									Position = UDim2.fromScale(0.5, 1.6),
 									Size = UDim2.fromScale(1.5, 0.175),
@@ -745,8 +746,8 @@ PlayScreen = New("ScreenGui")({
 									Text = "TheWhaleCloud",
 
 									[Children] = UIPadding(),
-								}),
-								New("TextLabel")({
+								},
+								New "TextLabel" {
 									Name = "Lewin4",
 									AnchorPoint = Vector2.new(0.5, 0.5),
 									Position = UDim2.fromScale(0.5, 1.8),
@@ -755,26 +756,26 @@ PlayScreen = New("ScreenGui")({
 									Text = "Lewin4",
 
 									[Children] = UIPadding(),
-								}),
+								},
 							},
-						}),
-					}),
+						},
+					},
 				},
-			}),
+			},
 		},
-	}),
-})
+	},
+}
 
 -- Main ui time,,.,,.oaoeueuoueooaaeiiaaa
 
-MainUI = New("ScreenGui")({
+MainUI = New "ScreenGui" {
 	Name = "Main",
 	Parent = LocalPlayer.PlayerGui,
 	DisplayOrder = 0,
 	IgnoreGuiInset = true,
 
 	[Children] = {
-		New("TextLabel")({ -- could go inside MainFrame or frame
+		New "TextLabel" { -- could go inside MainFrame or frame
 			Name = "Notification",
 
 			Position = UDim2.fromScale(0.5, 0.15),
@@ -786,23 +787,23 @@ MainUI = New("ScreenGui")({
 			Font = playerFont,
 
 			ZIndex = 88,
-		}),
+		},
 
-		New("Frame")({
+		New "Frame" {
 			Name = "MainFrame",
 			Size = UDim2.fromScale(1, 1),
 
 			ZIndex = 5,
 
 			[Children] = {
-				New("Frame")({
+				New "Frame" {
 					Size = Spring(MainFrameSize, 12, 1),
 					BackgroundTransparency = 1,
 
 					ZIndex = 5,
 
 					[Children] = {
-						Button({
+						Button {
 							Name = "OpenHelp",
 							Size = UDim2.fromScale(0.17, 0.075),
 							AnchorPoint = Vector2.new(0, 1),
@@ -817,8 +818,8 @@ MainUI = New("ScreenGui")({
 									if MainUI.MainFrame.Help.Visible then DarkTintTransparencyGoal else 1
 								)
 							end,
-						}),
-						Button({
+						},
+						Button {
 							Name = "OpenShop",
 							Size = UDim2.fromScale(0.17, 0.075),
 							AnchorPoint = Vector2.new(0, 0),
@@ -833,8 +834,8 @@ MainUI = New("ScreenGui")({
 									if MainUI.MainFrame.Shop.Visible then DarkTintTransparencyGoal else 1
 								)
 							end,
-						}),
-						Button({
+						},
+						Button {
 							Name = "OpenSettings",
 							Size = UDim2.fromScale(0.17, 0.075),
 							AnchorPoint = Vector2.new(1, 0),
@@ -849,8 +850,8 @@ MainUI = New("ScreenGui")({
 									if MainUI.MainFrame.Settings.Visible then DarkTintTransparencyGoal else 1
 								)
 							end,
-						}),
-						Button({
+						},
+						Button {
 							Name = "AudioToggle",
 							Size = UDim2.fromScale(0.1, 0.1),
 							AnchorPoint = Vector2.new(1, 1),
@@ -861,8 +862,8 @@ MainUI = New("ScreenGui")({
 							Corner = 0.1,
 							ImageSize = 0.9,
 							SizeConstraint = Enum.SizeConstraint.RelativeYY,
-						}),
-						Label({
+						},
+						Label {
 							Name = "Currency",
 							Size = UDim2.fromScale(0.22, 0.075),
 							AnchorPoint = Vector2.new(0, 0),
@@ -874,8 +875,8 @@ MainUI = New("ScreenGui")({
 
 							LabelWidth = 0.7,
 							LabelPosition = 0.95,
-						}),
-						Label({
+						},
+						Label {
 							Name = "Words",
 							Size = UDim2.fromScale(0.19, 0.075),
 							AnchorPoint = Vector2.new(0.5, 0),
@@ -884,9 +885,9 @@ MainUI = New("ScreenGui")({
 								return wordsTyped:get() .. " Words"
 							end),
 							Image = 7367083297,
-						}),
+						},
 
-						Button({
+						Button {
 							Name = "wordlistButton",
 							Size = UDim2.fromScale(0.22, 0.075),
 							AnchorPoint = Vector2.new(1, 0),
@@ -914,9 +915,9 @@ MainUI = New("ScreenGui")({
 
 							LabelWidth = 0.65,
 							LabelPosition = 0.95,
-						}),
+						},
 
-						New("Frame")({
+						New "Frame" {
 							Name = "LevelMenu",
 							AnchorPoint = Vector2.new(1, 0),
 							Position = UDim2.fromScale(0.99, 0.115),
@@ -925,9 +926,9 @@ MainUI = New("ScreenGui")({
 
 							[Children] = {
 								UICorner(0.05),
-								UIPadding({ Padding = 0.04 }),
+								UIPadding { Padding = 0.04 },
 
-								Label({
+								Label {
 									Name = "Rank",
 									Size = UDim2.fromScale(1, 0.32),
 									AnchorPoint = Vector2.new(0.5, 1),
@@ -939,16 +940,16 @@ MainUI = New("ScreenGui")({
 									BackgroundColor3 = White,
 
 									Children = {
-										New("UIGradient")({
+										New "UIGradient" {
 											Color = Computed(function()
 												return Ranks(level:get()).Colour
 											end),
 
 											Rotation = 90,
-										}),
+										},
 									},
-								}),
-								Label({
+								},
+								Label {
 									Name = "Level",
 									Size = UDim2.fromScale(1, 0.25),
 									AnchorPoint = Vector2.new(0.5, 0.5),
@@ -957,8 +958,8 @@ MainUI = New("ScreenGui")({
 										return "Level " .. level:get()
 									end),
 									Image = 7367078076,
-								}),
-								Label({
+								},
+								Label {
 									Name = "Experience",
 									Size = UDim2.fromScale(1, 0.2),
 									AnchorPoint = Vector2.new(0.5, 0),
@@ -969,9 +970,9 @@ MainUI = New("ScreenGui")({
 
 									LabelWidth = 1,
 									LabelPosition = 1,
-								}),
+								},
 
-								New("Frame")({
+								New "Frame" {
 									Name = "BarHolder",
 									Size = UDim2.fromScale(1, 0.08),
 									Position = UDim2.fromScale(0.5, 0.28),
@@ -981,7 +982,7 @@ MainUI = New("ScreenGui")({
 									[Children] = {
 										UICorner(0.5),
 
-										[Children] = New("Frame")({
+										[Children] = New "Frame" {
 											Name = "Bar",
 											Size = Spring(
 												Computed(function()
@@ -996,19 +997,19 @@ MainUI = New("ScreenGui")({
 											BackgroundColor3 = Green,
 
 											[Children] = UICorner(0.5),
-										}),
+										},
 									},
-								}),
+								},
 							},
-						}),
+						},
 
 						TypingBox,
 
-						New("Folder")({
+						New "Folder" {
 							Name = "NextWordLabels",
 
 							[Children] = {
-								New("TextLabel")({
+								New "TextLabel" {
 									Name = "CurrentWordLabel",
 
 									Size = UDim2.fromScale(0.4, 0.06),
@@ -1016,38 +1017,38 @@ MainUI = New("ScreenGui")({
 
 									Font = playerFont,
 									Text = displayedWords[1],
-								}),
+								},
 
-								NextWords({
+								NextWords {
 									Position = 0.36,
 									Number = 2,
-								}),
-								NextWords({
+								},
+								NextWords {
 									Position = 0.42,
 									Number = 3,
-								}),
-								NextWords({
+								},
+								NextWords {
 									Position = 0.48,
 									Number = 4,
-								}),
-								NextWords({
+								},
+								NextWords {
 									Position = 0.54,
 									Number = 5,
-								}),
+								},
 							},
-						}),
+						},
 					},
-				}),
+				},
 
-				New("UIGradient")({
-					Color = ColorSequence.new({
+				New "UIGradient" {
+					Color = ColorSequence.new {
 						ColorSequenceKeypoint.new(0, Color3.fromRGB(32, 30, 28)),
 						ColorSequenceKeypoint.new(1, Color3.fromRGB(12, 10, 8)),
-					}),
+					},
 					Rotation = 110,
-				}),
+				},
 
-				New("Frame")({
+				New "Frame" {
 					Name = "BackgroundDesign",
 
 					Size = UDim2.fromScale(1.5, 0.75),
@@ -1057,16 +1058,16 @@ MainUI = New("ScreenGui")({
 					ZIndex = -50,
 
 					[Children] = {
-						New("Frame")({
+						New "Frame" {
 							Name = "Frame1",
 
 							Size = UDim2.fromScale(1, 1),
 							BackgroundTransparency = 1,
 
 							[Children] = BackgroundDesign(),
-						}),
+						},
 
-						New("Frame")({
+						New "Frame" {
 							Name = "Frame2",
 
 							Size = UDim2.fromScale(1, 1),
@@ -1074,14 +1075,14 @@ MainUI = New("ScreenGui")({
 							BackgroundTransparency = 1,
 
 							[Children] = BackgroundDesign(),
-						}),
+						},
 					},
-				}),
+				},
 
 				-- MENU TIME
 				-- OH MY GOD STOP PROCRASTINATING
 
-				Popup({
+				Popup {
 					Name = "Help",
 
 					Size = UDim2.fromScale(0.8, 0.8),
@@ -1090,7 +1091,7 @@ MainUI = New("ScreenGui")({
 
 					-- Children does not require brackets here
 					-- remember, this is a variable, children are applied in the Popup() function
-					Children = New("TextLabel")({
+					Children = New "TextLabel" {
 						Name = "Text",
 						AnchorPoint = Vector2.new(0.5, 0.9),
 						Position = UDim2.fromScale(0.5, 1),
@@ -1136,10 +1137,10 @@ Typing Simulator by S-GAMES]],
 						TextTruncate = Enum.TextTruncate.AtEnd,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Top,
-					}),
-				}),
+					},
+				},
 
-				Popup({
+				Popup {
 					Name = "Settings",
 
 					Size = UDim2.fromScale(0.5, 0.5),
@@ -1147,32 +1148,32 @@ Typing Simulator by S-GAMES]],
 					ZIndex = 130,
 
 					Children = {
-						New("UIGridLayout")({
+						New "UIGridLayout" {
 							FillDirectionMaxCells = 2,
 							CellSize = UDim2.fromScale(0.465, 0.05),
 							CellPadding = UDim2.fromScale(0.05, 0.02),
-						}),
+						},
 
-						SettingsOption({
+						SettingsOption {
 							Name = "KeySounds",
 							Text = "Keypress Sounds",
-						}),
-						SettingsOption({
+						},
+						SettingsOption {
 							Name = "BlindMode",
 							Text = "Blind Mode",
-						}),
-						SettingsOption({
+						},
+						SettingsOption {
 							Name = "MemoryMode",
 							Text = "Memory Mode",
-						}),
-						SettingsOption({
+						},
+						SettingsOption {
 							Name = "PlainBG",
 							Text = "Plain Background",
-						}),
+						},
 					},
-				}),
+				},
 
-				Popup({
+				Popup {
 					Name = "Shop",
 
 					Size = UDim2.fromScale(0.5, 0.5),
@@ -1180,41 +1181,41 @@ Typing Simulator by S-GAMES]],
 					ZIndex = 120,
 
 					Children = {
-						New("UIGridLayout")({
+						New "UIGridLayout" {
 							FillDirectionMaxCells = 2,
 							CellSize = UDim2.fromScale(0.465, 0.05),
 							CellPadding = UDim2.fromScale(0.05, 0.02),
-						}),
+						},
 
-						ShopOption({
+						ShopOption {
 							Name = "Medium",
 							Category = "Wordlists",
 							Text = "Medium words",
 							LayoutOrder = 1,
-						}),
-						ShopOption({
+						},
+						ShopOption {
 							Name = "Hard",
 							Category = "Wordlists",
 							Text = "Hard words",
 							LayoutOrder = 2,
-						}),
-						ShopOption({
+						},
+						ShopOption {
 							Name = "Insane",
 							Category = "Wordlists",
 							Text = "Insane words",
 							LayoutOrder = 3,
-						}),
+						},
 					},
-				}),
+				},
 
-				New("Frame")({
+				New "Frame" {
 					Name = "DarkTint",
 					BackgroundColor3 = Black0,
 					BackgroundTransparency = Spring(DarkTintTransparency, 25),
 					Size = UDim2.fromScale(2, 2),
 					ZIndex = 100,
-				}),
+				},
 			},
-		}),
+		},
 	},
-})
+}

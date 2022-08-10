@@ -6,7 +6,7 @@ How syncing works
 	This means that the true data should be stored on the server for data saving.
 ]]
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ReplicatedStorage = game:GetService "ReplicatedStorage"
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
 local Words = require(ReplicatedStorage.Shared.Words)
@@ -14,16 +14,16 @@ local seed = math.random()
 local rand = Random.new(seed)
 
 local DataService
-local SyncService = Knit.CreateService({
+local SyncService = Knit.CreateService {
 	Name = "SyncService",
-})
+}
 
 local experience
 local level
 local wordlist = 1
 
 function SyncService:KnitStart()
-	DataService = Knit.GetService("DataService")
+	DataService = Knit.GetService "DataService"
 end
 
 function SyncService.Client:GetSeed()

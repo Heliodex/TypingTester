@@ -1,4 +1,4 @@
-local Players = game:GetService("Players")
+local Players = game:GetService "Players"
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 local ProfileService = require(game:GetService("ServerScriptService").Server.ProfileService)
 
@@ -51,9 +51,9 @@ local Profiles = {}
 local CurrentSaveSlot = {}
 local ProfileViews = {}
 
-local DataService = Knit.CreateService({
+local DataService = Knit.CreateService {
 	Name = "DataService",
-})
+}
 
 function DataService.Client:LoadData(player, SaveSlot)
 	CurrentSaveSlot[player] = SaveSlot
@@ -74,7 +74,7 @@ function DataService.Client:PrepareData(player)
 		end)
 		if player:IsDescendantOf(Players) then
 			-- A profile has been successfully loaded:
-			print("Data prepared")
+			print "Data prepared"
 			Profiles[player] = profile
 			ProfileViews[player] = profile.Data
 		else
@@ -84,7 +84,7 @@ function DataService.Client:PrepareData(player)
 	else
 		-- The profile couldn't be loaded possibly due to other
 		-- Roblox servers trying to load this profile at the same time:
-		player:Kick("\n\nYour data could not be loaded. Please rejoin and try again.\n")
+		player:Kick "\n\nYour data could not be loaded. Please rejoin and try again.\n"
 	end
 end
 

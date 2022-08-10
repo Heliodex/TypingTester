@@ -14,62 +14,62 @@ local grey = Color3.new(0.5, 0.5, 0.5)
 local uigrey = Color3.fromRGB(42, 42, 42)
 
 local gradients = { -- Yanderedev Moment
-	ColorSequence.new({
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, uigrey),
 		ColorSequenceKeypoint.new(1, uigrey),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, cyan),
 		ColorSequenceKeypoint.new(1, blue),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, blue),
 		ColorSequenceKeypoint.new(1, darkblue),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, orange),
 		ColorSequenceKeypoint.new(1, green),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, red),
 		ColorSequenceKeypoint.new(1, blue),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, darkgreen),
 		ColorSequenceKeypoint.new(1, green),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, black),
 		ColorSequenceKeypoint.new(1, red),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, grey),
 		ColorSequenceKeypoint.new(1, black),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, green),
 		ColorSequenceKeypoint.new(1, yellow),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, blue),
 		ColorSequenceKeypoint.new(1, grey),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, grey),
 		ColorSequenceKeypoint.new(1, orange),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, green),
 		ColorSequenceKeypoint.new(1, black),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, black),
 		ColorSequenceKeypoint.new(1, darkblue),
-	}),
-	ColorSequence.new({
+	},
+	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, yellow),
 		ColorSequenceKeypoint.new(1, orange),
-	}),
+	},
 }
 
 return function(level)
