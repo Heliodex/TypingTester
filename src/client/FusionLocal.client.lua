@@ -80,6 +80,8 @@ local wordsTyped = State(0)
 local ownedWordlists = {}
 local wordlist = State()
 
+local Settings = {}
+
 for _, v in pairs(Words) do
 	ownedWordlists[v.Name] = false
 end
@@ -434,13 +436,13 @@ local function Popup(props)
 	return popup
 end
 
-local function SettingsOption(props)
-	local checked = State(false)
+local function Setting(props)
 	local clickable = true
+	Settings[props.Name] = State()
 
 	dataLoadedChanged:onChange(function()
 		DataService:GetSetting(props.Name):andThen(function(value)
-			checked:set(value)
+			Settings[props.Name]:set(value)
 		end)
 	end)
 
@@ -453,7 +455,9 @@ local function SettingsOption(props)
 		[OnEvent "Activated"] = function()
 			if clickable then
 				clickable = false
-				checked:set(not checked:get())
+
+				Settings[props.Name]:set(not Settings[props.Name]:get())
+
 				SyncService:ChangeSetting(props.Name)
 				task.wait(0.1) -- ratelimiting, don't click so fast
 				clickable = true
@@ -466,7 +470,7 @@ local function SettingsOption(props)
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeYY,
 				Image = Computed(function()
-					return if checked:get() then "rbxassetid://7523095951" else "rbxassetid://7523096047"
+					return if Settings[props.Name]:get() then "rbxassetid://7523095951" else "rbxassetid://7523096047"
 				end),
 			},
 			New "TextLabel" {
@@ -1154,19 +1158,19 @@ Typing Simulator by S-GAMES]],
 							CellPadding = UDim2.fromScale(0.05, 0.02),
 						},
 
-						SettingsOption {
+						Setting {
 							Name = "KeySounds",
 							Text = "Keypress Sounds",
 						},
-						SettingsOption {
+						Setting {
 							Name = "BlindMode",
 							Text = "Blind Mode",
 						},
-						SettingsOption {
+						Setting {
 							Name = "MemoryMode",
 							Text = "Memory Mode",
 						},
-						SettingsOption {
+						Setting {
 							Name = "PlainBG",
 							Text = "Plain Background",
 						},
