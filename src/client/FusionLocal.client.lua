@@ -549,11 +549,13 @@ TypingBox = New "TextBox" {
 	[OnChange "Text"] = function()
 		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
 
-		local rand = math.random(1, 3)
-		local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
+		if Settings.KeySounds:get() then
+			local rand = math.random(1, 3)
+			local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
 
-		Sounds["click" .. rand].PlaybackSpeed = rand2
-		Sounds["click" .. rand]:Play()
+			Sounds["click" .. rand].PlaybackSpeed = rand2
+			Sounds["click" .. rand]:Play()
+		end
 
 		local text = TypingBox.Text
 
@@ -845,6 +847,14 @@ MainUI = New "ScreenGui" {
 							Corner = 0.1,
 							ImageSize = 0.9,
 							SizeConstraint = Enum.SizeConstraint.RelativeYY,
+
+							Activated = function()
+								if Sounds.music.Playing then
+									Sounds.music:Stop()
+								else
+									Sounds.music:Play()
+								end
+							end,
 						},
 						Label {
 							Name = "Currency",
@@ -1053,6 +1063,9 @@ MainUI = New "ScreenGui" {
 						BackgroundTransparency = 1,
 						LightColor = Grey3,
 						LightDirection = Vector3.new(0, -0.5, -1),
+						Visible = Computed(function()
+							return not Settings.PlainBG:get()
+						end),
 
 						CurrentCamera = camera,
 						[Children] = {
@@ -1224,7 +1237,9 @@ Typing Simulator by S-GAMES]],
 
 while true do
 	for i = 1, 3 do -- Animate background cubes
-		backgroundRotation[i]:set(90 - backgroundRotation[i]:get())
+		if not Settings.PlainBG:get() then
+			backgroundRotation[i]:set(90 - backgroundRotation[i]:get())
+		end
 		task.wait(18)
 	end
 end
