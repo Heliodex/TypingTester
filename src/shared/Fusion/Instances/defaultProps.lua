@@ -39,9 +39,9 @@ if ENABLE_SENSIBLE_DEFAULTS then
 		ScrollingFrame = {
 			BorderColor3 = Color3.new(),
 			BorderSizePixel = 0,
-			
+
 			ScrollBarImageColor3 = Color3.new(),
-			
+
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundTransparency = 1,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
@@ -68,15 +68,15 @@ if ENABLE_SENSIBLE_DEFAULTS then
 
 			TextScaled = true,
 		},
-		
+
 		TextBox = {
 			BorderSizePixel = 0,
-			
+
 			ClearTextOnFocus = false,
-			
+
 			Text = "",
 			TextColor3 = Color3.new(1, 1, 1),
-			
+
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			TextScaled = true,
 		},
@@ -103,6 +103,11 @@ if ENABLE_SENSIBLE_DEFAULTS then
 
 		VideoFrame = {
 			BorderSizePixel = 0,
+		},
+
+		Part = {
+			BottomSurface = Enum.SurfaceType.Smooth,
+			TopSurface = Enum.SurfaceType.Smooth,
 		},
 	}
 else

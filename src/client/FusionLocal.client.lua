@@ -34,11 +34,12 @@ local Computed = Fusion.Computed
 local Compat = Fusion.Compat
 
 local White = Color3.new(1, 1, 1)
-local Grey5 = Color3.fromRGB(178, 178, 178)
+-- local Grey5 = Color3.fromRGB(178, 178, 178)
 local Grey3 = Color3.fromRGB(102, 102, 102)
 local Grey2 = Color3.fromRGB(84, 84, 84)
 local Grey1 = Color3.fromRGB(60, 60, 60)
 local Grey0 = Color3.fromRGB(42, 42, 42)
+local Black3 = Color3.fromRGB(32, 30, 28)
 local Black2 = Color3.fromRGB(16, 14, 12)
 local Black1 = Color3.fromRGB(10, 9, 8)
 local Black0 = Color3.new() -- hehehuehehuehe
@@ -49,8 +50,6 @@ local Red = Color3.fromRGB(255, 0, 0)
 local playerFontThin = Enum.Font.Gotham
 local playerFont = Enum.Font.GothamMedium -- selene: "iT'S dePreCaTEd!!!!1!!!!11"
 local playerFontBold = Enum.Font.GothamBold
-
-local codeFont = Enum.Font.RobotoMono
 
 local PlayScreen
 local MainUI
@@ -73,6 +72,8 @@ end)
 local displayedWords = {}
 local wordCorrect = State(Green)
 
+local backgroundRotation = { State(90), State(90), State(90) }
+
 local currency = State(0)
 local experience = State(0)
 local level = State(0)
@@ -80,7 +81,12 @@ local wordsTyped = State(0)
 local ownedWordlists = {}
 local wordlist = State()
 
-local Settings = {}
+local Settings = {
+	KeySounds = State(),
+	BlindMode = State(),
+	MemoryMode = State(),
+	PlainBG = State(),
+}
 
 for _, v in pairs(Words) do
 	ownedWordlists[v.Name] = false
@@ -89,14 +95,6 @@ ownedWordlists["Easy"] = true
 
 local wordlistName = State "Easy"
 local wordlistChanged = Compat(wordlist)
-
-local function RandomString(length) -- thanks, mysterious4579		https://gist.github.com/haggen/2fd643ea9a261fea2094#gistcomment-2640881
-	local res = ""
-	for _ = 1, length do
-		res = res .. string.char(math.random(97, 122)) -- needs more random
-	end
-	return res
-end
 
 local function getWord()
 	local list = Words[wordlist:get()]
@@ -154,31 +152,12 @@ local function NextWords(props)
 		Position = UDim2.fromScale(0.5, props.Position),
 
 		Font = playerFont,
-		TextColor3 = Grey5,
+		TextTransparency = 0.6,
 		Text = displayedWords[props.Number],
+		Visible = Computed(function()
+			return not Settings.BlindMode:get()
+		end),
 	}
-end
-
-local function BackgroundDesign()
-	local returns = {}
-
-	for i = 1, 11 do
-		local temp = (i - 3.5) / 5
-
-		local box = New "TextLabel" {
-			Name = "BackgroundDesign" .. tostring(i),
-
-			Size = UDim2.fromScale(2.41, 0.1),
-			Position = UDim2.fromScale(0.5, temp),
-
-			Font = codeFont,
-			TextColor3 = Grey0,
-			TextTransparency = 0.65,
-			Text = RandomString(215),
-		}
-		table.insert(returns, box)
-	end
-	return returns
 end
 
 local function Button(props)
@@ -438,7 +417,6 @@ end
 
 local function Setting(props)
 	local clickable = true
-	Settings[props.Name] = State()
 
 	dataLoadedChanged:onChange(function()
 		DataService:GetSetting(props.Name):andThen(function(value)
@@ -797,6 +775,7 @@ MainUI = New "ScreenGui" {
 			Name = "MainFrame",
 			Size = UDim2.fromScale(1, 1),
 
+			BackgroundColor3 = Black3,
 			ZIndex = 5,
 
 			[Children] = {
@@ -1021,6 +1000,9 @@ MainUI = New "ScreenGui" {
 
 									Font = playerFont,
 									Text = displayedWords[1],
+									Visible = Computed(function()
+										return not Settings.MemoryMode:get()
+									end),
 								},
 
 								NextWords {
@@ -1044,47 +1026,63 @@ MainUI = New "ScreenGui" {
 					},
 				},
 
-				New "UIGradient" {
-					Color = ColorSequence.new {
-						ColorSequenceKeypoint.new(0, Color3.fromRGB(32, 30, 28)),
-						ColorSequenceKeypoint.new(1, Color3.fromRGB(12, 10, 8)),
-					},
-					Rotation = 110,
-				},
+				(function()
+					local backgroundSpring = Spring(
+						Computed(function()
+							return Vector3.new(
+								backgroundRotation[1]:get(),
+								backgroundRotation[2]:get(),
+								backgroundRotation[3]:get()
+							) -- rotation, rotation
+						end),
+						0.2,
+						1
+					)
 
-				New "Frame" {
-					Name = "BackgroundDesign",
+					local camera = New "Camera" {
+						CFrame = CFrame.new(Vector3.new(-400, 400, 400), Vector3.new(0, 0, 0)),
+						FieldOfView = 1,
+					}
 
-					Size = UDim2.fromScale(1.5, 0.75),
-					BackgroundTransparency = 1,
+					return New "ViewportFrame" {
+						Name = "BackgroundDesign",
 
-					Rotation = -20,
-					ZIndex = -50,
+						Size = UDim2.fromScale(1, 1),
+						ZIndex = -50,
+						BackgroundColor3 = Grey0, -- Prevent white outlines for parts
+						BackgroundTransparency = 1,
+						LightColor = Grey3,
+						LightDirection = Vector3.new(0, -0.5, -1),
 
-					[Children] = {
-						New "Frame" {
-							Name = "Frame1",
+						CurrentCamera = camera,
+						[Children] = {
+							camera,
+							(function()
+								local returns = {}
+								for h = -9, 9 do
+									for w = -16, 16 do
+										local r = math.random() * 0.2
+										table.insert(
+											returns,
+											New "Part" {
+												Size = Vector3.new(1, 1, 1),
+												Position = Vector3.new(h + w, h, w),
+												Color = Color3.new(r, r, r),
+												Material = Enum.Material.Plastic,
+												Rotation = backgroundSpring,
+											}
+										)
+									end
+								end
 
-							Size = UDim2.fromScale(1, 1),
-							BackgroundTransparency = 1,
-
-							[Children] = BackgroundDesign(),
+								return returns
+							end)(),
 						},
-
-						New "Frame" {
-							Name = "Frame2",
-
-							Size = UDim2.fromScale(1, 1),
-							Position = UDim2.fromScale(0.5, 0.6),
-							BackgroundTransparency = 1,
-
-							[Children] = BackgroundDesign(),
-						},
-					},
-				},
+					}
+				end)(),
 
 				-- MENU TIME
-				-- OH MY GOD STOP PROCRASTINATING
+				-- OH MY GOD STOP ROCRASTINATING
 
 				Popup {
 					Name = "Help",
@@ -1223,3 +1221,10 @@ Typing Simulator by S-GAMES]],
 		},
 	},
 }
+
+while true do
+	for i = 1, 3 do -- Animate background cubes
+		backgroundRotation[i]:set(90 - backgroundRotation[i]:get())
+		task.wait(18)
+	end
+end
