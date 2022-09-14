@@ -29,9 +29,9 @@ local Children = Fusion.Children
 local OnEvent = Fusion.OnEvent
 local OnChange = Fusion.OnChange
 local Spring = Fusion.Spring
-local State = Fusion.State
+local Value = Fusion.Value
 local Computed = Fusion.Computed
-local Compat = Fusion.Compat
+local Observer = Fusion.Observer
 
 local White = Color3.new(1, 1, 1)
 -- local Grey5 = Color3.fromRGB(178, 178, 178)
@@ -55,37 +55,37 @@ local PlayScreen
 local MainUI
 local TypingBox
 
-local MainFrameSize = State(UDim2.fromScale(0.8, 0.8))
-local DarkTintTransparency = State(1)
+local MainFrameSize = Value(UDim2.fromScale(0.8, 0.8))
+local DarkTintTransparency = Value(1)
 local DarkTintTransparencyGoal = 0.5
 
 local loadingData = false
-local dataPrepared = State()
-local dataPreparedChanged = Compat(dataPrepared)
-local dataLoaded = State()
-local dataLoadedChanged = Compat(dataLoaded)
+local dataPrepared = Value()
+local dataPreparedChanged = Observer(dataPrepared)
+local dataLoaded = Value()
+local dataLoadedChanged = Observer(dataLoaded)
 
 DataService:PrepareData():andThen(function()
 	dataPrepared:set(true)
 end)
 
 local displayedWords = {}
-local wordCorrect = State(Green)
+local wordCorrect = Value(Green)
 
-local backgroundRotation = { State(90), State(90), State(90) }
+local backgroundRotation = { Value(90), Value(90), Value(90) }
 
-local currency = State(0)
-local experience = State(0)
-local level = State(0)
-local wordsTyped = State(0)
+local currency = Value(0)
+local experience = Value(0)
+local level = Value(0)
+local wordsTyped = Value(0)
 local ownedWordlists = {}
-local wordlist = State()
+local wordlist = Value()
 
 local Settings = {
-	KeySounds = State(),
-	BlindMode = State(),
-	MemoryMode = State(),
-	PlainBG = State(),
+	KeySounds = Value(),
+	BlindMode = Value(),
+	MemoryMode = Value(),
+	PlainBG = Value(),
 }
 
 for _, v in pairs(Words) do
@@ -93,8 +93,8 @@ for _, v in pairs(Words) do
 end
 ownedWordlists["Easy"] = true
 
-local wordlistName = State "Easy"
-local wordlistChanged = Compat(wordlist)
+local wordlistName = Value "Easy"
+local wordlistChanged = Observer(wordlist)
 
 local function getWord()
 	local list = Words[wordlist:get()]
@@ -109,7 +109,7 @@ wordlistChanged:onChange(function()
 
 	for i = 1, 5 do
 		if not displayedWords[i] then
-			displayedWords[i] = State(getWord())
+			displayedWords[i] = Value(getWord())
 		else
 			displayedWords[i]:set(getWord())
 		end
@@ -220,8 +220,8 @@ local function Button(props)
 end
 
 local function SaveSlot(props)
-	local text = State("Save slot " .. props.SaveSlot)
-	local previewText = State "Loading info..."
+	local text = Value("Save slot " .. props.SaveSlot)
+	local previewText = Value "Loading info..."
 
 	local disconnect = dataPreparedChanged:onChange(function()
 		DataService:PreviewData(props.SaveSlot):andThen(function(data)
@@ -464,7 +464,7 @@ local function Setting(props)
 end
 
 local function ShopOption(props)
-	local buttonText = State(ShopItems[props.Category][props.Name].Price)
+	local buttonText = Value(ShopItems[props.Category][props.Name].Price)
 	local clickable
 
 	dataLoadedChanged:onChange(function()
