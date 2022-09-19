@@ -15,6 +15,7 @@ local DefaultProfileTemplate = {
 	Stats = {
 		PlayTime = 0,
 		Logins = 0,
+		LongestStreak = 0,
 		Words = {
 			Easy = 0,
 			Normal = 0,

@@ -105,12 +105,12 @@ return function(level)
 		}
 	elseif level < 70 then
 		return {
-			Text = "Wonderful Writer",
+			Text = "Keyboard Knight",
 			Colour = gradients[7],
 		}
 	elseif level < 80 then
 		return {
-			Text = "Keyboard Knight",
+			Text = "Writing Warrior",
 			Colour = gradients[8],
 		}
 	elseif level < 90 then

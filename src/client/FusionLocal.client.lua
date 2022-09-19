@@ -1,5 +1,6 @@
 -- Main UI-buliding script
 
+game.StarterGui:SetCoreGuiEnabled("All", false)
 local ReplicatedStorage = game:GetService "ReplicatedStorage"
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
