@@ -34,7 +34,7 @@ local Computed = Fusion.Computed
 local Observer = Fusion.Observer
 
 local White = Color3.new(1, 1, 1)
--- local Grey5 = Color3.fromRGB(178, 178, 178)
+local Grey4 = Color3.fromRGB(178, 178, 178)
 local Grey3 = Color3.fromRGB(102, 102, 102)
 local Grey2 = Color3.fromRGB(84, 84, 84)
 local Grey1 = Color3.fromRGB(60, 60, 60)
@@ -61,7 +61,6 @@ local DarkTintTransparencyGoal = 0.5
 
 local loadingData = false
 local dataPrepared = Value()
-local dataPreparedChanged = Observer(dataPrepared)
 local dataLoaded = Value()
 local dataLoadedChanged = Observer(dataLoaded)
 
@@ -73,13 +72,19 @@ local displayedWords = {}
 local wordCorrect = Value(Green)
 
 local backgroundRotation = { Value(90), Value(90), Value(90) }
-
 local currency = Value(0)
 local experience = Value(0)
 local level = Value(0)
 local wordsTyped = Value(0)
+local streak = Value(0)
+local streakLevel = Value(0)
 local ownedWordlists = {}
 local wordlist = Value()
+
+local adderTransparency = Value(1)
+local adderTransparencySpring = Spring(adderTransparency, 6, 1)
+local currencyAdded = Value(0) -- For the adder popup animation beside currency and experience
+local experienceAdded = Value(0)
 
 local Settings = {
 	KeySounds = Value(),
@@ -94,7 +99,6 @@ end
 ownedWordlists["Easy"] = true
 
 local wordlistName = Value "Easy"
-local wordlistChanged = Observer(wordlist)
 
 local function getWord()
 	local list = Words[wordlist:get()]
@@ -102,7 +106,7 @@ local function getWord()
 	return list[math.random(1, #list)]
 end
 
-wordlistChanged:onChange(function()
+Observer(wordlist):onChange(function()
 	if TypingBox then
 		TypingBox.Text = ""
 	end
@@ -223,7 +227,7 @@ local function SaveSlot(props)
 	local text = Value("Save slot " .. props.SaveSlot)
 	local previewText = Value "Loading info..."
 
-	local disconnect = dataPreparedChanged:onChange(function()
+	local disconnect = Observer(dataPrepared):onChange(function()
 		DataService:PreviewData(props.SaveSlot):andThen(function(data)
 			previewText:set(
 				"Level: " .. data.Level .. "\nWords: " .. data.WordsTyped .. "\nTyping Tokens: " .. data.Currency
@@ -512,6 +516,7 @@ local function ShopOption(props)
 						clickable = false
 						SyncService:PurchaseItem(props.Category, props.Name):andThen(function(success)
 							if success then
+								ownedWordlists[props.Name] = true
 								currency:set(currency:get() - price)
 								buttonText:set "Purchase successful!"
 								task.wait(1)
@@ -551,7 +556,7 @@ TypingBox = New "TextBox" {
 
 		if Settings.KeySounds:get() then
 			local rand = math.random(1, 3)
-			local rand2 = (math.random(90, 110) / 100) -- randomize sound pitch
+			local rand2 = 0.9 + math.random() * 0.2 -- Randomize sound pitch
 
 			Sounds["click" .. rand].PlaybackSpeed = rand2
 			Sounds["click" .. rand]:Play()
@@ -560,6 +565,7 @@ TypingBox = New "TextBox" {
 		local text = TypingBox.Text
 
 		if string.match("!" .. displayedWords[1]:get() .. " ", ("!" .. text)) then
+			-- Word is correct!
 			wordCorrect:set(Green)
 			if text == displayedWords[1]:get() .. " " then
 				TypingBox.Text = ""
@@ -567,21 +573,48 @@ TypingBox = New "TextBox" {
 				SyncService:WordTyped()
 				wordsTyped:set(wordsTyped:get() + 1)
 
+				-- Manage streak
+				local currentStreak = streak:get() + 1
+				local currentStreakLevel = streakLevel:get()
+				streak:set(currentStreak)
+
+				if currentStreak % 20 == 0 then
+					currentStreakLevel += 1
+					print "Streak level up!!"
+				end
+				streakLevel:set(currentStreakLevel)
+
+				print("Streak of ", currentStreak)
+
+				-- Manage experience
 				local currentWordlist = Words[wordlist:get()]
 				local expToAdd = randomGenerator:NextInteger(currentWordlist.Exp[1], currentWordlist.Exp[2])
+				local bonusExp = currentStreakLevel
 
 				local exp = experience:get()
-				if exp + expToAdd > level:get() * 100 then
-					while exp + expToAdd > level:get() * 100 do -- why no while else (also probably redundant until soemone actually gets this much exp)
-						exp += expToAdd - level:get() * 100
-						level:set(level:get() + 1)
+				local lvl = level:get()
+
+				-- Current streak level is added to experience as a bonus
+				-- Might not seem like much, but adds up over a long streak
+				if exp + expToAdd + bonusExp > lvl * 100 then
+					while exp + expToAdd + bonusExp > lvl * 100 do -- why no while else (also probably redundant until soemone actually gets this much exp)
+						exp += expToAdd + bonusExp - lvl * 100
+						lvl += 1
 					end
 				else
-					exp += expToAdd
+					exp += expToAdd + bonusExp
 				end
+
 				experience:set(exp)
+				level:set(lvl)
 
 				currency:set(currency:get() + currentWordlist.Currency)
+				currencyAdded:set(currentWordlist.Currency)
+				experienceAdded:set(expToAdd)
+
+				-- Pop up adder then fade out
+				adderTransparencySpring:setPosition(0)
+				adderTransparency:set(1)
 
 				local tempWords = displayedWords
 
@@ -591,6 +624,15 @@ TypingBox = New "TextBox" {
 				tempWords[5]:set(getWord()) -- Add a new word to the bottom
 
 				displayedWords = tempWords
+
+
+				task.wait(wordlist:get() + 1)
+				if streak:get() == currentStreak then
+					SyncService:EndStreak()
+					streak:set(0)
+					streakLevel:set(0)
+					print("Streak ended with ", currentStreak, "words!")
+				end
 			end
 		else
 			wordCorrect:set(Red)
@@ -600,6 +642,28 @@ TypingBox = New "TextBox" {
 	[Children] = {
 		UICorner(),
 		UIPadding(),
+
+		New "Frame" {
+			Name = "StreakProgress",
+			Size = Spring(
+				Computed(function()
+					return UDim2.fromScale((streak:get() % 20) * (1.15 / 20), 0.1) -- Remember padding of parent while sizing
+				end),
+				20,
+				1
+			),
+			BackgroundColor3 = Spring(
+				Computed(function()
+					return if streakLevel:get() > 0 then Grey4 else Grey3
+				end),
+				8,
+				1
+			),
+			AnchorPoint = Vector2.new(0, 0),
+			Position = UDim2.fromScale(-0.075, 1),
+
+			[Children] = UICorner(),
+		},
 	},
 }
 
@@ -862,12 +926,28 @@ MainUI = New "ScreenGui" {
 							AnchorPoint = Vector2.new(0, 0),
 							Position = UDim2.fromScale(0.01, 0.02),
 							Text = Computed(function()
-								return currency:get() .. " typing\ntokens"
+								return currency:get() .. "\nTyping tokens"
 							end),
 							Image = 7367251392,
 
 							LabelWidth = 0.7,
 							LabelPosition = 0.95,
+
+							Children = {
+								New "TextLabel" {
+									Name = "CurrencyAdder",
+									Size = UDim2.fromScale(0.6, 0.6),
+									Position = UDim2.fromScale(1.08, 0.5),
+									AnchorPoint = Vector2.new(0, 0.5),
+									TextTransparency = adderTransparencySpring,
+
+									Text = Computed(function()
+										return "+" .. currencyAdded:get()
+									end),
+									TextXAlignment = Enum.TextXAlignment.Left,
+									Font = playerFont,
+								},
+							},
 						},
 						Label {
 							Name = "Words",
@@ -875,7 +955,7 @@ MainUI = New "ScreenGui" {
 							AnchorPoint = Vector2.new(0.5, 0),
 							Position = UDim2.fromScale(0.5, 0.02),
 							Text = Computed(function()
-								return wordsTyped:get() .. " Words"
+								return wordsTyped:get() .. "\nWords"
 							end),
 							Image = 7367083297,
 						},
@@ -886,7 +966,7 @@ MainUI = New "ScreenGui" {
 							AnchorPoint = Vector2.new(1, 0),
 							Position = UDim2.fromScale(0.99, 0.02),
 							Text = Computed(function()
-								return "Change word list:\n" .. wordlistName:get()
+								return "Change wordlist:\n" .. wordlistName:get()
 							end),
 							Image = 7363005276,
 							Ratelimit = true,
@@ -975,7 +1055,7 @@ MainUI = New "ScreenGui" {
 									[Children] = {
 										UICorner(0.5),
 
-										[Children] = New "Frame" {
+										New "Frame" {
 											Name = "Bar",
 											Size = Spring(
 												Computed(function()
@@ -990,6 +1070,32 @@ MainUI = New "ScreenGui" {
 											BackgroundColor3 = Green,
 
 											[Children] = UICorner(0.5),
+										},
+
+										Children = {
+											New "TextLabel" {
+												Name = "ExperienceAdder",
+												Size = UDim2.fromScale(1, 2),
+												Position = UDim2.fromScale(-0.12, 0.5),
+												AnchorPoint = Vector2.new(1, 0.5),
+												TextTransparency = adderTransparencySpring,
+
+												Text = Computed(function()
+													local currentStreakLevel = streakLevel:get()
+													local expAdded = experienceAdded:get()
+
+													if currentStreakLevel > 0 then
+														return "<font color='#AA0000'>+"
+															.. currentStreakLevel
+															.. "</font> +"
+															.. expAdded
+													end
+													return "+" .. expAdded
+												end),
+												TextXAlignment = Enum.TextXAlignment.Right,
+												Font = playerFont,
+												RichText = true,
+											},
 										},
 									},
 								},
@@ -1037,18 +1143,6 @@ MainUI = New "ScreenGui" {
 				},
 
 				(function()
-					local backgroundSpring = Spring(
-						Computed(function()
-							return Vector3.new(
-								backgroundRotation[1]:get(),
-								backgroundRotation[2]:get(),
-								backgroundRotation[3]:get()
-							) -- rotation, rotation
-						end),
-						0.2,
-						1
-					)
-
 					local camera = New "Camera" {
 						CFrame = CFrame.new(Vector3.new(-400, 400, 400), Vector3.new(0, 0, 0)),
 						FieldOfView = 1,
@@ -1080,9 +1174,28 @@ MainUI = New "ScreenGui" {
 											New "Part" {
 												Size = Vector3.new(1, 1, 1),
 												Position = Vector3.new(h + w, h, w),
-												Color = Color3.new(r, r, r),
+												Color = Spring(
+													Computed(function()
+														local currentLevel = streakLevel:get() - 1
+														return if currentLevel > 0
+															then Color3.new(math.min(r + (currentLevel / 12), 0.6), r, r)
+															else Color3.new(r, r, r)
+													end),
+													0.5 + r * 5,
+													1
+												),
 												Material = Enum.Material.Plastic,
-												Rotation = backgroundSpring,
+												Rotation = Spring(
+													Computed(function()
+														return Vector3.new(
+															backgroundRotation[1]:get(),
+															backgroundRotation[2]:get(),
+															backgroundRotation[3]:get()
+														) -- rotation, rotation
+													end),
+													0.2,
+													1
+												),
 											}
 										)
 									end
@@ -1130,11 +1243,14 @@ They give 2 typing tokens and 20-26 exp per word.
 Hard words can be between 7 and 10 letters long.
 They give 3 typing tokens and 35-42 exp per word.
 
-Insane words were added as a joke, they are some of the longest words in English.
+Insane words are some of the longest words in English.
 They give 5 typing tokens and 57-65 exp per word.
 
-Experience is used to level up. Each level requires 100 more experience to level up than the one before it.
+Experience is used to level up. Each level needs 100 more experience to level up than the one before it.
 Ranks are gained every 10 levels.
+
+Typing enough words in quick succession will give you a streak.
+The longer you can keep a streak going, the more experience you will earn per word!
 
 Developers:
 pjstarr12

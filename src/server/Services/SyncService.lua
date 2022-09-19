@@ -18,9 +18,9 @@ local SyncService = Knit.CreateService {
 	Name = "SyncService",
 }
 
-local experience
-local level
 local wordlist = 1
+local streak = 0
+local streakLevel = 0
 
 function SyncService:KnitStart()
 	DataService = Knit.GetService "DataService"
@@ -31,25 +31,38 @@ function SyncService.Client:GetSeed()
 end
 
 function SyncService.Client:WordTyped(player)
-	experience = DataService:GetData(player, "Experience")
-	level = DataService:GetData(player, "Level")
-
 	DataService:IncrementData(player, "WordsTyped", 1)
 
 	local currentWordlist = Words[wordlist]
 	local expToAdd = rand:NextInteger(currentWordlist.Exp[1], currentWordlist.Exp[2])
+	local bonusExp = streakLevel
 
-	if experience + expToAdd > level * 100 then
-		experience += expToAdd - level * 100
-		DataService:IncrementData(player, "Experience", expToAdd - level * 100)
-		level += 1
-		DataService:IncrementData(player, "Level", 1)
+	local exp = DataService:GetData(player, "Experience")
+	local lvl = DataService:GetData(player, "Level")
+
+	-- Current streak level is added to experience as a bonus
+	-- Might not seem like much, but adds up over a long streak
+	if exp + expToAdd + bonusExp > lvl * 100 then
+		while exp + expToAdd + bonusExp > lvl * 100 do -- why no while else (also probably redundant until soemone actually gets this much exp)
+			exp += expToAdd + bonusExp - lvl * 100
+			lvl += 1
+		end
 	else
-		experience += expToAdd
-		DataService:IncrementData(player, "Experience", expToAdd)
+		exp += expToAdd + bonusExp
 	end
 
+	streak += 1
+	streakLevel += if streak % 20 == 0 then 1 else 0
+
+	DataService:SetData(player, "Experience", exp)
+	DataService:SetData(player, "Level", lvl)
+
 	DataService:IncrementData(player, "Currency", currentWordlist.Currency)
+end
+
+function SyncService.Client:EndStreak()
+	streak = 0
+	streakLevel = 0
 end
 
 function SyncService.Client:ChangeSetting(player, setting)
