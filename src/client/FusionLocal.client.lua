@@ -86,6 +86,8 @@ local adderTransparency = Value(1)
 local adderTransparencySpring = Spring(adderTransparency, 6, 1)
 local currencyAdded = Value(0) -- For the adder popup animation beside currency and experience
 local experienceAdded = Value(0)
+local streakLevelUpTransparency = Value(1)
+local streakLevelUpTransparencySpring = Spring(streakLevelUpTransparency, 3, 1)
 
 local Settings = {
 	KeySounds = Value(),
@@ -616,6 +618,10 @@ TypingBox = New "TextBox" {
 				-- Pop up adder then fade out
 				adderTransparencySpring:setPosition(0)
 				adderTransparency:set(1)
+				if currentStreak % 20 == 0 then
+					streakLevelUpTransparencySpring:setPosition(0)
+					streakLevelUpTransparency:set(1)
+				end
 
 				local tempWords = displayedWords
 
@@ -625,7 +631,6 @@ TypingBox = New "TextBox" {
 				tempWords[5]:set(getWord()) -- Add a new word to the bottom
 
 				displayedWords = tempWords
-
 
 				task.wait(wordlist:get() + 1)
 				if streak:get() == currentStreak then
@@ -664,6 +669,80 @@ TypingBox = New "TextBox" {
 			Position = UDim2.fromScale(-0.075, 1),
 
 			[Children] = UICorner(),
+		},
+
+		New "TextLabel" {
+			Name = "StreakLevelUp",
+			Size = UDim2.fromScale(0.7, 0.7),
+			Position = UDim2.fromScale(1.08, 0.5),
+			AnchorPoint = Vector2.new(0.5, 0),
+			TextTransparency = streakLevelUpTransparencySpring,
+			Rotation = -20,
+
+			Text = Computed(function()
+				local currentStreakLevel = streakLevel:get()
+				local messages = { -- Upon reaching level:
+					{ "NICE!", "COOL!", "WOW!", "GREAT!", "SUPER!" }, -- 1-3
+					{
+						"AWESOME!",
+						"AMAZING!",
+						"EPIC!",
+						"FANTASTIC!",
+						"FLAWLESS!",
+						"PERFECT!",
+						"TERRIFIC!",
+						"IMPRESSIVE!",
+						"EXCEPTIONAL!",
+						"BRILLIANT!",
+					}, -- 4-8
+					{
+						"INCREDIBLE!!",
+						"INSANITY!!",
+						"INSANE!!",
+						"IMPOSSIBLE!!",
+						"CRAZY!!",
+						"ASTONISHING!!",
+						"PHENOMENAL!",
+						"OUTSTANDING!!",
+						"BREATHTAKING!!",
+					}, -- 9-13
+					{
+						"UNSTOPPABLE!!",
+						"UNBEATABLE!!",
+						"UNBELIEVABLE!!",
+						"UNREAL!!",
+						"UNMATCHED!!",
+						"UNPARALLELED!!",
+						"UNTHINKABLE!!",
+						"MAGNIFICENT!!",
+						"SPECTACULAR!!",
+						"OUTRAGEOUS!!",
+					}, -- 14-18
+					{
+						"LEGENDARY!!!",
+						"INFINITE!!!",
+						"GODLIKE!!!",
+						"GODLY!!!",
+						"OMNIPOTENT!!!",
+						"IMMORTAL!!!",
+						"HACKER!!!",
+						"ALMIGHTY!!!",
+					}, -- 19-22
+				}
+
+				if currentStreakLevel < 4 then
+					return messages[1][math.random(1, #messages[1])]
+				elseif currentStreakLevel < 9 then
+					return messages[2][math.random(1, #messages[2])]
+				elseif currentStreakLevel < 14 then
+					return messages[3][math.random(1, #messages[3])]
+				elseif currentStreakLevel < 19 then
+					return messages[4][math.random(1, #messages[4])]
+				else
+					return messages[5][math.random(1, #messages[5])]
+				end
+			end),
+			Font = playerFont,
 		},
 	},
 }
@@ -1179,7 +1258,7 @@ MainUI = New "ScreenGui" {
 													Computed(function()
 														local currentLevel = streakLevel:get() - 1
 														return if currentLevel > 0
-															then Color3.new(math.min(r + (currentLevel / 12), 0.6), r, r)
+															then Color3.new(math.min(r + (currentLevel / 25), 0.6), r, r)
 															else Color3.new(r, r, r)
 													end),
 													0.5 + r * 5,
