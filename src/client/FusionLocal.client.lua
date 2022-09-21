@@ -472,6 +472,7 @@ end
 
 local function ShopOption(props)
 	local buttonText = Value(ShopItems[props.Category][props.Name].Price)
+	local levelRequirement = ShopItems[props.Category][props.Name].Level
 	local clickable
 
 	dataLoadedChanged:onChange(function()
@@ -514,7 +515,7 @@ local function ShopOption(props)
 				AutoButtonColor = true,
 
 				[OnEvent "Activated"] = function()
-					if clickable then
+					if clickable and level:get() >= levelRequirement then
 						local price = buttonText:get()
 						clickable = false
 						SyncService:PurchaseItem(props.Category, props.Name):andThen(function(success)
@@ -537,6 +538,37 @@ local function ShopOption(props)
 				[Children] = {
 					UIPadding(),
 					UICorner(),
+				},
+			},
+
+			New "Frame" {
+				Name = "LevelLock",
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				Position = UDim2.fromScale(0.5, 0.5),
+				Size = UDim2.fromScale(1.05, 1.2),
+				BackgroundTransparency = 0.25,
+				BackgroundColor3 = Black0,
+				Visible = Computed(function()
+					return level:get() < levelRequirement
+				end),
+
+				[Children] = {
+					UICorner(),
+					New "ImageLabel" {
+						Name = "PadlockIcon",
+						AnchorPoint = Vector2.new(0, 0.5),
+						Position = UDim2.fromScale(0.03, 0.5),
+						Size = UDim2.fromScale(0.8, 0.8),
+						SizeConstraint = Enum.SizeConstraint.RelativeYY,
+						Image = "rbxassetid://10970873852",
+					},
+					New "TextLabel" {
+						AnchorPoint = Vector2.new(0.5, 0.5),
+						Position = UDim2.fromScale(0.6, 0.5),
+						Size = UDim2.fromScale(0.7, 0.7),
+						Font = playerFont,
+						Text = "Level " .. levelRequirement,
+					},
 				},
 			},
 		},
@@ -682,7 +714,7 @@ TypingBox = New "TextBox" {
 			Text = Computed(function()
 				local currentStreakLevel = streakLevel:get()
 				local messages = { -- Upon reaching level:
-					{ "NICE!", "COOL!", "WOW!", "GREAT!", "SUPER!" }, -- 1-3
+					{ "NICE!", "COOL!", "WOW!", "GREAT!", "SUPER!", "SWEET!" }, -- 1-3
 					{
 						"AWESOME!",
 						"AMAZING!",
