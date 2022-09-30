@@ -19,12 +19,12 @@ local gradients = { -- Yanderedev Moment
 		ColorSequenceKeypoint.new(1, uigrey),
 	},
 	ColorSequence.new {
-		ColorSequenceKeypoint.new(0, cyan),
-		ColorSequenceKeypoint.new(1, blue),
+		ColorSequenceKeypoint.new(0, blue),
+		ColorSequenceKeypoint.new(1, cyan),
 	},
 	ColorSequence.new {
-		ColorSequenceKeypoint.new(0, blue),
-		ColorSequenceKeypoint.new(1, darkblue),
+		ColorSequenceKeypoint.new(0, darkblue),
+		ColorSequenceKeypoint.new(1, blue),
 	},
 	ColorSequence.new {
 		ColorSequenceKeypoint.new(0, orange),
@@ -67,8 +67,8 @@ local gradients = { -- Yanderedev Moment
 		ColorSequenceKeypoint.new(1, darkblue),
 	},
 	ColorSequence.new {
-		ColorSequenceKeypoint.new(0, yellow),
-		ColorSequenceKeypoint.new(1, orange),
+		ColorSequenceKeypoint.new(0, orange),
+		ColorSequenceKeypoint.new(1, yellow),
 	},
 }
 

@@ -2,7 +2,8 @@
 
 game.StarterGui:SetCoreGuiEnabled("All", false)
 local ReplicatedStorage = game:GetService "ReplicatedStorage"
-local LocalPlayer = game:GetService("Players").LocalPlayer
+local Players = game:GetService "Players"
+local LocalPlayer = Players.LocalPlayer
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local Words = require(ReplicatedStorage.Shared.Words)
@@ -151,6 +152,104 @@ local function UIPadding(props)
 	}
 end
 
+-- Was quite the trip to get working
+local function populateLeaderboard(leaderboard, page)
+	for _, v in ipairs(leaderboard) do
+		local you = v == "You"
+
+		-- Load users on leaderboard
+		-- very slow, so it would make the game load slowly if it was done at creation of the leaderboard popup
+		task.spawn(function()
+			New "Frame" {
+				Name = "LeaderboardPerson",
+				Parent = page,
+
+				Size = UDim2.fromScale(1, 0.04),
+				BackgroundTransparency = 1,
+
+				[Children] = {
+					UIPadding {
+						PaddingH = 0.03,
+					},
+
+					New "Frame" {
+						Size = UDim2.fromScale(1, 1),
+						BackgroundColor3 = White,
+
+						[Children] = {
+							UICorner(),
+							New "UIGradient" {
+								Color = if you
+									then Computed(function()
+										return Ranks(level:get()).Colour
+									end)
+									else Ranks(v.Level).Colour,
+							},
+
+							New "ImageLabel" {
+								Name = "ProfilePic",
+
+								AnchorPoint = Vector2.new(0, 0.5),
+								Position = UDim2.fromScale(0, 0.5),
+								Size = UDim2.fromScale(1, 0.8),
+								SizeConstraint = Enum.SizeConstraint.RelativeYY,
+								Image = (function()
+									local img
+									pcall(function()
+										img = Players:GetUserThumbnailAsync(
+											if you then LocalPlayer.UserId else v.Player,
+											Enum.ThumbnailType.HeadShot,
+											Enum.ThumbnailSize.Size48x48
+										)
+									end)
+									return img or 0
+								end)(),
+
+								[Children] = UICorner(1),
+							},
+							New "TextLabel" {
+								Name = "Username",
+								Text = if you
+									then LocalPlayer.Name
+									else (function()
+										local name
+										pcall(function()
+											name = Players:GetNameFromUserIdAsync(v.Player)
+										end)
+										return name or "[Unknown]"
+									end)(),
+
+								AnchorPoint = Vector2.new(0, 0.5),
+								Position = UDim2.fromScale(0.1, 0.5),
+								Size = UDim2.fromScale(0.25, 0.8),
+								Font = playerFont,
+							},
+							New "TextLabel" {
+								Name = "Level",
+								Text = if you then level else v.Level,
+
+								AnchorPoint = Vector2.new(0.5, 0.5),
+								Position = UDim2.fromScale(0.6, 0.5),
+								Size = UDim2.fromScale(0.2, 0.8),
+								Font = playerFont,
+							},
+							New "TextLabel" {
+								Name = "Words",
+								Text = if you then wordsTyped else v.Words,
+
+								AnchorPoint = Vector2.new(1, 0.5),
+								Position = UDim2.fromScale(1, 0.5),
+								Size = UDim2.fromScale(0.2, 0.8),
+								Font = playerFont,
+							},
+						},
+					},
+				},
+			}
+		end)
+	end
+end
+
 local function NextWords(props)
 	return New "TextLabel" {
 		Name = "Label" .. props.Number,
@@ -167,9 +266,10 @@ local function NextWords(props)
 	}
 end
 
-local function Button(props)
+local function ImageButton(props)
 	props.LabelWidth = props.LabelWidth or 0.6
 	props.ImageSize = props.ImageSize or 0.3
+	props.Size = props.Size or UDim2.fromScale(0.17, 0.075)
 	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
 
 	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
@@ -179,11 +279,9 @@ local function Button(props)
 		Name = props.Name,
 
 		Size = props.Size,
-
 		AnchorPoint = props.AnchorPoint or Vector2.new(0.5, 0.5),
 		Position = props.Position,
-		BackgroundColor3 = Grey3,
-		AutoButtonColor = true,
+		BackgroundColor3 = props.BackgroundColor3 or Grey3,
 
 		SizeConstraint = props.SizeConstraint,
 
@@ -198,7 +296,9 @@ local function Button(props)
 
 		[Children] = {
 			UICorner(props.Corner),
-			UIPadding { PaddingH = 0.075 / ratio }, -- at least it works well
+			UIPadding {
+				PaddingH = 0.075 / ratio,
+			}, -- at least it works well
 
 			New "TextLabel" {
 				Text = props.Text,
@@ -221,6 +321,53 @@ local function Button(props)
 					AspectType = Enum.AspectType.ScaleWithParentSize,
 					DominantAxis = Enum.DominantAxis.Width,
 				},
+			},
+		},
+	}
+end
+
+local function Button(props)
+	props.LabelWidth = props.LabelWidth or 0.6
+	props.ImageSize = props.ImageSize or 0.3
+	props.Size = props.Size or UDim2.fromScale(0.17, 0.075)
+	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
+
+	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
+	local clickable = true
+
+	return New "TextButton" {
+		Name = props.Name,
+
+		Size = props.Size,
+		AnchorPoint = props.AnchorPoint or Vector2.new(0.5, 0.5),
+		Position = props.Position,
+		BackgroundColor3 = props.BackgroundColor3 or Grey3,
+
+		SizeConstraint = props.SizeConstraint,
+
+		[OnEvent "Activated"] = function()
+			if clickable or not props.Ratelimit then
+				clickable = false
+				props.Activated() -- shouldn't yield
+				task.wait(0.1)
+				clickable = true
+			end
+		end,
+
+		[Children] = {
+			UICorner(props.Corner),
+			UIPadding {
+				PaddingH = 0.075 / ratio,
+			}, -- at least it works well
+
+			New "TextLabel" {
+				Text = props.Text,
+
+				Size = UDim2.fromScale(props.LabelWidth, 1),
+				Position = UDim2.fromScale(0.5, 0.5),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+
+				Font = playerFont,
 			},
 		},
 	}
@@ -267,6 +414,19 @@ local function SaveSlot(props)
 					PlayScreen.Frame.Visible = false
 					Sounds.music:Play()
 					MainFrameSize:set(UDim2.fromScale(1, 1))
+
+					DataService:LevelLeaderboard():andThen(function(leaderboard)
+						populateLeaderboard(
+							leaderboard,
+							MainUI.MainFrame.Leaderboard.ScrollingFrame.Frame.Pages.LevelLeaderboard
+						)
+					end)
+					DataService:WordsLeaderboard():andThen(function(leaderboard)
+						populateLeaderboard(
+							leaderboard,
+							MainUI.MainFrame.Leaderboard.ScrollingFrame.Frame.Pages.WordsLeaderboard
+						)
+					end)
 				end)
 			end
 		end,
@@ -318,7 +478,9 @@ local function Label(props)
 
 		[Children] = {
 			UICorner(),
-			UIPadding { PaddingH = 0.075 / ratio }, -- ratio
+			UIPadding {
+				PaddingH = 0.075 / ratio,
+			}, -- ratio
 			props.Children,
 
 			New "TextLabel" {
@@ -348,12 +510,19 @@ local function Label(props)
 end
 
 local function Popup(props)
-	if typeof(props.Children) == "table" then
-		for i = 1, #props.Children do
-			if props.Children[i]:IsA "GuiObject" then
-				props.Children[i].LayoutOrder = i
+	local function checkChildren(table)
+		for i = 1, #table do
+			if typeof(table[i]) ~= "table" then
+				if table[i]:IsA "GuiObject" then
+					table[i].LayoutOrder = i
+				end
+			else
+				checkChildren(table[i])
 			end
 		end
+	end
+	if typeof(props.Children) == "table" then
+		checkChildren(props.Children)
 	end
 
 	local popup
@@ -367,13 +536,13 @@ local function Popup(props)
 		ZIndex = props.ZIndex or 120, -- bruh darktint moment
 
 		[Children] = {
-			UICorner(props.Corner),
+			UICorner(props.Corner or 0.04),
 
 			New "ScrollingFrame" {
 				Active = true,
 				Position = UDim2.fromScale(0.5, 0.556), -- perfect values
 				Size = UDim2.fromScale(1, 0.888),
-				CanvasSize = UDim2.fromScale(1, 2.5),
+				CanvasSize = UDim2.fromScale(1, props.Length or 2.5),
 
 				[Children] = New "Frame" {
 					Size = UDim2.fromScale(0.96, 1),
@@ -381,7 +550,10 @@ local function Popup(props)
 					BackgroundTransparency = 1,
 
 					[Children] = {
-						UIPadding { PaddingV = 0.01, PaddingH = 0 },
+						UIPadding {
+							PaddingV = 0.01,
+							PaddingH = 0,
+						},
 						props.Children,
 					},
 				},
@@ -679,13 +851,15 @@ TypingBox = New "TextBox" {
 
 	[Children] = {
 		UICorner(),
-		UIPadding(),
+		UIPadding {
+			PaddingH = 0,
+		},
 
 		New "Frame" {
 			Name = "StreakProgress",
 			Size = Spring(
 				Computed(function()
-					return UDim2.fromScale((streak:get() % 20) * (1.15 / 20), 0.1) -- Remember padding of parent while sizing
+					return UDim2.fromScale((streak:get() % 20) / 20, 0.1) -- Remember padding of parent while sizing
 				end),
 				20,
 				1
@@ -698,7 +872,7 @@ TypingBox = New "TextBox" {
 				1
 			),
 			AnchorPoint = Vector2.new(0, 0),
-			Position = UDim2.fromScale(-0.075, 1),
+			Position = UDim2.fromScale(0, 1),
 
 			[Children] = UICorner(),
 		},
@@ -788,7 +962,6 @@ PlayScreen = New "ScreenGui" {
 	[Children] = New "Frame" {
 
 		BackgroundColor3 = Black2,
-		Position = UDim2.fromScale(0.5, 0.5),
 		Size = UDim2.fromScale(1, 1),
 
 		[Children] = {
@@ -801,7 +974,9 @@ PlayScreen = New "ScreenGui" {
 
 				[Children] = {
 					UICorner(0.05),
-					UIPadding { Padding = 0.025 },
+					UIPadding {
+						Padding = 0.025,
+					},
 
 					New "TextLabel" {
 						Size = UDim2.fromScale(1, 0.1),
@@ -840,9 +1015,8 @@ PlayScreen = New "ScreenGui" {
 				Size = UDim2.fromScale(1, 1),
 
 				[Children] = {
-					Button {
+					ImageButton {
 						Name = "Play",
-						Size = UDim2.fromScale(0.17, 0.075),
 						Position = UDim2.fromScale(0.5, 0.5),
 						Text = "Play",
 						Image = 8156398059,
@@ -861,7 +1035,9 @@ PlayScreen = New "ScreenGui" {
 						RichText = true,
 						Text = "typing simulator but better",
 
-						[Children] = UIPadding { Padding = 0.1 },
+						[Children] = UIPadding {
+							Padding = 0.1,
+						},
 					},
 
 					New "Frame" { -- Credits
@@ -964,74 +1140,6 @@ MainUI = New "ScreenGui" {
 					ZIndex = 5,
 
 					[Children] = {
-						Button {
-							Name = "OpenHelp",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(0, 1),
-							Position = UDim2.fromScale(0.01, 0.98),
-							Text = "Help",
-							Image = 7362810660,
-
-							Activated = function()
-								MainUI.MainFrame.Help.Visible = not MainUI.MainFrame.Help.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Help.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
-						},
-						Button {
-							Name = "OpenShop",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(0, 0),
-							Position = UDim2.fromScale(0.01, 0.12),
-							Text = "Shop",
-							Image = 7362870044,
-
-							Activated = function()
-								MainUI.MainFrame.Shop.Visible = not MainUI.MainFrame.Shop.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Shop.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
-						},
-						Button {
-							Name = "OpenSettings",
-							Size = UDim2.fromScale(0.17, 0.075),
-							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.39),
-							Text = "Settings",
-							Image = 7362801114,
-
-							Activated = function()
-								MainUI.MainFrame.Settings.Visible = not MainUI.MainFrame.Settings.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Settings.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
-						},
-						Button {
-							Name = "AudioToggle",
-							Size = UDim2.fromScale(0.1, 0.1),
-							AnchorPoint = Vector2.new(1, 1),
-							Position = UDim2.fromScale(0.99, 0.98),
-							Text = "",
-							Image = 7517177224,
-
-							Corner = 0.1,
-							ImageSize = 0.9,
-							SizeConstraint = Enum.SizeConstraint.RelativeYY,
-
-							Activated = function()
-								if Sounds.music.Playing then
-									Sounds.music:Stop()
-								else
-									Sounds.music:Play()
-								end
-							end,
-						},
 						Label {
 							Name = "Currency",
 							Size = UDim2.fromScale(0.22, 0.075),
@@ -1061,6 +1169,85 @@ MainUI = New "ScreenGui" {
 								},
 							},
 						},
+						ImageButton {
+							Name = "OpenShop",
+							AnchorPoint = Vector2.new(0, 0),
+							Position = UDim2.fromScale(0.01, 0.12),
+							Text = "Shop",
+							Image = 7362870044,
+
+							Activated = function()
+								MainUI.MainFrame.Shop.Visible = not MainUI.MainFrame.Shop.Visible
+
+								DarkTintTransparency:set(
+									if MainUI.MainFrame.Shop.Visible then DarkTintTransparencyGoal else 1
+								)
+							end,
+						},
+						ImageButton {
+							Name = "OpenLeaderboard",
+							AnchorPoint = Vector2.new(0, 1),
+							Position = UDim2.fromScale(0.01, 0.88),
+							Text = "Leaderboard",
+							Image = 10975178174,
+
+							Activated = function()
+								local leaderboard = MainUI.MainFrame.Leaderboard
+								leaderboard.Visible = not leaderboard.Visible
+
+								DarkTintTransparency:set(if leaderboard.Visible then DarkTintTransparencyGoal else 1)
+							end,
+						},
+						ImageButton {
+							Name = "OpenHelp",
+							AnchorPoint = Vector2.new(0, 1),
+							Position = UDim2.fromScale(0.01, 0.98),
+							Text = "Help",
+							Image = 7362810660,
+
+							Activated = function()
+								MainUI.MainFrame.Help.Visible = not MainUI.MainFrame.Help.Visible
+
+								DarkTintTransparency:set(
+									if MainUI.MainFrame.Help.Visible then DarkTintTransparencyGoal else 1
+								)
+							end,
+						},
+						ImageButton {
+							Name = "OpenSettings",
+							AnchorPoint = Vector2.new(1, 0),
+							Position = UDim2.fromScale(0.99, 0.39),
+							Text = "Settings",
+							Image = 7362801114,
+
+							Activated = function()
+								MainUI.MainFrame.Settings.Visible = not MainUI.MainFrame.Settings.Visible
+
+								DarkTintTransparency:set(
+									if MainUI.MainFrame.Settings.Visible then DarkTintTransparencyGoal else 1
+								)
+							end,
+						},
+						ImageButton {
+							Name = "AudioToggle",
+							Size = UDim2.fromScale(0.1, 0.1),
+							AnchorPoint = Vector2.new(1, 1),
+							Position = UDim2.fromScale(0.99, 0.98),
+							Text = "",
+							Image = 7517177224,
+
+							Corner = 0.1,
+							ImageSize = 0.9,
+							SizeConstraint = Enum.SizeConstraint.RelativeYY,
+
+							Activated = function()
+								if Sounds.music.Playing then
+									Sounds.music:Stop()
+								else
+									Sounds.music:Play()
+								end
+							end,
+						},
 						Label {
 							Name = "Words",
 							Size = UDim2.fromScale(0.19, 0.075),
@@ -1072,7 +1259,7 @@ MainUI = New "ScreenGui" {
 							Image = 7367083297,
 						},
 
-						Button {
+						ImageButton {
 							Name = "wordlistButton",
 							Size = UDim2.fromScale(0.22, 0.075),
 							AnchorPoint = Vector2.new(1, 0),
@@ -1111,7 +1298,9 @@ MainUI = New "ScreenGui" {
 
 							[Children] = {
 								UICorner(0.05),
-								UIPadding { Padding = 0.04 },
+								UIPadding {
+									Padding = 0.04,
+								},
 
 								Label {
 									Name = "Rank",
@@ -1130,7 +1319,7 @@ MainUI = New "ScreenGui" {
 												return Ranks(level:get()).Colour
 											end),
 
-											Rotation = 90,
+											Rotation = 75,
 										},
 									},
 								},
@@ -1290,7 +1479,11 @@ MainUI = New "ScreenGui" {
 													Computed(function()
 														local currentLevel = streakLevel:get() - 1
 														return if currentLevel > 0
-															then Color3.new(math.min(r + (currentLevel / 25), 0.6), r, r)
+															then Color3.new(
+																math.min(r + (currentLevel / 25), 0.6),
+																r,
+																r
+															)
 															else Color3.new(r, r, r)
 													end),
 													0.5 + r * 5,
@@ -1324,10 +1517,8 @@ MainUI = New "ScreenGui" {
 
 				Popup {
 					Name = "Help",
-
 					Size = UDim2.fromScale(0.8, 0.8),
-					Corner = 0.04,
-					ZIndex = 120,
+					Length = 6,
 
 					-- Children does not require brackets here
 					-- remember, this is a variable, children are applied in the Popup() function
@@ -1387,7 +1578,6 @@ Typing Simulator by S-GAMES]],
 					Name = "Settings",
 
 					Size = UDim2.fromScale(0.5, 0.5),
-					Corner = 0.04,
 					ZIndex = 130,
 
 					Children = {
@@ -1417,11 +1607,111 @@ Typing Simulator by S-GAMES]],
 				},
 
 				Popup {
-					Name = "Shop",
+					Name = "Leaderboard",
+					Size = UDim2.fromScale(0.5, 0.75),
 
+					Children = {
+						New "Frame" {
+							Name = "Header",
+							Size = UDim2.fromScale(1, 0.06),
+							Position = UDim2.fromScale(0.5, 0.025),
+							BackgroundTransparency = 1,
+
+							[Children] = {
+								UIPadding {
+									Padding = 0.03,
+								},
+								Button {
+									Size = UDim2.fromScale(0.49, 0.5),
+									Position = UDim2.fromScale(0, 0),
+									AnchorPoint = Vector2.new(0, 0),
+									Text = "Level",
+									BackgroundColor3 = Black3,
+
+									Activated = function()
+										local popup = MainUI.MainFrame.Leaderboard.ScrollingFrame.Frame.Pages
+										popup.UIPageLayout:JumpTo(popup.LevelLeaderboard)
+									end,
+								},
+								Button {
+									Size = UDim2.fromScale(0.49, 0.5),
+									Position = UDim2.fromScale(0.51, 0),
+									AnchorPoint = Vector2.new(0, 0),
+									Text = "Words",
+									BackgroundColor3 = Black3,
+
+									Activated = function()
+										local popup = MainUI.MainFrame.Leaderboard.ScrollingFrame.Frame.Pages
+										popup.UIPageLayout:JumpTo(popup.WordsLeaderboard)
+									end,
+								},
+
+								New "TextLabel" {
+									Name = "Username",
+									Text = "Username",
+
+									AnchorPoint = Vector2.new(0, 0),
+									Position = UDim2.fromScale(0.1, 0.55),
+									Size = UDim2.fromScale(0.25, 0.3),
+									Font = playerFont,
+								},
+								New "TextLabel" {
+									Name = "Level",
+									Text = "Level",
+
+									AnchorPoint = Vector2.new(0.5, 0),
+									Position = UDim2.fromScale(0.6, 0.55),
+									Size = UDim2.fromScale(0.2, 0.3),
+									Font = playerFont,
+								},
+								New "TextLabel" {
+									Name = "Words",
+									Text = "Words",
+
+									AnchorPoint = Vector2.new(1, 0),
+									Position = UDim2.fromScale(1, 0.55),
+									Size = UDim2.fromScale(0.2, 0.3),
+									Font = playerFont,
+								},
+							},
+						},
+
+						New "Frame" {
+							Name = "Pages",
+							Size = UDim2.fromScale(1, 0.97),
+							Position = UDim2.fromScale(0.5, 0.045),
+							AnchorPoint = Vector2.new(0.5, 0),
+							BackgroundTransparency = 1,
+
+							[Children] = {
+								New "UIPageLayout" {
+									ScrollWheelInputEnabled = false,
+								},
+
+								New "Frame" {
+									Name = "LevelLeaderboard",
+									BackgroundTransparency = 1,
+									Size = UDim2.fromScale(1, 1),
+									Position = UDim2.fromScale(0.5, 0.5),
+
+									[Children] = New "UIListLayout" {},
+								},
+								New "Frame" {
+									Name = "WordsLeaderboard",
+									BackgroundTransparency = 1,
+									Size = UDim2.fromScale(1, 1),
+									Position = UDim2.fromScale(0.5, 0.5),
+
+									[Children] = New "UIListLayout" {},
+								},
+							},
+						},
+					},
+				},
+
+				Popup {
+					Name = "Shop",
 					Size = UDim2.fromScale(0.5, 0.5),
-					Corner = 0.04,
-					ZIndex = 120,
 
 					Children = {
 						New "UIGridLayout" {
@@ -1463,8 +1753,9 @@ Typing Simulator by S-GAMES]],
 	},
 }
 
+-- Animate background cubes
 while true do
-	for i = 1, 3 do -- Animate background cubes
+	for i = 1, 3 do
 		if not Settings.PlainBG:get() then
 			backgroundRotation[i]:set(90 - backgroundRotation[i]:get())
 		end
