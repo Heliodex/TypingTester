@@ -1,3 +1,4 @@
+local DataStoreService = game:GetService "DataStoreService"
 local Players = game:GetService "Players"
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 local ProfileService = require(game:GetService("ServerScriptService").Server.ProfileService)
@@ -48,6 +49,9 @@ local DefaultUserTemplate = {
 }
 
 local ProfileStore = ProfileService.GetProfileStore("PlayerData_testing124", DefaultUserTemplate)
+local LevelLeaderboard = DataStoreService:GetOrderedDataStore "LevelLeaderboard_testing124"
+local WordsLeaderboard = DataStoreService:GetOrderedDataStore "WordsLeaderboard_testing124"
+
 local Profiles = {}
 local CurrentSaveSlot = {}
 local ProfileViews = {}
@@ -56,8 +60,61 @@ local DataService = Knit.CreateService {
 	Name = "DataService",
 }
 
+function UpdateLeaderboard(player)
+	local saveSlot = CurrentSaveSlot[player]
+	local data = Profiles[player].Data[saveSlot]
+
+	LevelLeaderboard:SetAsync(player.UserId .. "_" .. saveSlot, data.Level)
+	WordsLeaderboard:SetAsync(player.UserId .. "_" .. saveSlot, data.WordsTyped)
+end
+
+function DataService.Client:LevelLeaderboard(player)
+	local topTen = LevelLeaderboard:GetSortedAsync(false, 10):GetCurrentPage()
+	local returns = {}
+
+	for _, data in ipairs(topTen) do
+		if
+			tonumber(data.key:split("_")[1]) == player.UserId
+			and tonumber(data.key:split("_")[2]) == CurrentSaveSlot[player]
+		then
+			table.insert(returns, "You")
+			continue
+		end
+		table.insert(returns, {
+			Player = data.key:split("_")[1],
+			Level = data.value,
+			Words = WordsLeaderboard:GetAsync(data.key),
+		})
+	end
+
+	return returns
+end
+
+function DataService.Client:WordsLeaderboard(player)
+	local topTen = WordsLeaderboard:GetSortedAsync(false, 10):GetCurrentPage()
+	local returns = {}
+
+	for _, data in ipairs(topTen) do
+		if
+			tonumber(data.key:split("_")[1]) == player.UserId
+			and tonumber(data.key:split("_")[2]) == CurrentSaveSlot[player]
+		then
+			table.insert(returns, "You")
+			continue
+		end
+		table.insert(returns, {
+			Player = data.key:split("_")[1],
+			Level = LevelLeaderboard:GetAsync(data.key),
+			Words = data.value,
+		})
+	end
+
+	return returns
+end
+
 function DataService.Client:LoadData(player, SaveSlot)
 	CurrentSaveSlot[player] = SaveSlot
+	UpdateLeaderboard(player)
 	return Profiles[player].Data[SaveSlot]
 end
 
@@ -71,7 +128,7 @@ function DataService.Client:PrepareData(player)
 			Profiles[player] = nil
 			ProfileViews[player] = nil
 			-- The profile could've been loaded on another Roblox server:
-			player:Kick()
+			player:Kick "\n\nYour data may have been loaded on another server.\n"
 		end)
 		if player:IsDescendantOf(Players) then
 			-- A profile has been successfully loaded:
