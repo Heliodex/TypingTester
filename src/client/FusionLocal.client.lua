@@ -1228,26 +1228,34 @@ MainUI = New "ScreenGui" {
 								)
 							end,
 						},
-						ImageButton {
-							Name = "AudioToggle",
-							Size = UDim2.fromScale(0.1, 0.1),
-							AnchorPoint = Vector2.new(1, 1),
-							Position = UDim2.fromScale(0.99, 0.98),
-							Text = "",
-							Image = 7517177224,
+						(function()
+							local button
+							button = ImageButton {
+								Name = "AudioToggle",
+								Size = UDim2.fromScale(0.1, 0.1),
+								AnchorPoint = Vector2.new(1, 1),
+								Position = UDim2.fromScale(0.99, 0.98),
+								Text = "",
+								Image = 7517177224,
 
-							Corner = 0.1,
-							ImageSize = 0.9,
-							SizeConstraint = Enum.SizeConstraint.RelativeYY,
+								Corner = 0.1,
+								ImageSize = 0.9,
+								SizeConstraint = Enum.SizeConstraint.RelativeYY,
 
-							Activated = function()
-								if Sounds.music.Playing then
-									Sounds.music:Stop()
-								else
-									Sounds.music:Play()
-								end
-							end,
-						},
+								Activated = function()
+									if Sounds.music.Playing then
+										Sounds.music:Pause()
+										button.ImageLabel.Image = "rbxassetid://7517176989"
+									else
+										Sounds.music:Play()
+										button.ImageLabel.Image = "rbxassetid://7517177224"
+									end
+								end,
+							}
+
+							return button
+						end)(),
+
 						Label {
 							Name = "Words",
 							Size = UDim2.fromScale(0.19, 0.075),
