@@ -2604,7 +2604,7 @@ return {
 		"studios",
 		"buttons",
 		"placement",
-		"vbulletin",
+		"bulletin",
 		"thompson",
 		"winners",
 		"subsequent",
