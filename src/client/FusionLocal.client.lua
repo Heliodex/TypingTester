@@ -7,6 +7,8 @@ local LocalPlayer = Players.LocalPlayer
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local Words = require(ReplicatedStorage.Shared.Words)
+local Images = require(script.Parent.Images)
+local Ranks = require(script.Parent.Ranks)
 
 Knit.Start()
 	:andThen(function()
@@ -22,7 +24,6 @@ SyncService:GetSeed():andThen(function(seed)
 	randomGenerator = Random.new(seed)
 end)
 
-local Ranks = require(script.Parent.Ranks)
 local Sounds = ReplicatedStorage.Sounds
 local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
 
@@ -627,7 +628,7 @@ local function Setting(props)
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeYY,
 				Image = Computed(function()
-					return if Settings[props.Name]:get() then "rbxassetid://7523095951" else "rbxassetid://7523096047"
+					return if Settings[props.Name]:get() then Images.Checked else Images.Unchecked
 				end),
 			},
 			New "TextLabel" {
@@ -1245,10 +1246,10 @@ MainUI = New "ScreenGui" {
 								Activated = function()
 									if Sounds.music.Playing then
 										Sounds.music:Pause()
-										button.ImageLabel.Image = "rbxassetid://7517176989"
+										button.ImageLabel.Image = Images.Muted
 									else
 										Sounds.music:Play()
-										button.ImageLabel.Image = "rbxassetid://7517177224"
+										button.ImageLabel.Image = Images.Playing
 									end
 								end,
 							}
