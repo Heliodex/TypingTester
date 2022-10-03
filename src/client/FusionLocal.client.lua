@@ -586,7 +586,10 @@ local function Popup(props)
 
 					[OnEvent "Activated"] = function()
 						popup.Visible = false
-						DarkTintTransparency:set(1)
+
+						if not props.NoBG then
+							DarkTintTransparency:set(1)
+						end
 					end,
 				},
 			},
@@ -632,12 +635,12 @@ local function Setting(props)
 				end),
 			},
 			New "TextLabel" {
-				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.fromScale(0.18, 0.5),
-				Size = UDim2.fromScale(0.8, 0.8),
+				AnchorPoint = Vector2.new(1, 0.5),
+				Position = UDim2.fromScale(1, 0.5),
+				Size = UDim2.fromScale(0.7, 0.8),
 				Font = playerFont,
 				Text = props.Text,
-				TextXAlignment = Enum.TextXAlignment.Left,
+				TextXAlignment = Enum.TextXAlignment.Right,
 			},
 		},
 	}
@@ -1178,11 +1181,10 @@ MainUI = New "ScreenGui" {
 							Image = 7362870044,
 
 							Activated = function()
-								MainUI.MainFrame.Shop.Visible = not MainUI.MainFrame.Shop.Visible
+								local shop = MainUI.MainFrame.Shop
+								shop.Visible = not shop.Visible
 
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Shop.Visible then DarkTintTransparencyGoal else 1
-								)
+								DarkTintTransparency:set(if shop.Visible then DarkTintTransparencyGoal else 1)
 							end,
 						},
 						ImageButton {
@@ -1612,6 +1614,73 @@ Typing Simulator by S-GAMES]],
 							Name = "PlainBG",
 							Text = "Plain Background",
 						},
+						Button {
+							Name = "Stats",
+							Text = "Stats",
+							BackgroundColor3 = Black3,
+
+							Activated = function()
+								local stats = MainUI.MainFrame.Stats
+								stats.Visible = not stats.Visible
+							end,
+						},
+					},
+				},
+
+				Popup {
+					Name = "Stats",
+					Size = UDim2.fromScale(0.5, 0.5),
+					ZIndex = 140,
+					NoBG = true,
+
+					Children = {
+						New "UIListLayout" {},
+
+						(function()
+							dataLoadedChanged:onChange(function()
+								local _, stats = DataService:GetStats():await()
+								local userStats = {
+									{ "Total time played", "todo" },
+									{ "Logins", stats.Logins },
+									{ "Longest Streak", stats.LongestStreak },
+									{ "Easy Words", stats.Words.Easy },
+									{ "Medium Words", stats.Words.Medium },
+									{ "Hard Words", stats.Words.Hard },
+									{ "Insane Words", stats.Words.Insane },
+								}
+
+								for i in userStats do
+									New "Frame" {
+										BackgroundTransparency = 1,
+										Size = UDim2.fromScale(0.98, 0.04),
+										Parent = MainUI.MainFrame.Stats.ScrollingFrame.Frame,
+
+										[Children] = {
+											New "TextLabel" {
+												Name = "StatName",
+												Size = UDim2.fromScale(0.75, 1),
+												Position = UDim2.fromScale(0, 0.5),
+												AnchorPoint = Vector2.new(0, 0),
+
+												Text = userStats[i][1],
+												Font = playerFont,
+												TextXAlignment = Enum.TextXAlignment.Left,
+											},
+											New "TextLabel" {
+												Name = "Stat",
+												Size = UDim2.fromScale(0.25, 1),
+												Position = UDim2.fromScale(1, 0.5),
+												AnchorPoint = Vector2.new(1, 0),
+
+												Text = userStats[i][2],
+												Font = playerFont,
+												TextXAlignment = Enum.TextXAlignment.Right,
+											},
+										},
+									}
+								end
+							end)
+						end)(),
 					},
 				},
 

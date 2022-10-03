@@ -1,5 +1,5 @@
-local DataStoreService = game:GetService "DataStoreService"
 local Players = game:GetService "Players"
+local DataStoreService = game:GetService "DataStoreService"
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 local ProfileService = require(game:GetService("ServerScriptService").Server.ProfileService)
 
@@ -19,7 +19,7 @@ local DefaultProfileTemplate = {
 		LongestStreak = 0,
 		Words = {
 			Easy = 0,
-			Normal = 0,
+			Medium = 0,
 			Hard = 0,
 			Insane = 0,
 		},
@@ -89,7 +89,6 @@ function DataService.Client:LevelLeaderboard(player)
 
 	return returns
 end
-
 function DataService.Client:WordsLeaderboard(player)
 	local topTen = WordsLeaderboard:GetSortedAsync(false, 10):GetCurrentPage()
 	local returns = {}
@@ -113,9 +112,16 @@ function DataService.Client:WordsLeaderboard(player)
 end
 
 function DataService.Client:LoadData(player, SaveSlot)
-	CurrentSaveSlot[player] = SaveSlot
-	UpdateLeaderboard(player)
-	return Profiles[player].Data[SaveSlot]
+	if not CurrentSaveSlot[player] then
+		CurrentSaveSlot[player] = SaveSlot
+		UpdateLeaderboard(player)
+		Profiles[player].Data[SaveSlot].Stats.Logins += 1
+
+		return Profiles[player].Data[SaveSlot]
+	end
+end
+function DataService.Client:GetStats(player)
+	return Profiles[player].Data[CurrentSaveSlot[player]].Stats
 end
 
 function DataService.Client:PrepareData(player)
@@ -172,13 +178,23 @@ function DataService:GetSetting(player, setting)
 end
 
 function DataService:GetData(player, variable)
-	return Profiles[player].Data[CurrentSaveSlot[player]][variable]
+	local slot = Profiles[player].Data[CurrentSaveSlot[player]]
+
+	-- Variable could be a list of values denoting a path to access:
+	-- todo make this a function
+	if typeof(variable) == "table" then
+		for i = 1, #variable - 1 do
+			slot = slot[variable[i]]
+		end
+		return slot[variable[#variable]]
+	else
+		return slot[variable]
+	end
 end
 
 function DataService:SetData(player, variable, value)
 	local slot = Profiles[player].Data[CurrentSaveSlot[player]]
 
-	-- Variable could be a list of values denoting a path to access:
 	if typeof(variable) == "table" then
 		for i = 1, #variable - 1 do
 			slot = slot[variable[i]]
@@ -189,7 +205,16 @@ function DataService:SetData(player, variable, value)
 	end
 end
 function DataService:IncrementData(player, variable, value)
-	Profiles[player].Data[CurrentSaveSlot[player]][variable] += value
+	local slot = Profiles[player].Data[CurrentSaveSlot[player]]
+
+	if typeof(variable) == "table" then
+		for i = 1, #variable - 1 do
+			slot = slot[variable[i]]
+		end
+		slot[variable[#variable]] += value
+	else
+		slot[variable] += value
+	end
 end
 
 Players.PlayerRemoving:Connect(function(player)

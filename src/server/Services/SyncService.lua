@@ -31,11 +31,12 @@ function SyncService.Client:GetSeed()
 end
 
 function SyncService.Client:WordTyped(player)
-	DataService:IncrementData(player, "WordsTyped", 1)
-
 	local currentWordlist = Words[wordlist]
 	local expToAdd = rand:NextInteger(currentWordlist.Exp[1], currentWordlist.Exp[2])
 	local bonusExp = streakLevel
+
+	DataService:IncrementData(player, "WordsTyped", 1)
+	DataService:IncrementData(player, { "Stats", "Words", currentWordlist.Name }, 1)
 
 	local exp = DataService:GetData(player, "Experience")
 	local lvl = DataService:GetData(player, "Level")
@@ -60,7 +61,11 @@ function SyncService.Client:WordTyped(player)
 	DataService:IncrementData(player, "Currency", currentWordlist.Currency)
 end
 
-function SyncService.Client:EndStreak()
+function SyncService.Client:EndStreak(player)
+	if DataService:GetData(player, { "Stats", "LongestStreak" }) or 0 < streak then
+		DataService:SetData(player, { "Stats", "LongestStreak" }, streak)
+	end
+
 	streak = 0
 	streakLevel = 0
 end
