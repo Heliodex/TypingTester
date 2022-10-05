@@ -23,6 +23,8 @@ local DefaultProfileTemplate = {
 			Hard = 0,
 			Insane = 0,
 		},
+		TotalCurrency = 0,
+		CurrencySpent = 0,
 	},
 
 	ShopPurchases = {
@@ -55,6 +57,7 @@ local WordsLeaderboard = DataStoreService:GetOrderedDataStore "WordsLeaderboard_
 local Profiles = {}
 local CurrentSaveSlot = {}
 local ProfileViews = {}
+local counter
 
 local DataService = Knit.CreateService {
 	Name = "DataService",
@@ -117,6 +120,11 @@ function DataService.Client:LoadData(player, SaveSlot)
 		UpdateLeaderboard(player)
 		Profiles[player].Data[SaveSlot].Stats.Logins += 1
 
+		counter = task.spawn(function()
+			while task.wait(1) do
+				Profiles[player].Data[SaveSlot].Stats.PlayTime += 1
+			end
+		end)
 		return Profiles[player].Data[SaveSlot]
 	end
 end
@@ -219,6 +227,9 @@ end
 
 Players.PlayerRemoving:Connect(function(player)
 	local profile = Profiles[player]
+	if counter then
+		task.cancel(counter)
+	end
 	if profile ~= nil then
 		profile:Release()
 	end

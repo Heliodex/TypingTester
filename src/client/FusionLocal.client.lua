@@ -1620,8 +1620,67 @@ Typing Simulator by S-GAMES]],
 							BackgroundColor3 = Black3,
 
 							Activated = function()
-								local stats = MainUI.MainFrame.Stats
-								stats.Visible = not stats.Visible
+								local statsWindow = MainUI.MainFrame.Stats
+								statsWindow.Visible = not statsWindow.Visible
+
+								if statsWindow.Visible then
+									local _, stats = DataService:GetStats():await()
+									local h = math.floor(stats.PlayTime % 86400 / 3600)
+									local userStats = {
+										{
+											"Total time played",
+											(if h > 0 then h .. "h " else "") .. math.floor(stats.PlayTime % 3600 / 60) .. "m",
+										},
+										{ "Logins", stats.Logins },
+										{ "Longest Streak", stats.LongestStreak },
+										{ "Easy Words", stats.Words.Easy },
+										{ "Medium Words", stats.Words.Medium },
+										{ "Hard Words", stats.Words.Hard },
+										{ "Insane Words", stats.Words.Insane },
+										{ "Total typing tokens", stats.TotalCurrency },
+										{ "Typing tokens spent", stats.CurrencySpent },
+									}
+
+									if statsWindow.ScrollingFrame.Frame:FindFirstChildOfClass "Frame" then
+										for i in userStats do
+											statsWindow.ScrollingFrame.Frame[userStats[i][1]].Stat.Text =
+												userStats[i][2]
+										end
+									else
+										for i in userStats do
+											New "Frame" {
+												Name = userStats[i][1],
+												LayoutOrder = i,
+												BackgroundTransparency = 1,
+												Size = UDim2.fromScale(0.98, 0.04),
+												Parent = MainUI.MainFrame.Stats.ScrollingFrame.Frame,
+
+												[Children] = {
+													New "TextLabel" {
+														Name = "StatName",
+														Size = UDim2.fromScale(0.75, 1),
+														Position = UDim2.fromScale(0, 0.5),
+														AnchorPoint = Vector2.new(0, 0),
+
+														Text = userStats[i][1],
+														Font = playerFont,
+														TextXAlignment = Enum.TextXAlignment.Left,
+													},
+													New "TextLabel" {
+														Name = "Stat",
+														Size = UDim2.fromScale(0.25, 1),
+														Position = UDim2.fromScale(1, 0.5),
+														AnchorPoint = Vector2.new(1, 0),
+
+														Text = userStats[i][2],
+														Font = playerFont,
+														TextXAlignment = Enum.TextXAlignment.Right,
+													},
+												},
+											}
+										end
+									end
+								end
 							end,
 						},
 					},
@@ -1633,54 +1692,8 @@ Typing Simulator by S-GAMES]],
 					ZIndex = 140,
 					NoBG = true,
 
-					Children = {
-						New "UIListLayout" {},
-
-						(function()
-							dataLoadedChanged:onChange(function()
-								local _, stats = DataService:GetStats():await()
-								local userStats = {
-									{ "Total time played", "todo" },
-									{ "Logins", stats.Logins },
-									{ "Longest Streak", stats.LongestStreak },
-									{ "Easy Words", stats.Words.Easy },
-									{ "Medium Words", stats.Words.Medium },
-									{ "Hard Words", stats.Words.Hard },
-									{ "Insane Words", stats.Words.Insane },
-								}
-
-								for i in userStats do
-									New "Frame" {
-										BackgroundTransparency = 1,
-										Size = UDim2.fromScale(0.98, 0.04),
-										Parent = MainUI.MainFrame.Stats.ScrollingFrame.Frame,
-
-										[Children] = {
-											New "TextLabel" {
-												Name = "StatName",
-												Size = UDim2.fromScale(0.75, 1),
-												Position = UDim2.fromScale(0, 0.5),
-												AnchorPoint = Vector2.new(0, 0),
-
-												Text = userStats[i][1],
-												Font = playerFont,
-												TextXAlignment = Enum.TextXAlignment.Left,
-											},
-											New "TextLabel" {
-												Name = "Stat",
-												Size = UDim2.fromScale(0.25, 1),
-												Position = UDim2.fromScale(1, 0.5),
-												AnchorPoint = Vector2.new(1, 0),
-
-												Text = userStats[i][2],
-												Font = playerFont,
-												TextXAlignment = Enum.TextXAlignment.Right,
-											},
-										},
-									}
-								end
-							end)
-						end)(),
+					Children = New "UIListLayout" {
+						SortOrder = Enum.SortOrder.LayoutOrder,
 					},
 				},
 

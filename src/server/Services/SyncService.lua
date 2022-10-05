@@ -59,6 +59,7 @@ function SyncService.Client:WordTyped(player)
 	DataService:SetData(player, "Level", lvl)
 
 	DataService:IncrementData(player, "Currency", currentWordlist.Currency)
+	DataService:IncrementData(player, { "Stats", "TotalCurrency" }, currentWordlist.Currency)
 end
 
 function SyncService.Client:EndStreak(player)
@@ -89,14 +90,15 @@ function SyncService:ChangeWordlist(player)
 end
 
 function SyncService.Client:PurchaseItem(player, category, item)
-	-- if DataService:GetData(player, "ShopPurchases")[category][item] then
-	-- 	return
-	-- end
+	if DataService:GetData(player, "ShopPurchases")[category][item] then
+		return
+	end
 	local itemPrice = ShopItems[category][item].Price
 	if DataService:GetData(player, "Currency") < itemPrice then
 		return
 	end
 	DataService:IncrementData(player, "Currency", -itemPrice)
+	DataService:IncrementData(player, { "Stats", "CurrencySpent" }, itemPrice)
 	DataService:SetData(player, { "ShopPurchases", category, item }, true)
 	return true
 end
