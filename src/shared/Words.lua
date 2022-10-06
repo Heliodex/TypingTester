@@ -2996,7 +2996,6 @@ return {
 		"tetraiodophenolphthalein",
 		"theologicoastronomical",
 		"theologicometaphysical",
-		"three-dimensionalities",
 		"thymolsulphonephthalein",
 		"thyroparathyroidectomize",
 		"thyroparathyroidectomy",

@@ -10,6 +10,8 @@ local ReplicatedStorage = game:GetService "ReplicatedStorage"
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
 local Words = require(ReplicatedStorage.Shared.Words)
+local Ranks = require(ReplicatedStorage.Shared.Ranks)
+local Badge = require(script.Parent.Parent.Badge)
 local seed = math.random()
 local rand = Random.new(seed)
 
@@ -41,12 +43,14 @@ function SyncService.Client:WordTyped(player)
 	local exp = DataService:GetData(player, "Experience")
 	local lvl = DataService:GetData(player, "Level")
 
+	local levelUp = false
 	-- Current streak level is added to experience as a bonus
 	-- Might not seem like much, but adds up over a long streak
 	if exp + expToAdd + bonusExp > lvl * 100 then
 		while exp + expToAdd + bonusExp > lvl * 100 do -- why no while else (also probably redundant until soemone actually gets this much exp)
 			exp += expToAdd + bonusExp - lvl * 100
 			lvl += 1
+			levelUp = true
 		end
 	else
 		exp += expToAdd + bonusExp
@@ -56,14 +60,19 @@ function SyncService.Client:WordTyped(player)
 	streakLevel += if streak % 20 == 0 then 1 else 0
 
 	DataService:SetData(player, "Experience", exp)
-	DataService:SetData(player, "Level", lvl)
+	if levelUp then
+		DataService:SetData(player, "Level", lvl)
+		if Ranks(lvl).Badge then
+			Badge:AwardBadge(player, Ranks(lvl).Badge)
+		end
+	end
 
 	DataService:IncrementData(player, "Currency", currentWordlist.Currency)
 	DataService:IncrementData(player, { "Stats", "TotalCurrency" }, currentWordlist.Currency)
 end
 
 function SyncService.Client:EndStreak(player)
-	if DataService:GetData(player, { "Stats", "LongestStreak" }) or 0 < streak then
+	if DataService:GetData(player, { "Stats", "LongestStreak" }) < streak then
 		DataService:SetData(player, { "Stats", "LongestStreak" }, streak)
 	end
 

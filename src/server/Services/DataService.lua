@@ -2,6 +2,7 @@ local Players = game:GetService "Players"
 local DataStoreService = game:GetService "DataStoreService"
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 local ProfileService = require(game:GetService("ServerScriptService").Server.ProfileService)
+local Badge = require(script.Parent.Parent.Badge)
 
 -- *daft punk - get lucky plays*
 -- This game has ProfileService.
@@ -81,6 +82,7 @@ function DataService.Client:LevelLeaderboard(player)
 			and tonumber(data.key:split("_")[2]) == CurrentSaveSlot[player]
 		then
 			table.insert(returns, "You")
+			Badge:AwardBadge(player, 2128814962) -- Top 10 Level
 			continue
 		end
 		table.insert(returns, {
@@ -102,6 +104,7 @@ function DataService.Client:WordsLeaderboard(player)
 			and tonumber(data.key:split("_")[2]) == CurrentSaveSlot[player]
 		then
 			table.insert(returns, "You")
+			Badge:AwardBadge(player, 2128814964) -- Top 10 Words
 			continue
 		end
 		table.insert(returns, {
@@ -125,6 +128,33 @@ function DataService.Client:LoadData(player, SaveSlot)
 				Profiles[player].Data[SaveSlot].Stats.PlayTime += 1
 			end
 		end)
+		-- Award badges for time spent in game
+		task.spawn(function()
+			Badge:AwardBadge(player, 2128696002) -- Welcome!
+
+			if Profiles[player].Data[SaveSlot].Stats.PlayTime > 3600 * 8 then
+				Badge:AwardBadge(player, 2128888555) -- Fan
+			end
+			if Profiles[player].Data[SaveSlot].Stats.PlayTime > 3600 * 30 then
+				Badge:AwardBadge(player, 2128888557) -- Expert
+			end
+			if Profiles[player].Data[SaveSlot].Stats.PlayTime > 3600 * 100 then
+				Badge:AwardBadge(player, 2128888558) -- Veteran
+			end
+			if Profiles[player].Data[SaveSlot].Stats.PlayTime > 3600 * 300 then
+				Badge:AwardBadge(player, 2128888559) -- Champion
+			end
+
+			task.wait(3600)
+			Badge:AwardBadge(player, 2128873301) -- Enthusiast
+			task.wait(3600 * 2)
+			Badge:AwardBadge(player, 2128873302) -- Dedicated
+			task.wait(3600 * 2)
+			Badge:AwardBadge(player, 2128873304) -- Aficionado
+			task.wait(3600 * 3)
+			Badge:AwardBadge(player, 2128888554) -- Devotee
+		end)
+
 		return Profiles[player].Data[SaveSlot]
 	end
 end

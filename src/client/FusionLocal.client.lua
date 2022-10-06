@@ -7,8 +7,8 @@ local LocalPlayer = Players.LocalPlayer
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local Words = require(ReplicatedStorage.Shared.Words)
+local Ranks = require(ReplicatedStorage.Shared.Ranks)
 local Images = require(script.Parent.Images)
-local Ranks = require(script.Parent.Ranks)
 
 Knit.Start()
 	:andThen(function()
