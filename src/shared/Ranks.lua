@@ -1,14 +1,15 @@
 -- Manages ranks
 -- Directly been copied from legacy tsbb
 
+local pink = Color3.new(1, 0, 0.5)
 local red = Color3.new(0.75, 0, 0)
+local orange = Color3.new(0.9, 0.5, 0)
+local yellow = Color3.new(0.8, 0.75, 0)
 local green = Color3.new(0.2, 1, 0)
 local darkgreen = Color3.new(0, 0.5, 0)
-local orange = Color3.new(0.9, 0.5, 0)
 local cyan = Color3.new(0, 0.9, 0.9)
 local blue = Color3.new(0, 0.5, 1)
 local darkblue = Color3.new(0, 0, 1)
-local yellow = Color3.new(0.8, 0.75, 0)
 local black = Color3.new(0, 0, 0)
 local grey = Color3.new(0.5, 0.5, 0.5)
 local uigrey = Color3.fromRGB(42, 42, 42)
@@ -70,6 +71,10 @@ local gradients = { -- Yanderedev Moment
 		ColorSequenceKeypoint.new(0, orange),
 		ColorSequenceKeypoint.new(1, yellow),
 	},
+	ColorSequence.new {
+		ColorSequenceKeypoint.new(0, pink),
+		ColorSequenceKeypoint.new(1, orange),
+	},
 }
 
 return function(level)
@@ -82,66 +87,85 @@ return function(level)
 		return {
 			Text = "Typical Typer",
 			Colour = gradients[2],
+			Badge = 2128769583,
 		}
 	elseif level < 30 then
 		return {
 			Text = "Fast Fingers",
 			Colour = gradients[3],
+			Badge = 2128769584,
 		}
 	elseif level < 40 then
 		return {
 			Text = "Speedy Speller",
 			Colour = gradients[4],
+			Badge = 2128776064,
 		}
 	elseif level < 50 then
 		return {
 			Text = "Rapid Reader",
 			Colour = gradients[5],
+			Badge = 2128776071,
 		}
 	elseif level < 60 then
 		return {
 			Text = "Computing Cadet",
 			Colour = gradients[6],
+			Badge = 2128776072,
 		}
 	elseif level < 70 then
 		return {
 			Text = "Keyboard Knight",
 			Colour = gradients[7],
+			Badge = 2128776114,
 		}
 	elseif level < 80 then
 		return {
 			Text = "Writing Warrior",
 			Colour = gradients[8],
+			Badge = 2128776121,
 		}
 	elseif level < 90 then
 		return {
 			Text = "Terrific Typist",
 			Colour = gradients[9],
+			Badge = 2128794964,
 		}
 	elseif level < 100 then
 		return {
 			Text = "Obsessed Orthographer",
 			Colour = gradients[10],
+			Badge = 2128794965,
 		}
 	elseif level < 110 then
 		return {
 			Text = "Studious Stenographer",
 			Colour = gradients[11],
+			Badge = 2128794967,
 		}
 	elseif level < 120 then
 		return {
 			Text = "Hypersonic Hacker",
 			Colour = gradients[12],
+			Badge = 2128794973,
 		}
 	elseif level < 130 then
 		return {
 			Text = "Word Wizard",
 			Colour = gradients[13],
+			Badge = 2128794974,
 		}
-	else
+	elseif level < 140 then
 		return {
 			Text = "Document Deity",
 			Colour = gradients[14],
+			Badge = 2128814956,
+		}
+	else
+		return {
+			Text = "Literacy Legend",
+			Colour = gradients[15],
+			Badge = 2128814958,
 		}
 	end
 end
