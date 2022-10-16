@@ -72,7 +72,7 @@ function SyncService.Client:WordTyped(player)
 end
 
 function SyncService.Client:EndStreak(player)
-	if DataService:GetData(player, { "Stats", "LongestStreak" }) < streak then
+	if DataService:GetData(player, { "Stats", "LongestStreak" }) or 0 < streak then
 		DataService:SetData(player, { "Stats", "LongestStreak" }, streak)
 	end
 

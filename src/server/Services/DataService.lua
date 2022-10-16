@@ -249,7 +249,7 @@ function DataService:IncrementData(player, variable, value)
 		for i = 1, #variable - 1 do
 			slot = slot[variable[i]]
 		end
-		slot[variable[#variable]] += value
+		slot[variable[#variable]] = slot[variable[#variable]] or 0 + value
 	else
 		slot[variable] += value
 	end
