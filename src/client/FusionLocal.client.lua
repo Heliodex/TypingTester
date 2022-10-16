@@ -1621,7 +1621,8 @@ Typing Simulator by S-GAMES]],
 
 							Activated = function()
 								local statsWindow = MainUI.MainFrame.Stats
-								statsWindow.Visible = not statsWindow.Visible
+								statsWindow.Visible = true
+								MainUI.MainFrame.Settings.Visible = false
 
 								if statsWindow.Visible then
 									local _, stats = DataService:GetStats():await()
@@ -1629,7 +1630,9 @@ Typing Simulator by S-GAMES]],
 									local userStats = {
 										{
 											"Total time played",
-											(if h > 0 then h .. "h " else "") .. math.floor(stats.PlayTime % 3600 / 60) .. "m",
+											(if h > 0 then h .. "h " else "")
+												.. math.floor(stats.PlayTime % 3600 / 60)
+												.. "m",
 										},
 										{ "Logins", stats.Logins },
 										{ "Longest Streak", stats.LongestStreak },
@@ -1690,7 +1693,6 @@ Typing Simulator by S-GAMES]],
 					Name = "Stats",
 					Size = UDim2.fromScale(0.5, 0.5),
 					ZIndex = 140,
-					NoBG = true,
 
 					Children = New "UIListLayout" {
 						SortOrder = Enum.SortOrder.LayoutOrder,
