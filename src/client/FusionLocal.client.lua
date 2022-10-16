@@ -91,6 +91,8 @@ local experienceAdded = Value(0)
 local streakLevelUpTransparency = Value(1)
 local streakLevelUpTransparencySpring = Spring(streakLevelUpTransparency, 3, 1)
 
+local currentShopItem = Value()
+
 local Settings = {
 	KeySounds = Value(),
 	BlindMode = Value(),
@@ -593,6 +595,8 @@ local function Popup(props)
 					end,
 				},
 			},
+
+			props.MainChildren,
 		},
 	}
 	return popup
@@ -647,82 +651,62 @@ local function Setting(props)
 end
 
 local function ShopOption(props)
-	local buttonText = Value(ShopItems[props.Category][props.Name].Price)
-	local levelRequirement = ShopItems[props.Category][props.Name].Level
-	local clickable
+	local item = ShopItems[props.Category][props.Name]
+	local labelText = Value(item.Price)
+	local levelRequirement = item.Level
 
 	dataLoadedChanged:onChange(function()
 		DataService:ItemOwned(props.Category, props.Name):andThen(function(owned)
 			if owned then
-				buttonText:set "Owned"
+				labelText:set "Owned"
 				ownedWordlists[props.Name] = true
-				clickable = false
-			else
-				clickable = true
 			end
 		end)
 	end)
 
-	return New "Frame" {
+	return New "TextButton" {
 		Name = props.Name,
 
 		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
-		BackgroundTransparency = 1,
+		BackgroundColor3 = Grey3,
+
+		[OnEvent "Activated"] = function()
+			currentShopItem:set {
+				Name = props.Name,
+				Category = props.Category,
+				Level = item.Level,
+				ButtonText = labelText,
+			}
+		end,
 
 		[Children] = {
 			New "TextLabel" {
 				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.fromScale(0, 0.5),
-				Size = UDim2.fromScale(0.7, 0.8),
+				Position = UDim2.fromScale(0.05, 0.5),
+				Size = UDim2.fromScale(0.6, 0.8),
 				Font = playerFont,
-				Text = props.Text,
+				Text = item.Name,
 				TextXAlignment = Enum.TextXAlignment.Left,
 			},
 
-			New "TextButton" {
+			New "TextLabel" {
 				Name = "Price",
-
-				BackgroundColor3 = Grey3,
+				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.fromScale(1, 0.5),
+				Position = UDim2.fromScale(0.95, 0.5),
 				Size = UDim2.fromScale(0.25, 1),
 				Font = playerFont,
-				Text = buttonText,
-				AutoButtonColor = true,
+				Text = labelText,
 
-				[OnEvent "Activated"] = function()
-					if clickable and level:get() >= levelRequirement then
-						local price = buttonText:get()
-						clickable = false
-						SyncService:PurchaseItem(props.Category, props.Name):andThen(function(success)
-							if success then
-								ownedWordlists[props.Name] = true
-								currency:set(currency:get() - price)
-								buttonText:set "Purchase successful!"
-								task.wait(1)
-								buttonText:set "Owned"
-							else
-								buttonText:set "Purchase failed!"
-								task.wait(1)
-								buttonText:set(price)
-								clickable = true
-							end
-						end)
-					end
-				end,
-
-				[Children] = {
-					UIPadding(),
-					UICorner(),
-				},
+				[Children] = UIPadding(),
 			},
 
 			New "Frame" {
 				Name = "LevelLock",
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.fromScale(1.05, 1.2),
-				BackgroundTransparency = 0.25,
+				Size = UDim2.fromScale(1, 1),
+				BackgroundTransparency = 0.15,
 				BackgroundColor3 = Black0,
 				Visible = Computed(function()
 					return level:get() < levelRequirement
@@ -747,6 +731,8 @@ local function ShopOption(props)
 					},
 				},
 			},
+
+			UICorner(),
 		},
 	}
 end
@@ -1804,31 +1790,129 @@ Typing Simulator by S-GAMES]],
 
 				Popup {
 					Name = "Shop",
-					Size = UDim2.fromScale(0.5, 0.5),
+					Size = UDim2.fromScale(0.5, 0.65),
+
+					MainChildren = (function()
+						local popup
+						local buttonText = Value ""
+
+						Observer(currentShopItem):onChange(function()
+							buttonText:set(currentShopItem:get().ButtonText:get())
+							popup.Visible = true
+						end)
+
+						popup = New "Frame" {
+							Name = "PurchasePopup",
+							Size = UDim2.fromScale(0.96, 0.3),
+							Position = UDim2.fromScale(0.5, 0.98),
+							AnchorPoint = Vector2.new(0.5, 1),
+							BackgroundColor3 = Grey1,
+							Visible = false,
+
+							[Children] = {
+								New "TextLabel" {
+									Name = "ItemName",
+									Size = UDim2.fromScale(0.6, 0.2),
+									Position = UDim2.fromScale(0, 0),
+									AnchorPoint = Vector2.new(0, 0),
+									BackgroundTransparency = 1,
+									Text = Computed(function()
+										local item = currentShopItem:get()
+										return if item then ShopItems[item.Category][item.Name].Name else ""
+									end),
+									TextXAlignment = Enum.TextXAlignment.Left,
+									Font = playerFont,
+								},
+								New "TextLabel" {
+									Name = "ItemDescription",
+									Size = UDim2.fromScale(0.6, 0.8),
+									Position = UDim2.fromScale(0, 0.2),
+									AnchorPoint = Vector2.new(0, 0),
+									BackgroundTransparency = 1,
+									Text = Computed(function()
+										local item = currentShopItem:get()
+										return if item then ShopItems[item.Category][item.Name].Description else ""
+									end),
+									TextXAlignment = Enum.TextXAlignment.Left,
+									TextYAlignment = Enum.TextYAlignment.Top,
+									Font = playerFont,
+
+									[Children] = New "UITextSizeConstraint" {
+										MaxTextSize = 20,
+									},
+								},
+
+								New "TextButton" {
+									Name = "Price",
+									AnchorPoint = Vector2.new(1, 1),
+									Position = UDim2.fromScale(1, 1),
+									Size = UDim2.fromScale(0.2, 0.35),
+									Font = playerFont,
+									Text = buttonText,
+									BackgroundColor3 = Grey3,
+
+									[OnEvent "Activated"] = function()
+										local item = currentShopItem:get()
+										local levelRequirement = item.Level
+										local price = item.ButtonText:get() -- awful variable name
+										local clickable = price ~= "Owned"
+
+										if clickable and level:get() >= levelRequirement then
+											clickable = false
+											SyncService:PurchaseItem(item.Category, item.Name):andThen(function(success)
+												if success then
+													ownedWordlists[item.Name] = true
+													currency:set(currency:get() - price)
+													buttonText:set "Purchase successful!"
+													item.ButtonText:set "Owned"
+													task.wait(1)
+													buttonText:set "Owned"
+												else
+													buttonText:set "Purchase failed!"
+													task.wait(1)
+													buttonText:set(price)
+													clickable = true
+												end
+											end)
+										end
+									end,
+
+									[Children] = {
+										UICorner(),
+										UIPadding(),
+									},
+								},
+
+								UIPadding {
+									PaddingH = 0.025,
+								},
+								UICorner(0.1),
+							},
+						}
+
+						return popup
+					end)(),
 
 					Children = {
 						New "UIGridLayout" {
 							FillDirectionMaxCells = 2,
-							CellSize = UDim2.fromScale(0.465, 0.05),
-							CellPadding = UDim2.fromScale(0.05, 0.02),
+							CellSize = UDim2.fromScale(0.465, 0.045),
+							CellPadding = UDim2.fromScale(0.05, 0.01),
 						},
 
 						ShopOption {
 							Name = "Medium",
 							Category = "Wordlists",
-							Text = "Medium words",
 							LayoutOrder = 1,
 						},
 						ShopOption {
 							Name = "Hard",
 							Category = "Wordlists",
-							Text = "Hard words",
 							LayoutOrder = 2,
 						},
 						ShopOption {
 							Name = "Insane",
 							Category = "Wordlists",
-							Text = "Insane words",
 							LayoutOrder = 3,
 						},
 					},

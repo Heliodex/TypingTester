@@ -1,18 +1,18 @@
 -- Manages ranks
 -- Directly been copied from legacy tsbb
 
-local pink = Color3.new(1, 0, 0.5)
-local red = Color3.new(0.75, 0, 0)
-local orange = Color3.new(0.9, 0.5, 0)
-local yellow = Color3.new(0.8, 0.75, 0)
-local green = Color3.new(0.2, 1, 0)
-local darkgreen = Color3.new(0, 0.5, 0)
-local cyan = Color3.new(0, 0.9, 0.9)
-local blue = Color3.new(0, 0.5, 1)
-local darkblue = Color3.new(0, 0, 1)
-local black = Color3.new(0, 0, 0)
-local grey = Color3.new(0.5, 0.5, 0.5)
-local uigrey = Color3.fromRGB(42, 42, 42)
+local pink = Color3.new(1, 0, 0.5) -- ff007f
+local red = Color3.new(0.75, 0, 0) -- bf0000
+local orange = Color3.new(0.9, 0.5, 0) -- e57f00
+local yellow = Color3.new(0.8, 0.75, 0) -- ccbf00
+local green = Color3.new(0.2, 1, 0) -- 33ff00
+local darkgreen = Color3.new(0, 0.5, 0) -- 007f00
+local cyan = Color3.new(0, 0.9, 0.9) -- 00e5e5
+local blue = Color3.new(0, 0.5, 1) -- 007fff
+local darkblue = Color3.new(0, 0, 1) -- 0000ff
+local black = Color3.new(0, 0, 0) -- 000000
+local grey = Color3.new(0.5, 0.5, 0.5) -- 7f7f7f
+local uigrey = Color3.fromRGB(42, 42, 42) -- 2a2a2a
 
 local gradients = { -- Yanderedev Moment
 	ColorSequence.new {
