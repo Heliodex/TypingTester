@@ -1797,8 +1797,14 @@ Typing Simulator by S-GAMES]],
 						local buttonText = Value ""
 
 						Observer(currentShopItem):onChange(function()
-							buttonText:set(currentShopItem:get().ButtonText:get())
-							popup.Visible = true
+							local shopItem = currentShopItem:get()
+							print(shopItem.Level, level:get())
+							if shopItem.Level <= level:get() then
+								buttonText:set(shopItem.ButtonText:get())
+								popup.Visible = true
+							else
+								popup.Visible = false
+							end
 						end)
 
 						popup = New "Frame" {
