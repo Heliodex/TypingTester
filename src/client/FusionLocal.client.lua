@@ -167,7 +167,7 @@ local function populateLeaderboard(leaderboard, page)
 				Name = "LeaderboardPerson",
 				Parent = page,
 
-				Size = UDim2.fromScale(1, 0.04),
+				Size = UDim2.fromScale(1, 0.1),
 				BackgroundTransparency = 1,
 
 				[Children] = {
@@ -421,13 +421,13 @@ local function SaveSlot(props)
 					DataService:LevelLeaderboard():andThen(function(leaderboard)
 						populateLeaderboard(
 							leaderboard,
-							MainUI.MainFrame.Leaderboard.ScrollingFrame.Frame.Pages.LevelLeaderboard
+							MainUI.MainFrame.Leaderboard.ScrollingFrame.Pages.LevelLeaderboard
 						)
 					end)
 					DataService:WordsLeaderboard():andThen(function(leaderboard)
 						populateLeaderboard(
 							leaderboard,
-							MainUI.MainFrame.Leaderboard.ScrollingFrame.Frame.Pages.WordsLeaderboard
+							MainUI.MainFrame.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard
 						)
 					end)
 				end)
@@ -545,20 +545,14 @@ local function Popup(props)
 				Active = true,
 				Position = UDim2.fromScale(0.5, 0.556), -- perfect values
 				Size = UDim2.fromScale(1, 0.888),
-				CanvasSize = UDim2.fromScale(1, props.Length or 2.5),
+				CanvasSize = UDim2.fromScale(0.9, 1),
+				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 
-				[Children] = New "Frame" {
-					Size = UDim2.fromScale(0.96, 1),
-					Position = UDim2.fromScale(0.5, 0.5),
-					BackgroundTransparency = 1,
-
-					[Children] = {
-						UIPadding {
-							PaddingV = 0.01,
-							PaddingH = 0,
-						},
-						props.Children,
+				[Children] = {
+					UIPadding {
+						Padding = 0.01,
 					},
+					props.Children,
 				},
 			},
 
@@ -1526,7 +1520,7 @@ MainUI = New "ScreenGui" {
 						Name = "Text",
 						AnchorPoint = Vector2.new(0.5, 0),
 						Position = UDim2.fromScale(0.5, 0),
-						Size = UDim2.fromScale(0.97, 1.1),
+						Size = UDim2.fromScale(0.97, 2.5),
 						Font = playerFont,
 						-- RichText = true,
 						Text = [[Welcome to game name goes here!
@@ -1583,8 +1577,8 @@ Typing Simulator by S-GAMES]],
 					Children = {
 						New "UIGridLayout" {
 							FillDirectionMaxCells = 2,
-							CellSize = UDim2.fromScale(0.465, 0.05),
-							CellPadding = UDim2.fromScale(0.05, 0.02),
+							CellSize = UDim2.fromScale(0.465, 0.125),
+							CellPadding = UDim2.fromScale(0.05, 0.05),
 						},
 
 						Setting {
@@ -1633,9 +1627,9 @@ Typing Simulator by S-GAMES]],
 										{ "Typing tokens spent", stats.CurrencySpent },
 									}
 
-									if statsWindow.ScrollingFrame.Frame:FindFirstChildOfClass "Frame" then
+									if statsWindow.ScrollingFrame:FindFirstChildOfClass "Frame" then
 										for i in userStats do
-											statsWindow.ScrollingFrame.Frame[userStats[i][1]].Stat.Text =
+											statsWindow.ScrollingFrame[userStats[i][1]].Stat.Text =
 												userStats[i][2]
 										end
 									else
@@ -1644,8 +1638,8 @@ Typing Simulator by S-GAMES]],
 												Name = userStats[i][1],
 												LayoutOrder = i,
 												BackgroundTransparency = 1,
-												Size = UDim2.fromScale(0.98, 0.04),
-												Parent = MainUI.MainFrame.Stats.ScrollingFrame.Frame,
+												Size = UDim2.fromScale(0.98, 0.1),
+												Parent = MainUI.MainFrame.Stats.ScrollingFrame,
 
 												[Children] = {
 													New "TextLabel" {
@@ -1695,8 +1689,8 @@ Typing Simulator by S-GAMES]],
 					Children = {
 						New "Frame" {
 							Name = "Header",
-							Size = UDim2.fromScale(1, 0.06),
-							Position = UDim2.fromScale(0.5, 0.025),
+							Size = UDim2.fromScale(1, 0.15),
+							Position = UDim2.fromScale(0.5, 0.08),
 							BackgroundTransparency = 1,
 
 							[Children] = {
@@ -1711,7 +1705,7 @@ Typing Simulator by S-GAMES]],
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.Leaderboard.ScrollingFrame.Frame.Pages
+										local popup = MainUI.MainFrame.Leaderboard.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.LevelLeaderboard)
 									end,
 								},
@@ -1723,7 +1717,7 @@ Typing Simulator by S-GAMES]],
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.Leaderboard.ScrollingFrame.Frame.Pages
+										local popup = MainUI.MainFrame.Leaderboard.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.WordsLeaderboard)
 									end,
 								},
@@ -1760,8 +1754,8 @@ Typing Simulator by S-GAMES]],
 
 						New "Frame" {
 							Name = "Pages",
-							Size = UDim2.fromScale(1, 0.97),
-							Position = UDim2.fromScale(0.5, 0.045),
+							Size = UDim2.fromScale(1, 1),
+							Position = UDim2.fromScale(0.5, 0.13),
 							AnchorPoint = Vector2.new(0.5, 0),
 							BackgroundTransparency = 1,
 
@@ -1909,13 +1903,12 @@ Typing Simulator by S-GAMES]],
 					Children = {
 						New "ScrollingFrame" {
 							Name = "Header",
-							Size = UDim2.fromScale(1, 0.045),
-							CanvasSize = UDim2.fromScale(1, 0.045),
-							Position = UDim2.fromScale(0.5, 0.025),
+							Size = UDim2.fromScale(0.97, 0.11),
+							CanvasSize = UDim2.fromScale(1, 0.11),
+							Position = UDim2.fromScale(0.5, 0.06),
 							BackgroundTransparency = 1,
 							AutomaticCanvasSize = Enum.AutomaticSize.X,
 							ScrollingDirection = Enum.ScrollingDirection.X,
-							ScrollBarThickness = 7,
 
 							[Children] = {
 								New "UIListLayout" {
@@ -1927,9 +1920,9 @@ Typing Simulator by S-GAMES]],
 									AnchorPoint = Vector2.new(0, 0),
 									Text = "Wordlists",
 									BackgroundColor3 = Black3,
-									
+
 									Activated = function()
-										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Frame.Pages
+										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.WordlistsShop)
 									end,
 								},
@@ -1938,9 +1931,9 @@ Typing Simulator by S-GAMES]],
 									AnchorPoint = Vector2.new(0, 0),
 									Text = "test",
 									BackgroundColor3 = Black3,
-									
+
 									Activated = function()
-										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Frame.Pages
+										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.TestShop)
 									end,
 								},
@@ -1951,7 +1944,7 @@ Typing Simulator by S-GAMES]],
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Frame.Pages
+										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.TestShop)
 									end,
 								},
@@ -1959,8 +1952,8 @@ Typing Simulator by S-GAMES]],
 						},
 						New "Frame" {
 							Name = "Pages",
-							Size = UDim2.fromScale(1, 0.97),
-							Position = UDim2.fromScale(0.5, 0.05),
+							Size = UDim2.fromScale(0.97, 1),
+							Position = UDim2.fromScale(0.5, 0.12),
 							AnchorPoint = Vector2.new(0.5, 0),
 							BackgroundTransparency = 1,
 
@@ -1980,8 +1973,8 @@ Typing Simulator by S-GAMES]],
 									[Children] = {
 										New "UIGridLayout" {
 											FillDirectionMaxCells = 2,
-											CellSize = UDim2.fromScale(0.465, 0.045),
-											CellPadding = UDim2.fromScale(0.05, 0.01),
+											CellSize = UDim2.fromScale(0.465, 0.11),
+											CellPadding = UDim2.fromScale(0.05, 0.025),
 										},
 
 										ShopOption {
@@ -2010,8 +2003,8 @@ Typing Simulator by S-GAMES]],
 									[Children] = {
 										New "UIGridLayout" {
 											FillDirectionMaxCells = 2,
-											CellSize = UDim2.fromScale(0.465, 0.045),
-											CellPadding = UDim2.fromScale(0.05, 0.01),
+											CellSize = UDim2.fromScale(0.465, 0.11),
+											CellPadding = UDim2.fromScale(0.05, 0.025),
 										},
 
 										ShopOption {
