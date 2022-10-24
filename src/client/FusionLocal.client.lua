@@ -655,14 +655,16 @@ local function ShopOption(props)
 	local labelText = Value(item.Price)
 	local levelRequirement = item.Level
 
-	dataLoadedChanged:onChange(function()
-		DataService:ItemOwned(props.Category, props.Name):andThen(function(owned)
-			if owned then
-				labelText:set "Owned"
-				ownedWordlists[props.Name] = true
-			end
+	if item.Ownable then
+		dataLoadedChanged:onChange(function()
+			DataService:ItemOwned(props.Category, props.Name):andThen(function(owned)
+				if owned then
+					labelText:set "Owned"
+					ownedWordlists[props.Name] = true
+				end
+			end)
 		end)
-	end)
+	end
 
 	return New "TextButton" {
 		Name = props.Name,
@@ -675,6 +677,7 @@ local function ShopOption(props)
 				Name = props.Name,
 				Category = props.Category,
 				Level = item.Level,
+				Ownable = item.Ownable,
 				ButtonText = labelText,
 			}
 		end,
@@ -1521,8 +1524,8 @@ MainUI = New "ScreenGui" {
 					-- remember, this is a variable, children are applied in the Popup() function
 					Children = New "TextLabel" {
 						Name = "Text",
-						AnchorPoint = Vector2.new(0.5, 0.9),
-						Position = UDim2.fromScale(0.5, 1),
+						AnchorPoint = Vector2.new(0.5, 0),
+						Position = UDim2.fromScale(0.5, 0),
 						Size = UDim2.fromScale(0.97, 1.1),
 						Font = playerFont,
 						-- RichText = true,
@@ -1612,7 +1615,7 @@ Typing Simulator by S-GAMES]],
 
 								if statsWindow.Visible then
 									local _, stats = DataService:GetStats():await()
-									local h = math.floor(stats.PlayTime % 86400 / 3600)
+									local h = math.floor(stats.PlayTime / 3600)
 									local userStats = {
 										{
 											"Total time played",
@@ -1765,13 +1768,15 @@ Typing Simulator by S-GAMES]],
 							[Children] = {
 								New "UIPageLayout" {
 									ScrollWheelInputEnabled = false,
+									SortOrder = Enum.SortOrder.LayoutOrder,
+									EasingStyle = Enum.EasingStyle.Quint,
 								},
 
 								New "Frame" {
 									Name = "LevelLeaderboard",
 									BackgroundTransparency = 1,
 									Size = UDim2.fromScale(1, 1),
-									Position = UDim2.fromScale(0.5, 0.5),
+									LayoutOrder = 1,
 
 									[Children] = New "UIListLayout" {},
 								},
@@ -1779,7 +1784,7 @@ Typing Simulator by S-GAMES]],
 									Name = "WordsLeaderboard",
 									BackgroundTransparency = 1,
 									Size = UDim2.fromScale(1, 1),
-									Position = UDim2.fromScale(0.5, 0.5),
+									LayoutOrder = 2,
 
 									[Children] = New "UIListLayout" {},
 								},
@@ -1798,7 +1803,6 @@ Typing Simulator by S-GAMES]],
 
 						Observer(currentShopItem):onChange(function()
 							local shopItem = currentShopItem:get()
-							print(shopItem.Level, level:get())
 							if shopItem.Level <= level:get() then
 								buttonText:set(shopItem.ButtonText:get())
 								popup.Visible = true
@@ -1861,23 +1865,26 @@ Typing Simulator by S-GAMES]],
 										local item = currentShopItem:get()
 										local levelRequirement = item.Level
 										local price = item.ButtonText:get() -- awful variable name
-										local clickable = price ~= "Owned"
 
-										if clickable and level:get() >= levelRequirement then
-											clickable = false
+										if price ~= "Owned" and level:get() >= levelRequirement then
 											SyncService:PurchaseItem(item.Category, item.Name):andThen(function(success)
 												if success then
 													ownedWordlists[item.Name] = true
 													currency:set(currency:get() - price)
 													buttonText:set "Purchase successful!"
-													item.ButtonText:set "Owned"
+													if item.Ownable then
+														item.ButtonText:set "Owned"
+													end
 													task.wait(1)
-													buttonText:set "Owned"
+													if item.Ownable then
+														buttonText:set "Owned"
+													else
+														buttonText:set(price)
+													end
 												else
 													buttonText:set "Purchase failed!"
 													task.wait(1)
 													buttonText:set(price)
-													clickable = true
 												end
 											end)
 										end
@@ -1900,26 +1907,121 @@ Typing Simulator by S-GAMES]],
 					end)(),
 
 					Children = {
-						New "UIGridLayout" {
-							FillDirectionMaxCells = 2,
-							CellSize = UDim2.fromScale(0.465, 0.045),
-							CellPadding = UDim2.fromScale(0.05, 0.01),
-						},
+						New "ScrollingFrame" {
+							Name = "Header",
+							Size = UDim2.fromScale(1, 0.045),
+							CanvasSize = UDim2.fromScale(1, 0.045),
+							Position = UDim2.fromScale(0.5, 0.025),
+							BackgroundTransparency = 1,
+							AutomaticCanvasSize = Enum.AutomaticSize.X,
+							ScrollingDirection = Enum.ScrollingDirection.X,
+							ScrollBarThickness = 7,
 
-						ShopOption {
-							Name = "Medium",
-							Category = "Wordlists",
-							LayoutOrder = 1,
+							[Children] = {
+								New "UIListLayout" {
+									Padding = UDim.new(0.05, 0),
+									FillDirection = Enum.FillDirection.Horizontal,
+								},
+								Button {
+									Size = UDim2.fromScale(0.465, 0.75),
+									AnchorPoint = Vector2.new(0, 0),
+									Text = "Wordlists",
+									BackgroundColor3 = Black3,
+									
+									Activated = function()
+										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Frame.Pages
+										popup.UIPageLayout:JumpTo(popup.WordlistsShop)
+									end,
+								},
+								Button {
+									Size = UDim2.fromScale(0.465, 0.75),
+									AnchorPoint = Vector2.new(0, 0),
+									Text = "test",
+									BackgroundColor3 = Black3,
+									
+									Activated = function()
+										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Frame.Pages
+										popup.UIPageLayout:JumpTo(popup.TestShop)
+									end,
+								},
+								Button {
+									Size = UDim2.fromScale(0.465, 0.75),
+									AnchorPoint = Vector2.new(0, 0),
+									Text = "test",
+									BackgroundColor3 = Black3,
+
+									Activated = function()
+										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Frame.Pages
+										popup.UIPageLayout:JumpTo(popup.TestShop)
+									end,
+								},
+							},
 						},
-						ShopOption {
-							Name = "Hard",
-							Category = "Wordlists",
-							LayoutOrder = 2,
-						},
-						ShopOption {
-							Name = "Insane",
-							Category = "Wordlists",
-							LayoutOrder = 3,
+						New "Frame" {
+							Name = "Pages",
+							Size = UDim2.fromScale(1, 0.97),
+							Position = UDim2.fromScale(0.5, 0.05),
+							AnchorPoint = Vector2.new(0.5, 0),
+							BackgroundTransparency = 1,
+
+							[Children] = {
+								New "UIPageLayout" {
+									ScrollWheelInputEnabled = false,
+									SortOrder = Enum.SortOrder.LayoutOrder,
+									EasingStyle = Enum.EasingStyle.Quint,
+								},
+
+								New "Frame" {
+									Name = "WordlistsShop",
+									BackgroundTransparency = 1,
+									Size = UDim2.fromScale(1, 1),
+									LayoutOrder = 2,
+
+									[Children] = {
+										New "UIGridLayout" {
+											FillDirectionMaxCells = 2,
+											CellSize = UDim2.fromScale(0.465, 0.045),
+											CellPadding = UDim2.fromScale(0.05, 0.01),
+										},
+
+										ShopOption {
+											Name = "Medium",
+											Category = "Wordlists",
+											LayoutOrder = 1,
+										},
+										ShopOption {
+											Name = "Hard",
+											Category = "Wordlists",
+											LayoutOrder = 2,
+										},
+										ShopOption {
+											Name = "Insane",
+											Category = "Wordlists",
+											LayoutOrder = 3,
+										},
+									},
+								},
+								New "Frame" {
+									Name = "TestShop",
+									BackgroundTransparency = 1,
+									Size = UDim2.fromScale(1, 1),
+									LayoutOrder = 2,
+
+									[Children] = {
+										New "UIGridLayout" {
+											FillDirectionMaxCells = 2,
+											CellSize = UDim2.fromScale(0.465, 0.045),
+											CellPadding = UDim2.fromScale(0.05, 0.01),
+										},
+
+										ShopOption {
+											Name = "Bruh",
+											Category = "test",
+											LayoutOrder = 1,
+										},
+									},
+								},
+							},
 						},
 					},
 				},
