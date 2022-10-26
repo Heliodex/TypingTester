@@ -118,7 +118,7 @@ function DataService.Client:WordsLeaderboard(player)
 end
 
 function DataService.Client:LoadData(player, SaveSlot)
-	if not CurrentSaveSlot[player] then
+	if Profiles[player] and not CurrentSaveSlot[player] then
 		CurrentSaveSlot[player] = SaveSlot
 		UpdateLeaderboard(player)
 		Profiles[player].Data[SaveSlot].Stats.Logins += 1
@@ -172,7 +172,7 @@ function DataService.Client:PrepareData(player)
 			Profiles[player] = nil
 			ProfileViews[player] = nil
 			-- The profile could've been loaded on another Roblox server:
-			player:Kick "\n\nYour data may have been loaded on another server.\n"
+			player:Kick "\n\nYour data may have been loaded on another server. Please rejoin and try again.\n"
 		end)
 		if player:IsDescendantOf(Players) then
 			-- A profile has been successfully loaded:
