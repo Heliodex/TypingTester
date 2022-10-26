@@ -1,4 +1,5 @@
 -- Main UI-buliding script
+local version = "1.0.0"
 
 game.StarterGui:SetCoreGuiEnabled("All", false)
 local ReplicatedStorage = game:GetService "ReplicatedStorage"
@@ -406,6 +407,14 @@ local function SaveSlot(props)
 				disconnect()
 
 				DataService:LoadData(props.SaveSlot):andThen(function(data)
+					if not data then
+						print "Data not prepared yet!"
+						text:set "Data not prepared yet, try again."
+						task.wait(1)
+						text:set("Save slot " .. props.SaveSlot)
+						loadingData = false
+						return
+					end
 					currency:set(data.Currency)
 					experience:set(data.Experience)
 					level:set(data.Level)
@@ -430,6 +439,12 @@ local function SaveSlot(props)
 							MainUI.MainFrame.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard
 						)
 					end)
+				end, function()
+					print "Error while loading data!"
+					text:set "Error loading data!"
+					task.wait(1)
+					text:set("Save slot " .. props.SaveSlot)
+					loadingData = false
 				end)
 			end
 		end,
@@ -1516,14 +1531,72 @@ MainUI = New "ScreenGui" {
 
 					-- Children does not require brackets here
 					-- remember, this is a variable, children are applied in the Popup() function
-					Children = New "TextLabel" {
-						Name = "Text",
-						AnchorPoint = Vector2.new(0.5, 0),
-						Position = UDim2.fromScale(0.5, 0),
-						Size = UDim2.fromScale(0.97, 2.5),
-						Font = playerFont,
-						-- RichText = true,
-						Text = [[Welcome to game name goes here!
+					Children = {
+						New "Frame" {
+							Name = "Header",
+							Size = UDim2.fromScale(1, 0.07),
+							Position = UDim2.fromScale(0.5, 0.02),
+							AnchorPoint = Vector2.new(0.5, 0),
+							BackgroundTransparency = 1,
+
+							[Children] = {
+								UIPadding {
+									Padding = 0.03,
+								},
+								Button {
+									Size = UDim2.fromScale(0.49, 1),
+									Position = UDim2.fromScale(0, 0),
+									AnchorPoint = Vector2.new(0, 0),
+									Text = "Help",
+									BackgroundColor3 = Black3,
+
+									Activated = function()
+										local popup = MainUI.MainFrame.Help.ScrollingFrame.Pages
+										popup.UIPageLayout:JumpTo(popup.Help)
+									end,
+								},
+								Button {
+									Size = UDim2.fromScale(0.49, 1),
+									Position = UDim2.fromScale(0.51, 0),
+									AnchorPoint = Vector2.new(0, 0),
+									Text = "Changelog",
+									BackgroundColor3 = Black3,
+
+									Activated = function()
+										local popup = MainUI.MainFrame.Help.ScrollingFrame.Pages
+										popup.UIPageLayout:JumpTo(popup.Changelog)
+									end,
+								},
+							},
+						},
+						New "Frame" {
+							Name = "Pages",
+							Size = UDim2.fromScale(1, 0.9),
+							Position = UDim2.fromScale(0.5, 0.1),
+							AnchorPoint = Vector2.new(0.5, 0),
+							BackgroundTransparency = 1,
+
+							[Children] = {
+								New "UIPageLayout" {
+									ScrollWheelInputEnabled = false,
+									SortOrder = Enum.SortOrder.LayoutOrder,
+									EasingStyle = Enum.EasingStyle.Quint,
+								},
+
+								New "Frame" {
+									Name = "Help",
+									BackgroundTransparency = 1,
+									Size = UDim2.fromScale(1, 2.5),
+									LayoutOrder = 1,
+
+									[Children] = New "TextLabel" {
+										Name = "Text",
+										AnchorPoint = Vector2.new(0.5, 0),
+										Position = UDim2.fromScale(0.5, 0),
+										Size = UDim2.fromScale(0.97, 1),
+										Font = playerFont,
+										RichText = true,
+										Text = [[Welcome to game name goes here!
 This is a game you can use to improve your speed, accuracy, and stamina while typing.
 
 In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.
@@ -1560,11 +1633,47 @@ Thanks to icons8 for providing the icons.
 Inspired by:
 Monkeytype by Miodec
 Typing Simulator by S-GAMES]],
-						TextSize = 28,
-						TextScaled = false,
-						TextTruncate = Enum.TextTruncate.AtEnd,
-						TextXAlignment = Enum.TextXAlignment.Left,
-						TextYAlignment = Enum.TextYAlignment.Top,
+										TextTruncate = Enum.TextTruncate.AtEnd,
+										TextXAlignment = Enum.TextXAlignment.Left,
+										TextYAlignment = Enum.TextYAlignment.Top,
+									},
+								},
+								New "Frame" {
+									Name = "Changelog",
+									BackgroundTransparency = 1,
+									Size = UDim2.fromScale(1, 1),
+									LayoutOrder = 2,
+
+									[Children] = New "TextLabel" {
+										Name = "Text",
+										AnchorPoint = Vector2.new(0.5, 0),
+										Position = UDim2.fromScale(0.5, 0),
+										Size = UDim2.fromScale(0.97, 1),
+										Font = playerFont,
+										LayoutOrder = 2,
+										RichText = true,
+										Text = [[
+<b>1.0.0</b>
+Initial release
+
+- Of course I'm just kidding, the game will never be released
+
+<b>0.9.0</b>
+
+- Added a new wordlist: "Words"
+- Added a new wordlist: "Words 2"
+
+<b>0.8.0</b>
+
+- This update aint exist
+]],
+										TextTruncate = Enum.TextTruncate.AtEnd,
+										TextXAlignment = Enum.TextXAlignment.Left,
+										TextYAlignment = Enum.TextYAlignment.Top,
+									},
+								},
+							},
+						},
 					},
 				},
 
@@ -1629,8 +1738,7 @@ Typing Simulator by S-GAMES]],
 
 									if statsWindow.ScrollingFrame:FindFirstChildOfClass "Frame" then
 										for i in userStats do
-											statsWindow.ScrollingFrame[userStats[i][1]].Stat.Text =
-												userStats[i][2]
+											statsWindow.ScrollingFrame[userStats[i][1]].Stat.Text = userStats[i][2]
 										end
 									else
 										for i in userStats do
@@ -2019,6 +2127,15 @@ Typing Simulator by S-GAMES]],
 					},
 				},
 
+				New "TextLabel" {
+					Name = "Version",
+					Size = UDim2.fromScale(0.1, 0.015),
+					AnchorPoint = Vector2.new(1, 1),
+					Position = UDim2.fromScale(0.99, 1),
+					TextXAlignment = Enum.TextXAlignment.Right,
+					Font = playerFont,
+					Text = version .. ", v" .. game.PlaceVersion,
+				},
 				New "Frame" {
 					Name = "DarkTint",
 					BackgroundColor3 = Black0,
