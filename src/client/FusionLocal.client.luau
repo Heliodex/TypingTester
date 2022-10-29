@@ -114,6 +114,30 @@ local function getWord()
 	return list[math.random(1, #list)]
 end
 
+local function openPopup(popupName)
+	-- Popup system to close any existing popup when opening a new one
+	return function()
+		local currentPopup = MainUI.MainFrame.DarkTint.CurrentPopup
+		local popup = MainUI.MainFrame:FindFirstChild(popupName) or currentPopup:FindFirstChild(popupName)
+		local visible = popup.Visible
+		if visible then
+			popup.Visible = false
+			popup.Parent = MainUI.MainFrame
+			DarkTintTransparency:set(1)
+		else
+			local existingPopup = currentPopup:FindFirstChildOfClass "Frame"
+			if existingPopup then
+				existingPopup.Visible = false
+				existingPopup.Parent = MainUI.MainFrame
+			end
+
+			popup.Parent = currentPopup
+			popup.Visible = true
+			DarkTintTransparency:set(DarkTintTransparencyGoal)
+		end
+	end
+end
+
 Observer(wordlist):onChange(function()
 	if TypingBox then
 		TypingBox.Text = ""
@@ -597,6 +621,7 @@ local function Popup(props)
 
 					[OnEvent "Activated"] = function()
 						popup.Visible = false
+						popup.Parent = MainUI.MainFrame
 
 						if not props.NoBG then
 							DarkTintTransparency:set(1)
@@ -1178,12 +1203,7 @@ MainUI = New "ScreenGui" {
 							Text = "Shop",
 							Image = 7362870044,
 
-							Activated = function()
-								local shop = MainUI.MainFrame.Shop
-								shop.Visible = not shop.Visible
-
-								DarkTintTransparency:set(if shop.Visible then DarkTintTransparencyGoal else 1)
-							end,
+							Activated = openPopup "Shop",
 						},
 						ImageButton {
 							Name = "OpenLeaderboard",
@@ -1192,12 +1212,7 @@ MainUI = New "ScreenGui" {
 							Text = "Leaderboard",
 							Image = 10975178174,
 
-							Activated = function()
-								local leaderboard = MainUI.MainFrame.Leaderboard
-								leaderboard.Visible = not leaderboard.Visible
-
-								DarkTintTransparency:set(if leaderboard.Visible then DarkTintTransparencyGoal else 1)
-							end,
+							Activated = openPopup "Leaderboard",
 						},
 						ImageButton {
 							Name = "OpenHelp",
@@ -1206,13 +1221,7 @@ MainUI = New "ScreenGui" {
 							Text = "Help",
 							Image = 7362810660,
 
-							Activated = function()
-								MainUI.MainFrame.Help.Visible = not MainUI.MainFrame.Help.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Help.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
+							Activated = openPopup "Help",
 						},
 						ImageButton {
 							Name = "OpenSettings",
@@ -1221,13 +1230,7 @@ MainUI = New "ScreenGui" {
 							Text = "Settings",
 							Image = 7362801114,
 
-							Activated = function()
-								MainUI.MainFrame.Settings.Visible = not MainUI.MainFrame.Settings.Visible
-
-								DarkTintTransparency:set(
-									if MainUI.MainFrame.Settings.Visible then DarkTintTransparencyGoal else 1
-								)
-							end,
+							Activated = openPopup "Settings",
 						},
 						(function()
 							local button
@@ -2142,6 +2145,12 @@ Initial release
 					BackgroundTransparency = Spring(DarkTintTransparency, 25),
 					Size = UDim2.fromScale(2, 2),
 					ZIndex = 100,
+
+					[Children] = New "Frame" {
+						Name = "CurrentPopup",
+						BackgroundTransparency = 1,
+						Size = UDim2.fromScale(0.5, 0.5),
+					},
 				},
 			},
 		},
