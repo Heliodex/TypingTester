@@ -1538,7 +1538,7 @@ MainUI = New "ScreenGui" {
 						New "Frame" {
 							Name = "Header",
 							Size = UDim2.fromScale(1, 0.07),
-							Position = UDim2.fromScale(0.5, 0.02),
+							Position = UDim2.fromScale(0.5, 0),
 							AnchorPoint = Vector2.new(0.5, 0),
 							BackgroundTransparency = 1,
 
@@ -1554,7 +1554,7 @@ MainUI = New "ScreenGui" {
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.Help.ScrollingFrame.Pages
+										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Help.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.Help)
 									end,
 								},
@@ -1566,7 +1566,7 @@ MainUI = New "ScreenGui" {
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.Help.ScrollingFrame.Pages
+										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Help.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.Changelog)
 									end,
 								},
@@ -1715,11 +1715,10 @@ Initial release
 							BackgroundColor3 = Black3,
 
 							Activated = function()
-								local statsWindow = MainUI.MainFrame.Stats
-								statsWindow.Visible = true
-								MainUI.MainFrame.Settings.Visible = false
+								openPopup("Stats")()
+								local statsPopup = MainUI.MainFrame.DarkTint.CurrentPopup.Stats
 
-								if statsWindow.Visible then
+								if statsPopup.Visible then
 									local _, stats = DataService:GetStats():await()
 									local h = math.floor(stats.PlayTime / 3600)
 									local userStats = {
@@ -1739,9 +1738,9 @@ Initial release
 										{ "Typing tokens spent", stats.CurrencySpent },
 									}
 
-									if statsWindow.ScrollingFrame:FindFirstChildOfClass "Frame" then
+									if statsPopup.ScrollingFrame:FindFirstChildOfClass "Frame" then
 										for i in userStats do
-											statsWindow.ScrollingFrame[userStats[i][1]].Stat.Text = userStats[i][2]
+											statsPopup.ScrollingFrame[userStats[i][1]].Stat.Text = userStats[i][2]
 										end
 									else
 										for i in userStats do
@@ -1750,7 +1749,7 @@ Initial release
 												LayoutOrder = i,
 												BackgroundTransparency = 1,
 												Size = UDim2.fromScale(0.98, 0.1),
-												Parent = MainUI.MainFrame.Stats.ScrollingFrame,
+												Parent = statsPopup.ScrollingFrame,
 
 												[Children] = {
 													New "TextLabel" {
@@ -1816,7 +1815,7 @@ Initial release
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.Leaderboard.ScrollingFrame.Pages
+										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.LevelLeaderboard)
 									end,
 								},
@@ -1828,7 +1827,7 @@ Initial release
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.Leaderboard.ScrollingFrame.Pages
+										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.WordsLeaderboard)
 									end,
 								},
@@ -2033,7 +2032,7 @@ Initial release
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Pages
+										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Shop.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.WordlistsShop)
 									end,
 								},
@@ -2044,7 +2043,7 @@ Initial release
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Pages
+										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Shop.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.TestShop)
 									end,
 								},
