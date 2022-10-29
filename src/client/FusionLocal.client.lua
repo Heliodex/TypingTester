@@ -51,9 +51,9 @@ local Black0 = Color3.new() -- hehehuehehuehe
 local Green = Color3.fromRGB(0, 255, 0)
 local Red = Color3.fromRGB(255, 0, 0)
 
-local playerFontThin = Enum.Font.Gotham
-local playerFont = Enum.Font.GothamMedium -- selene: "iT'S dePreCaTEd!!!!1!!!!11"
-local playerFontBold = Enum.Font.GothamBold
+local playerFontThin = Font.fromName("GothamSSm", Enum.FontWeight.Thin) -- selene: "`FOnT` iS Not dEfinEd!!!!1!!!!11"
+local playerFont = Font.fromName("GothamSSm", Enum.FontWeight.Medium)
+local playerFontBold = Font.fromName("GothamSSm", Enum.FontWeight.Bold)
 
 local PlayScreen
 local MainUI
@@ -159,7 +159,7 @@ end
 -- Was quite the trip to get working
 local function populateLeaderboard(leaderboard, page)
 	for _, v in ipairs(leaderboard) do
-		local you = v == "You"
+		local you = v.Player == "You"
 
 		-- Load users on leaderboard
 		-- very slow, so it would make the game load slowly if it was done at creation of the leaderboard popup
@@ -226,7 +226,7 @@ local function populateLeaderboard(leaderboard, page)
 								AnchorPoint = Vector2.new(0, 0.5),
 								Position = UDim2.fromScale(0.1, 0.5),
 								Size = UDim2.fromScale(0.25, 0.8),
-								Font = playerFont,
+								FontFace = playerFont,
 							},
 							New "TextLabel" {
 								Name = "Level",
@@ -235,7 +235,7 @@ local function populateLeaderboard(leaderboard, page)
 								AnchorPoint = Vector2.new(0.5, 0.5),
 								Position = UDim2.fromScale(0.6, 0.5),
 								Size = UDim2.fromScale(0.2, 0.8),
-								Font = playerFont,
+								FontFace = playerFont,
 							},
 							New "TextLabel" {
 								Name = "Words",
@@ -244,7 +244,7 @@ local function populateLeaderboard(leaderboard, page)
 								AnchorPoint = Vector2.new(1, 0.5),
 								Position = UDim2.fromScale(1, 0.5),
 								Size = UDim2.fromScale(0.2, 0.8),
-								Font = playerFont,
+								FontFace = playerFont,
 							},
 						},
 					},
@@ -261,7 +261,7 @@ local function NextWords(props)
 		Size = UDim2.fromScale(0.4, 0.06),
 		Position = UDim2.fromScale(0.5, props.Position),
 
-		Font = playerFont,
+		FontFace = playerFont,
 		TextTransparency = 0.6,
 		Text = displayedWords[props.Number],
 		Visible = Computed(function()
@@ -311,7 +311,7 @@ local function ImageButton(props)
 				Position = UDim2.fromScale(0.9, 0.5),
 				AnchorPoint = Vector2.new(1, 0.5),
 
-				Font = playerFont,
+				FontFace = playerFont,
 			},
 
 			New "ImageLabel" {
@@ -371,7 +371,7 @@ local function Button(props)
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 
-				Font = playerFont,
+				FontFace = playerFont,
 			},
 		},
 	}
@@ -461,7 +461,7 @@ local function SaveSlot(props)
 				AnchorPoint = Vector2.new(0, 0.5),
 				TextXAlignment = Enum.TextXAlignment.Left,
 
-				Font = playerFont,
+				FontFace = playerFont,
 			},
 
 			New "TextLabel" {
@@ -473,7 +473,7 @@ local function SaveSlot(props)
 				AnchorPoint = Vector2.new(1, 0.5),
 				TextXAlignment = Enum.TextXAlignment.Right,
 
-				Font = playerFont,
+				FontFace = playerFont,
 			},
 		},
 	}
@@ -508,7 +508,7 @@ local function Label(props)
 				Position = UDim2.fromScale(props.LabelPosition, 0.5),
 				AnchorPoint = Vector2.new(1, 0.5),
 
-				Font = playerFont,
+				FontFace = playerFont,
 			},
 
 			New "ImageLabel" {
@@ -579,7 +579,7 @@ local function Popup(props)
 
 				Position = UDim2.fromScale(0.5, 0.03),
 				Size = UDim2.fromScale(1, 0.08), -- I don't like it. 0.08 barely works okay enough.
-				Font = playerFontBold,
+				FontFace = playerFontBold,
 				Text = string.upper(props.Name),
 
 				[Children] = New "TextButton" {
@@ -590,7 +590,7 @@ local function Popup(props)
 					Position = UDim2.fromScale(1, 0),
 					Size = UDim2.fromScale(1, 1),
 					SizeConstraint = Enum.SizeConstraint.RelativeYY,
-					Font = Enum.Font.SourceSans,
+					FontFace = playerFont,
 
 					Text = "X",
 					AutoButtonColor = true,
@@ -651,7 +651,7 @@ local function Setting(props)
 				AnchorPoint = Vector2.new(1, 0.5),
 				Position = UDim2.fromScale(1, 0.5),
 				Size = UDim2.fromScale(0.7, 0.8),
-				Font = playerFont,
+				FontFace = playerFont,
 				Text = props.Text,
 				TextXAlignment = Enum.TextXAlignment.Right,
 			},
@@ -696,7 +696,7 @@ local function ShopOption(props)
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.fromScale(0.05, 0.5),
 				Size = UDim2.fromScale(0.6, 0.8),
-				Font = playerFont,
+				FontFace = playerFont,
 				Text = item.Name,
 				TextXAlignment = Enum.TextXAlignment.Left,
 			},
@@ -707,7 +707,7 @@ local function ShopOption(props)
 				AnchorPoint = Vector2.new(1, 0.5),
 				Position = UDim2.fromScale(0.95, 0.5),
 				Size = UDim2.fromScale(0.25, 1),
-				Font = playerFont,
+				FontFace = playerFont,
 				Text = labelText,
 
 				[Children] = UIPadding(),
@@ -738,7 +738,7 @@ local function ShopOption(props)
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.6, 0.5),
 						Size = UDim2.fromScale(0.7, 0.7),
-						Font = playerFont,
+						FontFace = playerFont,
 						Text = "Level " .. levelRequirement,
 					},
 				},
@@ -756,7 +756,7 @@ TypingBox = New "TextBox" {
 	BackgroundColor3 = Grey0,
 	TextColor3 = wordCorrect,
 
-	Font = playerFont,
+	FontFace = playerFont,
 	PlaceholderText = "Type here (spacebar to complete word)",
 	PlaceholderColor3 = Grey3,
 
@@ -950,7 +950,7 @@ TypingBox = New "TextBox" {
 					return messages[5][math.random(1, #messages[5])]
 				end
 			end),
-			Font = playerFont,
+			FontFace = playerFont,
 		},
 	},
 }
@@ -984,7 +984,7 @@ PlayScreen = New "ScreenGui" {
 						Size = UDim2.fromScale(1, 0.1),
 						Position = UDim2.fromScale(0.5, -0.1),
 						Text = "Select a save slot to load",
-						Font = playerFontBold,
+						FontFace = playerFontBold,
 					},
 
 					SaveSlot {
@@ -1033,7 +1033,7 @@ PlayScreen = New "ScreenGui" {
 						Name = "Title",
 						Position = UDim2.fromScale(0.5, 0.35),
 						Size = UDim2.fromScale(0.3, 0.175),
-						Font = playerFontBold,
+						FontFace = playerFontBold,
 						RichText = true,
 						Text = "typing simulator but better",
 
@@ -1063,7 +1063,7 @@ PlayScreen = New "ScreenGui" {
 									Name = "a Heliodex game",
 									Position = UDim2.fromScale(0.5, 1.1),
 									Size = UDim2.fromScale(1.8, 0.2),
-									Font = playerFontThin,
+									FontFace = playerFontThin,
 									RichText = true,
 									Text = "a <i>HELIODEX</i> game",
 								},
@@ -1071,7 +1071,7 @@ PlayScreen = New "ScreenGui" {
 									Name = "pjstarr12",
 									Position = UDim2.fromScale(0.5, 1.4),
 									Size = UDim2.fromScale(1.5, 0.175),
-									Font = playerFontThin,
+									FontFace = playerFontThin,
 									Text = "pjstarr12",
 
 									[Children] = UIPadding(),
@@ -1080,7 +1080,7 @@ PlayScreen = New "ScreenGui" {
 									Name = "TheWhaleCloud",
 									Position = UDim2.fromScale(0.5, 1.6),
 									Size = UDim2.fromScale(1.5, 0.175),
-									Font = playerFontThin,
+									FontFace = playerFontThin,
 									Text = "TheWhaleCloud",
 
 									[Children] = UIPadding(),
@@ -1090,7 +1090,7 @@ PlayScreen = New "ScreenGui" {
 									AnchorPoint = Vector2.new(0.5, 0.5),
 									Position = UDim2.fromScale(0.5, 1.8),
 									Size = UDim2.fromScale(1.5, 0.175),
-									Font = playerFontThin,
+									FontFace = playerFontThin,
 									Text = "Lewin4",
 
 									[Children] = UIPadding(),
@@ -1122,7 +1122,7 @@ MainUI = New "ScreenGui" {
 			Visible = false,
 
 			TextTransparency = 1,
-			Font = playerFont,
+			FontFace = playerFont,
 
 			ZIndex = 88,
 		},
@@ -1167,7 +1167,7 @@ MainUI = New "ScreenGui" {
 										return "+" .. currencyAdded:get()
 									end),
 									TextXAlignment = Enum.TextXAlignment.Left,
-									Font = playerFont,
+									FontFace = playerFont,
 								},
 							},
 						},
@@ -1403,7 +1403,7 @@ MainUI = New "ScreenGui" {
 													return "+" .. expAdded
 												end),
 												TextXAlignment = Enum.TextXAlignment.Right,
-												Font = playerFont,
+												FontFace = playerFont,
 												RichText = true,
 											},
 										},
@@ -1424,7 +1424,7 @@ MainUI = New "ScreenGui" {
 									Size = UDim2.fromScale(0.4, 0.06),
 									Position = UDim2.fromScale(0.5, 0.3),
 
-									Font = playerFont,
+									FontFace = playerFont,
 									Text = displayedWords[1],
 									Visible = Computed(function()
 										return not Settings.MemoryMode:get()
@@ -1594,7 +1594,7 @@ MainUI = New "ScreenGui" {
 										AnchorPoint = Vector2.new(0.5, 0),
 										Position = UDim2.fromScale(0.5, 0),
 										Size = UDim2.fromScale(0.97, 1),
-										Font = playerFont,
+										FontFace = playerFont,
 										RichText = true,
 										Text = [[Welcome to game name goes here!
 This is a game you can use to improve your speed, accuracy, and stamina while typing.
@@ -1649,7 +1649,7 @@ Typing Simulator by S-GAMES]],
 										AnchorPoint = Vector2.new(0.5, 0),
 										Position = UDim2.fromScale(0.5, 0),
 										Size = UDim2.fromScale(0.97, 1),
-										Font = playerFont,
+										FontFace = playerFont,
 										LayoutOrder = 2,
 										RichText = true,
 										Text = [[
@@ -1757,7 +1757,7 @@ Initial release
 														AnchorPoint = Vector2.new(0, 0),
 
 														Text = userStats[i][1],
-														Font = playerFont,
+														FontFace = playerFont,
 														TextXAlignment = Enum.TextXAlignment.Left,
 													},
 													New "TextLabel" {
@@ -1767,7 +1767,7 @@ Initial release
 														AnchorPoint = Vector2.new(1, 0),
 
 														Text = userStats[i][2],
-														Font = playerFont,
+														FontFace = playerFont,
 														TextXAlignment = Enum.TextXAlignment.Right,
 													},
 												},
@@ -1837,7 +1837,7 @@ Initial release
 									AnchorPoint = Vector2.new(0, 0),
 									Position = UDim2.fromScale(0.1, 0.55),
 									Size = UDim2.fromScale(0.25, 0.3),
-									Font = playerFont,
+									FontFace = playerFont,
 								},
 								New "TextLabel" {
 									Name = "Level",
@@ -1846,7 +1846,7 @@ Initial release
 									AnchorPoint = Vector2.new(0.5, 0),
 									Position = UDim2.fromScale(0.6, 0.55),
 									Size = UDim2.fromScale(0.2, 0.3),
-									Font = playerFont,
+									FontFace = playerFont,
 								},
 								New "TextLabel" {
 									Name = "Words",
@@ -1855,7 +1855,7 @@ Initial release
 									AnchorPoint = Vector2.new(1, 0),
 									Position = UDim2.fromScale(1, 0.55),
 									Size = UDim2.fromScale(0.2, 0.3),
-									Font = playerFont,
+									FontFace = playerFont,
 								},
 							},
 						},
@@ -1933,7 +1933,7 @@ Initial release
 										return if item then ShopItems[item.Category][item.Name].Name else ""
 									end),
 									TextXAlignment = Enum.TextXAlignment.Left,
-									Font = playerFont,
+									FontFace = playerFont,
 								},
 								New "TextLabel" {
 									Name = "ItemDescription",
@@ -1947,7 +1947,7 @@ Initial release
 									end),
 									TextXAlignment = Enum.TextXAlignment.Left,
 									TextYAlignment = Enum.TextYAlignment.Top,
-									Font = playerFont,
+									FontFace = playerFont,
 
 									[Children] = New "UITextSizeConstraint" {
 										MaxTextSize = 20,
@@ -1959,7 +1959,7 @@ Initial release
 									AnchorPoint = Vector2.new(1, 1),
 									Position = UDim2.fromScale(1, 1),
 									Size = UDim2.fromScale(0.2, 0.35),
-									Font = playerFont,
+									FontFace = playerFont,
 									Text = buttonText,
 									BackgroundColor3 = Grey3,
 
@@ -2133,7 +2133,7 @@ Initial release
 					AnchorPoint = Vector2.new(1, 1),
 					Position = UDim2.fromScale(0.99, 1),
 					TextXAlignment = Enum.TextXAlignment.Right,
-					Font = playerFont,
+					FontFace = playerFont,
 					Text = version .. ", v" .. game.PlaceVersion,
 				},
 				New "Frame" {
