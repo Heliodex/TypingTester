@@ -4,28 +4,125 @@
 		"$className": "DataModel",
 
 		"ReplicatedStorage": {
-			"$className": "ReplicatedStorage",
 			"Shared": {
 				"$path": "src/shared"
 			},
 			"Packages": {
 				"$path": "Packages"
+			},
+			"Sounds": {
+				"$className": "Folder",
+
+				"click1": {
+					"$className": "Sound",
+					"$properties": {
+						"SoundId": "rbxassetid://7137343141",
+						"Volume": 1
+					}
+				},
+				"click2": {
+					"$className": "Sound",
+					"$properties": {
+						"SoundId": "rbxassetid://7137343220",
+						"Volume": 1
+					}
+				},
+				"click3": {
+					"$className": "Sound",
+					"$properties": {
+						"SoundId": "rbxassetid://7137343281",
+						"Volume": 1
+					}
+				},
+				"errorSound": {
+					"$className": "Sound",
+					"$properties": {
+						"SoundId": "rbxassetid://184734960",
+						"Volume": 0.5
+					}
+				},
+				"music": {
+					"$className": "Sound",
+					"$properties": {
+						"Looped": true,
+						"SoundId": "rbxassetid://7516579421",
+						"Volume": 0
+					}
+				},
+				"successSound": {
+					"$className": "Sound",
+					"$properties": {
+						"SoundId": "rbxassetid://5949392929",
+						"Volume": 0.5
+					}
+				}
 			}
 		},
 
 		"ServerScriptService": {
-			"$className": "ServerScriptService",
 			"Server": {
 				"$path": "src/server"
 			}
 		},
 
 		"StarterPlayer": {
-			"$className": "StarterPlayer",
 			"StarterPlayerScripts": {
 				"$className": "StarterPlayerScripts",
 				"Client": {
 					"$path": "src/client"
+				}
+			}
+		},
+
+		"Workspace": {
+			"$properties": {
+				"FallenPartsDestroyHeight": 0,
+				"Gravity": 0
+			},
+
+			"Camera": {
+				"$className": "Camera",
+				"$properties": {
+					"CameraType": "Scriptable",
+					"FieldOfView": 1
+				}
+			}
+		},
+
+		"Players": {
+			"$properties": {
+				"RespawnTime": 0,
+				"CharacterAutoLoads": false
+			}
+		},
+
+		"Lighting": {
+			"$properties": {
+				"Ambient": [0, 0, 0],
+				"Brightness": 0,
+				"GlobalShadows": false,
+				"OutdoorAmbient": [0, 0, 0],
+				"ClockTime": 0,
+				"GeographicLatitude": 0,
+				"Technology": "Voxel",
+				"FogColor": [0, 0, 0]
+			},
+
+			"NoCelestialBodies": {
+				"$className": "Sky",
+				"$properties": {
+					"CelestialBodiesShown": false,
+					"MoonAngularSize": 0,
+					"MoonTextureId": "",
+					"SkyboxBk": "",
+					"SkyboxDn": "",
+					"SkyboxFt": "",
+					"SkyboxLf": "",
+					"SkyboxRt": "",
+					"SkyboxUp": "",
+					"StarCount": 0,
+					"SunAngularSize": 0,
+					"SunTextureId": ""
 				}
 			}
 		}
