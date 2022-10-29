@@ -81,7 +81,7 @@ function DataService.Client:LevelLeaderboard(player)
 			tonumber(data.key:split("_")[1]) == player.UserId
 			and tonumber(data.key:split("_")[2]) == CurrentSaveSlot[player]
 		then
-			table.insert(returns, "You")
+			table.insert(returns, { Player = "You" })
 			Badge:AwardBadge(player, 2128814962) -- Top 10 Level
 			continue
 		end
@@ -103,7 +103,7 @@ function DataService.Client:WordsLeaderboard(player)
 			tonumber(data.key:split("_")[1]) == player.UserId
 			and tonumber(data.key:split("_")[2]) == CurrentSaveSlot[player]
 		then
-			table.insert(returns, "You")
+			table.insert(returns, { Player = "You" })
 			Badge:AwardBadge(player, 2128814964) -- Top 10 Words
 			continue
 		end
