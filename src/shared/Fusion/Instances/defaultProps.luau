@@ -52,6 +52,7 @@ return {
 		TextScaled = true,
 
 		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = UDim2.fromScale(0.5, 0.5),
 		BackgroundTransparency = 1,
 	},
 
@@ -104,6 +105,9 @@ return {
 
 	CanvasGroup = {
 		BorderSizePixel = 0,
+
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = UDim2.fromScale(0.5, 0.5),
 	},
 
 	Part = {

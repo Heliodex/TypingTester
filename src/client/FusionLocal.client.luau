@@ -125,7 +125,7 @@ local function openPopup(popupName)
 			popup.Parent = MainUI.MainFrame
 			DarkTintTransparency:set(1)
 		else
-			local existingPopup = currentPopup:FindFirstChildOfClass "Frame"
+			local existingPopup = currentPopup:FindFirstChildOfClass "CanvasGroup"
 			if existingPopup then
 				existingPopup.Visible = false
 				existingPopup.Parent = MainUI.MainFrame
@@ -568,14 +568,13 @@ local function Popup(props)
 	end
 
 	local popup
-	popup = New "Frame" {
+	popup = New "CanvasGroup" {
 		Name = props.Name,
 
 		Size = props.Size or UDim2.fromScale(0.8, 0.8),
 		Position = props.Position or UDim2.fromScale(0.5, 0.5),
 		BackgroundColor3 = Grey2,
 		Visible = false,
-		ZIndex = props.ZIndex or 120, -- bruh darktint moment
 
 		[Children] = {
 			UICorner(props.Corner or 0.04),
@@ -595,38 +594,47 @@ local function Popup(props)
 				},
 			},
 
-			New "TextLabel" {
-				Name = "Label",
+			New "Frame" {
+				Name = "Top",
 				AnchorPoint = Vector2.new(0.5, 0),
 				BackgroundColor3 = Grey1,
-				BackgroundTransparency = 0,
 
-				Position = UDim2.fromScale(0.5, 0.03),
-				Size = UDim2.fromScale(1, 0.08), -- I don't like it. 0.08 barely works okay enough.
-				FontFace = playerFontBold,
-				Text = string.upper(props.Name),
+				Position = UDim2.fromScale(0.5, 0),
+				Size = UDim2.fromScale(1, 0.1),
 
-				[Children] = New "TextButton" {
-					Name = "CloseButton",
-					AnchorPoint = Vector2.new(1, 0),
-					BackgroundColor3 = Black2,
+				[Children] = {
+					New "TextLabel" {
+						Name = "Label",
+						Size = UDim2.fromScale(0.8, 0.8),
 
-					Position = UDim2.fromScale(1, 0),
-					Size = UDim2.fromScale(1, 1),
-					SizeConstraint = Enum.SizeConstraint.RelativeYY,
-					FontFace = playerFont,
+						FontFace = playerFontBold,
+						Text = string.upper(props.Name),
+					},
 
-					Text = "X",
-					AutoButtonColor = true,
+					New "TextButton" {
+						Name = "CloseButton",
+						AnchorPoint = Vector2.new(1, 0),
+						BackgroundColor3 = Black2,
 
-					[OnEvent "Activated"] = function()
-						popup.Visible = false
-						popup.Parent = MainUI.MainFrame
+						Position = UDim2.fromScale(1, 0),
+						Size = UDim2.fromScale(1, 1),
+						SizeConstraint = Enum.SizeConstraint.RelativeYY,
+						FontFace = playerFont,
 
-						if not props.NoBG then
-							DarkTintTransparency:set(1)
-						end
-					end,
+						Text = "X",
+						AutoButtonColor = true,
+
+						[OnEvent "Activated"] = function()
+							popup.Visible = false
+							popup.Parent = MainUI.MainFrame
+
+							if not props.NoBG then
+								DarkTintTransparency:set(1)
+							end
+						end,
+
+						[Children] = UIPadding(),
+					},
 				},
 			},
 
@@ -760,7 +768,6 @@ local function ShopOption(props)
 						Image = "rbxassetid://10970873852",
 					},
 					New "TextLabel" {
-						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.6, 0.5),
 						Size = UDim2.fromScale(0.7, 0.7),
 						FontFace = playerFont,
@@ -1112,7 +1119,6 @@ PlayScreen = New "ScreenGui" {
 								},
 								New "TextLabel" {
 									Name = "Lewin4",
-									AnchorPoint = Vector2.new(0.5, 0.5),
 									Position = UDim2.fromScale(0.5, 1.8),
 									Size = UDim2.fromScale(1.5, 0.175),
 									FontFace = playerFontThin,
@@ -1682,9 +1688,7 @@ Initial release
 
 				Popup {
 					Name = "Settings",
-
 					Size = UDim2.fromScale(0.5, 0.5),
-					ZIndex = 130,
 
 					Children = {
 						New "UIGridLayout" {
@@ -1715,7 +1719,7 @@ Initial release
 							BackgroundColor3 = Black3,
 
 							Activated = function()
-								openPopup("Stats")()
+								openPopup "Stats"()
 								local statsPopup = MainUI.MainFrame.DarkTint.CurrentPopup.Stats
 
 								if statsPopup.Visible then
@@ -1785,7 +1789,6 @@ Initial release
 				Popup {
 					Name = "Stats",
 					Size = UDim2.fromScale(0.5, 0.5),
-					ZIndex = 140,
 
 					Children = New "UIListLayout" {
 						SortOrder = Enum.SortOrder.LayoutOrder,
@@ -1815,7 +1818,8 @@ Initial release
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages
+										local popup =
+											MainUI.MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.LevelLeaderboard)
 									end,
 								},
@@ -1827,7 +1831,8 @@ Initial release
 									BackgroundColor3 = Black3,
 
 									Activated = function()
-										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages
+										local popup =
+											MainUI.MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages
 										popup.UIPageLayout:JumpTo(popup.WordsLeaderboard)
 									end,
 								},
