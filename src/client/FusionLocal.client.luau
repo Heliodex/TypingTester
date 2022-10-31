@@ -99,6 +99,7 @@ local Settings = {
 	BlindMode = Value(),
 	MemoryMode = Value(),
 	PlainBG = Value(),
+	Fullscreen = Value(),
 }
 
 for _, v in pairs(Words) do
@@ -1141,7 +1142,7 @@ MainUI = New "ScreenGui" {
 	Name = "Main",
 	Parent = LocalPlayer.PlayerGui,
 	DisplayOrder = 0,
-	IgnoreGuiInset = true,
+	IgnoreGuiInset = Settings.Fullscreen,
 
 	[Children] = {
 		New "TextLabel" { -- could go inside MainFrame or frame
@@ -1162,7 +1163,7 @@ MainUI = New "ScreenGui" {
 			Name = "MainFrame",
 			Size = UDim2.fromScale(1, 1),
 
-			BackgroundColor3 = Black3,
+			BackgroundTransparency = 1,
 			ZIndex = 5,
 
 			[Children] = {
@@ -1461,75 +1462,6 @@ MainUI = New "ScreenGui" {
 					},
 				},
 
-				(function()
-					local camera = New "Camera" {
-						CFrame = CFrame.new(Vector3.new(-400, 400, 400), Vector3.new(0, 0, 0)),
-						FieldOfView = 1,
-					}
-
-					return New "ViewportFrame" {
-						Name = "BackgroundDesign",
-
-						Size = UDim2.fromScale(1, 1),
-						ZIndex = -50,
-						BackgroundColor3 = Grey0, -- Prevent white outlines for parts
-						BackgroundTransparency = 1,
-						LightColor = Grey3,
-						LightDirection = Vector3.new(0, -0.5, -1),
-						Visible = Computed(function()
-							return not Settings.PlainBG:get()
-						end),
-
-						CurrentCamera = camera,
-						[Children] = {
-							camera,
-							(function()
-								local returns = {}
-								for h = -9, 9 do
-									for w = -16, 16 do
-										local r = math.random() * 0.2
-										table.insert(
-											returns,
-											New "Part" {
-												Size = Vector3.new(1, 1, 1),
-												Position = Vector3.new(h + w, h, w),
-												Color = Spring(
-													Computed(function()
-														local currentLevel = streakLevel:get() - 1
-														return if currentLevel > 0
-															then Color3.new(
-																math.min(r + (currentLevel / 25), 0.6),
-																r,
-																r
-															)
-															else Color3.new(r, r, r)
-													end),
-													0.5 + r * 5,
-													1
-												),
-												Material = Enum.Material.Plastic,
-												Rotation = Spring(
-													Computed(function()
-														return Vector3.new(
-															backgroundRotation[1]:get(),
-															backgroundRotation[2]:get(),
-															backgroundRotation[3]:get()
-														) -- rotation, rotation
-													end),
-													0.2,
-													1
-												),
-											}
-										)
-									end
-								end
-
-								return returns
-							end)(),
-						},
-					}
-				end)(),
-
 				-- MENU TIME
 				-- OH MY GOD STOP ROCRASTINATING
 
@@ -1710,6 +1642,10 @@ Initial release
 						Setting {
 							Name = "PlainBG",
 							Text = "Plain Background",
+						},
+						Setting {
+							Name = "Fullscreen",
+							Text = "Fullscreen",
 						},
 						Button {
 							Name = "Stats",
@@ -2152,6 +2088,85 @@ Initial release
 				},
 			},
 		},
+	},
+}
+
+New "ScreenGui" {
+	Name = "Background",
+	Parent = LocalPlayer.PlayerGui,
+	DisplayOrder = -10,
+	IgnoreGuiInset = true,
+
+	[Children] = New "Frame" {
+		Name = "BackgroundBackground",
+		Size = UDim2.fromScale(1, 1),
+
+		BackgroundColor3 = Black3,
+		ZIndex = 5,
+		[Children] = (function()
+			local camera = New "Camera" {
+				CFrame = CFrame.new(Vector3.new(-400, 400, 400), Vector3.new(0, 0, 0)),
+				FieldOfView = 1,
+			}
+
+			return New "ViewportFrame" {
+				Name = "BackgroundDesign",
+
+				Size = UDim2.fromScale(1, 1),
+				ZIndex = -50,
+				BackgroundColor3 = Grey0, -- Prevent white outlines for parts
+				BackgroundTransparency = 1,
+				LightColor = Grey3,
+				LightDirection = Vector3.new(0, -0.5, -1),
+				Visible = Computed(function()
+					return not Settings.PlainBG:get()
+				end),
+
+				CurrentCamera = camera,
+				[Children] = {
+					camera,
+					(function()
+						local returns = {}
+						for h = -9, 9 do
+							for w = -16, 16 do
+								local r = math.random() * 0.2
+								table.insert(
+									returns,
+									New "Part" {
+										Size = Vector3.new(1, 1, 1),
+										Position = Vector3.new(h + w, h, w),
+										Color = Spring(
+											Computed(function()
+												local currentLevel = streakLevel:get() - 1
+												return if currentLevel > 0
+													then Color3.new(math.min(r + (currentLevel / 25), 0.6), r, r)
+													else Color3.new(r, r, r)
+											end),
+											0.5 + r * 5,
+											1
+										),
+										Material = Enum.Material.Plastic,
+										Rotation = Spring(
+											Computed(function()
+												return Vector3.new(
+													backgroundRotation[1]:get(),
+													backgroundRotation[2]:get(),
+													backgroundRotation[3]:get()
+												) -- rotation, rotation
+											end),
+											0.2,
+											1
+										),
+									}
+								)
+							end
+						end
+
+						return returns
+					end)(),
+				},
+			}
+		end)(),
 	},
 }
 

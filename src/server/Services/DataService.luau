@@ -40,6 +40,7 @@ local DefaultProfileTemplate = {
 		BlindMode = false,
 		MemoryMode = false,
 		PlainBG = false,
+		Fullscreen = true,
 	},
 }
 
