@@ -1588,8 +1588,6 @@ MainUI = New "ScreenGui" {
 							[Children] = {
 								New "UIPageLayout" {
 									ScrollWheelInputEnabled = false,
-									SortOrder = Enum.SortOrder.LayoutOrder,
-									EasingStyle = Enum.EasingStyle.Quint,
 								},
 
 								New "Frame" {
@@ -1877,8 +1875,6 @@ Initial release
 							[Children] = {
 								New "UIPageLayout" {
 									ScrollWheelInputEnabled = false,
-									SortOrder = Enum.SortOrder.LayoutOrder,
-									EasingStyle = Enum.EasingStyle.Quint,
 								},
 
 								New "Frame" {
@@ -2075,8 +2071,6 @@ Initial release
 							[Children] = {
 								New "UIPageLayout" {
 									ScrollWheelInputEnabled = false,
-									SortOrder = Enum.SortOrder.LayoutOrder,
-									EasingStyle = Enum.EasingStyle.Quint,
 								},
 
 								New "Frame" {
