@@ -2,8 +2,10 @@
 local version = "1.0.0"
 
 game.StarterGui:SetCoreGuiEnabled("All", false)
-local ReplicatedStorage = game:GetService "ReplicatedStorage"
 local Players = game:GetService "Players"
+local ReplicatedStorage = game:GetService "ReplicatedStorage"
+local UserInputService = game:GetService "UserInputService"
+
 local LocalPlayer = Players.LocalPlayer
 local Fusion = require(ReplicatedStorage.Shared.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
@@ -133,6 +135,7 @@ local function openPopup(popupName)
 			end
 
 			popup.Parent = currentPopup
+			popup.Position = UDim2.fromScale(0.5, 0.5)
 			popup.Visible = true
 			DarkTintTransparency:set(DarkTintTransparencyGoal)
 		end
@@ -569,11 +572,14 @@ local function Popup(props)
 	end
 
 	local popup
+	local pos = Value(props.Position or UDim2.fromScale(0.5, 0.5))
+	local mousePos
+	local popupPos
 	popup = New "CanvasGroup" {
 		Name = props.Name,
 
 		Size = props.Size or UDim2.fromScale(0.8, 0.8),
-		Position = props.Position or UDim2.fromScale(0.5, 0.5),
+		Position = pos,
 		BackgroundColor3 = Grey2,
 		Visible = false,
 
@@ -595,13 +601,26 @@ local function Popup(props)
 				},
 			},
 
-			New "Frame" {
+			New "TextButton" {
 				Name = "Top",
 				AnchorPoint = Vector2.new(0.5, 0),
 				BackgroundColor3 = Grey1,
+				AutoButtonColor = false,
 
 				Position = UDim2.fromScale(0.5, 0),
 				Size = UDim2.fromScale(1, 0.1),
+
+				[OnEvent "MouseButton1Down"] = function()
+					mousePos = UserInputService:GetMouseLocation()
+					popupPos = popup.Position
+				end,
+
+				[OnEvent "MouseMoved"] = function()
+					if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+						local newPos = UserInputService:GetMouseLocation() - mousePos
+						pos:set(UDim2.new(0.5, newPos.X + popupPos.X.Offset, 0.5, newPos.Y + popupPos.Y.Offset))
+					end
+				end,
 
 				[Children] = {
 					New "TextLabel" {
