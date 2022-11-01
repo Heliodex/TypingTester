@@ -86,6 +86,10 @@ return {
 		TextScaled = true,
 	},
 
+	UIGridLayout = {
+		SortOrder = Enum.SortOrder.LayoutOrder,
+	},
+	
 	UIPageLayout = {
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		EasingStyle = Enum.EasingStyle.Quint,

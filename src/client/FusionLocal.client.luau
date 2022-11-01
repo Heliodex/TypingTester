@@ -4,14 +4,15 @@ local version = "1.0.0"
 game.StarterGui:SetCoreGuiEnabled("All", false)
 local Players = game:GetService "Players"
 local ReplicatedStorage = game:GetService "ReplicatedStorage"
-local UserInputService = game:GetService "UserInputService"
 
 local LocalPlayer = Players.LocalPlayer
-local Fusion = require(ReplicatedStorage.Shared.Fusion)
+local Fusion = require(script.Parent.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local Words = require(ReplicatedStorage.Shared.Words)
 local Ranks = require(ReplicatedStorage.Shared.Ranks)
 local Images = require(script.Parent.Images)
+local State = require(script.Parent.State)
+local Components = script.Parent.components
 
 Knit.Start()
 	:andThen(function()
@@ -39,35 +40,33 @@ local Value = Fusion.Value
 local Computed = Fusion.Computed
 local Observer = Fusion.Observer
 
-local White = Color3.new(1, 1, 1)
-local Grey4 = Color3.fromRGB(178, 178, 178)
-local Grey3 = Color3.fromRGB(102, 102, 102)
-local Grey2 = Color3.fromRGB(84, 84, 84)
-local Grey1 = Color3.fromRGB(60, 60, 60)
-local Grey0 = Color3.fromRGB(42, 42, 42)
-local Black3 = Color3.fromRGB(32, 30, 28)
-local Black2 = Color3.fromRGB(16, 14, 12)
-local Black1 = Color3.fromRGB(10, 9, 8)
-local Black0 = Color3.new() -- hehehuehehuehe
+local White = State.White
+local Grey4 = State.Grey4
+local Grey3 = State.Grey3
+local Grey1 = State.Grey1
+local Grey0 = State.Grey0
+local Black3 = State.Black3
+local Black2 = State.Black2
+local Black1 = State.Black1
+local Black0 = State.Black0
 
 local Green = Color3.fromRGB(0, 255, 0)
 local Red = Color3.fromRGB(255, 0, 0)
 
-local playerFontThin = Font.fromName("GothamSSm", Enum.FontWeight.Thin) -- selene: "`FOnT` iS Not dEfinEd!!!!1!!!!11"
-local playerFont = Font.fromName("GothamSSm", Enum.FontWeight.Medium)
-local playerFontBold = Font.fromName("GothamSSm", Enum.FontWeight.Bold)
+local playerFontThin = State.playerFontThin -- selene: "`FOnT` iS Not dEfinEd!!!!1!!!!11"
+local playerFont = State.playerFont
+local playerFontBold = State.playerFontBold
 
 local PlayScreen
 local MainUI
 local TypingBox
 
-local MainFrameSize = Value(UDim2.fromScale(0.8, 0.8))
-local DarkTintTransparency = Value(1)
+local MainFrameSize = State.MainFrameSize
+local DarkTintTransparency = State.DarkTintTransparency
 local DarkTintTransparencyGoal = 0.5
 
-local loadingData = false
-local dataPrepared = Value()
-local dataLoaded = Value()
+local dataPrepared = State.dataPrepared
+local dataLoaded = State.dataLoaded
 local dataLoadedChanged = Observer(dataLoaded)
 
 DataService:PrepareData():andThen(function()
@@ -78,13 +77,13 @@ local displayedWords = {}
 local wordCorrect = Value(Green)
 
 local backgroundRotation = { Value(90), Value(90), Value(90) }
-local currency = Value(0)
-local experience = Value(0)
-local level = Value(0)
-local wordsTyped = Value(0)
-local streak = Value(0)
-local streakLevel = Value(0)
-local ownedWordlists = {}
+local currency = State.currency
+local experience = State.experience
+local level = State.level
+local wordsTyped = State.wordsTyped
+local streak = State.streak
+local streakLevel = State.streakLevel
+local ownedWordlists = State.ownedWordlists
 local wordlist = Value()
 
 local adderTransparency = Value(1)
@@ -94,20 +93,9 @@ local experienceAdded = Value(0)
 local streakLevelUpTransparency = Value(1)
 local streakLevelUpTransparencySpring = Spring(streakLevelUpTransparency, 3, 1)
 
-local currentShopItem = Value()
+local currentShopItem = State.currentShopItem
 
-local Settings = {
-	KeySounds = Value(),
-	BlindMode = Value(),
-	MemoryMode = Value(),
-	PlainBG = Value(),
-	Fullscreen = Value(),
-}
-
-for _, v in pairs(Words) do
-	ownedWordlists[v.Name] = false
-end
-ownedWordlists["Easy"] = true
+local Settings = State.Settings
 
 local wordlistName = Value "Easy"
 
@@ -157,649 +145,15 @@ Observer(wordlist):onChange(function()
 end)
 wordlist:set(1)
 
-local function UICorner(corner)
-	return New "UICorner" {
-		CornerRadius = UDim.new(corner or 0.2, 0),
-	}
-end
-
-local function UIPadding(props)
-	if props then
-		props.Padding = props.Padding or 0.075
-		props.PaddingV = props.PaddingV or props.Padding
-		props.PaddingH = props.PaddingH or props.Padding
-	else
-		props = {
-			Padding = 0.075,
-			PaddingV = 0.075,
-			PaddingH = 0.075,
-		}
-	end
-
-	return New "UIPadding" {
-		PaddingBottom = UDim.new(props.PaddingV, 0),
-		PaddingTop = UDim.new(props.PaddingV, 0),
-		PaddingLeft = UDim.new(props.PaddingH, 0),
-		PaddingRight = UDim.new(props.PaddingH, 0),
-	}
-end
-
--- Was quite the trip to get working
-local function populateLeaderboard(leaderboard, page)
-	for _, v in ipairs(leaderboard) do
-		local you = v.Player == "You"
-
-		-- Load users on leaderboard
-		-- very slow, so it would make the game load slowly if it was done at creation of the leaderboard popup
-		task.spawn(function()
-			New "Frame" {
-				Name = "LeaderboardPerson",
-				Parent = page,
-
-				Size = UDim2.fromScale(1, 0.1),
-				BackgroundTransparency = 1,
-
-				[Children] = {
-					UIPadding {
-						PaddingH = 0.03,
-					},
-
-					New "Frame" {
-						Size = UDim2.fromScale(1, 1),
-						BackgroundColor3 = White,
-
-						[Children] = {
-							UICorner(),
-							New "UIGradient" {
-								Color = if you
-									then Computed(function()
-										return Ranks(level:get()).Colour
-									end)
-									else Ranks(v.Level).Colour,
-							},
-
-							New "ImageLabel" {
-								Name = "ProfilePic",
-
-								AnchorPoint = Vector2.new(0, 0.5),
-								Position = UDim2.fromScale(0, 0.5),
-								Size = UDim2.fromScale(1, 0.8),
-								SizeConstraint = Enum.SizeConstraint.RelativeYY,
-								Image = (function()
-									local img
-									pcall(function()
-										img = Players:GetUserThumbnailAsync(
-											if you then LocalPlayer.UserId else v.Player,
-											Enum.ThumbnailType.HeadShot,
-											Enum.ThumbnailSize.Size48x48
-										)
-									end)
-									return img or 0
-								end)(),
-
-								[Children] = UICorner(1),
-							},
-							New "TextLabel" {
-								Name = "Username",
-								Text = if you
-									then LocalPlayer.Name
-									else (function()
-										local name
-										pcall(function()
-											name = Players:GetNameFromUserIdAsync(v.Player)
-										end)
-										return name or "[Unknown]"
-									end)(),
-
-								AnchorPoint = Vector2.new(0, 0.5),
-								Position = UDim2.fromScale(0.1, 0.5),
-								Size = UDim2.fromScale(0.25, 0.8),
-								FontFace = playerFont,
-							},
-							New "TextLabel" {
-								Name = "Level",
-								Text = if you then level else v.Level,
-
-								AnchorPoint = Vector2.new(0.5, 0.5),
-								Position = UDim2.fromScale(0.6, 0.5),
-								Size = UDim2.fromScale(0.2, 0.8),
-								FontFace = playerFont,
-							},
-							New "TextLabel" {
-								Name = "Words",
-								Text = if you then wordsTyped else v.Words,
-
-								AnchorPoint = Vector2.new(1, 0.5),
-								Position = UDim2.fromScale(1, 0.5),
-								Size = UDim2.fromScale(0.2, 0.8),
-								FontFace = playerFont,
-							},
-						},
-					},
-				},
-			}
-		end)
-	end
-end
-
-local function NextWords(props)
-	return New "TextLabel" {
-		Name = "Label" .. props.Number,
-
-		Size = UDim2.fromScale(0.4, 0.06),
-		Position = UDim2.fromScale(0.5, props.Position),
-
-		FontFace = playerFont,
-		TextTransparency = 0.6,
-		Text = displayedWords[props.Number],
-		Visible = Computed(function()
-			return not Settings.BlindMode:get()
-		end),
-	}
-end
-
-local function ImageButton(props)
-	props.LabelWidth = props.LabelWidth or 0.6
-	props.ImageSize = props.ImageSize or 0.3
-	props.Size = props.Size or UDim2.fromScale(0.17, 0.075)
-	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
-
-	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
-	local clickable = true
-
-	return New "TextButton" {
-		Name = props.Name,
-
-		Size = props.Size,
-		AnchorPoint = props.AnchorPoint or Vector2.new(0.5, 0.5),
-		Position = props.Position,
-		BackgroundColor3 = props.BackgroundColor3 or Grey3,
-
-		SizeConstraint = props.SizeConstraint,
-
-		[OnEvent "Activated"] = function()
-			if clickable or not props.Ratelimit then
-				clickable = false
-				props.Activated() -- shouldn't yield
-				task.wait(0.1)
-				clickable = true
-			end
-		end,
-
-		[Children] = {
-			UICorner(props.Corner),
-			UIPadding {
-				PaddingH = 0.075 / ratio,
-			}, -- at least it works well
-
-			New "TextLabel" {
-				Text = props.Text,
-
-				Size = UDim2.fromScale(props.LabelWidth, 1),
-				Position = UDim2.fromScale(0.9, 0.5),
-				AnchorPoint = Vector2.new(1, 0.5),
-
-				FontFace = playerFont,
-			},
-
-			New "ImageLabel" {
-				Size = UDim2.fromScale(props.ImageSize, props.ImageSize),
-				Position = UDim2.fromScale(0, 0.5),
-				AnchorPoint = Vector2.new(0, 0.5),
-
-				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = New "UIAspectRatioConstraint" {
-					AspectRatio = 1,
-					AspectType = Enum.AspectType.ScaleWithParentSize,
-					DominantAxis = Enum.DominantAxis.Width,
-				},
-			},
-		},
-	}
-end
-
-local function Button(props)
-	props.LabelWidth = props.LabelWidth or 0.6
-	props.ImageSize = props.ImageSize or 0.3
-	props.Size = props.Size or UDim2.fromScale(0.17, 0.075)
-	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
-
-	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
-	local clickable = true
-
-	return New "TextButton" {
-		Name = props.Name,
-
-		Size = props.Size,
-		AnchorPoint = props.AnchorPoint or Vector2.new(0.5, 0.5),
-		Position = props.Position,
-		BackgroundColor3 = props.BackgroundColor3 or Grey3,
-
-		SizeConstraint = props.SizeConstraint,
-
-		[OnEvent "Activated"] = function()
-			if clickable or not props.Ratelimit then
-				clickable = false
-				props.Activated() -- shouldn't yield
-				task.wait(0.1)
-				clickable = true
-			end
-		end,
-
-		[Children] = {
-			UICorner(props.Corner),
-			UIPadding {
-				PaddingH = 0.075 / ratio,
-			}, -- at least it works well
-
-			New "TextLabel" {
-				Text = props.Text,
-
-				Size = UDim2.fromScale(props.LabelWidth, 1),
-				Position = UDim2.fromScale(0.5, 0.5),
-				AnchorPoint = Vector2.new(0.5, 0.5),
-
-				FontFace = playerFont,
-			},
-		},
-	}
-end
-
-local function SaveSlot(props)
-	local text = Value("Save slot " .. props.SaveSlot)
-	local previewText = Value "Loading info..."
-
-	local disconnect = Observer(dataPrepared):onChange(function()
-		DataService:PreviewData(props.SaveSlot):andThen(function(data)
-			previewText:set(
-				"Level: " .. data.Level .. "\nWords: " .. data.WordsTyped .. "\nTyping Tokens: " .. data.Currency
-			)
-		end)
-	end)
-
-	return New "TextButton" {
-		Name = "SaveSlot",
-
-		Size = UDim2.fromScale(1, 0.15),
-
-		AnchorPoint = Vector2.new(0.5, 0.5),
-		Position = props.Position,
-		BackgroundColor3 = Grey3,
-		AutoButtonColor = true,
-
-		[OnEvent "Activated"] = function()
-			if not loadingData then
-				loadingData = true
-				print "Loading data..."
-				text:set "Loading..."
-				disconnect()
-
-				DataService:LoadData(props.SaveSlot):andThen(function(data)
-					if not data then
-						print "Data not prepared yet!"
-						text:set "Data not prepared yet, try again."
-						task.wait(1)
-						text:set("Save slot " .. props.SaveSlot)
-						loadingData = false
-						return
-					end
-					currency:set(data.Currency)
-					experience:set(data.Experience)
-					level:set(data.Level)
-					wordsTyped:set(data.WordsTyped)
-
-					dataLoaded:set(true)
-					print "Data loaded!"
-
-					PlayScreen.Frame.Visible = false
-					Sounds.music:Play()
-					MainFrameSize:set(UDim2.fromScale(1, 1))
-
-					DataService:LevelLeaderboard():andThen(function(leaderboard)
-						populateLeaderboard(
-							leaderboard,
-							MainUI.MainFrame.Leaderboard.ScrollingFrame.Pages.LevelLeaderboard
-						)
-					end)
-					DataService:WordsLeaderboard():andThen(function(leaderboard)
-						populateLeaderboard(
-							leaderboard,
-							MainUI.MainFrame.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard
-						)
-					end)
-				end, function()
-					print "Error while loading data!"
-					text:set "Error loading data!"
-					task.wait(1)
-					text:set("Save slot " .. props.SaveSlot)
-					loadingData = false
-				end)
-			end
-		end,
-
-		[Children] = {
-			UICorner(),
-
-			New "TextLabel" {
-				Name = "SaveSlotName",
-				Text = text,
-
-				Size = UDim2.fromScale(0.3, 0.8),
-				Position = UDim2.fromScale(0.02, 0.5),
-				AnchorPoint = Vector2.new(0, 0.5),
-				TextXAlignment = Enum.TextXAlignment.Left,
-
-				FontFace = playerFont,
-			},
-
-			New "TextLabel" {
-				Name = "SaveSlotPreview",
-				Text = previewText,
-
-				Size = UDim2.fromScale(0.3, 0.8),
-				Position = UDim2.fromScale(0.98, 0.5),
-				AnchorPoint = Vector2.new(1, 0.5),
-				TextXAlignment = Enum.TextXAlignment.Right,
-
-				FontFace = playerFont,
-			},
-		},
-	}
-end
-
-local function Label(props)
-	props.LabelWidth = props.LabelWidth or 0.6
-	props.LabelPosition = props.LabelPosition or 0.9
-
-	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale)
-
-	return New "TextLabel" {
-		Name = props.Name,
-
-		Size = props.Size,
-		AnchorPoint = props.AnchorPoint,
-		Position = props.Position,
-		BackgroundColor3 = props.BackgroundColor3 or Grey0,
-		BackgroundTransparency = 0,
-
-		[Children] = {
-			UICorner(),
-			UIPadding {
-				PaddingH = 0.075 / ratio,
-			}, -- ratio
-			props.Children,
-
-			New "TextLabel" {
-				Text = props.Text,
-
-				Size = UDim2.fromScale(props.LabelWidth, 1),
-				Position = UDim2.fromScale(props.LabelPosition, 0.5),
-				AnchorPoint = Vector2.new(1, 0.5),
-
-				FontFace = playerFont,
-			},
-
-			New "ImageLabel" {
-				Size = UDim2.fromScale(0.3, 0.3),
-				Position = UDim2.fromScale(0, 0.5),
-				AnchorPoint = Vector2.new(0, 0.5),
-
-				Image = "rbxassetid://" .. tostring(props.Image),
-				[Children] = New "UIAspectRatioConstraint" {
-					AspectRatio = 1,
-					AspectType = Enum.AspectType.ScaleWithParentSize,
-					DominantAxis = Enum.DominantAxis.Width,
-				},
-			},
-		},
-	}
-end
-
-local function Popup(props)
-	local function checkChildren(table)
-		for i = 1, #table do
-			if typeof(table[i]) ~= "table" then
-				if table[i]:IsA "GuiObject" then
-					table[i].LayoutOrder = i
-				end
-			else
-				checkChildren(table[i])
-			end
-		end
-	end
-	if typeof(props.Children) == "table" then
-		checkChildren(props.Children)
-	end
-
-	local popup
-	local pos = Value(props.Position or UDim2.fromScale(0.5, 0.5))
-	local mousePos
-	local popupPos
-	popup = New "CanvasGroup" {
-		Name = props.Name,
-
-		Size = props.Size or UDim2.fromScale(0.8, 0.8),
-		Position = pos,
-		BackgroundColor3 = Grey2,
-		Visible = false,
-
-		[Children] = {
-			UICorner(props.Corner or 0.04),
-
-			New "ScrollingFrame" {
-				Active = true,
-				Position = UDim2.fromScale(0.5, 0.556), -- perfect values
-				Size = UDim2.fromScale(1, 0.888),
-				CanvasSize = UDim2.fromScale(0.9, 1),
-				AutomaticCanvasSize = Enum.AutomaticSize.Y,
-
-				[Children] = {
-					UIPadding {
-						Padding = 0.01,
-					},
-					props.Children,
-				},
-			},
-
-			New "TextButton" {
-				Name = "Top",
-				AnchorPoint = Vector2.new(0.5, 0),
-				BackgroundColor3 = Grey1,
-				AutoButtonColor = false,
-
-				Position = UDim2.fromScale(0.5, 0),
-				Size = UDim2.fromScale(1, 0.1),
-
-				[OnEvent "MouseButton1Down"] = function()
-					mousePos = UserInputService:GetMouseLocation()
-					popupPos = popup.Position
-				end,
-
-				[OnEvent "MouseMoved"] = function()
-					if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
-						local newPos = UserInputService:GetMouseLocation() - mousePos
-						pos:set(UDim2.new(0.5, newPos.X + popupPos.X.Offset, 0.5, newPos.Y + popupPos.Y.Offset))
-					end
-				end,
-
-				[Children] = {
-					New "TextLabel" {
-						Name = "Label",
-						Size = UDim2.fromScale(0.8, 0.8),
-
-						FontFace = playerFontBold,
-						Text = string.upper(props.Name),
-					},
-
-					New "TextButton" {
-						Name = "CloseButton",
-						AnchorPoint = Vector2.new(1, 0),
-						BackgroundColor3 = Black2,
-
-						Position = UDim2.fromScale(1, 0),
-						Size = UDim2.fromScale(1, 1),
-						SizeConstraint = Enum.SizeConstraint.RelativeYY,
-						FontFace = playerFont,
-
-						Text = "X",
-						AutoButtonColor = true,
-
-						[OnEvent "Activated"] = function()
-							popup.Visible = false
-							popup.Parent = MainUI.MainFrame
-
-							if not props.NoBG then
-								DarkTintTransparency:set(1)
-							end
-						end,
-
-						[Children] = UIPadding(),
-					},
-				},
-			},
-
-			props.MainChildren,
-		},
-	}
-	return popup
-end
-
-local function Setting(props)
-	local clickable = true
-
-	dataLoadedChanged:onChange(function()
-		DataService:GetSetting(props.Name):andThen(function(value)
-			Settings[props.Name]:set(value)
-		end)
-	end)
-
-	return New "TextButton" {
-		Name = props.Name,
-
-		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
-		BackgroundTransparency = 1,
-
-		[OnEvent "Activated"] = function()
-			if clickable then
-				clickable = false
-
-				Settings[props.Name]:set(not Settings[props.Name]:get())
-
-				SyncService:ChangeSetting(props.Name)
-				task.wait(0.1) -- ratelimiting, don't click so fast
-				clickable = true
-			end
-		end,
-
-		[Children] = {
-			New "ImageLabel" {
-				BackgroundTransparency = 1,
-				Size = UDim2.fromScale(1, 1),
-				SizeConstraint = Enum.SizeConstraint.RelativeYY,
-				Image = Computed(function()
-					return if Settings[props.Name]:get() then Images.Checked else Images.Unchecked
-				end),
-			},
-			New "TextLabel" {
-				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.fromScale(1, 0.5),
-				Size = UDim2.fromScale(0.7, 0.8),
-				FontFace = playerFont,
-				Text = props.Text,
-				TextXAlignment = Enum.TextXAlignment.Right,
-			},
-		},
-	}
-end
-
-local function ShopOption(props)
-	local item = ShopItems[props.Category][props.Name]
-	local labelText = Value(item.Price)
-	local levelRequirement = item.Level
-
-	if item.Ownable then
-		dataLoadedChanged:onChange(function()
-			DataService:ItemOwned(props.Category, props.Name):andThen(function(owned)
-				if owned then
-					labelText:set "Owned"
-					ownedWordlists[props.Name] = true
-				end
-			end)
-		end)
-	end
-
-	return New "TextButton" {
-		Name = props.Name,
-
-		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
-		BackgroundColor3 = Grey3,
-
-		[OnEvent "Activated"] = function()
-			currentShopItem:set {
-				Name = props.Name,
-				Category = props.Category,
-				Level = item.Level,
-				Ownable = item.Ownable,
-				ButtonText = labelText,
-			}
-		end,
-
-		[Children] = {
-			New "TextLabel" {
-				AnchorPoint = Vector2.new(0, 0.5),
-				Position = UDim2.fromScale(0.05, 0.5),
-				Size = UDim2.fromScale(0.6, 0.8),
-				FontFace = playerFont,
-				Text = item.Name,
-				TextXAlignment = Enum.TextXAlignment.Left,
-			},
-
-			New "TextLabel" {
-				Name = "Price",
-				BackgroundTransparency = 1,
-				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.fromScale(0.95, 0.5),
-				Size = UDim2.fromScale(0.25, 1),
-				FontFace = playerFont,
-				Text = labelText,
-
-				[Children] = UIPadding(),
-			},
-
-			New "Frame" {
-				Name = "LevelLock",
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.fromScale(1, 1),
-				BackgroundTransparency = 0.15,
-				BackgroundColor3 = Black0,
-				Visible = Computed(function()
-					return level:get() < levelRequirement
-				end),
-
-				[Children] = {
-					UICorner(),
-					New "ImageLabel" {
-						Name = "PadlockIcon",
-						AnchorPoint = Vector2.new(0, 0.5),
-						Position = UDim2.fromScale(0.03, 0.5),
-						Size = UDim2.fromScale(0.8, 0.8),
-						SizeConstraint = Enum.SizeConstraint.RelativeYY,
-						Image = "rbxassetid://10970873852",
-					},
-					New "TextLabel" {
-						Position = UDim2.fromScale(0.6, 0.5),
-						Size = UDim2.fromScale(0.7, 0.7),
-						FontFace = playerFont,
-						Text = "Level " .. levelRequirement,
-					},
-				},
-			},
-
-			UICorner(),
-		},
-	}
-end
+local UICorner = require(Components.UICorner)
+local UIPadding = require(Components.UIPadding)
+local ImageButton = require(Components.ImageButton)
+local Button = require(Components.Button)
+local Label = require(Components.Label)
+local SaveSlot = require(Components.SaveSlot)
+local Popup = require(Components.Popup)
+local Setting = require(Components.Setting)
+local ShopOption = require(Components.ShopOption)
 
 TypingBox = New "TextBox" {
 	Name = "TypingBox",
@@ -1154,6 +508,7 @@ PlayScreen = New "ScreenGui" {
 		},
 	},
 }
+State.PlayScreen:set(PlayScreen)
 
 -- Main ui time,,.,,.oaoeueuoueooaaeiiaaa
 
@@ -1316,7 +671,7 @@ MainUI = New "ScreenGui" {
 									if currentWordlist == 1 then
 										break
 									end
-								until ownedWordlists[Words[currentWordlist].Name]
+								until ownedWordlists[Words[currentWordlist].Name]:get()
 
 								wordlist:set(currentWordlist)
 
@@ -1361,6 +716,7 @@ MainUI = New "ScreenGui" {
 										},
 									},
 								},
+
 								Label {
 									Name = "Level",
 									Size = UDim2.fromScale(1, 0.25),
@@ -1371,6 +727,7 @@ MainUI = New "ScreenGui" {
 									end),
 									Image = 7367078076,
 								},
+
 								Label {
 									Name = "Experience",
 									Size = UDim2.fromScale(1, 0.2),
@@ -1460,22 +817,28 @@ MainUI = New "ScreenGui" {
 									end),
 								},
 
-								NextWords {
-									Position = 0.36,
-									Number = 2,
-								},
-								NextWords {
-									Position = 0.42,
-									Number = 3,
-								},
-								NextWords {
-									Position = 0.48,
-									Number = 4,
-								},
-								NextWords {
-									Position = 0.54,
-									Number = 5,
-								},
+								(function()
+									local returns = {}
+									for i = 2, 5 do
+										table.insert(
+											returns,
+											New "TextLabel" {
+												Name = "Label" .. i,
+
+												Size = UDim2.fromScale(0.4, 0.06),
+												Position = UDim2.fromScale(0.5, 0.06 * i + 0.24),
+
+												FontFace = playerFont,
+												TextTransparency = 0.6,
+												Text = displayedWords[i],
+												Visible = Computed(function()
+													return not Settings.BlindMode:get()
+												end),
+											}
+										)
+									end
+									return returns
+								end)(),
 							},
 						},
 					},
@@ -1929,7 +1292,9 @@ Initial release
 										if price ~= "Owned" and level:get() >= levelRequirement then
 											SyncService:PurchaseItem(item.Category, item.Name):andThen(function(success)
 												if success then
-													ownedWordlists[item.Name] = true
+													if item.Category == "Wordlists" then
+														ownedWordlists[item.Name]:set(true)
+													end
 													currency:set(currency:get() - price)
 													buttonText:set "Purchase successful!"
 													if item.Ownable then
@@ -2109,6 +1474,7 @@ Initial release
 		},
 	},
 }
+State.MainUI:set(MainUI)
 
 New "ScreenGui" {
 	Name = "Background",
