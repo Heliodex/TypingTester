@@ -1286,7 +1286,7 @@ Initial release
 										if price ~= "Owned" and level:get() >= levelRequirement then
 											SyncService:PurchaseItem(item.Category, item.Name):andThen(function(success)
 												if success then
-													if item.Category == "Wordlists" then
+													if ShopItems[item.Category].Name == "Wordlists" then
 														ownedWordlists[item.Name]:set(true)
 													end
 													currency:set(currency:get() - price)
@@ -1395,17 +1395,14 @@ Initial release
 
 													(function()
 														local returns2 = {}
-														-- local l2 = 1
 														for i2, _ in pairs(v.Items) do
 															table.insert(
 																returns2,
 																ShopOption {
 																	Name = i2,
 																	Category = i,
-																	-- LayoutOrder = l2
 																}
 															)
-															-- l2 += 1 -- gotta figure out a better way to do LayoutOrders
 														end
 														return returns2
 													end)(),

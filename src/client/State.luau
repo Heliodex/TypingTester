@@ -39,7 +39,7 @@ return {
 		for _, v in pairs(Words) do
 			t[v.Name] = Value(false)
 		end
-		t.Easy:set(true)
+		t["Easy words"]:set(true)
 		return t
 	end)(),
 

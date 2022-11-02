@@ -99,22 +99,24 @@ function SyncService:ChangeWordlist(player)
 end
 
 function SyncService.Client:PurchaseItem(player, category, item)
+	local categoryName = ShopItems[category].Name
 	local shopItem = ShopItems[category].Items[item]
+	if shopItem then
+		if shopItem.Ownable and DataService:GetData(player, "ShopPurchases")[categoryName][item] then
+			return
+		end
 
-	if item.Ownable and DataService:GetData(player, "ShopPurchases")[category][item] then
-		return
-	end
+		if DataService:GetData(player, "Currency") < shopItem.Price then
+			return
+		end
+		DataService:IncrementData(player, "Currency", -shopItem.Price)
+		DataService:IncrementData(player, { "Stats", "CurrencySpent" }, shopItem.Price)
 
-	if DataService:GetData(player, "Currency") < shopItem.Price then
-		return
+		if shopItem.Ownable then
+			DataService:SetData(player, { "ShopPurchases", categoryName, item }, true)
+		end
+		return true
 	end
-	DataService:IncrementData(player, "Currency", -shopItem.Price)
-	DataService:IncrementData(player, { "Stats", "CurrencySpent" }, shopItem.Price)
-
-	if item.Ownable then
-		DataService:SetData(player, { "ShopPurchases", category, item }, true)
-	end
-	return true
 end
 
 return SyncService

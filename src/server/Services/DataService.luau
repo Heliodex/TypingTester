@@ -210,7 +210,6 @@ function DataService.Client:ItemOwned(player, categoryName, item)
 	return DataService:ItemOwned(player, categoryName, item)
 end
 function DataService:ItemOwned(player, categoryName, item)
-	print(player, categoryName, item)
 	return DataService:GetData(player, "ShopPurchases")[categoryName][item]
 end
 

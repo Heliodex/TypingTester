@@ -2,7 +2,7 @@
 
 return {
 	{
-		Name = "Easy",
+		Name = "Easy words",
 		Exp = { 12, 15 },
 		Currency = 1,
 		"the",
@@ -136,7 +136,7 @@ return {
 	},
 	-- 128 words between 2 and 4 characters
 	{
-		Name = "Medium",
+		Name = "Medium words",
 		Exp = { 20, 26 },
 		Currency = 2,
 		"that",
@@ -853,7 +853,7 @@ return {
 	},
 	-- 711 words between 4 and 7 characters
 	{
-		Name = "Hard",
+		Name = "Hard words",
 		Exp = { 35, 42 },
 		Currency = 3,
 		"contact",
@@ -2815,7 +2815,7 @@ return {
 	},
 	-- 1959 words between 7 and 10 characters
 	{
-		Name = "Insane",
+		Name = "Insane words",
 		Exp = { 57, 65 },
 		Currency = 5,
 		"alkylbenzenesulfonates",
