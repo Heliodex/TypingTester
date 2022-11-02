@@ -2,6 +2,7 @@ local Players = game:GetService "Players"
 local ReplicatedStorage = game:GetService "ReplicatedStorage"
 local DataStoreService = game:GetService "DataStoreService"
 local Knit = require(ReplicatedStorage.Packages.Knit)
+local Settings = require(ReplicatedStorage.Shared.Settings)
 local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
 local ProfileService = require(game:GetService("ServerScriptService").Server.ProfileService)
 local Badge = require(script.Parent.Parent.Badge)
@@ -39,13 +40,7 @@ local DefaultProfileTemplate = {
 			return returns
 		end)(),
 	},
-	Settings = {
-		KeySounds = false,
-		BlindMode = false,
-		MemoryMode = false,
-		PlainBG = false,
-		Fullscreen = true,
-	},
+	Settings = Settings,
 }
 
 local DefaultUserTemplate = {

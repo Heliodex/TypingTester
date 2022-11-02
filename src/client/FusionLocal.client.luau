@@ -8,8 +8,9 @@ local ReplicatedStorage = game:GetService "ReplicatedStorage"
 local LocalPlayer = Players.LocalPlayer
 local Fusion = require(script.Parent.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
-local Words = require(ReplicatedStorage.Shared.Words)
 local Ranks = require(ReplicatedStorage.Shared.Ranks)
+local StarterSettings = require(ReplicatedStorage.Shared.Settings)
+local Words = require(ReplicatedStorage.Shared.Words)
 local Images = require(script.Parent.Images)
 local State = require(script.Parent.State)
 local Components = script.Parent.components
@@ -161,7 +162,7 @@ TypingBox = New "TextBox" {
 	[OnChange "Text"] = function()
 		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
 
-		if Settings.KeySounds:get() then
+		if Settings["Keypress Sounds"]:get() then
 			local rand = math.random(1, 3)
 			local rand2 = 0.9 + math.random() * 0.2 -- Randomize sound pitch
 
@@ -508,7 +509,7 @@ MainUI = New "ScreenGui" {
 	Name = "Main",
 	Parent = LocalPlayer.PlayerGui,
 	DisplayOrder = 0,
-	IgnoreGuiInset = Settings.Fullscreen,
+	IgnoreGuiInset = Settings["Fullscreen"],
 
 	[Children] = {
 		New "TextLabel" { -- could go inside MainFrame or frame
@@ -805,7 +806,7 @@ MainUI = New "ScreenGui" {
 									FontFace = playerFont,
 									Text = displayedWords[1],
 									Visible = Computed(function()
-										return not Settings.MemoryMode:get()
+										return not Settings["Memory Mode"]:get()
 									end),
 								},
 
@@ -824,7 +825,7 @@ MainUI = New "ScreenGui" {
 												TextTransparency = 0.6,
 												Text = displayedWords[i],
 												Visible = Computed(function()
-													return not Settings.BlindMode:get()
+													return not Settings["Blind Mode"]:get()
 												end),
 											}
 										)
@@ -1001,26 +1002,16 @@ Initial release
 							CellPadding = UDim2.fromScale(0.05, 0.05),
 						},
 
-						Setting {
-							Name = "KeySounds",
-							Text = "Keypress Sounds",
-						},
-						Setting {
-							Name = "BlindMode",
-							Text = "Blind Mode",
-						},
-						Setting {
-							Name = "MemoryMode",
-							Text = "Memory Mode",
-						},
-						Setting {
-							Name = "PlainBG",
-							Text = "Plain Background",
-						},
-						Setting {
-							Name = "Fullscreen",
-							Text = "Fullscreen",
-						},
+						(function()
+							local returns = {}
+							for i in StarterSettings do
+								print(StarterSettings[i][1], StarterSettings[i][2])
+								table.insert(returns, Setting(StarterSettings[i][1]))
+							end
+							return returns
+						end)(),
+
+						-- LayoutOrder be broke :(
 						Button {
 							Name = "Stats",
 							Text = "Stats",
@@ -1473,7 +1464,7 @@ New "ScreenGui" {
 				LightColor = Grey3,
 				LightDirection = Vector3.new(0, -0.5, -1),
 				Visible = Computed(function()
-					return not Settings.PlainBG:get()
+					return not Settings["Plain Background"]:get()
 				end),
 
 				CurrentCamera = camera,
@@ -1527,7 +1518,7 @@ New "ScreenGui" {
 -- Animate background cubes
 while true do
 	for i = 1, 3 do
-		if not Settings.PlainBG:get() then
+		if not Settings["Plain Background"]:get() then
 			backgroundRotation[i]:set(90 - backgroundRotation[i]:get())
 		end
 		task.wait(18)

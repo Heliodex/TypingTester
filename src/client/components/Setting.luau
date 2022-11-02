@@ -16,29 +16,30 @@ local State = require(script.Parent.Parent.State)
 local dataLoaded = State.dataLoaded
 local playerFont = State.playerFont
 local Settings = State.Settings
+local layoutOrder = 0
 
-return function(props)
+return function(name)
 	local clickable = true
 
 	Observer(dataLoaded):onChange(function()
-		DataService:GetSetting(props.Name):andThen(function(value)
-			Settings[props.Name]:set(value)
+		DataService:GetSetting(name):andThen(function(value)
+			Settings[name]:set(value)
 		end)
 	end)
 
+	layoutOrder += 1
 	return New "TextButton" {
-		Name = props.Name,
-
-		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
+		Name = name,
 		BackgroundTransparency = 1,
+		LayoutOrder = layoutOrder,
 
 		[OnEvent "Activated"] = function()
 			if clickable then
 				clickable = false
 
-				Settings[props.Name]:set(not Settings[props.Name]:get())
+				Settings[name]:set(not Settings[name]:get())
 
-				SyncService:ChangeSetting(props.Name)
+				SyncService:ChangeSetting(name)
 				task.wait(0.1) -- ratelimiting, don't click so fast
 				clickable = true
 			end
@@ -50,7 +51,7 @@ return function(props)
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeYY,
 				Image = Computed(function()
-					return if Settings[props.Name]:get() then Images.Checked else Images.Unchecked
+					return if Settings[name]:get() then Images.Checked else Images.Unchecked
 				end),
 			},
 			New "TextLabel" {
@@ -58,7 +59,7 @@ return function(props)
 				Position = UDim2.fromScale(1, 0.5),
 				Size = UDim2.fromScale(0.7, 0.8),
 				FontFace = playerFont,
-				Text = props.Text,
+				Text = name,
 				TextXAlignment = Enum.TextXAlignment.Right,
 			},
 		},

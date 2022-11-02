@@ -1,4 +1,5 @@
 local ReplicatedStorage = game:GetService "ReplicatedStorage"
+local Settings = require(ReplicatedStorage.Shared.Settings)
 local Words = require(ReplicatedStorage.Shared.Words)
 
 local Fusion = require(script.Parent.Fusion)
@@ -44,11 +45,11 @@ return {
 	end)(),
 
 	currentShopItem = Value(),
-	Settings = {
-		KeySounds = Value(),
-		BlindMode = Value(),
-		MemoryMode = Value(),
-		PlainBG = Value(),
-		Fullscreen = Value(),
-	},
+	Settings = (function()
+		local returns = {}
+		for _, v in pairs(Settings) do
+			returns[v[1]] = Value()
+		end
+		return returns
+	end)()
 }
