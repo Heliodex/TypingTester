@@ -4,4 +4,5 @@ return {
 	{"Memory Mode", false},
 	{"Plain Background", false},
 	{"Fullscreen", true},
+	{"British English", false},
 }

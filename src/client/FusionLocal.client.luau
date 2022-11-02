@@ -95,7 +95,11 @@ local wordlistName = Value "Easy"
 local function getWord()
 	local list = Words[wordlist:get()]
 	wordlistName:set(list.Name)
-	return list[math.random(1, #list)]
+	local word = list[math.random(1, #list)]
+	if typeof(word) == "table" then
+		word = word[if Settings["British English"]:get() then 2 else 1]
+	end
+	return word
 end
 
 local function openPopup(popupName)
