@@ -42,7 +42,8 @@ local loadingData = false
 
 -- Was quite the trip to get working
 local function populateLeaderboard(leaderboard, page)
-	for _, v in ipairs(leaderboard) do
+	for i, v in ipairs(leaderboard) do
+		print(i)
 		local you = v.Player == "You"
 
 		-- Load users on leaderboard
@@ -51,6 +52,7 @@ local function populateLeaderboard(leaderboard, page)
 			New "Frame" {
 				Name = "LeaderboardPerson",
 				Parent = page,
+				LayoutOrder = i,
 
 				Size = UDim2.fromScale(1, 0.1),
 				BackgroundTransparency = 1,
@@ -189,15 +191,17 @@ return function(props)
 					MainFrameSize:set(UDim2.fromScale(1, 1))
 
 					DataService:LevelLeaderboard():andThen(function(leaderboard)
+						local MainFrame = MainUI:get().MainFrame
 						populateLeaderboard(
 							leaderboard,
-							MainUI:get().MainFrame.Leaderboard.ScrollingFrame.Pages.LevelLeaderboard
+							if MainFrame:FindFirstChild "Leaderboard" then MainFrame.Leaderboard.ScrollingFrame.Pages.LevelLeaderboard else MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages.LevelLeaderboard
 						)
 					end)
 					DataService:WordsLeaderboard():andThen(function(leaderboard)
+						local MainFrame = MainUI:get().MainFrame
 						populateLeaderboard(
 							leaderboard,
-							MainUI:get().MainFrame.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard
+							if MainFrame:FindFirstChild "Leaderboard" then MainFrame.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard else MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard
 						)
 					end)
 				end, function()

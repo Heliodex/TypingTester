@@ -1184,7 +1184,9 @@ Initial release
 									Size = UDim2.fromScale(1, 1),
 									LayoutOrder = 1,
 
-									[Children] = New "UIListLayout" {},
+									[Children] = New "UIListLayout" {
+										SortOrder = Enum.SortOrder.LayoutOrder,
+									},
 								},
 								New "Frame" {
 									Name = "WordsLeaderboard",
@@ -1192,7 +1194,9 @@ Initial release
 									Size = UDim2.fromScale(1, 1),
 									LayoutOrder = 2,
 
-									[Children] = New "UIListLayout" {},
+									[Children] = New "UIListLayout" {
+										SortOrder = Enum.SortOrder.LayoutOrder,
+									},
 								},
 							},
 						},
