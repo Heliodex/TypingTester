@@ -26,8 +26,13 @@ local currency = State.currency
 local experience = State.experience
 local level = State.level
 local wordsTyped = State.wordsTyped
-local dataPrepared = State.dataPrepared
+local dataPrepared = Value() 
 local dataLoaded = State.dataLoaded
+-- dataPrepared is only used by SaveSlot, dataLoaded is used by several modules
+
+DataService:PrepareData():andThen(function()
+	dataPrepared:set(true)
+end)
 
 local Components = script.Parent
 local UIPadding = require(Components.UIPadding)

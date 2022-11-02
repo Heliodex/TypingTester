@@ -5,16 +5,12 @@ local Fusion = require(script.Parent.Fusion)
 local Value = Fusion.Value
 
 return {
-	test = Value(1),
-	test2 = 1,
-
 	MainUI = Value(), -- why r these values
 	PlayScreen = Value(),
 
 	MainFrameSize = Value(UDim2.fromScale(0.8, 0.8)),
 	DarkTintTransparency = Value(1),
 
-	dataPrepared = Value(),
 	dataLoaded = Value(),
 
 	White = Color3.new(1, 1, 1),
