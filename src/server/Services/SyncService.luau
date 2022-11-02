@@ -99,7 +99,7 @@ function SyncService:ChangeWordlist(player)
 end
 
 function SyncService.Client:PurchaseItem(player, category, item)
-	local shopItem = ShopItems[category][item]
+	local shopItem = ShopItems[category].Items[item]
 
 	if item.Ownable and DataService:GetData(player, "ShopPurchases")[category][item] then
 		return

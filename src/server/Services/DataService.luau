@@ -1,6 +1,8 @@
 local Players = game:GetService "Players"
+local ReplicatedStorage = game:GetService "ReplicatedStorage"
 local DataStoreService = game:GetService "DataStoreService"
-local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
+local Knit = require(ReplicatedStorage.Packages.Knit)
+local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
 local ProfileService = require(game:GetService("ServerScriptService").Server.ProfileService)
 local Badge = require(script.Parent.Parent.Badge)
 
@@ -29,11 +31,13 @@ local DefaultProfileTemplate = {
 	},
 
 	ShopPurchases = {
-		Wordlists = {
-			Medium = false,
-			Hard = false,
-			Insane = false,
-		},
+		Wordlists = (function()
+			local returns = {}
+			for i, _ in pairs(ShopItems[1].Items) do
+				returns[i] = false
+			end
+			return returns
+		end)(),
 	},
 	Settings = {
 		KeySounds = false,
@@ -202,11 +206,12 @@ function DataService.Client:PreviewData(player, SaveSlot)
 	end
 end
 
-function DataService.Client:ItemOwned(player, category, item)
-	return DataService:ItemOwned(player, category, item)
+function DataService.Client:ItemOwned(player, categoryName, item)
+	return DataService:ItemOwned(player, categoryName, item)
 end
-function DataService:ItemOwned(player, category, item)
-	return DataService:GetData(player, "ShopPurchases")[category][item]
+function DataService:ItemOwned(player, categoryName, item)
+	print(player, categoryName, item)
+	return DataService:GetData(player, "ShopPurchases")[categoryName][item]
 end
 
 function DataService.Client:GetSetting(player, setting)

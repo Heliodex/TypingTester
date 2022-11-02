@@ -26,13 +26,14 @@ local UIPadding = require(Components.UIPadding)
 local UICorner = require(Components.UICorner)
 
 return function(props)
-	local item = ShopItems[props.Category][props.Name]
+	local item = ShopItems[props.Category].Items[props.Name]
+	local categoryName = ShopItems[props.Category].Name
 	local labelText = Value(item.Price)
 	local levelRequirement = item.Level
 
 	if item.Ownable then
 		Observer(dataLoaded):onChange(function()
-			DataService:ItemOwned(props.Category, props.Name):andThen(function(owned)
+			DataService:ItemOwned(categoryName, props.Name):andThen(function(owned)
 				if owned then
 					labelText:set "Owned"
 					ownedWordlists[props.Name]:set(true)
@@ -51,6 +52,7 @@ return function(props)
 			currentShopItem:set {
 				Name = props.Name,
 				Category = props.Category,
+				CategoryName = categoryName,
 				Level = item.Level,
 				Ownable = item.Ownable,
 				ButtonText = labelText,
@@ -63,7 +65,7 @@ return function(props)
 				Position = UDim2.fromScale(0.05, 0.5),
 				Size = UDim2.fromScale(0.6, 0.8),
 				FontFace = playerFont,
-				Text = item.Name,
+				Text = props.Name,
 				TextXAlignment = Enum.TextXAlignment.Left,
 			},
 

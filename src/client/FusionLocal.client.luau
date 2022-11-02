@@ -65,14 +65,6 @@ local MainFrameSize = State.MainFrameSize
 local DarkTintTransparency = State.DarkTintTransparency
 local DarkTintTransparencyGoal = 0.5
 
-local dataPrepared = State.dataPrepared
-local dataLoaded = State.dataLoaded
-local dataLoadedChanged = Observer(dataLoaded)
-
-DataService:PrepareData():andThen(function()
-	dataPrepared:set(true)
-end)
-
 local displayedWords = {}
 local wordCorrect = Value(Green)
 
@@ -1251,7 +1243,7 @@ Initial release
 									BackgroundTransparency = 1,
 									Text = Computed(function()
 										local item = currentShopItem:get()
-										return if item then ShopItems[item.Category][item.Name].Name else ""
+										return if item then item.Name else ""
 									end),
 									TextXAlignment = Enum.TextXAlignment.Left,
 									FontFace = playerFont,
@@ -1264,7 +1256,9 @@ Initial release
 									BackgroundTransparency = 1,
 									Text = Computed(function()
 										local item = currentShopItem:get()
-										return if item then ShopItems[item.Category][item.Name].Description else ""
+										return if item
+											then ShopItems[item.Category].Items[item.Name].Description
+											else ""
 									end),
 									TextXAlignment = Enum.TextXAlignment.Left,
 									TextYAlignment = Enum.TextYAlignment.Top,
@@ -1346,39 +1340,27 @@ Initial release
 									Padding = UDim.new(0.05, 0),
 									FillDirection = Enum.FillDirection.Horizontal,
 								},
-								Button {
-									Size = UDim2.fromScale(0.465, 0.75),
-									AnchorPoint = Vector2.new(0, 0),
-									Text = "Wordlists",
-									BackgroundColor3 = Black3,
+								(function()
+									local returns = {}
+									for _, v in pairs(ShopItems) do
+										table.insert(
+											returns,
+											Button {
+												Size = UDim2.fromScale(0.465, 0.75),
+												AnchorPoint = Vector2.new(0, 0),
+												Text = v.Name,
+												BackgroundColor3 = Black3,
 
-									Activated = function()
-										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Shop.ScrollingFrame.Pages
-										popup.UIPageLayout:JumpTo(popup.WordlistsShop)
-									end,
-								},
-								Button {
-									Size = UDim2.fromScale(0.465, 0.75),
-									AnchorPoint = Vector2.new(0, 0),
-									Text = "test",
-									BackgroundColor3 = Black3,
-
-									Activated = function()
-										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Shop.ScrollingFrame.Pages
-										popup.UIPageLayout:JumpTo(popup.TestShop)
-									end,
-								},
-								Button {
-									Size = UDim2.fromScale(0.465, 0.75),
-									AnchorPoint = Vector2.new(0, 0),
-									Text = "test",
-									BackgroundColor3 = Black3,
-
-									Activated = function()
-										local popup = MainUI.MainFrame.Shop.ScrollingFrame.Pages
-										popup.UIPageLayout:JumpTo(popup.TestShop)
-									end,
-								},
+												Activated = function()
+													local popup =
+														MainUI.MainFrame.DarkTint.CurrentPopup.Shop.ScrollingFrame.Pages
+													popup.UIPageLayout:JumpTo(popup[v.Name])
+												end,
+											}
+										)
+									end
+									return returns
+								end)(),
 							},
 						},
 						New "Frame" {
@@ -1393,56 +1375,46 @@ Initial release
 									ScrollWheelInputEnabled = false,
 								},
 
-								New "Frame" {
-									Name = "WordlistsShop",
-									BackgroundTransparency = 1,
-									Size = UDim2.fromScale(1, 1),
-									LayoutOrder = 2,
+								(function()
+									local returns = {}
+									for i, v in pairs(ShopItems) do
+										table.insert(
+											returns,
+											New "Frame" {
+												Name = v.Name,
+												BackgroundTransparency = 1,
+												Size = UDim2.fromScale(1, 1),
+												LayoutOrder = i,
 
-									[Children] = {
-										New "UIGridLayout" {
-											FillDirectionMaxCells = 2,
-											CellSize = UDim2.fromScale(0.465, 0.11),
-											CellPadding = UDim2.fromScale(0.05, 0.025),
-										},
+												[Children] = {
+													New "UIGridLayout" {
+														FillDirectionMaxCells = 2,
+														CellSize = UDim2.fromScale(0.465, 0.11),
+														CellPadding = UDim2.fromScale(0.05, 0.025),
+													},
 
-										ShopOption {
-											Name = "Medium",
-											Category = "Wordlists",
-											LayoutOrder = 1,
-										},
-										ShopOption {
-											Name = "Hard",
-											Category = "Wordlists",
-											LayoutOrder = 2,
-										},
-										ShopOption {
-											Name = "Insane",
-											Category = "Wordlists",
-											LayoutOrder = 3,
-										},
-									},
-								},
-								New "Frame" {
-									Name = "TestShop",
-									BackgroundTransparency = 1,
-									Size = UDim2.fromScale(1, 1),
-									LayoutOrder = 2,
-
-									[Children] = {
-										New "UIGridLayout" {
-											FillDirectionMaxCells = 2,
-											CellSize = UDim2.fromScale(0.465, 0.11),
-											CellPadding = UDim2.fromScale(0.05, 0.025),
-										},
-
-										ShopOption {
-											Name = "Bruh",
-											Category = "test",
-											LayoutOrder = 1,
-										},
-									},
-								},
+													(function()
+														local returns2 = {}
+														-- local l2 = 1
+														for i2, _ in pairs(v.Items) do
+															table.insert(
+																returns2,
+																ShopOption {
+																	Name = i2,
+																	Category = i,
+																	-- LayoutOrder = l2
+																}
+															)
+															-- l2 += 1 -- gotta figure out a better way to do LayoutOrders
+														end
+														return returns2
+													end)(),
+												},
+											}
+										)
+									end
+									return returns
+								end)(),
 							},
 						},
 					},
