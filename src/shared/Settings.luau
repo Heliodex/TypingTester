@@ -3,6 +3,6 @@ return {
 	{"Blind Mode", false},
 	{"Memory Mode", false},
 	{"Plain Background", false},
-	{"Fullscreen", true},
 	{"British English", false},
+	{"Fullscreen", true},
 }

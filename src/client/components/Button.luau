@@ -16,6 +16,7 @@ return function(props)
 	props.ImageSize = props.ImageSize or 0.3
 	props.Size = props.Size or UDim2.fromScale(0.17, 0.075)
 	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
+	props.LayoutOrder = props.LayoutOrder or nil
 
 	local ratio = (props.Size.Width.Scale / props.Size.Height.Scale) -- i hate
 	local clickable = true
@@ -27,6 +28,7 @@ return function(props)
 		AnchorPoint = props.AnchorPoint or Vector2.new(0.5, 0.5),
 		Position = props.Position,
 		BackgroundColor3 = props.BackgroundColor3 or Grey3,
+		LayoutOrder = props.LayoutOrder,
 
 		SizeConstraint = props.SizeConstraint,
 

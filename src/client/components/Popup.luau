@@ -20,21 +20,6 @@ local UICorner = require(Components.UICorner)
 local UIPadding = require(Components.UIPadding)
 
 return function(props)
-	local function checkChildren(table)
-		for i = 1, #table do
-			if typeof(table[i]) ~= "table" then
-				if table[i]:IsA "GuiObject" then
-					table[i].LayoutOrder = i
-				end
-			else
-				checkChildren(table[i])
-			end
-		end
-	end
-	if typeof(props.Children) == "table" then
-		checkChildren(props.Children)
-	end
-
 	local popup
 	local pos = Value(props.Position or UDim2.fromScale(0.5, 0.5))
 	local mousePos = Vector2.new()

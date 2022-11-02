@@ -1015,11 +1015,11 @@ Initial release
 							return returns
 						end)(),
 
-						-- LayoutOrder be broke :(
 						Button {
 							Name = "Stats",
 							Text = "Stats",
 							BackgroundColor3 = Black3,
+							LayoutOrder = #StarterSettings + 1,
 
 							Activated = function()
 								openPopup "Stats"()
