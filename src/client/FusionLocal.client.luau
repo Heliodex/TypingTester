@@ -921,18 +921,7 @@ In the middle of the screen, a highlighted word will appear. Type it in the text
 The upcoming words are displayed below the current word.
 
 The button in the top-right corner allows you to change the wordlist of your words.
-
-Easy words can be between 2 and 4 letters long. They are the easiest to type.
-They give 1 typing token and 12-15 exp per word.
-
-Medium words can be between 4 and 7 letters long. Harder, but more rewarding.
-They give 2 typing tokens and 20-26 exp per word.
-
-Hard words can be between 7 and 10 letters long.
-They give 3 typing tokens and 35-42 exp per word.
-
-Insane words are some of the longest words in English.
-They give 5 typing tokens and 57-65 exp per word.
+New wordlists can be purchased from the Shop.
 
 Experience is used to level up. Each level needs 100 more experience to level up than the one before it.
 Ranks are gained every 10 levels.
@@ -1086,6 +1075,14 @@ Initial release
 								end
 							end,
 						},
+						Button {
+							Name = "Verification",
+							Text = "Verification",
+							BackgroundColor3 = Black3,
+							LayoutOrder = #StarterSettings + 2,
+
+							Activated = openPopup "Verification",
+						},
 					},
 				},
 
@@ -1097,6 +1094,65 @@ Initial release
 						SortOrder = Enum.SortOrder.LayoutOrder,
 					},
 				},
+				(function()
+					local popup
+					local txt = Value "Verification Code"
+					popup = Popup {
+						Name = "Verification",
+						Size = UDim2.fromScale(0.5, 0.5),
+
+						Children = {
+							New "TextBox" {
+								Size = UDim2.fromScale(0.7, 0.1),
+								Position = UDim2.fromScale(0.5, 0.4),
+								BackgroundColor3 = Grey0,
+
+								FontFace = playerFont,
+								PlaceholderText = txt,
+
+								[Children] = {
+									UICorner(),
+									UIPadding {
+										PaddingH = 0,
+									},
+								},
+							},
+
+							Button {
+								Size = UDim2.fromScale(0.3, 0.1),
+								Position = UDim2.fromScale(0.5, 0.53),
+								Name = "Verify",
+								Text = "Verify",
+								BackgroundColor3 = Black3,
+
+								Activated = function()
+									local textBox = popup.ScrollingFrame.TextBox
+									if string.len(textBox.Text) == 6 then
+										DataService:Verify(textBox.Text):andThen(function(success)
+											if success then
+												textBox.Text = ""
+												txt:set("Verification successful!")
+												task.wait(1)
+												txt:set("Verification Code")
+											else
+												textBox.Text = ""
+												txt:set("Verification failed!")
+												task.wait(1)
+												txt:set("Verification Code")
+											end
+										end)
+									else
+										textBox.Text = ""
+										txt:set "Code must be 6 numbers!"
+										task.wait(1)
+										txt:set "Verification Code"
+									end
+								end,
+							},
+						},
+					}
+					return popup
+				end)(),
 
 				Popup {
 					Name = "Leaderboard",

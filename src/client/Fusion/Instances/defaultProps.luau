@@ -83,6 +83,7 @@ return {
 		TextColor3 = Color3.new(1, 1, 1),
 
 		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = UDim2.fromScale(0.5, 0.5),
 		TextScaled = true,
 	},
 

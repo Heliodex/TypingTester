@@ -43,7 +43,6 @@ local loadingData = false
 -- Was quite the trip to get working
 local function populateLeaderboard(leaderboard, page)
 	for i, v in ipairs(leaderboard) do
-		print(i)
 		local you = v.Player == "You"
 
 		-- Load users on leaderboard

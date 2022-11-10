@@ -1,6 +1,7 @@
+local DataStoreService = game:GetService "DataStoreService"
+local HttpService = game:GetService "HttpService"
 local Players = game:GetService "Players"
 local ReplicatedStorage = game:GetService "ReplicatedStorage"
-local DataStoreService = game:GetService "DataStoreService"
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local Settings = require(ReplicatedStorage.Shared.Settings)
 local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
@@ -30,6 +31,8 @@ local DefaultProfileTemplate = {
 		TotalCurrency = 0,
 		CurrencySpent = 0,
 	},
+
+	Verified = false,
 
 	ShopPurchases = {
 		Wordlists = (function()
@@ -120,8 +123,9 @@ end
 function DataService.Client:LoadData(player, SaveSlot)
 	if Profiles[player] and not CurrentSaveSlot[player] then
 		CurrentSaveSlot[player] = SaveSlot
+		local slot = Profiles[player].Data[SaveSlot]
 		UpdateLeaderboard(player)
-		Profiles[player].Data[SaveSlot].Stats.Logins += 1
+		slot.Stats.Logins += 1
 
 		counter = task.spawn(function()
 			while task.wait(1) do
@@ -132,16 +136,16 @@ function DataService.Client:LoadData(player, SaveSlot)
 		task.spawn(function()
 			Badge:AwardBadge(player, 2128696002) -- Welcome!
 
-			if Profiles[player].Data[SaveSlot].Stats.PlayTime > 3600 * 8 then
+			if slot.Stats.PlayTime > 3600 * 8 then
 				Badge:AwardBadge(player, 2128888555) -- Fan
 			end
-			if Profiles[player].Data[SaveSlot].Stats.PlayTime > 3600 * 30 then
+			if slot.Stats.PlayTime > 3600 * 30 then
 				Badge:AwardBadge(player, 2128888557) -- Expert
 			end
-			if Profiles[player].Data[SaveSlot].Stats.PlayTime > 3600 * 100 then
+			if slot.Stats.PlayTime > 3600 * 100 then
 				Badge:AwardBadge(player, 2128888558) -- Veteran
 			end
-			if Profiles[player].Data[SaveSlot].Stats.PlayTime > 3600 * 300 then
+			if slot.Stats.PlayTime > 3600 * 300 then
 				Badge:AwardBadge(player, 2128888559) -- Champion
 			end
 
@@ -155,7 +159,7 @@ function DataService.Client:LoadData(player, SaveSlot)
 			Badge:AwardBadge(player, 2128888554) -- Devotee
 		end)
 
-		return Profiles[player].Data[SaveSlot]
+		return slot
 	end
 end
 function DataService.Client:GetStats(player)
@@ -258,6 +262,30 @@ function DataService:IncrementData(player, variable, value)
 		end
 	else
 		slot[variable] += value
+	end
+end
+
+function DataService.Client:Verify(player, code)
+	local response = HttpService:RequestAsync {
+		Url = "http://echat.ddns.net:7777",
+		-- was using this domain for echat
+		Method = "POST",
+		Headers = {
+			["Content-Type"] = "application/json",
+		},
+		Body = HttpService:JSONEncode {
+			code = code,
+			player = player.Name,
+			userId = player.UserId,
+		},
+	}
+
+	if response.Body == "success" then
+		Profiles[player].Data[CurrentSaveSlot[player]].Verified = true
+		Badge:AwardBadge(player, 2129375774) -- Verified
+		return true
+	else
+		return false
 	end
 end
 
