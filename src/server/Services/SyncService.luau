@@ -59,6 +59,14 @@ function SyncService.Client:WordTyped(player)
 	streak += 1
 	streakLevel += if streak % 20 == 0 then 1 else 0
 
+	if streakLevel == 1 then
+		Badge:AwardBadge(player, 2128814965) -- On Fire
+	elseif streakLevel == 5 then
+		Badge:AwardBadge(player, 2128873285) -- Ablaze
+	elseif streakLevel == 20 then
+		Badge:AwardBadge(player, 2128873287) -- Inferno
+	end
+
 	DataService:SetData(player, "Experience", exp)
 	if levelUp then
 		DataService:SetData(player, "Level", lvl)
