@@ -88,9 +88,7 @@ return function(props)
 						Position = UDim2.fromScale(1, 0),
 						Size = UDim2.fromScale(1, 1),
 						SizeConstraint = Enum.SizeConstraint.RelativeYY,
-						FontFace = playerFont,
 
-						Text = "X",
 						AutoButtonColor = true,
 
 						-- Has to be MouseButton1Down because of glitchy dragging
@@ -103,7 +101,10 @@ return function(props)
 							end
 						end,
 
-						[Children] = UIPadding(),
+						[Children] = New "ImageLabel" {
+							Size = UDim2.fromScale(0.7, 0.7),
+							Image = "rbxasset://textures/loading/cancelButton.png",
+						},
 					},
 				},
 			},

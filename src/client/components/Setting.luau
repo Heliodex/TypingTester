@@ -47,6 +47,9 @@ return function(name)
 
 		[Children] = {
 			New "ImageLabel" {
+				Position = UDim2.fromScale(0, 0),
+				AnchorPoint = Vector2.new(0, 0),
+
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeYY,

@@ -11,7 +11,6 @@ local Knit = require(ReplicatedStorage.Packages.Knit)
 local Ranks = require(ReplicatedStorage.Shared.Ranks)
 local StarterSettings = require(ReplicatedStorage.Shared.Settings)
 local Words = require(ReplicatedStorage.Shared.Words)
-local Images = require(script.Parent.Images)
 local State = require(script.Parent.State)
 local Components = script.Parent.components
 
@@ -516,26 +515,13 @@ MainUI = New "ScreenGui" {
 	IgnoreGuiInset = Settings["Fullscreen"],
 
 	[Children] = {
-		New "TextLabel" { -- could go inside MainFrame or frame
-			Name = "Notification",
-
-			Position = UDim2.fromScale(0.5, 0.15),
-			Size = UDim2.fromScale(1, 1),
-
-			Visible = false,
-
-			TextTransparency = 1,
-			FontFace = playerFont,
-
-			ZIndex = 88,
-		},
-
 		New "Frame" {
 			Name = "MainFrame",
 			Size = UDim2.fromScale(1, 1),
-
 			BackgroundTransparency = 1,
-			ZIndex = 5,
+			
+			BorderMode = Enum.BorderMode.Inset,
+			BorderSizePixel = 10,
 
 			[Children] = {
 				New "Frame" {
@@ -549,7 +535,7 @@ MainUI = New "ScreenGui" {
 							Name = "Currency",
 							Size = UDim2.fromScale(0.22, 0.075),
 							AnchorPoint = Vector2.new(0, 0),
-							Position = UDim2.fromScale(0.01, 0.02),
+							Position = UDim2.fromScale(0, 0),
 							Text = Computed(function()
 								return currency:get() .. "\nTyping tokens"
 							end),
@@ -577,7 +563,7 @@ MainUI = New "ScreenGui" {
 						ImageButton {
 							Name = "OpenShop",
 							AnchorPoint = Vector2.new(0, 0),
-							Position = UDim2.fromScale(0.01, 0.12),
+							Position = UDim2.fromScale(0, 0.1),
 							Text = "Shop",
 							Image = 7362870044,
 
@@ -586,7 +572,7 @@ MainUI = New "ScreenGui" {
 						ImageButton {
 							Name = "OpenLeaderboard",
 							AnchorPoint = Vector2.new(0, 1),
-							Position = UDim2.fromScale(0.01, 0.88),
+							Position = UDim2.fromScale(0, 0.9),
 							Text = "Leaderboard",
 							Image = 10975178174,
 
@@ -595,7 +581,7 @@ MainUI = New "ScreenGui" {
 						ImageButton {
 							Name = "OpenHelp",
 							AnchorPoint = Vector2.new(0, 1),
-							Position = UDim2.fromScale(0.01, 0.98),
+							Position = UDim2.fromScale(0, 1),
 							Text = "Help",
 							Image = 7362810660,
 
@@ -604,7 +590,7 @@ MainUI = New "ScreenGui" {
 						ImageButton {
 							Name = "OpenSettings",
 							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.39),
+							Position = UDim2.fromScale(1, 0.38),
 							Text = "Settings",
 							Image = 7362801114,
 
@@ -615,7 +601,7 @@ MainUI = New "ScreenGui" {
 							Name = "Words",
 							Size = UDim2.fromScale(0.19, 0.075),
 							AnchorPoint = Vector2.new(0.5, 0),
-							Position = UDim2.fromScale(0.5, 0.02),
+							Position = UDim2.fromScale(0.5, 0),
 							Text = Computed(function()
 								return wordsTyped:get() .. "\nWords"
 							end),
@@ -626,7 +612,7 @@ MainUI = New "ScreenGui" {
 							Name = "wordlistButton",
 							Size = UDim2.fromScale(0.22, 0.075),
 							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.02),
+							Position = UDim2.fromScale(1, 0),
 							Text = Computed(function()
 								return "Change wordlist:\n" .. wordlistName:get()
 							end),
@@ -655,7 +641,7 @@ MainUI = New "ScreenGui" {
 						New "Frame" {
 							Name = "LevelMenu",
 							AnchorPoint = Vector2.new(1, 0),
-							Position = UDim2.fromScale(0.99, 0.115),
+							Position = UDim2.fromScale(1, 0.1),
 							Size = UDim2.fromScale(0.17, 0.255),
 							BackgroundColor3 = Grey3,
 
@@ -1067,6 +1053,7 @@ Initial release
 						SortOrder = Enum.SortOrder.LayoutOrder,
 					},
 				},
+
 				(function()
 					local popup
 					local txt = Value "Verification Code"
@@ -1447,9 +1434,9 @@ Initial release
 
 				New "TextLabel" {
 					Name = "Version",
-					Size = UDim2.fromScale(0.1, 0.015),
+					Size = UDim2.fromScale(0.1, 05),
 					AnchorPoint = Vector2.new(1, 1),
-					Position = UDim2.fromScale(0.99, 1),
+					Position = UDim2.fromScale(1, 1),
 					TextXAlignment = Enum.TextXAlignment.Right,
 					FontFace = playerFont,
 					Text = version .. ", v" .. game.PlaceVersion,
