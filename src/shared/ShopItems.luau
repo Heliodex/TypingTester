@@ -1,3 +1,13 @@
+--[[
+	The list contains categories, which contain items
+	
+	Item: Something that can be bought in the shop
+		Description: Appears below the name after clicking on an item
+		Price: The price of the item
+		Level: The level required to buy the item
+		Ownable: If false, the item can be bought multiple times
+]]
+
 return {
 	{
 		Name = "Wordlists",
@@ -25,9 +35,9 @@ return {
 	{
 		Name = "Test",
 		Items = {
-			["BruhItem"] = {
+			["TestItem"] = {
 				Description = "whatsu p bruh wburth this is a test item tdonot buy",
-				Price = -5,
+				Price = 5555555555555555,
 				Level = 1,
 				Ownable = false,
 			},

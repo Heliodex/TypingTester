@@ -2,7 +2,6 @@ local Players = game:GetService "Players"
 local ReplicatedStorage = game:GetService "ReplicatedStorage"
 
 local LocalPlayer = Players.LocalPlayer
-local Sounds = ReplicatedStorage.Sounds
 local Ranks = require(ReplicatedStorage.Shared.Ranks)
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local DataService = Knit.GetService "DataService"
@@ -197,7 +196,6 @@ return function(props)
 					print "Data loaded!"
 
 					PlayScreen:get().Frame.Visible = false
-					Sounds.music:Play()
 					MainFrameSize:set(UDim2.fromScale(1, 1))
 
 					DataService:LevelLeaderboard():andThen(function(leaderboard)

@@ -610,33 +610,6 @@ MainUI = New "ScreenGui" {
 
 							Activated = openPopup "Settings",
 						},
-						(function()
-							local button
-							button = ImageButton {
-								Name = "AudioToggle",
-								Size = UDim2.fromScale(0.1, 0.1),
-								AnchorPoint = Vector2.new(1, 1),
-								Position = UDim2.fromScale(0.99, 0.98),
-								Text = "",
-								Image = 7517177224,
-
-								Corner = 0.1,
-								ImageSize = 0.9,
-								SizeConstraint = Enum.SizeConstraint.RelativeYY,
-
-								Activated = function()
-									if Sounds.music.Playing then
-										Sounds.music:Pause()
-										button.ImageLabel.Image = Images.Muted
-									else
-										Sounds.music:Play()
-										button.ImageLabel.Image = Images.Playing
-									end
-								end,
-							}
-
-							return button
-						end)(),
 
 						Label {
 							Name = "Words",
@@ -1005,14 +978,14 @@ Initial release
 						end)(),
 
 						Button {
-							Name = "Stats",
-							Text = "Stats",
+							Name = "Statistics",
+							Text = "Statistics",
 							BackgroundColor3 = Black3,
 							LayoutOrder = #StarterSettings + 1,
 
 							Activated = function()
-								openPopup "Stats"()
-								local statsPopup = MainUI.MainFrame.DarkTint.CurrentPopup.Stats
+								openPopup "Statistics"()
+								local statsPopup = MainUI.MainFrame.DarkTint.CurrentPopup.Statistics
 
 								if statsPopup.Visible then
 									local _, stats = DataService:GetStats():await()
@@ -1087,7 +1060,7 @@ Initial release
 				},
 
 				Popup {
-					Name = "Stats",
+					Name = "Statistics",
 					Size = UDim2.fromScale(0.5, 0.5),
 
 					Children = New "UIListLayout" {
@@ -1577,6 +1550,15 @@ New "ScreenGui" {
 			}
 		end)(),
 	},
+}
+
+New "Sound" {
+	Name = "Music",
+	Parent = Sounds,
+	Looped = true,
+	SoundId = "rbxassetid://7516579421",
+	Volume = 1,
+	Playing = Settings["Background Music"], -- fusion moment
 }
 
 -- Animate background cubes
