@@ -15,9 +15,9 @@ Ref.type = "SpecialKey"
 Ref.kind = "Ref"
 Ref.stage = "observer"
 
-function Ref:apply(refState: any, applyTo: Instance, cleanupTasks: {PubTypes.Task})
+function Ref:apply(refState: any, applyTo: Instance, cleanupTasks: { PubTypes.Task })
 	if xtypeof(refState) ~= "State" or refState.kind ~= "Value" then
-		logError("invalidRefType")
+		logError "invalidRefType"
 	else
 		refState:set(applyTo)
 		table.insert(cleanupTasks, function()

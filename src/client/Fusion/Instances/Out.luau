@@ -21,7 +21,7 @@ local function Out(propertyName: string): PubTypes.SpecialKey
 		if not ok then
 			logError("invalidOutProperty", nil, applyTo.ClassName, propertyName)
 		elseif xtypeof(outState) ~= "State" or outState.kind ~= "Value" then
-			logError("invalidOutType")
+			logError "invalidOutType"
 		else
 			outState:set((applyTo :: any)[propertyName])
 			table.insert(

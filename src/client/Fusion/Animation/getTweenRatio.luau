@@ -5,7 +5,7 @@
 	tween between two values over time.
 ]]
 
-local TweenService = game:GetService("TweenService")
+local TweenService = game:GetService "TweenService"
 
 local function getTweenRatio(tweenInfo: TweenInfo, currentTime: number): number
 	local delay = tweenInfo.DelayTime

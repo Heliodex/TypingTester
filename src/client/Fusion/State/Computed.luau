@@ -17,8 +17,8 @@ local needsDestruction = require(Package.Utility.needsDestruction)
 
 local class = {}
 
-local CLASS_METATABLE = {__index = class}
-local WEAK_KEYS_METATABLE = {__mode = "k"}
+local CLASS_METATABLE = { __index = class }
+local WEAK_KEYS_METATABLE = { __mode = "k" }
 
 --[[
 	Returns the last cached value calculated by this Computed object.
@@ -53,11 +53,11 @@ function class:update(): boolean
 
 	if ok then
 		if self._destructor == nil and needsDestruction(newValue) then
-			logWarn("destructorNeededComputed")
+			logWarn "destructorNeededComputed"
 		end
 
 		if newMetaValue ~= nil then
-			logWarn("multiReturnComputed")
+			logWarn "multiReturnComputed"
 		end
 
 		local oldValue = self._value
