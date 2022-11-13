@@ -1131,14 +1131,14 @@ Initial release
 										DataService:Verify(textBox.Text):andThen(function(success)
 											if success then
 												textBox.Text = ""
-												txt:set("Verification successful!")
+												txt:set "Verification successful!"
 												task.wait(1)
-												txt:set("Verification Code")
+												txt:set "Verification Code"
 											else
 												textBox.Text = ""
-												txt:set("Verification failed!")
+												txt:set "Verification failed!"
 												task.wait(1)
-												txt:set("Verification Code")
+												txt:set "Verification Code"
 											end
 										end)
 									else

@@ -26,7 +26,7 @@ local currency = State.currency
 local experience = State.experience
 local level = State.level
 local wordsTyped = State.wordsTyped
-local dataPrepared = Value() 
+local dataPrepared = Value()
 local dataLoaded = State.dataLoaded
 -- dataPrepared is only used by SaveSlot, dataLoaded is used by several modules
 
@@ -41,6 +41,7 @@ local UICorner = require(Components.UICorner)
 local loadingData = false
 
 -- Was quite the trip to get working
+-- also probably shouldn't be in SaveSlot
 local function populateLeaderboard(leaderboard, page)
 	for i, v in ipairs(leaderboard) do
 		local you = v.Player == "You"
@@ -112,6 +113,16 @@ local function populateLeaderboard(leaderboard, page)
 								Position = UDim2.fromScale(0.1, 0.5),
 								Size = UDim2.fromScale(0.25, 0.8),
 								FontFace = playerFont,
+								TextXAlignment = Enum.TextXAlignment.Left,
+							},
+							New "TextLabel" {
+								Name = "Profile",
+								Text = "(" .. (if you then dataLoaded:get() else v.Profile) .. ")",
+
+								AnchorPoint = Vector2.new(0.5, 0.5),
+								Position = UDim2.fromScale(0.4, 0.5),
+								Size = UDim2.fromScale(0.1, 0.35),
+								FontFace = playerFont,
 							},
 							New "TextLabel" {
 								Name = "Level",
@@ -182,7 +193,7 @@ return function(props)
 					level:set(data.Level)
 					wordsTyped:set(data.WordsTyped)
 
-					dataLoaded:set(true)
+					dataLoaded:set(props.SaveSlot)
 					print "Data loaded!"
 
 					PlayScreen:get().Frame.Visible = false
@@ -193,14 +204,18 @@ return function(props)
 						local MainFrame = MainUI:get().MainFrame
 						populateLeaderboard(
 							leaderboard,
-							if MainFrame:FindFirstChild "Leaderboard" then MainFrame.Leaderboard.ScrollingFrame.Pages.LevelLeaderboard else MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages.LevelLeaderboard
+							if MainFrame:FindFirstChild "Leaderboard"
+								then MainFrame.Leaderboard.ScrollingFrame.Pages.LevelLeaderboard
+								else MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages.LevelLeaderboard
 						)
 					end)
 					DataService:WordsLeaderboard():andThen(function(leaderboard)
 						local MainFrame = MainUI:get().MainFrame
 						populateLeaderboard(
 							leaderboard,
-							if MainFrame:FindFirstChild "Leaderboard" then MainFrame.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard else MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard
+							if MainFrame:FindFirstChild "Leaderboard"
+								then MainFrame.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard
+								else MainFrame.DarkTint.CurrentPopup.Leaderboard.ScrollingFrame.Pages.WordsLeaderboard
 						)
 					end)
 				end, function()

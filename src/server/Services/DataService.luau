@@ -90,6 +90,7 @@ function DataService.Client:LevelLeaderboard(player)
 		end
 		table.insert(returns, {
 			Player = data.key:split("_")[1],
+			Profile = data.key:split("_")[2],
 			Level = data.value,
 			Words = WordsLeaderboard:GetAsync(data.key),
 		})
@@ -112,6 +113,7 @@ function DataService.Client:WordsLeaderboard(player)
 		end
 		table.insert(returns, {
 			Player = data.key:split("_")[1],
+			Profile = data.key:split("_")[2],
 			Level = LevelLeaderboard:GetAsync(data.key),
 			Words = data.value,
 		})
