@@ -51,5 +51,5 @@ return {
 			returns[v[1]] = Value()
 		end
 		return returns
-	end)()
+	end)(),
 }

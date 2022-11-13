@@ -20,7 +20,7 @@ return {
 				Level = 20,
 				Ownable = true,
 			},
-		}
+		},
 	},
 	{
 		Name = "Test",
@@ -30,7 +30,7 @@ return {
 				Price = -5,
 				Level = 1,
 				Ownable = false,
-			}
-		}
-	}
+			},
+		},
+	},
 }
