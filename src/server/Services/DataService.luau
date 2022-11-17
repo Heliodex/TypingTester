@@ -3,6 +3,7 @@ local HttpService = game:GetService "HttpService"
 local Players = game:GetService "Players"
 local ReplicatedStorage = game:GetService "ReplicatedStorage"
 local Knit = require(ReplicatedStorage.Packages.Knit)
+local Colours = require(ReplicatedStorage.Shared.Colours)
 local Settings = require(ReplicatedStorage.Shared.Settings)
 local ShopItems = require(ReplicatedStorage.Shared.ShopItems)
 local ProfileService = require(game:GetService("ServerScriptService").Server.ProfileService)
@@ -31,6 +32,14 @@ local DefaultProfileTemplate = {
 		TotalCurrency = 0,
 		CurrencySpent = 0,
 	},
+
+	Theme = (function()
+		local returns = {}
+		for i, v in pairs(Colours) do
+			returns[i] = { v.R, v.G, v.B } -- can't store Color3 (userdata) in DataStore
+		end
+		return returns
+	end)(),
 
 	Verified = false,
 
@@ -286,6 +295,18 @@ function DataService.Client:Verify(player, code)
 		Profiles[player].Data[CurrentSaveSlot[player]].Verified = true
 		Badge:AwardBadge(player, 2129375774) -- Verified
 		return true
+	else
+		return false
+	end
+end
+
+function DataService.Client:SaveTheme(player, colourName, colour)
+	local slot = Profiles[player].Data[CurrentSaveSlot[player]]
+	if not slot.Theme then
+		slot.Theme = {}
+	end
+	if typeof(colourName) == "string" then
+		slot.Theme[colourName] = { colour.R, colour.G, colour.B }
 	else
 		return false
 	end

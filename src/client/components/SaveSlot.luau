@@ -18,8 +18,7 @@ local State = require(script.Parent.Parent.State)
 local MainUI = State.MainUI
 local PlayScreen = State.PlayScreen
 local MainFrameSize = State.MainFrameSize
-local White = State.White
-local Grey3 = State.Grey3
+local Colours = State.Colours
 local playerFont = State.playerFont
 local currency = State.currency
 local experience = State.experience
@@ -63,7 +62,7 @@ local function populateLeaderboard(leaderboard, page)
 
 					New "Frame" {
 						Size = UDim2.fromScale(1, 1),
-						BackgroundColor3 = White,
+						BackgroundColor3 = Color3.new(1, 1, 1), -- also could be a problem for gradient if not completely Colours.White
 
 						[Children] = {
 							UICorner(),
@@ -112,6 +111,7 @@ local function populateLeaderboard(leaderboard, page)
 								Position = UDim2.fromScale(0.1, 0.5),
 								Size = UDim2.fromScale(0.25, 0.8),
 								FontFace = playerFont,
+								TextColor3 = Colours.White,
 								TextXAlignment = Enum.TextXAlignment.Left,
 							},
 							New "TextLabel" {
@@ -122,6 +122,7 @@ local function populateLeaderboard(leaderboard, page)
 								Position = UDim2.fromScale(0.4, 0.5),
 								Size = UDim2.fromScale(0.1, 0.35),
 								FontFace = playerFont,
+								TextColor3 = Colours.White,
 							},
 							New "TextLabel" {
 								Name = "Level",
@@ -131,6 +132,7 @@ local function populateLeaderboard(leaderboard, page)
 								Position = UDim2.fromScale(0.6, 0.5),
 								Size = UDim2.fromScale(0.2, 0.8),
 								FontFace = playerFont,
+								TextColor3 = Colours.White,
 							},
 							New "TextLabel" {
 								Name = "Words",
@@ -140,6 +142,7 @@ local function populateLeaderboard(leaderboard, page)
 								Position = UDim2.fromScale(1, 0.5),
 								Size = UDim2.fromScale(0.2, 0.8),
 								FontFace = playerFont,
+								TextColor3 = Colours.White,
 							},
 						},
 					},
@@ -168,7 +171,7 @@ return function(props)
 
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = props.Position,
-		BackgroundColor3 = Grey3,
+		BackgroundColor3 = Colours.Grey3,
 		AutoButtonColor = true,
 
 		[OnEvent "Activated"] = function()
@@ -191,6 +194,13 @@ return function(props)
 					experience:set(data.Experience)
 					level:set(data.Level)
 					wordsTyped:set(data.WordsTyped)
+
+					for i, v in pairs(data.Theme or {}) do
+						print(i, table.unpack(v))
+						if v then
+							Colours[i]:set(Color3.new(v[1], v[2], v[3]))
+						end
+					end
 
 					dataLoaded:set(props.SaveSlot)
 					print "Data loaded!"

@@ -13,6 +13,7 @@ local Observer = Fusion.Observer
 local OnEvent = Fusion.OnEvent
 
 local State = require(script.Parent.Parent.State)
+local Colours = State.Colours
 local dataLoaded = State.dataLoaded
 local playerFont = State.playerFont
 local Settings = State.Settings
@@ -56,12 +57,15 @@ return function(name)
 				Image = Computed(function()
 					return if Settings[name]:get() then Images.Checked else Images.Unchecked
 				end),
+				ImageColor3 = Colours.White,
 			},
 			New "TextLabel" {
 				AnchorPoint = Vector2.new(1, 0.5),
 				Position = UDim2.fromScale(1, 0.5),
 				Size = UDim2.fromScale(0.7, 0.8),
+
 				FontFace = playerFont,
+				TextColor3 = Colours.White,
 				Text = name,
 				TextXAlignment = Enum.TextXAlignment.Right,
 			},

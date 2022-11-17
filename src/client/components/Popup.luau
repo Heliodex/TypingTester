@@ -9,10 +9,7 @@ local Value = Fusion.Value
 local State = require(script.Parent.Parent.State)
 local MainUI = State.MainUI
 local DarkTintTransparency = State.DarkTintTransparency
-local Grey2 = State.Grey2
-local Grey1 = State.Grey1
-local Black2 = State.Black2
-local playerFont = State.playerFont
+local Colours = State.Colours
 local playerFontBold = State.playerFontBold
 
 local Components = script.Parent
@@ -29,7 +26,7 @@ return function(props)
 
 		Size = props.Size or UDim2.fromScale(0.8, 0.8),
 		Position = pos,
-		BackgroundColor3 = Grey2,
+		BackgroundColor3 = Colours.Grey2,
 		Visible = false,
 
 		[Children] = {
@@ -39,7 +36,7 @@ return function(props)
 				Active = true,
 				Position = UDim2.fromScale(0.5, 0.556), -- perfect values
 				Size = UDim2.fromScale(1, 0.888),
-				CanvasSize = UDim2.fromScale(0.9, 1),
+				CanvasSize = UDim2.fromScale(0.9, 0.887),
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 
 				[Children] = {
@@ -53,7 +50,7 @@ return function(props)
 			New "TextButton" {
 				Name = "Top",
 				AnchorPoint = Vector2.new(0, 0),
-				BackgroundColor3 = Grey1,
+				BackgroundColor3 = Colours.Grey1,
 				AutoButtonColor = false,
 
 				Position = UDim2.fromScale(0, 0),
@@ -77,13 +74,14 @@ return function(props)
 						Size = UDim2.fromScale(0.8, 0.8),
 
 						FontFace = playerFontBold,
+						TextColor3 = Colours.White,
 						Text = string.upper(props.Name),
 					},
 
 					New "TextButton" {
 						Name = "CloseButton",
 						AnchorPoint = Vector2.new(1, 0),
-						BackgroundColor3 = Black2,
+						BackgroundColor3 = Colours.Black2,
 
 						Position = UDim2.fromScale(1, 0),
 						Size = UDim2.fromScale(1, 1),
@@ -104,6 +102,7 @@ return function(props)
 						[Children] = New "ImageLabel" {
 							Size = UDim2.fromScale(0.7, 0.7),
 							Image = "rbxasset://textures/loading/cancelButton.png",
+							ImageColor3 = Colours.White,
 						},
 					},
 				},

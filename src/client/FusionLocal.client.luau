@@ -10,6 +10,7 @@ local Fusion = require(script.Parent.Fusion)
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local Ranks = require(ReplicatedStorage.Shared.Ranks)
 local StarterSettings = require(ReplicatedStorage.Shared.Settings)
+local StarterColours = require(ReplicatedStorage.Shared.Colours)
 local Words = require(ReplicatedStorage.Shared.Words)
 local State = require(script.Parent.State)
 local Components = script.Parent.components
@@ -40,15 +41,7 @@ local Value = Fusion.Value
 local Computed = Fusion.Computed
 local Observer = Fusion.Observer
 
-local White = State.White
-local Grey4 = State.Grey4
-local Grey3 = State.Grey3
-local Grey1 = State.Grey1
-local Grey0 = State.Grey0
-local Black3 = State.Black3
-local Black2 = State.Black2
-local Black1 = State.Black1
-local Black0 = State.Black0
+local Colours = State.Colours
 
 local Green = Color3.fromRGB(0, 255, 0)
 local Red = Color3.fromRGB(255, 0, 0)
@@ -155,12 +148,12 @@ TypingBox = New "TextBox" {
 	Name = "TypingBox",
 	Position = UDim2.fromScale(0.5, 0.7),
 	Size = UDim2.fromScale(0.5, 0.05),
-	BackgroundColor3 = Grey0,
+	BackgroundColor3 = Colours.Grey0,
 	TextColor3 = wordCorrect,
 
 	FontFace = playerFont,
 	PlaceholderText = "Type here (spacebar to complete word)",
-	PlaceholderColor3 = Grey3,
+	PlaceholderColor3 = Colours.Grey3,
 
 	[OnChange "Text"] = function()
 		TypingBox.Text = TypingBox.Text:sub(1, 33) -- Does not allow words longer than 32 characters + space, no word in any list is longer than 31 characters.
@@ -270,7 +263,7 @@ TypingBox = New "TextBox" {
 			),
 			BackgroundColor3 = Spring(
 				Computed(function()
-					return if streakLevel:get() > 0 then Grey4 else Grey3
+					return if streakLevel:get() > 0 then Colours.White:get() else Colours.Grey3:get()
 				end),
 				8,
 				1
@@ -365,13 +358,13 @@ PlayScreen = New "ScreenGui" {
 
 	[Children] = New "Frame" {
 
-		BackgroundColor3 = Black2,
+		BackgroundColor3 = Colours.Black2,
 		Size = UDim2.fromScale(1, 1),
 
 		[Children] = {
 			New "Frame" {
 				Name = "SaveSlots",
-				BackgroundColor3 = Black1,
+				BackgroundColor3 = Colours.Black1,
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromScale(0.5, 0.5),
 				Visible = false,
@@ -519,7 +512,7 @@ MainUI = New "ScreenGui" {
 			Name = "MainFrame",
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
-			
+
 			BorderMode = Enum.BorderMode.Inset,
 			BorderSizePixel = 10,
 
@@ -643,7 +636,7 @@ MainUI = New "ScreenGui" {
 							AnchorPoint = Vector2.new(1, 0),
 							Position = UDim2.fromScale(1, 0.1),
 							Size = UDim2.fromScale(0.17, 0.255),
-							BackgroundColor3 = Grey3,
+							BackgroundColor3 = Colours.Grey3,
 
 							[Children] = {
 								UICorner(0.05),
@@ -660,7 +653,7 @@ MainUI = New "ScreenGui" {
 										return Ranks(level:get()).Text
 									end),
 									Image = 7456285956,
-									BackgroundColor3 = White,
+									BackgroundColor3 = Color3.new(1, 1, 1), -- could be a problem for gradient if not completely Colours.White
 
 									Children = {
 										New "UIGradient" {
@@ -702,7 +695,7 @@ MainUI = New "ScreenGui" {
 									Size = UDim2.fromScale(1, 0.08),
 									Position = UDim2.fromScale(0.5, 0.28),
 
-									BackgroundColor3 = Grey0,
+									BackgroundColor3 = Colours.Grey0,
 
 									[Children] = {
 										UICorner(0.5),
@@ -756,47 +749,43 @@ MainUI = New "ScreenGui" {
 
 						TypingBox,
 
-						New "Folder" {
-							Name = "NextWordLabels",
+						New "TextLabel" {
+							Name = "CurrentWordLabel",
 
-							[Children] = {
-								New "TextLabel" {
-									Name = "CurrentWordLabel",
+							Size = UDim2.fromScale(0.4, 0.06),
+							Position = UDim2.fromScale(0.5, 0.3),
 
-									Size = UDim2.fromScale(0.4, 0.06),
-									Position = UDim2.fromScale(0.5, 0.3),
-
-									FontFace = playerFont,
-									Text = displayedWords[1],
-									Visible = Computed(function()
-										return not Settings["Memory Mode"]:get()
-									end),
-								},
-
-								(function()
-									local returns = {}
-									for i = 2, 5 do
-										table.insert(
-											returns,
-											New "TextLabel" {
-												Name = "Label" .. i,
-
-												Size = UDim2.fromScale(0.4, 0.06),
-												Position = UDim2.fromScale(0.5, 0.06 * i + 0.24),
-
-												FontFace = playerFont,
-												TextTransparency = 0.6,
-												Text = displayedWords[i],
-												Visible = Computed(function()
-													return not Settings["Blind Mode"]:get()
-												end),
-											}
-										)
-									end
-									return returns
-								end)(),
-							},
+							FontFace = playerFont,
+							TextColor3 = Colours.White,
+							Text = displayedWords[1],
+							Visible = Computed(function()
+								return not Settings["Memory Mode"]:get()
+							end),
 						},
+
+						(function()
+							local returns = {}
+							for i = 2, 5 do
+								table.insert(
+									returns,
+									New "TextLabel" {
+										Name = "Label" .. i,
+
+										Size = UDim2.fromScale(0.4, 0.06),
+										Position = UDim2.fromScale(0.5, 0.06 * i + 0.24),
+
+										FontFace = playerFont,
+										TextColor3 = Colours.White,
+										TextTransparency = 0.6,
+										Text = displayedWords[i],
+										Visible = Computed(function()
+											return not Settings["Blind Mode"]:get()
+										end),
+									}
+								)
+							end
+							return returns
+						end)(),
 					},
 				},
 
@@ -827,7 +816,7 @@ MainUI = New "ScreenGui" {
 									Position = UDim2.fromScale(0, 0),
 									AnchorPoint = Vector2.new(0, 0),
 									Text = "Help",
-									BackgroundColor3 = Black3,
+									BackgroundColor3 = Colours.Black3,
 
 									Activated = function()
 										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Help.ScrollingFrame.Pages
@@ -839,7 +828,7 @@ MainUI = New "ScreenGui" {
 									Position = UDim2.fromScale(0.51, 0),
 									AnchorPoint = Vector2.new(0, 0),
 									Text = "Changelog",
-									BackgroundColor3 = Black3,
+									BackgroundColor3 = Colours.Black3,
 
 									Activated = function()
 										local popup = MainUI.MainFrame.DarkTint.CurrentPopup.Help.ScrollingFrame.Pages
@@ -871,7 +860,9 @@ MainUI = New "ScreenGui" {
 										AnchorPoint = Vector2.new(0.5, 0),
 										Position = UDim2.fromScale(0.5, 0),
 										Size = UDim2.fromScale(0.97, 1),
+
 										FontFace = playerFont,
+										TextColor3 = Colours.White,
 										RichText = true,
 										Text = [[Welcome to game name goes here!
 This is a game you can use to improve your speed, accuracy, and stamina while typing.
@@ -915,7 +906,9 @@ Typing Simulator by S-GAMES]],
 										AnchorPoint = Vector2.new(0.5, 0),
 										Position = UDim2.fromScale(0.5, 0),
 										Size = UDim2.fromScale(0.97, 1),
+
 										FontFace = playerFont,
+										TextColor3 = Colours.White,
 										LayoutOrder = 2,
 										RichText = true,
 										Text = [[
@@ -966,7 +959,7 @@ Initial release
 						Button {
 							Name = "Statistics",
 							Text = "Statistics",
-							BackgroundColor3 = Black3,
+							BackgroundColor3 = Colours.Black3,
 							LayoutOrder = #StarterSettings + 1,
 
 							Activated = function()
@@ -1015,6 +1008,7 @@ Initial release
 
 														Text = userStats[i][1],
 														FontFace = playerFont,
+														TextColor3 = Colours.White,
 														TextXAlignment = Enum.TextXAlignment.Left,
 													},
 													New "TextLabel" {
@@ -1025,6 +1019,7 @@ Initial release
 
 														Text = userStats[i][2],
 														FontFace = playerFont,
+														TextColor3 = Colours.White,
 														TextXAlignment = Enum.TextXAlignment.Right,
 													},
 												},
@@ -1037,10 +1032,18 @@ Initial release
 						Button {
 							Name = "Verification",
 							Text = "Verification",
-							BackgroundColor3 = Black3,
+							BackgroundColor3 = Colours.Black3,
 							LayoutOrder = #StarterSettings + 2,
 
 							Activated = openPopup "Verification",
+						},
+						Button {
+							Name = "Theme",
+							Text = "Theme",
+							BackgroundColor3 = Colours.Black3,
+							LayoutOrder = #StarterSettings + 3,
+
+							Activated = openPopup "Theme",
 						},
 					},
 				},
@@ -1062,13 +1065,24 @@ Initial release
 						Size = UDim2.fromScale(0.5, 0.5),
 
 						Children = {
+							New "TextLabel" {
+								Name = "Description",
+								AnchorPoint = Vector2.new(0.5, 0),
+								Size = UDim2.fromScale(0.9, 0.4),
+								Position = UDim2.fromScale(0.5, 0.1),
+
+								FontFace = playerFont,
+								TextColor3 = Colours.White,
+								Text = "To verify your account, follow the instructions in the community server, and enter the code given below.",
+							},
 							New "TextBox" {
 								Size = UDim2.fromScale(0.7, 0.1),
-								Position = UDim2.fromScale(0.5, 0.4),
-								BackgroundColor3 = Grey0,
+								Position = UDim2.fromScale(0.5, 0.6),
+								BackgroundColor3 = Colours.Grey0,
 
 								FontFace = playerFont,
 								PlaceholderText = txt,
+								PlaceholderColor3 = Colours.Grey3,
 
 								[Children] = {
 									UICorner(),
@@ -1080,10 +1094,10 @@ Initial release
 
 							Button {
 								Size = UDim2.fromScale(0.3, 0.1),
-								Position = UDim2.fromScale(0.5, 0.53),
+								Position = UDim2.fromScale(0.5, 0.73),
 								Name = "Verify",
 								Text = "Verify",
-								BackgroundColor3 = Black3,
+								BackgroundColor3 = Colours.Black3,
 
 								Activated = function()
 									local textBox = popup.ScrollingFrame.TextBox
@@ -1115,6 +1129,126 @@ Initial release
 				end)(),
 
 				Popup {
+					Name = "Theme",
+					Size = UDim2.fromScale(0.5, 0.5),
+
+					Children = {
+						New "UIGridLayout" {
+							FillDirectionMaxCells = 2,
+							CellSize = UDim2.fromScale(0.465, 0.11),
+							CellPadding = UDim2.fromScale(0.05, 0.025),
+						},
+
+						(function()
+							local returns = {}
+							for i, v in
+								pairs((function() -- top tip: don't write code like this
+									local returns2 = {}
+									for _, v2 in pairs(StarterColours) do
+										v2[2] = Colours[v2[1]]:get()
+										table.insert(returns2, v2)
+									end
+
+									return returns2
+								end)())
+							do
+								local colour = StarterColours[i][2]
+								local colourTable = {
+									colour.R * 255,
+									colour.G * 255,
+									colour.B * 255,
+								}
+								table.insert(
+									returns,
+									New "Frame" {
+										BackgroundTransparency = 1,
+
+										[Children] = {
+											New "UITableLayout" {
+												FillDirection = Enum.FillDirection.Horizontal,
+												FillEmptySpaceColumns = true,
+												FillEmptySpaceRows = true,
+												Padding = UDim2.fromScale(0.02, 0.02),
+											},
+											(function()
+												local returns2 = {}
+												table.insert(
+													returns2,
+													New "TextLabel" {
+														BackgroundTransparency = 1,
+														Text = v[1],
+														FontFace = playerFont,
+														TextColor3 = Colours.White,
+													}
+												)
+												for i2, rgb in pairs { "R", "G", "B" } do
+													local tb
+													local defaultColour = v[2][rgb] * 255
+													tb = New "TextBox" {
+														BackgroundColor3 = Colours.Grey0,
+														FontFace = playerFont,
+														Text = Computed(function() -- set textbox to saved colour if it's not the default
+															local currentColour = State.Colours[v[1]]:get()[rgb] * 255
+															return if defaultColour == currentColour
+																then ""
+																else math.round(currentColour)
+														end),
+														TextColor3 = Colours.White,
+														PlaceholderText = math.round(defaultColour), -- 3.000001 moment
+														PlaceholderColor3 = Colours.Grey3,
+
+														[OnChange "Text"] = function()
+															if tb.Text == "" then
+																colourTable[i2] = defaultColour
+																State.Colours[v[1]]:set(
+																	Color3.fromRGB(
+																		colourTable[1],
+																		colourTable[2],
+																		colourTable[3]
+																	)
+																)
+															else
+																local number = math.clamp(
+																	tonumber(tb.Text) or defaultColour,
+																	0,
+																	255
+																)
+																colourTable[i2] = number
+																State.Colours[v[1]]:set(
+																	Color3.fromRGB(
+																		colourTable[1],
+																		colourTable[2],
+																		colourTable[3]
+																	)
+																)
+															end
+														end,
+
+														[OnEvent "FocusLost"] = function()
+															DataService:SaveTheme(v[1], State.Colours[v[1]]:get())
+														end,
+
+														[Children] = {
+															UICorner(),
+															UIPadding {
+																PaddingH = 0,
+															},
+														},
+													}
+													table.insert(returns2, tb)
+												end
+												return returns2
+											end)(),
+										},
+									}
+								)
+							end
+							return returns
+						end)(),
+					},
+				},
+
+				Popup {
 					Name = "Leaderboard",
 					Size = UDim2.fromScale(0.5, 0.75),
 
@@ -1134,7 +1268,7 @@ Initial release
 									Position = UDim2.fromScale(0, 0),
 									AnchorPoint = Vector2.new(0, 0),
 									Text = "Level",
-									BackgroundColor3 = Black3,
+									BackgroundColor3 = Colours.Black3,
 
 									Activated = function()
 										local popup =
@@ -1147,7 +1281,7 @@ Initial release
 									Position = UDim2.fromScale(0.51, 0),
 									AnchorPoint = Vector2.new(0, 0),
 									Text = "Words",
-									BackgroundColor3 = Black3,
+									BackgroundColor3 = Colours.Black3,
 
 									Activated = function()
 										local popup =
@@ -1164,6 +1298,7 @@ Initial release
 									Position = UDim2.fromScale(0.1, 0.55),
 									Size = UDim2.fromScale(0.25, 0.3),
 									FontFace = playerFont,
+									TextColor3 = Colours.White,
 								},
 								New "TextLabel" {
 									Name = "Level",
@@ -1173,6 +1308,7 @@ Initial release
 									Position = UDim2.fromScale(0.6, 0.55),
 									Size = UDim2.fromScale(0.2, 0.3),
 									FontFace = playerFont,
+									TextColor3 = Colours.White,
 								},
 								New "TextLabel" {
 									Name = "Words",
@@ -1182,6 +1318,7 @@ Initial release
 									Position = UDim2.fromScale(1, 0.55),
 									Size = UDim2.fromScale(0.2, 0.3),
 									FontFace = playerFont,
+									TextColor3 = Colours.White,
 								},
 							},
 						},
@@ -1246,7 +1383,7 @@ Initial release
 							Size = UDim2.fromScale(0.96, 0.3),
 							Position = UDim2.fromScale(0.5, 0.98),
 							AnchorPoint = Vector2.new(0.5, 1),
-							BackgroundColor3 = Grey1,
+							BackgroundColor3 = Colours.Grey1,
 							Visible = false,
 
 							[Children] = {
@@ -1262,6 +1399,7 @@ Initial release
 									end),
 									TextXAlignment = Enum.TextXAlignment.Left,
 									FontFace = playerFont,
+									TextColor3 = Colours.White,
 								},
 								New "TextLabel" {
 									Name = "ItemDescription",
@@ -1278,6 +1416,7 @@ Initial release
 									TextXAlignment = Enum.TextXAlignment.Left,
 									TextYAlignment = Enum.TextYAlignment.Top,
 									FontFace = playerFont,
+									TextColor3 = Colours.White,
 
 									[Children] = New "UITextSizeConstraint" {
 										MaxTextSize = 20,
@@ -1289,9 +1428,11 @@ Initial release
 									AnchorPoint = Vector2.new(1, 1),
 									Position = UDim2.fromScale(1, 1),
 									Size = UDim2.fromScale(0.2, 0.35),
+
 									FontFace = playerFont,
+									TextColor3 = Colours.White,
 									Text = buttonText,
-									BackgroundColor3 = Grey3,
+									BackgroundColor3 = Colours.Grey3,
 
 									[OnEvent "Activated"] = function()
 										local item = currentShopItem:get()
@@ -1364,7 +1505,7 @@ Initial release
 												Size = UDim2.fromScale(0.465, 0.75),
 												AnchorPoint = Vector2.new(0, 0),
 												Text = v.Name,
-												BackgroundColor3 = Black3,
+												BackgroundColor3 = Colours.Black3,
 
 												Activated = function()
 													local popup =
@@ -1443,7 +1584,7 @@ Initial release
 				},
 				New "Frame" {
 					Name = "DarkTint",
-					BackgroundColor3 = Black0,
+					BackgroundColor3 = Colours.Black0,
 					BackgroundTransparency = Spring(DarkTintTransparency, 25),
 					Size = UDim2.fromScale(2, 2),
 					ZIndex = 100,
@@ -1470,7 +1611,7 @@ New "ScreenGui" {
 		Name = "BackgroundBackground",
 		Size = UDim2.fromScale(1, 1),
 
-		BackgroundColor3 = Black3,
+		BackgroundColor3 = Colours.Black3,
 		ZIndex = 5,
 		[Children] = (function()
 			local camera = New "Camera" {
@@ -1483,9 +1624,9 @@ New "ScreenGui" {
 
 				Size = UDim2.fromScale(1, 1),
 				ZIndex = -50,
-				BackgroundColor3 = Grey0, -- Prevent white outlines for parts
+				BackgroundColor3 = Colours.Grey0, -- Prevent Colours.White outlines for parts
 				BackgroundTransparency = 1,
-				LightColor = Grey3,
+				LightColor = Colours.Grey3,
 				LightDirection = Vector3.new(0, -0.5, -1),
 				Visible = Computed(function()
 					return not Settings["Plain Background"]:get()

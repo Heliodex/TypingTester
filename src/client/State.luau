@@ -1,6 +1,7 @@
-local ReplicatedStorage = game:GetService "ReplicatedStorage"
-local Settings = require(ReplicatedStorage.Shared.Settings)
-local Words = require(ReplicatedStorage.Shared.Words)
+local Shared = game:GetService("ReplicatedStorage").Shared
+local Settings = require(Shared.Settings)
+local Words = require(Shared.Words)
+local Colours = require(Shared.Colours)
 
 local Fusion = require(script.Parent.Fusion)
 local Value = Fusion.Value
@@ -14,16 +15,13 @@ return {
 
 	dataLoaded = Value(),
 
-	White = Color3.new(1, 1, 1),
-	Grey4 = Color3.fromRGB(178, 178, 178),
-	Grey3 = Color3.fromRGB(102, 102, 102),
-	Grey2 = Color3.fromRGB(84, 84, 84),
-	Grey1 = Color3.fromRGB(60, 60, 60),
-	Grey0 = Color3.fromRGB(42, 42, 42),
-	Black3 = Color3.fromRGB(32, 30, 28),
-	Black2 = Color3.fromRGB(16, 14, 12),
-	Black1 = Color3.fromRGB(10, 9, 8),
-	Black0 = Color3.new(), -- hehehuehehuehe
+	Colours = (function()
+		local returns = {}
+		for _, v in pairs(Colours) do
+			returns[v[1]] = Value(v[2])
+		end
+		return returns
+	end)(),
 
 	playerFontThin = Value(Font.fromName("GothamSSm", Enum.FontWeight.Thin)), -- selene: "`FOnT` iS Not dEfinEd!!!!1!!!!11"
 	playerFont = Value(Font.fromName("GothamSSm", Enum.FontWeight.Medium)),

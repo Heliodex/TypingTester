@@ -14,8 +14,7 @@ local Value = Fusion.Value
 
 local State = require(script.Parent.Parent.State)
 local dataLoaded = State.dataLoaded
-local Grey3 = State.Grey3
-local Black0 = State.Black0
+local Colours = State.Colours
 local playerFont = State.playerFont
 local level = State.level
 local currentShopItem = State.currentShopItem
@@ -46,7 +45,7 @@ return function(props)
 		Name = props.Name,
 
 		AnchorPoint = if props.Right then Vector2.new(1, 0) else Vector2.new(0, 0),
-		BackgroundColor3 = Grey3,
+		BackgroundColor3 = Colours.Grey3,
 
 		[OnEvent "Activated"] = function()
 			currentShopItem:set {
@@ -65,6 +64,8 @@ return function(props)
 				Position = UDim2.fromScale(0.05, 0.5),
 				Size = UDim2.fromScale(0.6, 0.8),
 				FontFace = playerFont,
+
+				TextColor3 = Colours.White,
 				Text = props.Name,
 				TextXAlignment = Enum.TextXAlignment.Left,
 			},
@@ -76,6 +77,8 @@ return function(props)
 				Position = UDim2.fromScale(0.95, 0.5),
 				Size = UDim2.fromScale(0.25, 1),
 				FontFace = playerFont,
+
+				TextColor3 = Colours.White,
 				Text = labelText,
 
 				[Children] = UIPadding(),
@@ -87,7 +90,7 @@ return function(props)
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromScale(1, 1),
 				BackgroundTransparency = 0.15,
-				BackgroundColor3 = Black0,
+				BackgroundColor3 = Colours.Black0,
 				Visible = Computed(function()
 					return level:get() < levelRequirement
 				end),
@@ -101,11 +104,13 @@ return function(props)
 						Size = UDim2.fromScale(0.8, 0.8),
 						SizeConstraint = Enum.SizeConstraint.RelativeYY,
 						Image = "rbxassetid://10970873852",
+						ImageColor3 = Colours.White,
 					},
 					New "TextLabel" {
 						Position = UDim2.fromScale(0.6, 0.5),
 						Size = UDim2.fromScale(0.7, 0.7),
 						FontFace = playerFont,
+						TextColor3 = Colours.White,
 						Text = "Level " .. levelRequirement,
 					},
 				},

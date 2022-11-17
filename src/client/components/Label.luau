@@ -3,7 +3,7 @@ local Children = Fusion.Children
 local New = Fusion.New
 
 local State = require(script.Parent.Parent.State)
-local Grey0 = State.Grey0
+local Colours = State.Colours
 local playerFont = State.playerFont
 
 local Components = script.Parent
@@ -22,7 +22,7 @@ return function(props)
 		Size = props.Size,
 		AnchorPoint = props.AnchorPoint,
 		Position = props.Position,
-		BackgroundColor3 = props.BackgroundColor3 or Grey0,
+		BackgroundColor3 = props.BackgroundColor3 or Colours.Grey0,
 		BackgroundTransparency = 0,
 
 		[Children] = {
@@ -40,6 +40,7 @@ return function(props)
 				AnchorPoint = Vector2.new(1, 0.5),
 
 				FontFace = playerFont,
+				TextColor3 = Colours.White,
 			},
 
 			New "ImageLabel" {
@@ -48,6 +49,7 @@ return function(props)
 				AnchorPoint = Vector2.new(0, 0.5),
 
 				Image = "rbxassetid://" .. tostring(props.Image),
+				ImageColor3 = Colours.White,
 				[Children] = New "UIAspectRatioConstraint" {
 					AspectRatio = 1,
 					AspectType = Enum.AspectType.ScaleWithParentSize,
