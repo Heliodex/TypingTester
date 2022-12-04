@@ -430,7 +430,7 @@ PlayScreen = New "ScreenGui" {
 						Size = UDim2.fromScale(0.3, 0.175),
 						FontFace = playerFontBold,
 						RichText = true,
-						Text = "typing simulator but better",
+						Text = "Typing Tester",
 
 						[Children] = UIPadding {
 							Padding = 0.1,
@@ -864,7 +864,7 @@ MainUI = New "ScreenGui" {
 										FontFace = playerFont,
 										TextColor3 = Colours.White,
 										RichText = true,
-										Text = [[Welcome to game name goes here!
+										Text = [[Welcome to Typing Tester!
 This is a game you can use to improve your speed, accuracy, and stamina while typing.
 
 In the middle of the screen, a highlighted word will appear. Type it in the text box below, then press the spacebar once you finish a word.
@@ -890,6 +890,7 @@ Thanks to icons8 for providing the icons.
 Inspired by:
 Monkeytype by Miodec
 Typing Simulator by S-GAMES]],
+										AutoLocalize = false, -- fix "TextScraper text too long" warnings
 										TextTruncate = Enum.TextTruncate.AtEnd,
 										TextXAlignment = Enum.TextXAlignment.Left,
 										TextYAlignment = Enum.TextYAlignment.Top,
@@ -926,6 +927,7 @@ Initial release
 
 - This update aint exist
 ]],
+										AutoLocalize = false, -- fix "TextScraper text too long" warnings
 										TextTruncate = Enum.TextTruncate.AtEnd,
 										TextXAlignment = Enum.TextXAlignment.Left,
 										TextYAlignment = Enum.TextYAlignment.Top,
@@ -1187,12 +1189,15 @@ Initial release
 													tb = New "TextBox" {
 														BackgroundColor3 = Colours.Grey0,
 														FontFace = playerFont,
-														Text = Computed(function() -- set textbox to saved colour if it's not the default
-															local currentColour = State.Colours[v[1]]:get()[rgb] * 255
-															return if defaultColour == currentColour
-																then ""
-																else math.round(currentColour)
-														end),
+														Text = Computed(
+															function() -- set textbox to saved colour if it's not the default
+																local currentColour = State.Colours[v[1]]:get()[rgb]
+																	* 255
+																return if defaultColour == currentColour
+																	then ""
+																	else math.round(currentColour)
+															end
+														),
 														TextColor3 = Colours.White,
 														PlaceholderText = math.round(defaultColour), -- 3.000001 moment
 														PlaceholderColor3 = Colours.Grey3,

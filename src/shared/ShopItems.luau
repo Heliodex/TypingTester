@@ -33,7 +33,7 @@ return {
 		},
 	},
 	{
-		Name = "Test",
+		Name = "Coming soon...",
 		Items = {
 			["TestItem"] = {
 				Description = "whatsu p bruh wburth this is a test item tdonot buy",

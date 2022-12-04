@@ -12,7 +12,7 @@ local UICorner = require(Components.UICorner)
 local UIPadding = require(Components.UIPadding)
 
 return function(props)
-	props.LabelWidth = props.LabelWidth or 0.6
+	props.LabelWidth = props.LabelWidth or 0.9
 	props.ImageSize = props.ImageSize or 0.3
 	props.Size = props.Size or UDim2.fromScale(0.17, 0.075)
 	props.SizeConstraint = props.SizeConstraint or Enum.SizeConstraint.RelativeXY
