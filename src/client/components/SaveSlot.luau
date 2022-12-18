@@ -196,7 +196,6 @@ return function(props)
 					wordsTyped:set(data.WordsTyped)
 
 					for i, v in pairs(data.Theme or {}) do
-						print(i, table.unpack(v))
 						if v then
 							Colours[i]:set(Color3.new(v[1], v[2], v[3]))
 						end

@@ -1,5 +1,32 @@
 -- Main UI-buliding script
 local version = "1.0.0"
+local changelog = [[
+<b>1.0.0</b>
+Initial release
+
+- Of course I'm just kidding, the game will never be released
+
+<b>0.9.0</b>
+
+- Added a new wordlist: "Words"
+- Added a new wordlist: "Words 2"
+
+<b>0.8.0</b>
+
+- This update aint exist
+
+<b>0.8.0</b>
+
+- This update aint exist
+
+<b>0.8.0</b>
+
+- This update aint exist
+
+<b>0.8.0</b>
+
+- This update aint exist
+]]
 
 game.StarterGui:SetCoreGuiEnabled("All", false)
 local Players = game:GetService "Players"
@@ -238,7 +265,7 @@ TypingBox = New "TextBox" {
 					SyncService:EndStreak()
 					streak:set(0)
 					streakLevel:set(0)
-					print("Streak ended with ", currentStreak, "words!")
+					print("Streak ended with", currentStreak, "words!")
 				end
 			end
 		else
@@ -363,70 +390,102 @@ PlayScreen = New "ScreenGui" {
 
 		[Children] = {
 			New "Frame" {
-				Name = "SaveSlots",
-				BackgroundColor3 = Colours.Black1,
-				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.fromScale(0.5, 0.5),
-				Visible = false,
-
-				[Children] = {
-					UICorner(0.05),
-					UIPadding {
-						Padding = 0.025,
-					},
-
-					New "TextLabel" {
-						Size = UDim2.fromScale(1, 0.1),
-						Position = UDim2.fromScale(0.5, -0.1),
-						Text = "Select a save slot to load",
-						FontFace = playerFontBold,
-					},
-
-					SaveSlot {
-						SaveSlot = 1,
-						Position = UDim2.fromScale(0.5, 0.1),
-					},
-					SaveSlot {
-						SaveSlot = 2,
-						Position = UDim2.fromScale(0.5, 0.3),
-					},
-					SaveSlot {
-						SaveSlot = 3,
-						Position = UDim2.fromScale(0.5, 0.5),
-					},
-					SaveSlot {
-						SaveSlot = 4,
-						Position = UDim2.fromScale(0.5, 0.7),
-					},
-					SaveSlot {
-						SaveSlot = 5,
-						Position = UDim2.fromScale(0.5, 0.9),
-					},
-				},
-			},
-
-			New "Frame" {
 				Name = "Play",
 				BackgroundTransparency = 1,
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromScale(1, 1),
 
 				[Children] = {
-					ImageButton {
-						Name = "Play",
-						Position = UDim2.fromScale(0.5, 0.5),
-						Text = "Play",
-						Image = 8156398059,
+					New "Frame" {
+						Name = "SaveSlots",
+						BackgroundTransparency = 1,
+						Position = UDim2.fromScale(0.75, 0.5),
+						Size = UDim2.fromScale(0.5, 0.5),
 
-						Activated = function() -- o this is how you do functions
-							PlayScreen.Frame.Play.Visible = false
-							PlayScreen.Frame.SaveSlots.Visible = true
-						end,
+						[Children] = {
+							UIPadding {
+								Padding = 0.05,
+							},
+
+							New "TextLabel" {
+								Size = UDim2.fromScale(1, 0.1),
+								Position = UDim2.fromScale(0.5, -0.1),
+								Text = "Select a save slot to load",
+								FontFace = playerFontBold,
+							},
+
+							SaveSlot {
+								SaveSlot = 1,
+								Position = UDim2.fromScale(0.5, 0.1),
+							},
+							SaveSlot {
+								SaveSlot = 2,
+								Position = UDim2.fromScale(0.5, 0.3),
+							},
+							SaveSlot {
+								SaveSlot = 3,
+								Position = UDim2.fromScale(0.5, 0.5),
+							},
+							SaveSlot {
+								SaveSlot = 4,
+								Position = UDim2.fromScale(0.5, 0.7),
+							},
+							SaveSlot {
+								SaveSlot = 5,
+								Position = UDim2.fromScale(0.5, 0.9),
+							},
+						},
+					},
+
+					New "Frame" {
+						Name = "Changelog",
+						BackgroundTransparency = 1,
+						Position = UDim2.fromScale(0.25, 0.5),
+						Size = UDim2.fromScale(0.5, 0.5),
+
+						[Children] = {
+							UIPadding {
+								Padding = 0.05,
+							},
+
+							New "TextLabel" {
+								Size = UDim2.fromScale(1, 0.1),
+								Position = UDim2.fromScale(0.5, -0.1),
+								Text = "Changelog",
+								FontFace = playerFontBold,
+							},
+
+							New "ScrollingFrame" {
+								Name = "Changelog",
+								BackgroundTransparency = 1,
+								Size = UDim2.fromScale(1, 0.8),
+								Position = UDim2.fromScale(0.5, 0.5),
+								CanvasSize = UDim2.fromScale(0.9, 1.4),
+								LayoutOrder = 2,
+
+								[Children] = New "TextLabel" {
+									Name = "Text",
+									AnchorPoint = Vector2.new(0.5, 0),
+									Position = UDim2.fromScale(0.5, 0),
+									Size = UDim2.fromScale(0.97, 1),
+
+									FontFace = playerFont,
+									TextColor3 = Colours.White,
+									LayoutOrder = 2,
+									RichText = true,
+									Text = changelog,
+									AutoLocalize = false, -- fix "TextScraper text too long" warnings
+									TextTruncate = Enum.TextTruncate.AtEnd,
+									TextXAlignment = Enum.TextXAlignment.Left,
+									TextYAlignment = Enum.TextYAlignment.Top,
+								},
+							},
+						},
 					},
 
 					New "TextLabel" { -- Title
 						Name = "Title",
-						Position = UDim2.fromScale(0.5, 0.35),
+						Position = UDim2.fromScale(0.5, 0.1),
 						Size = UDim2.fromScale(0.3, 0.175),
 						FontFace = playerFontBold,
 						RichText = true,
@@ -440,7 +499,7 @@ PlayScreen = New "ScreenGui" {
 					New "Frame" { -- Credits
 						Name = "Credits",
 						BackgroundTransparency = 1,
-						Position = UDim2.fromScale(0.9, 0.65),
+						Position = UDim2.fromScale(0.1, 0.75),
 						Size = UDim2.fromScale(0.1, 0.1),
 						SizeConstraint = Enum.SizeConstraint.RelativeXX,
 
@@ -653,7 +712,7 @@ MainUI = New "ScreenGui" {
 										return Ranks(level:get()).Text
 									end),
 									Image = 7456285956,
-									BackgroundColor3 = Color3.new(1, 1, 1), -- could be a problem for gradient if not completely Colours.White
+									BackgroundColor3 = Color3.new(1, 1, 1), -- could be a problem for gradient if not completely white
 
 									Children = {
 										New "UIGradient" {
@@ -912,21 +971,7 @@ Typing Simulator by S-GAMES]],
 										TextColor3 = Colours.White,
 										LayoutOrder = 2,
 										RichText = true,
-										Text = [[
-<b>1.0.0</b>
-Initial release
-
-- Of course I'm just kidding, the game will never be released
-
-<b>0.9.0</b>
-
-- Added a new wordlist: "Words"
-- Added a new wordlist: "Words 2"
-
-<b>0.8.0</b>
-
-- This update aint exist
-]],
+										Text = changelog,
 										AutoLocalize = false, -- fix "TextScraper text too long" warnings
 										TextTruncate = Enum.TextTruncate.AtEnd,
 										TextXAlignment = Enum.TextXAlignment.Left,
@@ -952,7 +997,6 @@ Initial release
 						(function()
 							local returns = {}
 							for i in StarterSettings do
-								print(StarterSettings[i][1], StarterSettings[i][2])
 								table.insert(returns, Setting(StarterSettings[i][1]))
 							end
 							return returns
