@@ -1,31 +1,22 @@
 -- Main UI-buliding script
 local version = "1.0.0"
 local changelog = [[
-<b>1.0.0</b>
-Initial release
+<b>1.0.0 - 39 September 2042</b>
+Initial release of Typing Tester!
 
-- Of course I'm just kidding, the game will never be released
 
-<b>0.9.0</b>
 
-- Added a new wordlist: "Words"
-- Added a new wordlist: "Words 2"
 
-<b>0.8.0</b>
 
-- This update aint exist
 
-<b>0.8.0</b>
 
-- This update aint exist
 
-<b>0.8.0</b>
 
-- This update aint exist
 
-<b>0.8.0</b>
 
-- This update aint exist
+
+
+
 ]]
 
 game.StarterGui:SetCoreGuiEnabled("All", false)
