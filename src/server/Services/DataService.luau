@@ -82,6 +82,8 @@ function UpdateLeaderboard(player)
 
 	LevelLeaderboard:SetAsync(player.UserId .. "_" .. saveSlot, data.Level)
 	WordsLeaderboard:SetAsync(player.UserId .. "_" .. saveSlot, data.WordsTyped)
+
+	print "Updated leaderboard!"
 end
 
 function DataService.Client:LevelLeaderboard(player)
@@ -318,6 +320,7 @@ Players.PlayerRemoving:Connect(function(player)
 		task.cancel(counter)
 	end
 	if profile ~= nil then
+		UpdateLeaderboard(player)
 		profile:Release()
 	end
 end)
