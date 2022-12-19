@@ -33,6 +33,7 @@ local DefaultProfileTemplate = {
 		CurrencySpent = 0,
 	},
 
+	Font = "GothamMedium",
 	Theme = (function()
 		local returns = {}
 		for i, v in pairs(Colours) do
@@ -78,12 +79,16 @@ local DataService = Knit.CreateService {
 
 function UpdateLeaderboard(player)
 	local saveSlot = CurrentSaveSlot[player]
-	local data = Profiles[player].Data[saveSlot]
+	if saveSlot then
+		local data = Profiles[player].Data[saveSlot]
 
-	LevelLeaderboard:SetAsync(player.UserId .. "_" .. saveSlot, data.Level)
-	WordsLeaderboard:SetAsync(player.UserId .. "_" .. saveSlot, data.WordsTyped)
+		LevelLeaderboard:SetAsync(player.UserId .. "_" .. saveSlot, data.Level)
+		WordsLeaderboard:SetAsync(player.UserId .. "_" .. saveSlot, data.WordsTyped)
 
-	print "Updated leaderboard!"
+		print "Updated leaderboard!"
+	else
+		print "Did not update leaderboard."
+	end
 end
 
 function DataService.Client:LevelLeaderboard(player)
@@ -312,6 +317,11 @@ function DataService.Client:SaveTheme(player, colourName, colour)
 	else
 		return false
 	end
+end
+
+function DataService.Client:SaveFont(player, font)
+	local slot = Profiles[player].Data[CurrentSaveSlot[player]]
+	slot.Font = font
 end
 
 Players.PlayerRemoving:Connect(function(player)

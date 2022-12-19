@@ -5,9 +5,20 @@ local Colours = require(Shared.Colours)
 
 local Fusion = require(script.Parent.Fusion)
 local Value = Fusion.Value
+local Computed = Fusion.Computed
+
+local fontName = Value "GothamMedium"
+
+function getFont()
+	local font = Enum.Font.GothamMedium
+	pcall(function()
+		font = Enum.Font[fontName:get()]
+	end)
+	return font
+end
 
 return {
-	MainUI = Value(), -- why r these values
+	MainUI = Value(), -- why r these values (so they update correctly ithink)
 	PlayScreen = Value(),
 
 	MainFrameSize = Value(UDim2.fromScale(0.8, 0.8)),
@@ -23,9 +34,17 @@ return {
 		return returns
 	end)(),
 
-	playerFontThin = Value(Font.fromName("GothamSSm", Enum.FontWeight.Thin)), -- selene: "`FOnT` iS Not dEfinEd!!!!1!!!!11"
-	playerFont = Value(Font.fromName("GothamSSm", Enum.FontWeight.Medium)),
-	playerFontBold = Value(Font.fromName("GothamSSm", Enum.FontWeight.Bold)),
+	fontName = fontName,
+
+	playerFontThin = Computed(function()
+		return Font.fromEnum(getFont(), Enum.FontWeight.Thin) -- selene: "`FOnT` iS Not dEfinEd!!!!1!!!!11"
+	end),
+	playerFont = Computed(function()
+		return Font.fromEnum(getFont(), Enum.FontWeight.Medium)
+	end),
+	playerFontBold = Computed(function()
+		return Font.fromEnum(getFont(), Enum.FontWeight.Bold)
+	end),
 
 	currency = Value(0),
 	experience = Value(0),

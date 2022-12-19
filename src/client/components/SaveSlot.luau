@@ -201,6 +201,10 @@ return function(props)
 						end
 					end
 
+					if data.Font and data.Font ~= "GothamMedium" then
+						State.fontName:set(data.Font)
+					end
+
 					dataLoaded:set(props.SaveSlot)
 					print "Data loaded!"
 

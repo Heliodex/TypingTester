@@ -64,7 +64,7 @@ local Colours = State.Colours
 local Green = Color3.fromRGB(0, 255, 0)
 local Red = Color3.fromRGB(255, 0, 0)
 
-local playerFontThin = State.playerFontThin -- selene: "`FOnT` iS Not dEfinEd!!!!1!!!!11"
+local playerFontThin = State.playerFontThin
 local playerFont = State.playerFont
 local playerFontBold = State.playerFontBold
 
@@ -1208,16 +1208,14 @@ Typing Simulator by S-GAMES]],
 												Padding = UDim2.fromScale(0.02, 0.02),
 											},
 											(function()
-												local returns2 = {}
-												table.insert(
-													returns2,
+												local returns2 = {
 													New "TextLabel" {
 														BackgroundTransparency = 1,
 														Text = v[1],
 														FontFace = playerFont,
 														TextColor3 = Colours.White,
-													}
-												)
+													},
+												}
 												for i2, rgb in pairs { "R", "G", "B" } do
 													local tb
 													local defaultColour = v[2][rgb] * 255
@@ -1283,6 +1281,63 @@ Typing Simulator by S-GAMES]],
 									}
 								)
 							end
+
+							table.insert(
+								returns,
+								New "Frame" {
+									BackgroundTransparency = 1,
+
+									[Children] = {
+										New "UITableLayout" {
+											FillDirection = Enum.FillDirection.Horizontal,
+											FillEmptySpaceColumns = true,
+											FillEmptySpaceRows = true,
+											Padding = UDim2.fromScale(0.02, 0.02),
+										},
+										(function()
+											local returns2 = {
+												New "TextLabel" {
+													BackgroundTransparency = 1,
+													Text = "Font",
+													FontFace = playerFont,
+													TextColor3 = Colours.White,
+												},
+											}
+											local tb
+											tb = New "TextBox" {
+												BackgroundColor3 = Colours.Grey0,
+												FontFace = playerFont,
+												Text = Computed(
+													function() -- set textbox to saved font if it's not the default
+														return "bruh"
+													end
+												),
+												TextColor3 = Colours.White,
+												PlaceholderText = "GothamMedium",
+												PlaceholderColor3 = Colours.Grey3,
+
+												[OnEvent "FocusLost"] = function() -- too slow to change on every keypress
+													if tb.Text == "" then
+														State.fontName:set "GothamMedium"
+													else
+														tb.Text = string.gsub(tb.Text, "[%d%p%s]", "") -- remove numbers, punctuation, and whitespace
+														State.fontName:set(tb.Text)
+														DataService:SaveFont(tb.Text)
+													end
+												end,
+
+												[Children] = {
+													UICorner(),
+													UIPadding(),
+												},
+											}
+											table.insert(returns2, tb)
+											return returns2
+										end)(),
+									},
+								}
+							)
+
 							return returns
 						end)(),
 					},
