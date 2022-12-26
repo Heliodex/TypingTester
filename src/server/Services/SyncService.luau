@@ -103,7 +103,6 @@ function SyncService:ChangeWordlist(player)
 			break
 		end
 	until DataService:ItemOwned(player, "Wordlists", Words[wordlist].Name)
-	print(wordlist)
 end
 
 function SyncService.Client:PurchaseItem(player, category, item)

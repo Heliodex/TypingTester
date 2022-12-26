@@ -291,7 +291,7 @@ return {
 		"draw",
 		"left",
 		"late",
-		"don't",
+		-- "don't", -- worth leaving out?
 		"while",
 		"press",
 		"close",
@@ -696,7 +696,7 @@ return {
 		"rail",
 		"agree",
 		"thus",
-		"won't",
+		-- "won't", -- worth leaving out?
 		"chair",
 		"danger",
 		"fruit",
@@ -851,7 +851,7 @@ return {
 		"shell",
 		"neck",
 	},
-	-- 711 words between 4 and 7 characters
+	-- 709 words between 4 and 7 characters
 	{
 		Name = "Hard words",
 		Exp = { 35, 42 },

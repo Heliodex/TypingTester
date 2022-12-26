@@ -35,12 +35,12 @@ return {
 	{
 		Name = "Coming soon...",
 		Items = {
-			["TestItem"] = {
-				Description = "whatsu p bruh wburth this is a test item tdonot buy",
-				Price = 5555555555555555,
-				Level = 1,
-				Ownable = false,
-			},
+			-- ["TestItem"] = {
+			-- 	Description = "whatsu p bruh wburth this is a test item tdonot buy",
+			-- 	Price = 5555555555555555,
+			-- 	Level = 1,
+			-- 	Ownable = false,
+			-- },
 		},
 	},
 }

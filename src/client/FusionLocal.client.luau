@@ -1,8 +1,8 @@
 -- Main UI-buliding script
 local version = "1.0.0"
 local changelog = [[
-<b>1.0.0 - 39 September 2042</b>
-Initial release of Typing Tester!
+<b>1.0.0 - 25 December 2022</b>
+Initial release of Typing Tester. Happy christmas!
 
 
 
@@ -90,11 +90,11 @@ local ownedWordlists = State.ownedWordlists
 local wordlist = Value()
 
 local adderTransparency = Value(1)
-local adderTransparencySpring = Spring(adderTransparency, 6, 1)
+local adderTransparencySpring = Spring(adderTransparency, 6)
 local currencyAdded = Value(0) -- For the adder popup animation beside currency and experience
 local experienceAdded = Value(0)
 local streakLevelUpTransparency = Value(1)
-local streakLevelUpTransparencySpring = Spring(streakLevelUpTransparency, 3, 1)
+local streakLevelUpTransparencySpring = Spring(streakLevelUpTransparency, 3)
 
 local currentShopItem = State.currentShopItem
 
@@ -203,6 +203,8 @@ TypingBox = New "TextBox" {
 				if currentStreak % 20 == 0 then
 					currentStreakLevel += 1
 					print "Streak level up!!"
+					streakLevelUpTransparencySpring:setPosition(0)
+					streakLevelUpTransparency:set(1)
 				end
 				streakLevel:set(currentStreakLevel)
 
@@ -237,11 +239,6 @@ TypingBox = New "TextBox" {
 				-- Pop up adder then fade out
 				adderTransparencySpring:setPosition(0)
 				adderTransparency:set(1)
-				if currentStreak % 20 == 0 then
-					streakLevelUpTransparencySpring:setPosition(0)
-					streakLevelUpTransparency:set(1)
-				end
-
 				local tempWords = displayedWords
 
 				for i = 1, 4 do
@@ -348,7 +345,7 @@ TypingBox = New "TextBox" {
 						"IMMORTAL!!!",
 						"HACKER!!!",
 						"ALMIGHTY!!!",
-					}, -- 19-22
+					}, -- 19+
 				}
 
 				if currentStreakLevel < 4 then
@@ -1307,11 +1304,12 @@ Typing Simulator by S-GAMES]],
 											tb = New "TextBox" {
 												BackgroundColor3 = Colours.Grey0,
 												FontFace = playerFont,
-												Text = Computed(
-													function() -- set textbox to saved font if it's not the default
-														return "bruh"
-													end
-												),
+												Text = "",
+												-- Computed(
+												-- 	function() -- set textbox to saved font if it's not the default
+												-- 		return "GothamMedium"
+												-- 	end
+												-- ),
 												TextColor3 = Colours.White,
 												PlaceholderText = "GothamMedium",
 												PlaceholderColor3 = Colours.Grey3,
@@ -1670,7 +1668,7 @@ Typing Simulator by S-GAMES]],
 
 				New "TextLabel" {
 					Name = "Version",
-					Size = UDim2.fromScale(0.1, 05),
+					Size = UDim2.fromScale(0.1, 0.02),
 					AnchorPoint = Vector2.new(1, 1),
 					Position = UDim2.fromScale(1, 1),
 					TextXAlignment = Enum.TextXAlignment.Right,
@@ -1719,7 +1717,7 @@ New "ScreenGui" {
 
 				Size = UDim2.fromScale(1, 1),
 				ZIndex = -50,
-				BackgroundColor3 = Colours.Grey0, -- Prevent Colours.White outlines for parts
+				BackgroundColor3 = Colours.Grey0, -- Prevent white outlines for parts
 				BackgroundTransparency = 1,
 				LightColor = Colours.Grey3,
 				LightDirection = Vector3.new(0, -0.5, -1),
@@ -1744,7 +1742,7 @@ New "ScreenGui" {
 											Computed(function()
 												local currentLevel = streakLevel:get() - 1
 												return if currentLevel > 0
-													then Color3.new(math.min(r + (currentLevel / 25), 0.6), r, r)
+													then Color3.new(math.min(r + (currentLevel / 40), 0.5), r, r)
 													else Color3.new(r, r, r)
 											end),
 											0.5 + r * 5,
