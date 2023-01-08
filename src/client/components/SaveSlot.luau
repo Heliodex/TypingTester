@@ -195,9 +195,17 @@ return function(props)
 					level:set(data.Level)
 					wordsTyped:set(data.WordsTyped)
 
+					for i, v in pairs(data.Theme) do
+						print(i, v, v[1], v[2], v[3])
+					end
+
 					for i, v in pairs(data.Theme or {}) do
 						if v then
-							Colours[i]:set(Color3.new(v[1], v[2], v[3]))
+							if Colours[i] then
+								Colours[i]:set(Color3.new(v[1], v[2], v[3]))
+							else
+								Colours[i] = Value(Color3.new(v[1], v[2], v[3]))
+							end
 						end
 					end
 

@@ -36,8 +36,8 @@ local DefaultProfileTemplate = {
 	Font = "GothamMedium",
 	Theme = (function()
 		local returns = {}
-		for i, v in pairs(Colours) do
-			returns[i] = { v.R, v.G, v.B } -- can't store Color3 (userdata) in DataStore
+		for _ = 0, #Colours do
+			returns[Colours[1]] = { Colours[2].R, Colours[2].G, Colours[2].B } -- can't store Color3 (userdata) in DataStore
 		end
 		return returns
 	end)(),
